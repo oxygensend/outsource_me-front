@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 
 import './Navbar.css';
 import Wordmark from '../../assets/images/Wordmark.svg'
@@ -9,7 +9,7 @@ import menu from '../../assets/images/menu.png'
 
 
 import {Button} from "../Button/Button";
-import {NavLink, Searchbar, Watermark} from "./NavbarElements";
+import {DashboardMenu, NavbarMenu, NavLink, Searchbar, Watermark} from "./NavbarElements";
 import {ButtonLink} from "../Button/ButtonLink";
 
 export class Navbar extends React.Component {
@@ -19,49 +19,36 @@ export class Navbar extends React.Component {
         super(props, context);
         this.state = {
             login: 0,
+            showMenu: false
         }
     }
 
 
+    handleMouseClick() {
+        this.setState({showMenu: !this.state.showMenu});
+    }
+
     render() {
         return (
             <nav className="navbar">
+                <div className={"nav-menu-mobile"} onClick={() => this.handleMouseClick()}>
+                    <img src={menu} alt={"menu"}/>
+                </div>
                 <Watermark
                     image={OutsourceMe}
                     image_mobile={OutsourceMe_mobile}
-                    image_menu={menu}
                     alt={"watermark-outsourceme"}
                 />
+                {this.state.showMenu ?
+                    <DashboardMenu/>
+                    : null}
                 {/*<Searchbar/>*/}
                 <div className={"nav-menu"}>
-                    <div className={"nav-wrapper"}>
-                        {this.state.login ? (
-                            <NavLink route={'/'}>
-                                Strona główna
-                            </NavLink>
-                        ) : (
-                            <NavLink route={'/o-nas'}>
-                                O nas
-                            </NavLink>
-                        )
-                        }
-                        <NavLink route={'/spolecznosc'}>
-                            Społeczność
-                        </NavLink>
-                        <NavLink route={'/oferty-zlecen'}>
-                            Oferty zleceń
-                        </NavLink>
-                        {this.state.login ? (
-                            <NavLink route={'/zaloguj-sie'}>
-                                Powiadomienia
-                            </NavLink>
-                        ) : (
-                            <NavLink route={'/zaloguj-sie'}>
-                                Zaloguj się
-                            </NavLink>
-                        )
-                        }</div>
-                    {this.state.login ? <ButtonLink value={"Dołącz do nas"} route={"/rejestracja"}/> : <ButtonLink value={"Dołącz do nas"} route={"/rejestracja"}/>}
+                    <NavbarMenu/>
+                    {this.state.login ?
+                        <ButtonLink value={"Dołącz do nas"} route={"/rejestracja"}/> :
+                        <ButtonLink value={"Dołącz do nas"} route={"/rejestracja"}/>
+                    }
                 </div>
             </nav>
 
@@ -71,7 +58,7 @@ export class Navbar extends React.Component {
 
 
 function getWindowDimensions() {
-    const { innerWidth: width, innerHeight: height } = window;
+    const {innerWidth: width, innerHeight: height} = window;
     return {
         width,
         height
