@@ -8,6 +8,7 @@ import {
     RouterProvider,
     Route,
 } from "react-router-dom";
+import {Footer} from "./Components/Footer/Footer";
 
 const router = createBrowserRouter([
     {
@@ -22,6 +23,7 @@ root.render(
 
       <Navbar/>
       <RouterProvider router={router} />
+      <Footer/>
   </React.StrictMode>
 );
 

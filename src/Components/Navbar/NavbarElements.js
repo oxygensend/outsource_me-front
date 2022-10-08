@@ -14,9 +14,9 @@ export const Watermark = (props) => {
         <div className={"nav-watermark nav-watermark-mobile"}>
             <a href={"/"}>
                 <picture>
-                    <source srcSet={props.image} media="(min-width: 900px)"/>
-                    <source srcSet={props.image_menu} media="(min-width: 320px)"/>
-                    <img src={props.image}/>
+                    <source srcSet={props.image} media="(min-width: 900px)" alt={"watermark"}/>
+                    <source srcSet={props.image_menu} media="(min-width: 320px)" alt={"watermark"}/>
+                    <img src={props.image} alt={"wartermark"}/>
                 </picture>
             </a>
         </div>
