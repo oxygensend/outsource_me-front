@@ -342,6 +342,12 @@
     opacity: 0.9;
 
 }
+.hover-text {
+    color: #FFFFFF;
+}
+.not-hover-text {
+    color: #7C8DB0;
+}
 .not-hover {
     background-color: #FAFAFA;
     opacity: 1;

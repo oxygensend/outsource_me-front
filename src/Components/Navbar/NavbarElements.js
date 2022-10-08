@@ -26,7 +26,10 @@ export const MenuItem = (props) => {
              onMouseOver={() => handleMouseOver()}
              onMouseOut={() => handleMouseOut()}
         >
-            <a className={"nav-link "} href={props.route}>{props.children}</a>
+            <a className={"nav-link " + (isHovering ? "hover-text" : "not-hover-text")}
+               href={props.route}>
+                {props.children}
+            </a>
         </div>
     );
 }
