@@ -42,6 +42,7 @@
     }
 
     .home-content {
+
         width: 100vw;
     }
 
@@ -74,6 +75,8 @@
 
 
     }
+
+
 }
 
 @media screen and (min-width: 600px) {
@@ -122,10 +125,18 @@
 }
 
 @media screen and (min-width: 900px) {
+    .right-content {
+        display: flex;
+        float: right;
+        width: 60%;
 
+
+    }
     .home-image {
         position: relative;
-        width: 720px;
+        float: left;
+        width: 50%;
+        /*width: 720px;*/
         height: 950px;
         left: 0;
         top: 0;
@@ -156,6 +167,9 @@
 }
 @media screen and (min-width: 1440px) {
 
+    .right-content{
+        width: 50%;
+    }
     .home-image{
         width: 850px;
         background: url(../../assets/images/home-xxl.png);

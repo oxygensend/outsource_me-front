@@ -1,0 +1,15 @@
+.success {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    margin-top: 5rem;
+
+}
+
+@media screen and (min-width: 900px) {
+    .success {
+        margin-top: unset;
+    }
+}
