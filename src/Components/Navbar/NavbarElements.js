@@ -89,13 +89,13 @@ export const DashboardMenu = (props) => {
             >
             {props.login ? (
                 <MenuItem
-                    route={'/zaloguj-sie'}>
+                    route={'/powiadomienia'}>
                     Powiadomienia
                 </MenuItem
                 >
             ) : (
                 <MenuItem
-                    route={'/zaloguj-sie'}>
+                    route={'/logowanie'}>
                     Zaloguj się
                 </MenuItem
                 >
@@ -130,7 +130,7 @@ export const NavbarMenu = (props) => {
                     Powiadomienia
                 </NavLink>
             ) : (
-                <NavLink route={'/zaloguj-sie'}>
+                <NavLink route={'/logowanie'}>
                     Zaloguj się
                 </NavLink>
             )
