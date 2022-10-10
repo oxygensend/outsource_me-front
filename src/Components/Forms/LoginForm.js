@@ -3,8 +3,9 @@ import {GoogleButton} from "../Button/GoogleButton";
 import {Button} from "../Button/Button";
 import React from "react";
 import {SERVER_URL} from "../../config";
-import axios from "axios";
 import './Form.css'
+import AuthService from "../../services/authService";
+import tokenService from "../../services/tokenService";
 
 export class LoginForm extends React.Component {
 
@@ -35,6 +36,14 @@ export class LoginForm extends React.Component {
         });
     }
 
+    clearPasswordInputs() {
+
+        this.setState({
+            password: '',
+            email: ''
+        });
+    }
+
 
     async handleSubmit(event) {
 
@@ -43,24 +52,25 @@ export class LoginForm extends React.Component {
         const data = this.getFormData();
 
         this.setState({errors: null, password: null});
+        this.clearPasswordInputs()
 
-        axios.post(event.target.action, data, {
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            }
-        }).then(response => {
-            if (response.status === 201 || response.status === 200) {
-                this.setState({successfulResponse: response.data})
-            }
-        }).catch(err => {
+        AuthService.login(data)
+            .then(response => {
+                if (response.status === 201 || response.status === 200) {
+                    this.setState({successfulResponse: response.data})
+                    tokenService.setLocalAccessToken(response.data.token)
+                    tokenService.setLocalRefreshToken(response.data.refresh_token)
+                    window.location.href = '/';
+                }
+            }).catch(err => {
             if (err.response.status === 401) {
                 this.setState({errors: err.response.data})
+
             }
         })
 
-    }
 
+    }
 
     render() {
         return (

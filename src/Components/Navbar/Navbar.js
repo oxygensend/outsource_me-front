@@ -1,16 +1,13 @@
 import React from "react";
 import {useState, useEffect} from 'react';
-
 import './Navbar.css';
-import Wordmark from '../../assets/images/Wordmark.svg'
 import OutsourceMe from '../../assets/images/Outsource me.png'
 import OutsourceMe_mobile from '../../assets/images/logo-mobile.png'
 import menu from '../../assets/images/menu.png'
-
-
-import {Button} from "../Button/Button";
 import {DashboardMenu, NavbarMenu, NavLink, Searchbar, Watermark} from "./NavbarElements";
 import {ButtonLink} from "../Button/ButtonLink";
+import tokenService from "../../services/tokenService";
+import avatar from '../../assets/images/Avatar.png';
 
 export class Navbar extends React.Component {
 
@@ -18,8 +15,8 @@ export class Navbar extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            login: 0,
-            showMenu: false
+            showMenu: false,
+            isAuthenticated: tokenService.getLocalAccessToken()
         }
     }
 
@@ -40,42 +37,21 @@ export class Navbar extends React.Component {
                     alt={"watermark-outsourceme"}
                 />
                 {this.state.showMenu ?
-                    <DashboardMenu/>
+                    <DashboardMenu login={this.state.isAuthenticated}/>
                     : null}
                 {/*<Searchbar/>*/}
                 <div className={"nav-menu"}>
                     <NavbarMenu/>
-                    {this.state.login ?
-                        <ButtonLink value={"Dołącz do nas"} route={"/rejestracja"}/> :
+                    {!this.state.isAuthenticated ?
                         <ButtonLink value={"Dołącz do nas"} route={"/rejestracja"}/>
+                        :
+                        <div className={"div-avatar"}>
+                            <img src={avatar} className={"avatar rounded-3xl"} height={"60px"} width={"60px"}/>
+                        </div>
                     }
                 </div>
             </nav>
 
         );
     }
-}
-
-
-function getWindowDimensions() {
-    const {innerWidth: width, innerHeight: height} = window;
-    return {
-        width,
-        height
-    };
-}
-
-export default function useWindowDimensions() {
-    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
-
-    useEffect(() => {
-        function handleResize() {
-            setWindowDimensions(getWindowDimensions());
-        }
-
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
-
-    return windowDimensions;
 }

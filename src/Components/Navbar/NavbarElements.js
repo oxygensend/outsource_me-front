@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import AuthService from "../../services/authService";
 
 
 export const NavLink = (props) => {
@@ -25,11 +26,18 @@ export const MenuItem = (props) => {
         <div className={"nav-div  nav-menu  " + (isHovering ? "hover" : "not-hover")}
              onMouseOver={() => handleMouseOver()}
              onMouseOut={() => handleMouseOut()}
+             onClick={props.logout}
         >
-            <a className={"nav-link " + (isHovering ? "hover-text" : "not-hover-text")}
-               href={props.route}>
-                {props.children}
-            </a>
+            {
+                props.logout ?
+                    <p className={"nav-link cursor-pointer " + (isHovering ? "hover-text" : "not-hover-text ")}
+                    >{props.children}</p>
+                    :
+                    <a className={"nav-link " + (isHovering ? "hover-text" : "not-hover-text")}
+                       href={props.route}>
+                        {props.children}
+                    </a>
+            }
         </div>
     );
 }
@@ -37,7 +45,7 @@ export const MenuItem = (props) => {
 export const Watermark = (props) => {
 
     return (
-        <div className={"nav-watermark"}>
+        <div className={"nav-watermark cursor-pointer cur"}>
             <a href={"/"}>
                 <picture>
                     <source srcSet={props.image} media="(min-width: 900px)" alt={"watermark"}/>
@@ -89,13 +97,15 @@ export const DashboardMenu = (props) => {
             >
             {props.login ? (
                 <MenuItem
-                    route={'/powiadomienia'}>
-                    Powiadomienia
+                    logout={() => AuthService.logout()}
+                >
+                    Wyloguj się
                 </MenuItem
                 >
             ) : (
                 <MenuItem
-                    route={'/logowanie'}>
+                    route={'/logowanie'}
+                >
                     Zaloguj się
                 </MenuItem
                 >

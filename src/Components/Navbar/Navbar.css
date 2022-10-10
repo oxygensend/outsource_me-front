@@ -354,3 +354,23 @@
 
 }
 
+.div-avatar {
+    width: 60px;
+    height: 60px;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 5;
+    flex-grow: 0;
+}
+
+.avatar {
+    box-sizing: border-box;
+
+
+    /* Purple Extra Light */
+
+    border: 1px solid #E9E8FC;
+}

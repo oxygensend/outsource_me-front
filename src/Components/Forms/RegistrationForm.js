@@ -6,6 +6,7 @@ import React, {useRef} from "react";
 import {SERVER_URL} from "../../config";
 import axios from "axios";
 import './Form.css'
+import AuthService from "../../services/authService";
 
 export class RegistrationForm extends React.Component {
 
@@ -81,20 +82,15 @@ export class RegistrationForm extends React.Component {
 
         this.setState({errors: null});
 
-        axios.post(event.target.action, data, {
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            }
-        }).then(response => {
-            if (response.status === 201 || response.status === 200) {
-                this.setState({successfulResponse: response.data})
-            }
-        }).catch(err => {
+        AuthService.register(data)
+            .then(response => {
+                if (response.status === 201 || response.status === 200) {
+                    this.setState({successfulResponse: response.data})
+                }
+            }).catch(err => {
             if (err.response.status === 422 || err.response.status === 400) {
                 this.setState({errors: err.response.data.violations})
                 this.clearPasswordInputs()
-                console.log(this.state);
             }
         })
 
@@ -125,7 +121,7 @@ export class RegistrationForm extends React.Component {
                 {this.state.emailResent ?
                     <p> Email został przesłany ponownie </p> :
                     <p className={"underline cursor-pointer text-blue-700 hover:text-blue-500"}
-                                                                   onClick={() => this.resendEmailVerificationEmail()}
+                       onClick={() => this.resendEmailVerificationEmail()}
                     >
                         Prześlij email jeszcze raz
                     </p>
