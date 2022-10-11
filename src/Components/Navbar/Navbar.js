@@ -41,12 +41,12 @@ export class Navbar extends React.Component {
                     : null}
                 {/*<Searchbar/>*/}
                 <div className={"nav-menu"}>
-                    <NavbarMenu/>
+                    <NavbarMenu login={this.state.isAuthenticated}/>
                     {!this.state.isAuthenticated ?
                         <ButtonLink value={"Dołącz do nas"} route={"/rejestracja"}/>
                         :
                         <div className={"div-avatar"}>
-                            <img src={avatar} className={"avatar rounded-3xl"} height={"60px"} width={"60px"}/>
+                            <img src={avatar} className={"avatar rounded-3xl"} height={"50px"} width={"50px"}/>
                         </div>
                     }
                 </div>

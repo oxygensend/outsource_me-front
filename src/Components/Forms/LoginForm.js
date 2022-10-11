@@ -106,9 +106,8 @@ export class LoginForm extends React.Component {
                         error={this.state.errors}
                     />
                     <div className={"flex order-2 relative bottom-10"}>
-                        <p className={"underline cursor-pointer text-blue-700 hover:text-blue-500"}
-                           onClick={() => this.resendEmailVerificationEmail()}
-                        >Zapomniałeś hasła? </p>
+                        <a className={"underline cursor-pointer text-blue-700 hover:text-blue-500"} href={"/odzyskiwanie-hasla-email"}
+                        >Zapomniałeś hasła? </a>
                     </div>
                     <GoogleButton>
                         Zaloguj się przez Google

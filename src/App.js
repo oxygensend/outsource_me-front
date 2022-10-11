@@ -6,6 +6,8 @@ import {Footer} from "./Components/Footer/Footer";
 import {Register} from "./pages/register";
 import {Login} from "./pages/login";
 import {GOOGLE_URL} from "./config";
+import {PasswordReset} from "./pages/passwordReset/passwordResetExecute";
+import {PasswordSendLink} from "./pages/passwordReset/passwordSendLink";
 
 function App() {
     return (
@@ -15,7 +17,8 @@ function App() {
                 <Route exact path={'/'} exact element={<WelcomeBoard/>}/>
                 <Route path={"/rejestracja"} element={<Register/>}/>
                 <Route path={"/logowanie"} element={<Login/>}/>
-
+                <Route path={"/odzyskiwanie-hasla"} element={<PasswordReset/>}/>
+                <Route path={"/odzyskiwanie-hasla-email"} element={<PasswordSendLink/>}/>
             </Routes>
             {/*<Footer/>*/}
         </Router>

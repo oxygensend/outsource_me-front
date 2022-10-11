@@ -11,6 +11,15 @@ export const NavLink = (props) => {
     );
 }
 
+export const Logout = (props) => {
+
+    return (
+        <div className={"nav-div "}>
+            <p className={"nav-link "} onClick={props.logout}>{props.children}</p>
+        </div>
+    );
+}
+
 export const MenuItem = (props) => {
     const [isHovering, setIsHovering] = useState(false);
 
@@ -136,9 +145,9 @@ export const NavbarMenu = (props) => {
                 Oferty zleceń
             </NavLink>
             {props.login ? (
-                <NavLink route={'/zaloguj-sie'}>
-                    Powiadomienia
-                </NavLink>
+                <Logout logout={() => AuthService.logout()}>
+                    Wyloguj się
+                </Logout>
             ) : (
                 <NavLink route={'/logowanie'}>
                     Zaloguj się

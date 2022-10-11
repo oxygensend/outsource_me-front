@@ -16,7 +16,7 @@ export const Input = (props) => {
             {props.error ?
                 <span
                     className={"flex mb-0.5 font-medium tracking-wide ml-1 text-red-500 text-xs flex order-2 relative bottom-2 "}>
-                   {props.error.message}
+                   {props.error.message ?? props.error}
                 </span> : null
             }
 
