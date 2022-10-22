@@ -2,7 +2,7 @@ import {Input} from "../Input/Input";
 import {GoogleButton} from "../Button/GoogleButton";
 import {Button} from "../Button/Button";
 import React from "react";
-import {SERVER_URL} from "../../config";
+import {API_URL} from "../../config";
 import './Form.css'
 import AuthService from "../../services/authService";
 import tokenService from "../../services/tokenService";
@@ -77,7 +77,7 @@ export class LoginForm extends React.Component {
             <form
                 className={"login-content "}
                 onSubmit={this.handleSubmit}
-                action={SERVER_URL + "/login"}
+                action={API_URL + "/login"}
             >
                 <div className={"login-title mt-6 "}>
                     <p>Zaloguj się</p>

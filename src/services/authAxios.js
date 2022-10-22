@@ -1,10 +1,10 @@
 import axios from "axios";
-import {SERVER_URL} from "../config";
-import {TokenService} from "./tokenService";
+import {API_URL} from "../config";
 import AuthService from "./authService";
+import TokenService from "./tokenService";
 
 const instance = axios.create({
-    baseURL: SERVER_URL,
+    baseURL: API_URL,
     headers: {
         "Content-Type": "application/json",
     }
@@ -23,17 +23,19 @@ instance.interceptors.request.use(
     }
 );
 
-instance.interceptors.request.use(
+instance.interceptors.response.use(
     res => {
         return res;
     },
     async err => {
         const originalConfig = err.config;
 
+        console.log(err);
         if (err.response) {
             if (err.response.status === 401 && !originalConfig._retry) {
                 originalConfig._retry = true;
 
+                console.log('c');
                 try {
                     const response = await AuthService.refreshToken();
                     const {accessToken, refreshToken} = response.data;

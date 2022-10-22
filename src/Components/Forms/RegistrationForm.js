@@ -3,7 +3,7 @@ import {Input} from "../Input/Input";
 import {GoogleButton} from "../Button/GoogleButton";
 import {Button} from "../Button/Button";
 import React, {useRef} from "react";
-import {SERVER_URL} from "../../config";
+import {API_URL} from "../../config";
 import axios from "axios";
 import './Form.css'
 import AuthService from "../../services/authService";
@@ -100,7 +100,7 @@ export class RegistrationForm extends React.Component {
     resendEmailVerificationEmail() {
 
         axios.post(
-            SERVER_URL + this.state.successfulResponse.resendEmailVerificationLink,
+            API_URL + this.state.successfulResponse.resendEmailVerificationLink,
             {email: this.state.successfulResponse.email}
         ).then(response => {
             if (response.status === 200) {
@@ -133,7 +133,7 @@ export class RegistrationForm extends React.Component {
                 <form
                     className={"login-content "}
                     onSubmit={this.handleSubmit}
-                    action={SERVER_URL + "/register"}
+                    action={API_URL + "/register"}
 
                 >
 

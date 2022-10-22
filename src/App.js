@@ -8,6 +8,7 @@ import {Login} from "./pages/login";
 import {GOOGLE_URL} from "./config";
 import {PasswordReset} from "./pages/passwordReset/passwordResetExecute";
 import {PasswordSendLink} from "./pages/passwordReset/passwordSendLink";
+import {Profile} from "./pages/profile";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                 <Route path={"/logowanie"} element={<Login/>}/>
                 <Route path={"/odzyskiwanie-hasla"} element={<PasswordReset/>}/>
                 <Route path={"/odzyskiwanie-hasla-email"} element={<PasswordSendLink/>}/>
+                <Route path={"/profile/:id"} element={<Profile/>}/>
             </Routes>
             {/*<Footer/>*/}
         </Router>

@@ -1,13 +1,13 @@
 import React from "react";
 import {useState, useEffect} from 'react';
 import './Navbar.css';
-import OutsourceMe from '../../assets/images/Outsource me.png'
+import OutsourceMe from '../../assets/images/Outsource me (1).png'
 import OutsourceMe_mobile from '../../assets/images/logo-mobile.png'
 import menu from '../../assets/images/menu.png'
 import {DashboardMenu, NavbarMenu, NavLink, Searchbar, Watermark} from "./NavbarElements";
 import {ButtonLink} from "../Button/ButtonLink";
 import tokenService from "../../services/tokenService";
-import avatar from '../../assets/images/Avatar.png';
+import avatar from '../../assets/images/avatar.png';
 
 export class Navbar extends React.Component {
 
@@ -46,7 +46,7 @@ export class Navbar extends React.Component {
                         <ButtonLink value={"Dołącz do nas"} route={"/rejestracja"}/>
                         :
                         <div className={"div-avatar"}>
-                            <img src={avatar} className={"avatar rounded-3xl"} height={"50px"} width={"50px"}/>
+                            <img src={avatar} className={"avatar rounded-2xl"} height={"50px"} width={"50px"}/>
                         </div>
                     }
                 </div>
