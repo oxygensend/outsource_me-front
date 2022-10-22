@@ -1,0 +1,307 @@
+.button-login {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    gap: 8px;
+}
+
+
+@media screen and (min-width: 600px) {
+
+    .button {
+
+        /* Auto layout */
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 12px 20px;
+        gap: 8px;
+
+        width: 141px;
+        height: 38px;
+
+        background: #D82521;
+        border-radius: 4px;
+
+        /* Inside auto layout */
+
+        flex: none;
+        order: 4;
+        flex-grow: 0;
+
+        justify-content: center;
+        text-align: center;
+        color: #FFFFFF;
+    }
+}
+
+@media screen and (min-width: 320px) {
+    .button {
+        /* button */
+
+        /* Auto layout */
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 8px 16px;
+        gap: 8px;
+
+        width: 133px;
+        height: 38px;
+
+        background: #D82521;
+        border-radius: 4px;
+
+        /* Inside auto layout */
+
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+
+        justify-content: center;
+        text-align: center;
+        color: #FFFFFF;
+    }
+}
+
+/*@media screen  and (min-width: 320px){*/
+/*   .button-text {*/
+/*       !* label *!*/
+
+
+/*       width: 101px;*/
+/*       height: 22px;*/
+
+/*       !* Body Default *!*/
+
+/*       font-style: normal;*/
+/*       font-weight: 400;*/
+/*       font-size: 16px;*/
+/*       line-height: 22px;*/
+/*       !* identical to box height *!*/
+
+/*       display: flex;*/
+/*       align-items: center;*/
+
+/*       !* Grey / 100 *!*/
+
+/*       color: #FAFAFA;*/
+
+
+/*       !* Inside auto layout *!*/
+
+/*       flex: none;*/
+/*       order: 0;*/
+/*       flex-grow: 0;*/
+/*   }*/
+/*}*/
+
+.button-text {
+
+    height: 22px;
+
+    /* Body Default */
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+
+    /* Grey / 100 */
+
+    color: #FAFAFA;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+
+
+
+@media screen and (min-width: 320px) {
+
+    .button-login {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 12px 20px;
+        gap: 8px;
+
+        position: relative;
+        width: 328.71px;
+        height: 80.89px;
+
+        text-align: center;
+        color: #000000;
+        background: #FAFAFA;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 4px;
+
+        left: 50%;
+        margin-top: 10px;
+
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+
+    }
+
+    .button-sign-in {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 12px 20px;
+        gap: 8px;
+
+        position: relative;
+        width: 328.71px;
+        height: 80.89px;
+
+        background: #D82521;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 4px;
+        text-align: center;
+
+        left: 50%;
+        margin-top: 10px;
+
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+
+    }
+
+    .button-login2 {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 12px 20px;
+        gap: 8px;
+
+        width: 369px;
+        height: 54px;
+
+        background: #D82521;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 4px;
+
+        /* Inside auto layout */
+
+        position: relative;
+        flex: none;
+        order: 4;
+        flex-grow: 0;
+        left: 50%;
+
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    .button-google {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 15px;
+        gap: 15px;
+
+        width: 366px;
+        height: 54px;
+
+        background: #FFFFFF;
+        box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.084), 0px 2px 3px rgba(0, 0, 0, 0.168);
+        border-radius: 10px;
+
+        /* Inside auto layout */
+
+        position: relative;
+        flex: none;
+        order: 3;
+        flex-grow: 0;
+        left: 50%;
+
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        margin-bottom: 20px;
+    }
+
+
+
+}
+
+
+@media  screen and (min-width: 640px) {
+    .button-sign-in {
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        gap: 8px;
+
+        position: relative;
+        width: 233.49px;
+        height: 84.5px;
+
+        background: #D82521;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 4px;
+        text-align: center;
+
+        left: unset;
+        margin-top: 10px;
+
+        -ms-transform: none;
+        transform: none;
+    }
+
+    .button-login {
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        gap: 8px;
+
+        position: relative;
+        width: 233.49px;
+        height: 84.5px;
+
+        text-align: center;
+        color: #000000;
+        background: #FAFAFA;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 4px;
+        left: unset;
+        margin-top: 10px;
+
+        -ms-transform: none;
+        transform: none;
+
+    }
+}
+
+
+.technology {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 10px;
+    position: relative;
+
+    font-size: 12px;
+    font-weight: 524;
+
+    background: #D82521;
+    color: #FFFFFF;
+    /*box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);*/
+    border-radius: 4px;
+    text-align: center;
+    justify-content: center;
+
+}

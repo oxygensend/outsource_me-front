@@ -1,0 +1,116 @@
+@media screen and (min-width: 320px) {
+
+    .input-field {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px 24px 0px 0px;
+        gap: 10px;
+
+        width: 370px;
+        height: 76px;
+
+
+        /* Inside auto layout */
+
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+        position: relative;
+        left: 50%;
+
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    .input-label {
+        height: 17px;
+
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        /* identical to box height */
+
+        display: flex;
+        align-items: center;
+        text-align: center;
+        letter-spacing: -0.02em;
+
+        color: #000000;
+
+
+        /* Inside auto layout */
+
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+    }
+
+    .input {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 16px;
+        gap: 10px;
+
+        width: 370px;
+        height: 51px;
+
+        background: #F1F2F3;
+        border-radius: 8px;
+
+        /* Inside auto layout */
+
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+    }
+
+    .checkbox {
+
+        width: 15px;
+        height: 51px;
+
+        accent-color: #D82521;
+        border-radius: 8px;
+
+        /* Inside auto layout */
+
+        align-items: center;
+
+    }
+
+    .checkbox-field {
+        display: flex;
+        flex-direction: row;
+        padding: 0px 24px 0px 0px;
+        gap: 10px;
+
+
+
+        /* Inside auto layout */
+
+
+        position: relative;
+
+    }
+
+    .checkbox-label {
+
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        /* identical to box height */
+
+        display: flex;
+        align-items: center;
+        text-align: center;
+        letter-spacing: -0.02em;
+
+        color: #000000;
+
+    }
+
+}
