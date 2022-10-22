@@ -46,7 +46,7 @@ export class Navbar extends React.Component {
                         <ButtonLink value={"Dołącz do nas"} route={"/rejestracja"}/>
                         :
                         <div className={"div-avatar"}>
-                            <img src={avatar} className={"avatar rounded-2xl"} height={"50px"} width={"50px"}/>
+                            <a href={"/profile/me"}><img src={avatar} className={"avatar rounded-2xl"} height={"50px"} width={"50px"}/></a>
                         </div>
                     }
                 </div>
