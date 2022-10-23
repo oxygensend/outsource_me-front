@@ -9,6 +9,7 @@ import {GOOGLE_URL} from "./config";
 import {PasswordReset} from "./pages/passwordReset/passwordResetExecute";
 import {PasswordSendLink} from "./pages/passwordReset/passwordSendLink";
 import {Profile} from "./pages/profile";
+import {JobOffers} from "./pages/jobOffers";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                 <Route path={"/odzyskiwanie-hasla"} element={<PasswordReset/>}/>
                 <Route path={"/odzyskiwanie-hasla-email"} element={<PasswordSendLink/>}/>
                 <Route path={"/profile/:id"} element={<Profile/>}/>
+                <Route path={"/oferty-zlecen"} element={<JobOffers/>}/>
             </Routes>
             {/*<Footer/>*/}
         </Router>
