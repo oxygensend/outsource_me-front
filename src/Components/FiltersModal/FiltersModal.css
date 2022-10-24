@@ -15,7 +15,7 @@
     border-radius: 50%;
     margin-right: 8px;
 }
-.checkbox-checked {
+.checkbox-active {
     border: 4px solid #D82521;
 }
 
@@ -33,6 +33,17 @@
     padding: 12px;
     background: rgba(128, 128, 128, 0.21);
     border-radius: 10px;
+}
+.search-results {
+
+    margin-top: 5px;
+    width: 100%;
+    padding: 12px;
+    background: rgba(128, 128, 128, 0.21);
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 }
 .filter-item {
     display: flex;

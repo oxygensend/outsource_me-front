@@ -9,7 +9,7 @@ export const JobOfferCard = (props) => {
 
     return (
 
-        <div className={"card"}>
+        <div className={"card mb-5"}>
             <div className={"grid grid-cols-12 md:flex md:flex-row md:justify-between md:ml-8 md:mr-8"}>
 
                 <div className={"flex flex-row  gap-3 col-start-2 md:col-start-1 col-span-7 mt-2  "}>
@@ -39,13 +39,13 @@ export const JobOfferCard = (props) => {
                 </div>
             </div>
 
-            <div className={"grid grid-cols-12 mt-5 md:flex md:flex-row md:justify-between md:ml-8 md:mr-8 mb-4"}>
+            <div className={"grid grid-cols-12 mt-5 md:flex md:flex-row md:justify-between md:ml-8 md:mr-8 "}>
 
-                <div className={"application-font col-start-2 col-span-6  "}>
+                <div className={"application-font col-start-2 md:mt-2 col-span-6"}>
                     <p>82 aplikacje</p>
                 </div>
 
-                <ButtonLink class={"application-button mt-5  md:mt-0 col-span-full"} value={"Aplikuj"}/>
+                <ButtonLink class={"application-button mt-5  md:mb-4 md:mt-0 col-span-full"} value={"Aplikuj"}/>
             </div>
 
         </div>
