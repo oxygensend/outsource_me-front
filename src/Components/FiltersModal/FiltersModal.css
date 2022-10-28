@@ -51,14 +51,31 @@
     align-items: center;
     padding: 5px 5px;
     position: relative;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 524;
-    background: #D82521;
-    color: #FFFFFF;
+    border: 1px #a2acb8 solid;
     border-radius: 4px;
+    background: rgba(128, 128, 128, 0.21);
     text-align: center;
 
 
+}
+
+
+.choosen-filter-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px 5px;
+    position: relative;
+    font-size: 10px;
+    font-weight: 524;
+    background: #D82521;
+    color: #FFFFFF;
+    border: 1px #a2acb8 solid;
+    border-radius: 4px;
+    text-align: center;
+    justify-content: center;
 }
 
 @media screen and (min-width: 320px) {
