@@ -45,7 +45,7 @@ export const Technologies = ({technologiesList, onFilterClick, technologies}) =>
                 value={search}
                 onChange={onChangeHandler}
             />
-            <div className={"flex flex-row gap-2  mt-5 flex-wrap mb-12 overflow-y-scroll max-h-40 cur"}>
+            <div className={"flex flex-row gap-2  mt-5 flex-wrap mb-12 overflow-y-scroll  cur"} style={{maxHeight: "10.5rem"}}>
 
                 {results ? results.map((technology, i) => {
                         return (<FilterItem

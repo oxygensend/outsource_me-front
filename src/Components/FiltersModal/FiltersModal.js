@@ -36,7 +36,6 @@ export const FiltersModal = ({
     const {address, developers, order, technologies, principles, workTypes} = filtersSettings;
 
 
-
     return (
         <div
             className={"bg-color md:col-start-1 md:col-end-4 xl:col-start-2 xl:col-end-5 xl:mr-16 md:ml-6 " + (hide ? "hidden " : null) + ' ' + (className ?? null)}>
@@ -78,17 +77,21 @@ export const FiltersModal = ({
                 technologies={technologies}
             />
 
-            <WorkTypes
-                workTypesList={workTypesList}
-                onFilterClick={onFilterClick}
-                workTypes={workTypes}
-            />
+            {
+                filtersSettings.principles ?
+                    <WorkTypes
+                        workTypesList={workTypesList}
+                        onFilterClick={onFilterClick}
+                        workTypes={workTypes}
+                    /> : null
+            }
 
             <div className={"mb-4 md:hidden cursor-pointer"}>
                 <div
                     className={"application-button mt-5  p-8"}
                     onClick={() => onClick(true)}
-                > Filtruj</div>
+                > Filtruj
+                </div>
             </div>
         </div>
     );

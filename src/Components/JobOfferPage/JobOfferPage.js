@@ -3,7 +3,7 @@ import filter_icon from "../../assets/icons/filter-24.png";
 import {FiltersModal} from "../FiltersModal/FiltersModal";
 import {JobOffersList} from "./JobOffersList";
 import './index.css';
-import { generateQueryParameters, getData, scrollToTop} from "../../services/utils";
+import {generateQueryParameters, getData, scrollToTop} from "../../services/utils";
 
 export const JobOfferPage = ({defaultFiltersSettings, searchParams, updatingUrlCompleted, setSearchParams}) => {
 
@@ -52,11 +52,14 @@ export const JobOfferPage = ({defaultFiltersSettings, searchParams, updatingUrlC
             getJobOffers();
         };
     }, [updatingUrlCompleted]);
+
+
     /* fetch job offer data  */
     const getJobOffers = (clear = false) => {
 
-        const params = '?' + generateQueryParameters(filtersSettings);
-        const url = currentPaginationUrl + (isInitialLoad ? params : '');
+        const params = generateQueryParameters(filtersSettings);
+        const url = (isInitialLoad ? updateEndpointUrl() : currentPaginationUrl) + (isInitialLoad ? params : '');
+
         getData(url)
             .then(response => {
                 if (response !== undefined) {
@@ -93,9 +96,9 @@ export const JobOfferPage = ({defaultFiltersSettings, searchParams, updatingUrlC
     const onFilterClick = (key, value) => {
         setReload(true);
         setIsInitialLoad(true)
+        setHasMore(false);
         scrollToTop();
 
-        setCurrentPaginationUrl('/api/job_offers')
 
         return setFiltersSettings((prevState) => ({
             ...prevState,
@@ -103,16 +106,23 @@ export const JobOfferPage = ({defaultFiltersSettings, searchParams, updatingUrlC
         }))
     }
 
+    const updateEndpointUrl = () => {
+        const {developers} = filtersSettings;
+        return developers ? '/api/users?accountType=Developer' : '/api/job_offers?';
+    }
 
     const updateQueryParams = () => {
 
         const {address, developers, order, technologies, principles, workTypes} = filtersSettings;
-
         let searchQuery = `${order ? '?order=' + order : ''}`;
-        if (developers)
+
+        if (developers) {
             searchQuery += (searchQuery.startsWith('?') ? '&offers=developers' : '?offers=developers');
-        if (principles)
+        }
+        if (principles) {
             searchQuery += (searchQuery.startsWith('?') ? '&offers=principles' : '?offers=principles');
+        }
+
         if (technologies.length > 0)
             searchQuery += (searchQuery.startsWith('?') ? '&technologies=' + technologies : '?technologies=' + technologies);
         if (address)
@@ -129,7 +139,7 @@ export const JobOfferPage = ({defaultFiltersSettings, searchParams, updatingUrlC
 
             <div
                 className={"md:col-start-11 md:col-end-13 md:ml-10 xl:col-start-10 xl:col-end-12 xl:ml-5 xl:mb-2 mobile-hide2"}>
-                <p style={{color: "#7C8DB0"}}>{totalNumberOfItems ? totalNumberOfItems + ' zleceń' : null}</p>
+                <p style={{color: "#7C8DB0"}}>{totalNumberOfItems ? totalNumberOfItems + (filtersSettings.principles ? ' zleceń' : ' programistów') : null}</p>
             </div>
             <div className={"mobile-filters-panel " + (!filtersModal ? 'mobile-hide' : null)}>
                 <div className={"flex flex-row gap-2 cursor-pointer"} onClick={() => setFiltersModal(false)}>
@@ -171,6 +181,8 @@ export const JobOfferPage = ({defaultFiltersSettings, searchParams, updatingUrlC
                 jobOffers={jobOffers}
                 getJobOffers={getJobOffers}
                 hasMore={hasMore}
+                developers={filtersSettings.developers}
+                principles={filtersSettings.principles}
             />
         </div>
     );

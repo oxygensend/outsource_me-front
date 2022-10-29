@@ -21,8 +21,19 @@ export const JobOffers = () => {
 
         let settings = {}
         searchParams.forEach((param, key) => {
-            settings[key] = isInArray(key, castToArray) ? param.split(',').map(Number) : param;
+            //TODO change this shit
+            if (param === 'developers') {
+                settings[param] = true;
+                settings['principles'] = false;
+            } else if (param === 'principles') {
+                settings['principles'] = true;
+                settings['developers'] = false;
+            } else {
+                settings[key] = isInArray(key, castToArray) ? param.split(',').map(Number) : param;
+            }
         })
+
+
         setFiltersSettings(prevState => ({
             ...prevState,
             ...settings

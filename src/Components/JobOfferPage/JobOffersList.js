@@ -1,10 +1,13 @@
 import {JobOfferCard} from "../JobOfferCard/JobOfferCard";
 import InfiniteScroll from "react-infinite-scroller";
 import loader from '../../assets/images/loader.gif'
+import {DeveloperCard} from "../DeveloperCard/DeveloperCard";
 
-export const JobOffersList = ({filtersModal, jobOffers, getJobOffers, hasMore}) => {
+export const JobOffersList = ({filtersModal, jobOffers, getJobOffers, hasMore, developers, principles}) => {
 
 
+
+    console.log('has more ' + hasMore);
     if (jobOffers) {
 
         return (
@@ -19,15 +22,35 @@ export const JobOffersList = ({filtersModal, jobOffers, getJobOffers, hasMore}) 
                     loader={<img src={loader} alt={"loader"} className={"loader"} key={-1} width={40} height={40}/>}
                     useWindow={true}
                 >
-                    {jobOffers.map((jobOffer, i) => {
-                        return (
-                            <JobOfferCard
-                                key={i}
-                                jobOffer={jobOffer}
+                    {principles ?
+                        jobOffers.map((jobOffer, i) => {
+                            if (jobOffer['@type'] === 'JobOffer') {
+                                return (
+                                    <JobOfferCard
+                                        key={i}
+                                        jobOffer={jobOffer}
 
-                            />
-                        );
-                    })}
+                                    />
+                                );
+                            } else {
+                                return null;
+                            }
+
+                        }) :
+                        jobOffers.map((jobOffer, i) => {
+                            if (jobOffer['@type'] === 'User') {
+                                return (
+                                    <DeveloperCard
+                                        key={i}
+                                        developer={jobOffer}
+
+                                    />
+                                );
+                            } else {
+                                return null;
+                            }
+                        })
+                    }
                 </InfiniteScroll>
 
             </div>
