@@ -1,13 +1,14 @@
 import {ProfileModule} from "./ProfileModule";
 import {Technology} from "../Button/Technology";
 import {memo, useEffect, useState} from "react";
-import {AddTechnologyModal} from "../ProfileEditModal/AddTechnologyModal";
 import {getData, scrollToTop} from "../../services/utils";
+import {useNavigate} from "react-router-dom";
 
 export const Technologies = memo(({personalData, setShowModals}) => {
     const [showAddModal, setShowAddModal] = useState(false);
     const [technologiesList, setTechnologiesList] = useState([]);
     const [reload, setReload] = useState([]);
+    const navigate = useNavigate();
 
     // useEffect(() => {
     //     setReload(false);
@@ -26,7 +27,8 @@ export const Technologies = memo(({personalData, setShowModals}) => {
 
 
     const onClickEdit = () => {
-        window.location.href = '/profil/' + personalData.id + '/edytuj/technologie';
+        navigate('/profil/1/edytuj/technologie', {state: {personalData: personalData}});
+        // window.location.href = '/profil/' + personalData.id + '/edytuj/technologie';
     }
 
     const onClickAdd = () => {
@@ -52,12 +54,6 @@ export const Technologies = memo(({personalData, setShowModals}) => {
 
             </div>
 
-            {showAddModal ?
-                <AddTechnologyModal
-                    technologiesList={technologiesList}
-                    setReload={setReload}
-                    setShowModal={setShowAddModal}
-                /> : null}
         </ProfileModule>
     );
 });

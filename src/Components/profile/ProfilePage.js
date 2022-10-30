@@ -12,9 +12,6 @@ import {Languages} from "./Languages";
 import {JobPositions} from "./JobPosition";
 import {Education} from "./Education";
 import {Technologies} from "./Technologies";
-import {EditModule} from "./EditModule";
-import {AddLanguagesModal} from "../ProfileEditModal/AddLanguagesModal";
-import {AddTechnologyModal} from "../ProfileEditModal/AddTechnologyModal";
 
 export const ProfilePage = memo(({style, setShowModals}) => {
 
@@ -159,14 +156,8 @@ export const ProfilePage = memo(({style, setShowModals}) => {
                     <Technologies
                         personalData={personalData}
                         setShowModals={setShowModals}
-                        setShowEditModal={setShowEditModal}
                     />
                     : null}
-
-                {}
-                <EditModule/>
-
-
 
             </div>
 

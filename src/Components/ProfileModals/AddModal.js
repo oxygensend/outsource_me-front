@@ -1,7 +1,7 @@
 import close_icon from "../../assets/icons/close-icon.svg";
 import {useParams} from "react-router-dom";
 
-export const EditModal = ({title, children, onSubmitHandler, errors, setShowModals, prop}) => {
+export const AddModal = ({title, children, onSubmitHandler, errors, setShowModals, prop}) => {
     const {id} = useParams();
 
     const onClickCloseButton = () => {

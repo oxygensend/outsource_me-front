@@ -1,12 +1,10 @@
 import './index.css';
 import {ProfilePage} from "../../Components/profile/ProfilePage";
-import {AddTechnologyModal} from "../../Components/ProfileEditModal/AddTechnologyModal";
+import {AddTechnologyModal} from "../../Components/ProfileModals/AddTechnologyModal";
 import {useEffect, useState} from "react";
-import {getData, getDataAuthentication} from "../../services/utils";
-import {AddExpirienceModal} from "../../Components/ProfileEditModal/AddExpirienceModal";
-import {AddJobPositionForm} from "../../Components/Forms/AddJobPositionForm";
-import {AddJobPositionModal} from "../../Components/ProfileEditModal/AddJobPositionModal";
-import {AddLanguagesModal} from "../../Components/ProfileEditModal/AddLanguagesModal";
+import {AddLanguagesModal} from "../../Components/ProfileModals/AddLanguagesModal";
+import {AddJobPositionModal} from "../../Components/ProfileModals/AddJobPositionModal";
+import {AddExpirienceModal} from "../../Components/ProfileModals/AddExpirienceModal";
 
 
 export const Profile = () => {

@@ -1,4 +1,4 @@
-import {EditModal} from "./EditModal";
+import {AddModal} from "./AddModal";
 import {Search} from "../Search/Search";
 import {getData, searchArray} from "../../services/utils";
 import React, {useEffect, useState} from "react";
@@ -55,7 +55,7 @@ export const AddJobPositionModal = ({ setShowModals}) => {
     }
 
     return (
-        <EditModal
+        <AddModal
             title={"Dodaj miejce pracy"}
             prop={"jobPositions"}
             setShowModals={setShowModals}
@@ -102,7 +102,7 @@ export const AddJobPositionModal = ({ setShowModals}) => {
                 {/*: null*/}
             {/*}*/}
 
-        </EditModal>
+        </AddModal>
     );
 
 }

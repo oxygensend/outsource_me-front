@@ -1,4 +1,4 @@
-import {EditModal} from "./EditModal";
+import {AddModal} from "./AddModal";
 import {Search} from "../Search/Search";
 import {TechnologiesBox} from "../FiltersModal/TechnologiesBox";
 import {memo, useEffect, useState} from "react";
@@ -87,7 +87,7 @@ export const AddTechnologyModal = memo(({ setShowModals}) => {
     }
 
     return (
-        <EditModal
+        <AddModal
             title={"Dodaj technologie"}
             onSubmitHandler={onSubmitHandler}
             setShowModals={setShowModals}
@@ -114,6 +114,6 @@ export const AddTechnologyModal = memo(({ setShowModals}) => {
                 onClick={() => onSubmitHandler()}
             />
 
-        </EditModal>
+        </AddModal>
     );
 });

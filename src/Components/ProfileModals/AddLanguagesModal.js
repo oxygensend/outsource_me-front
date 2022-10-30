@@ -1,4 +1,4 @@
-import {EditModal} from "./EditModal";
+import {AddModal} from "./AddModal";
 import React, {useState} from "react";
 import {AddLanguageForm} from "../Forms/AddLanguageForm";
 
@@ -6,13 +6,13 @@ export  const AddLanguagesModal = ({universitiesList, setShowModals}) => {
 
 
     return (
-        <EditModal
+        <AddModal
             title={"Dodaj język"}
             setShowModals={setShowModals}
             prop={"languages"}
         >
             <AddLanguageForm/>
-        </EditModal>
+        </AddModal>
     );
 
 }

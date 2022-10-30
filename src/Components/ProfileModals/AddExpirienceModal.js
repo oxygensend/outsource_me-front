@@ -1,4 +1,4 @@
-import {EditModal} from "./EditModal";
+import {AddModal} from "./AddModal";
 import {Search} from "../Search/Search";
 import {getDataAuthentication, searchArray} from "../../services/utils";
 import React, {useEffect, useState} from "react";
@@ -50,7 +50,7 @@ export const AddExpirienceModal = ({setShowModals}) => {
 
     console.log(selectedUni);
     return (
-        <EditModal
+        <AddModal
             title={"Dodaj wykształcenie"}
             setShowModals={setShowModals}
             prop={"education"}
@@ -96,7 +96,7 @@ export const AddExpirienceModal = ({setShowModals}) => {
                 : null
             }
 
-        </EditModal>
+        </AddModal>
     );
 
 }

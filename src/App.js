@@ -10,11 +10,8 @@ import {PasswordReset} from "./pages/passwordReset/passwordResetExecute";
 import {PasswordSendLink} from "./pages/passwordReset/passwordSendLink";
 import {Profile} from "./pages/profile";
 import {JobOffers} from "./pages/jobOffers";
-import {ProfileAddTechnology} from "./pages/profileAddTechnology";
-import {ProfileEditTechnology} from "./pages/profileEditTechnology";
-import {ProfileAddExpirience} from "./pages/profileAddExpirience";
-import {ProfileAddJobPosition} from "./pages/profileAddJobPosition";
-import {ProfileAddLanguage} from "./pages/profileAddLanguage";
+import {ProfileEditTechnologies} from "./pages/profileEditTechnologies";
+import {ProfileEditLanguages} from "./pages/profileEditLanguages";
 
 function App() {
     return (
@@ -30,8 +27,8 @@ function App() {
                 {/*<Route path={"/profil/:id/dodaj/technologie"} element={<ProfileAddTechnology/>}/>*/}
                 {/*<Route path={"/profil/:id/dodaj/wyksztalcenie"} element={<ProfileAddExpirience/>}/>*/}
                 {/*<Route path={"/profil/:id/dodaj/miejsce_pracy"} element={<ProfileAddJobPosition/>}/>*/}
-                {/*<Route path={"/profil/:id/dodaj/jezyk"} element={<ProfileAddLanguage/>}/>*/}
-                <Route path={"/profil/:id/edytuj/technologie"} element={<ProfileEditTechnology/>}/>
+                <Route path={"/profil/:id/edytuj/jezyki"} element={<ProfileEditLanguages/>}/>
+                <Route path={"/profil/:id/edytuj/technologie"}  element={<ProfileEditTechnologies/>}/>
                 <Route path={"/oferty-zlecen"} element={<JobOffers/>}/>
             </Routes>
             {/*<Footer/>*/}

@@ -1,9 +1,6 @@
 import {memo, useEffect, useState} from "react";
-import profileService from "../../services/profileService";
 import {ListElement} from "./ListElement";
 import {ProfileModule} from "./ProfileModule";
-import {AddLanguagesModal} from "../ProfileEditModal/AddLanguagesModal";
-import {scrollToTop} from "../../services/utils";
 
 export const Languages = memo(({id, languages, setShowModals}) => {
 
