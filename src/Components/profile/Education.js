@@ -26,15 +26,22 @@ export const Education = ({id}) => {
             console.log(err);
         });
     }
+    const onClickAdd = () => {
+        window.location.href = '/profil/' + id + '/dodaj/wyksztalcenie';
+    }
 
     if (education) {
         return (
-            <ProfileModule title={"Wykształcenie"} breakLine={true}>
+            <ProfileModule
+                title={"Wykształcenie"}
+                breakLine={true}
+                onClickAdd={onClickAdd}
+            >
                 {education.map((element) => {
                     return <ListElement
                         name={element.university.name}
                         timePeriod={element.fieldOfStudy + formatTimePeriod(element.startDate, element.endDate)
-                            + (element.title ? ' - ' + element.title : null)
+                            + (element.title ? ' - ' + element.title : '')
                         }
                         metaData={element.description}
                         key={element['@id']}

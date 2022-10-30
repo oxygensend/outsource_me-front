@@ -29,6 +29,15 @@ export const JobPositions = ({id}) => {
 
     }
 
+    const onClickEdit = () => {
+        window.location.href = '/profil/' + id + '/edytuj/miejsce_pracy';
+    }
+
+    const onClickAdd = () => {
+        window.location.href = '/profil/' + id + '/dodaj/miejsce_pracy';
+    }
+
+
     if (jobPositions) {
 
         jobPositions.forEach(element => {
@@ -50,7 +59,12 @@ export const JobPositions = ({id}) => {
 
 
         return (
-            <ProfileModule title={"Doświadczenie"} breakLine={true}>
+            <ProfileModule
+                title={"Doświadczenie"}
+                breakLine={true}
+                onClickAdd={onClickAdd}
+                onClickEdit={onClickEdit}
+            >
 
                 {showResults ? results : results.slice(0, 3)}
                 {results.length > 3 && !showResults ?

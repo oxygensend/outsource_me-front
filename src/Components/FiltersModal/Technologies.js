@@ -2,6 +2,7 @@ import {FilterSection} from "./FilterSection";
 import {FilterItem} from "./FilterItem";
 import {useState} from "react";
 import {isInArray, searchArray} from "../../services/utils";
+import {TechnologiesBox} from "./TechnologiesBox";
 
 export const Technologies = ({technologiesList, onFilterClick, technologies}) => {
 
@@ -45,27 +46,14 @@ export const Technologies = ({technologiesList, onFilterClick, technologies}) =>
                 value={search}
                 onChange={onChangeHandler}
             />
-            <div className={"flex flex-row gap-2  mt-5 flex-wrap mb-12 overflow-y-scroll  cur"} style={{maxHeight: "10.5rem"}}>
+                <TechnologiesBox
+                    results={results}
+                    technologiesList={technologiesList}
+                    onClickTechnology={onClickTechnology}
+                    selectedTechnologies={selectedTechnologies}
 
-                {results ? results.map((technology, i) => {
-                        return (<FilterItem
-                            key={i}
-                            name={technology.name}
-                            onClick={() => onClickTechnology(technology)}
-                            active={isInArray(technology.id, selectedTechnologies)}
-                        />)
-                    }) :
-                    technologiesList ? technologiesList.map((technology, i) => {
-                        return (<FilterItem
-                            key={i}
-                            name={technology.name}
-                            onClick={() => onClickTechnology(technology)}
-                            active={isInArray(technology.id, selectedTechnologies)}
-                        />);
-                    }) : null
-                }
+                />
 
-            </div>
         </FilterSection>
 
     );

@@ -24,10 +24,23 @@ export const Languages = ({id}) => {
         });
     }
 
+    const onClickEdit = () => {
+        window.location.href = '/profil/' + id + '/edytuj/jezyk';
+    }
+
+    const onClickAdd = () => {
+        window.location.href = '/profil/' + id + '/dodaj/jezyk';
+    }
+
     if (languages) {
 
         return (
-            <ProfileModule title={"Języki"} breakLine={true}>
+            <ProfileModule
+                title={"Języki"}
+                breakLine={true}
+                onClickAdd={onClickAdd}
+                onClickEdit={onClickEdit}
+            >
                 {languages.map((element) => {
                     return (<ListElement
                         name={element.name}

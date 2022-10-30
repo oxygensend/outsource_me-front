@@ -1,7 +1,7 @@
 import {Checkbox} from "../Input/Checkbox";
 import {Input} from "../Input/Input";
 import {GoogleButton} from "../Button/GoogleButton";
-import {Button} from "../Button/Button";
+import {SubmitButton} from "../Button/SubmitButton";
 import React, {useRef} from "react";
 import {API_URL} from "../../config";
 import axios from "axios";
@@ -225,7 +225,7 @@ export class RegistrationForm extends React.Component {
                             <GoogleButton>
                                 Dołącz przez Google
                             </GoogleButton>
-                            <Button
+                            <SubmitButton
                                 class={"button-login2 justify-center cursor-pointer"}
                                 value={"Zarejestruj się"}
                             />

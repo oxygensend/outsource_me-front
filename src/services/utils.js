@@ -1,5 +1,7 @@
 import axios from "axios";
-import {SERVER_URL} from "../config";
+import {API_URL, SERVER_URL} from "../config";
+import TokenService from "./tokenService";
+import authAxios from "./authAxios";
 
 export const scrollToTop = () => {
     window.scrollTo({top: 0, behavior: 'smooth'})
@@ -55,3 +57,23 @@ export const getData = (endpoint) =>
                 throw error
             }
         })
+export const getDataAuthentication = (endpoint) =>
+    authAxios.get(SERVER_URL + endpoint)
+        .then(({data}) => data)
+        .catch(function (error) {
+            if (error.response) {
+                if (error.response.status === 404) {
+                    return undefined
+                }
+            } else {
+                throw error
+            }
+        })
+
+
+export const postData = async (endpoint, data) => {
+    authAxios.post(API_URL + endpoint, data)
+        .then(({data}) => console.log(data) )
+        .catch((error) => {throw error});
+
+}

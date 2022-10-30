@@ -1,11 +1,13 @@
 import './Buton.css';
 
-export const Button = (props) => {
+export const Button = ({className, text_color, value, onClick}) => {
 
 
     return (
-        <div className={props.class ?? "button button-mobile"}>
-            <input className={"button-text cursor-pointer"} style={{color: props.text_color ?? "#ffffff"}} type={"submit"} value={props.value}/>
+        <div className={className ?? "button button-mobile"} onClick={onClick}>
+            <button className={"button-text cursor-pointer"} style={{color: text_color ?? "#ffffff"}} type={"submit"}>
+                {value}
+            </button>
         </div>
     );
 }

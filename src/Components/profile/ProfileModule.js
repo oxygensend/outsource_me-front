@@ -1,24 +1,33 @@
 import edit_icon from "../../assets/icons/edit-icon.png";
 import plus from "../../assets/icons/plus.png";
 import '../../pages/profile/index.css'
+import {useParams} from "react-router-dom";
+import tokenService from "../../services/tokenService";
+import {useState} from "react";
 
-export const ProfileModule = (props) => {
+export const ProfileModule = ({lastCol, title, breakLine, onClickEdit, onClickAdd, children}) => {
+    const {id} = useParams();
+
     return (
 
-        <div className={"col-span-full mt-5 grid grid-cols-10 " } >
 
-            <div className={"col-start-2 col-end-10 md:col-end-" + (props.lastCol ?? '10')}>
-                <p className={"font-module pb-2"}>{props.title}</p>
-                {props.children}
+        <div className={"col-span-full mt-5 grid grid-cols-10 "}>
+
+            <div className={"col-start-2 col-end-10 md:col-end-" + (lastCol ?? '10')}>
+                <p className={"font-module pb-2"}>{title}</p>
+                {children}
 
             </div>
-            <div className={"col-end-11  row-span-0 cursor-pointer"}>
-                <img src={plus} alt={"add"} onClick={props.addAction}/>
-                <img src={edit_icon} alt={"edit"} className={"mt-2"} onClick={props.editAction}/>
-            </div>
-            {props.breakLine ?
-                <hr className={"col-span-full mt-10 "} style={{backgroundColor: "#0F528B", opacity: "0.8"}}/>
-                : null
+            {tokenService.checkIfMe(id) ?
+                <div className={"col-end-11  row-span-0 cursor-pointer"}>
+                    <img src={plus} alt={"add"} onClick={onClickAdd}/>
+                    <img src={edit_icon} alt={"edit"} className={"mt-2"} onClick={onClickEdit}/>
+                </div>
+                : null}
+            {
+                breakLine ?
+                    <hr className={"col-span-full mt-10 "} style={{backgroundColor: "#0F528B", opacity: "0.8"}}/>
+                    : null
             }
         </div>
     );

@@ -6,8 +6,6 @@ import {DeveloperCard} from "../DeveloperCard/DeveloperCard";
 export const JobOffersList = ({filtersModal, jobOffers, getJobOffers, hasMore, developers, principles}) => {
 
 
-
-    console.log('has more ' + hasMore);
     if (jobOffers) {
 
         return (

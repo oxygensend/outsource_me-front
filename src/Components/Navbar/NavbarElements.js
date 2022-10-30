@@ -54,7 +54,7 @@ export const MenuItem = (props) => {
 export const Watermark = (props) => {
 
     return (
-        <div className={"nav-watermark cursor-pointer cur"}>
+        <div className={"nav-watermark cursor-pointer "}>
             <a href={"/"}>
                 <picture>
                     <source srcSet={props.image} media="(min-width: 900px)" alt={"watermark"}/>
@@ -70,7 +70,12 @@ export const Searchbar = (props) => {
     return (
         <div className={"nav-search"}>
 
-            <input className={"nav-search-content "}/>
+            <input
+                className={"search"}
+                type="text"
+                placeholder="Szukaj..."
+
+            />
         </div>
     )
 }
@@ -78,6 +83,9 @@ export const Searchbar = (props) => {
 export const DashboardMenu = (props) => {
 
     return (<div className={"nav-dashboard"}>
+            <MenuItem>
+                Wyszukaj
+            </MenuItem>
             {props.login ? (
                 <MenuItem
                     route={'/'}
@@ -94,11 +102,6 @@ export const DashboardMenu = (props) => {
                 >
             )
             }
-            <MenuItem
-                route={'/spolecznosc'}>
-                Społeczność
-            </MenuItem
-            >
             <MenuItem
                 route={'/oferty-zlecen'}>
                 Oferty zleceń
@@ -138,16 +141,13 @@ export const NavbarMenu = (props) => {
                 </NavLink>
             )
             }
-            <NavLink route={'/spolecznosc'}>
-                Społeczność
-            </NavLink>
             <NavLink route={'/oferty-zlecen'}>
                 Oferty zleceń
             </NavLink>
             {props.login ? (
-                <Logout logout={() => AuthService.logout()}>
-                    Wyloguj się
-                </Logout>
+                <NavLink rotue={'/powiadomienia'}>
+                    Powiadomienia
+                </NavLink>
             ) : (
                 <NavLink route={'/logowanie'}>
                     Zaloguj się

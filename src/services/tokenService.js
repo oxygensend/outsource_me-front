@@ -33,6 +33,10 @@ class TokenService {
         return jwtDecode(this.getLocalAccessToken());
     }
 
+    checkIfMe(id) {
+        return this.getUser().id == id || id === 'me';
+    }
+
 }
 
 export default new TokenService();
