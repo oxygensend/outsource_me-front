@@ -1,10 +1,10 @@
-import {useEffect, useState} from "react";
+import {memo, useEffect, useState} from "react";
 import profileService from "../../services/profileService";
 import formatTimePeriod from "../../helpers/formatTimePeriod";
 import {ListElement} from "./ListElement";
 import {ProfileModule} from "./ProfileModule";
 
-export const JobPositions = ({id}) => {
+export const JobPositions = ({id, setShowModals}) => {
     const [jobPositions, setJobPositions] = useState();
     const [showResults, setShowResults] = useState(false);
     const results = [];
@@ -34,7 +34,7 @@ export const JobPositions = ({id}) => {
     }
 
     const onClickAdd = () => {
-        window.location.href = '/profil/' + id + '/dodaj/miejsce_pracy';
+        setShowModals((prevState) => ({...prevState, ['jobPositions']: true}));
     }
 
 

@@ -1,13 +1,13 @@
 import {EditModal} from "./EditModal";
 import {Search} from "../Search/Search";
 import {TechnologiesBox} from "../FiltersModal/TechnologiesBox";
-import {useEffect, useState} from "react";
+import {memo, useEffect, useState} from "react";
 import {getData, isInArray, patchData, postData, searchArray} from "../../services/utils";
 import {useParams} from "react-router-dom";
 import authAxios from "../../services/authAxios";
 import {Button} from "../Button/Button";
 
-export const AddTechnologyModal = ({technologiesList, setReload}) => {
+export const AddTechnologyModal = memo(({ setShowModals}) => {
     const [search, setSearch] = useState('')
     const [results, setResults] = useState(null);
     const [selectedTechnologies, setSelectedTechnologies] = useState([]);
@@ -15,6 +15,26 @@ export const AddTechnologyModal = ({technologiesList, setReload}) => {
     const {id} = useParams();
 
 
+    const [technologiesList, setTechnologiesList] = useState([]);
+    const [reload, setReload] = useState([]);
+
+    useEffect(() => {
+        setReload(false);
+    }, [reload])
+
+    useEffect(() => {
+
+        return () => {
+                getData('/api/technologies').then(technologies => {
+                    console.log(technologies);
+                    setTechnologiesList(technologies['hydra:member']);
+                });
+
+        }
+    }, []);
+
+
+    console.log(technologiesList);
     const onClickTechnology = (technology) => {
 
         if (isInArray(technology['@id'], selectedTechnologies)) {
@@ -51,7 +71,7 @@ export const AddTechnologyModal = ({technologiesList, setReload}) => {
 
         for (const technology of selectedTechnologies) {
 
-            await authAxios.post('/users/' + id + '/technologies', {iri: technology}).then((response) => {
+            await authAxios.post('/users/' + '1' + '/technologies', {iri: technology}).then((response) => {
                 countSuccessfullResponses++;
             }).catch((e) => {
                 if (e.response.status === 400) {
@@ -70,6 +90,8 @@ export const AddTechnologyModal = ({technologiesList, setReload}) => {
         <EditModal
             title={"Dodaj technologie"}
             onSubmitHandler={onSubmitHandler}
+            setShowModals={setShowModals}
+            prop={"technology"}
             errors={errors}
         >
             <Search
@@ -94,4 +116,4 @@ export const AddTechnologyModal = ({technologiesList, setReload}) => {
 
         </EditModal>
     );
-}
+});

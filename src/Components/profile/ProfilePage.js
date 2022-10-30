@@ -13,8 +13,10 @@ import {JobPositions} from "./JobPosition";
 import {Education} from "./Education";
 import {Technologies} from "./Technologies";
 import {EditModule} from "./EditModule";
+import {AddLanguagesModal} from "../ProfileEditModal/AddLanguagesModal";
+import {AddTechnologyModal} from "../ProfileEditModal/AddTechnologyModal";
 
-export const ProfilePage = memo(({style}) => {
+export const ProfilePage = memo(({style, setShowModals}) => {
 
     const [personalData, setPersonalData] = useState();
     const {id} = useParams();
@@ -23,12 +25,17 @@ export const ProfilePage = memo(({style}) => {
     const checkIfMe = tokenService.checkIfMe(id);
     const [showEditModal, setShowEditModal] = useState(false);
     const [showAddModal, setShowAddModal] = useState(false);
+    const [languages, setLanguages] = useState();
+
 
     useEffect(() => {
         return () => {
             getPersonalData();
+            getLanguages();
         };
     }, []);
+
+
 
     const getPersonalData = () => {
         profileService.getPersonalData(id)
@@ -42,7 +49,18 @@ export const ProfilePage = memo(({style}) => {
         });
     }
 
+    const getLanguages = () => {
+        profileService.getLanguages('1')
+            .then(response => {
+                if (response.status === 200) {
+                    console.log(response.data)
+                    setLanguages(response.data['hydra:member']);
+                }
+            }).catch(err => {
 
+            console.log(err);
+        });
+    }
     const getTechnologies = () => {
         profileService.getTechnologies(id)
             .then(response => {
@@ -54,6 +72,7 @@ export const ProfilePage = memo(({style}) => {
         });
     }
 
+    console.log(languages);
 
     /**
      * Personal data have to be rendered first
@@ -132,21 +151,25 @@ export const ProfilePage = memo(({style}) => {
                     <hr className={"col-span-full mt-10 "} style={{backgroundColor: "#0F528B", opacity: "0.8"}}/>
                 </div>
 
-                <Languages id={personalData.id}/>
-                <JobPositions id={personalData.id}/>
-                <Education id={personalData.id}/>
+                <Languages id={personalData.id} languages={languages}  setShowModals={setShowModals}/>
+                <JobPositions id={personalData.id} setShowModals={setShowModals}/>
+                <Education id={personalData.id} setShowModals={setShowModals}/>
 
                 {personalData.accountType === DEVELOPER_ROLE ?
                     <Technologies
                         personalData={personalData}
-                        setShowAddModal={setShowAddModal}
+                        setShowModals={setShowModals}
                         setShowEditModal={setShowEditModal}
                     />
                     : null}
 
                 {}
                 <EditModule/>
+
+
+
             </div>
+
         );
     else
         return null;

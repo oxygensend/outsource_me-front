@@ -27,10 +27,10 @@ function App() {
                 <Route path={"/odzyskiwanie-hasla"} element={<PasswordReset/>}/>
                 <Route path={"/odzyskiwanie-hasla-email"} element={<PasswordSendLink/>}/>
                 <Route path={"/profil/:id"} element={<Profile/>}/>
-                <Route path={"/profil/:id/dodaj/technologie"} element={<ProfileAddTechnology/>}/>
-                <Route path={"/profil/:id/dodaj/wyksztalcenie"} element={<ProfileAddExpirience/>}/>
-                <Route path={"/profil/:id/dodaj/miejsce_pracy"} element={<ProfileAddJobPosition/>}/>
-                <Route path={"/profil/:id/dodaj/jezyk"} element={<ProfileAddLanguage/>}/>
+                {/*<Route path={"/profil/:id/dodaj/technologie"} element={<ProfileAddTechnology/>}/>*/}
+                {/*<Route path={"/profil/:id/dodaj/wyksztalcenie"} element={<ProfileAddExpirience/>}/>*/}
+                {/*<Route path={"/profil/:id/dodaj/miejsce_pracy"} element={<ProfileAddJobPosition/>}/>*/}
+                {/*<Route path={"/profil/:id/dodaj/jezyk"} element={<ProfileAddLanguage/>}/>*/}
                 <Route path={"/profil/:id/edytuj/technologie"} element={<ProfileEditTechnology/>}/>
                 <Route path={"/oferty-zlecen"} element={<JobOffers/>}/>
             </Routes>

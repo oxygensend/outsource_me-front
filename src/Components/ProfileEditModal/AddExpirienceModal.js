@@ -1,16 +1,26 @@
 import {EditModal} from "./EditModal";
 import {Search} from "../Search/Search";
-import {searchArray} from "../../services/utils";
-import React, {useState} from "react";
+import {getDataAuthentication, searchArray} from "../../services/utils";
+import React, {useEffect, useState} from "react";
 import close_icon from "../../assets/icons/close-icon.svg";
 import {AddEducationForm} from "../Forms/AddEducationForm";
 
-export const AddExpirienceModal = ({universitiesList}) => {
+export const AddExpirienceModal = ({setShowModals}) => {
 
     const [search, setSearch] = useState('')
     const [results, setResults] = useState([]);
     const [selectedUni, setSelectedUni] = useState(null);
+    const [universitiesList, setUniversitiesList] = useState([]);
 
+    useEffect(() => {
+        return () => {
+
+            getDataAuthentication('/api/universities').then(universities => {
+                setUniversitiesList(universities['hydra:member']);
+            });
+
+        };
+    }, []);
     const onChangeHandler = async (event) => {
 
         const search = event.target.value.toLowerCase();
@@ -42,6 +52,8 @@ export const AddExpirienceModal = ({universitiesList}) => {
     return (
         <EditModal
             title={"Dodaj wykształcenie"}
+            setShowModals={setShowModals}
+            prop={"education"}
             // onSubmitHandler={onSubmitHandler}
             // errors={errors}
         >

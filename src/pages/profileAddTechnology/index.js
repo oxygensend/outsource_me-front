@@ -27,8 +27,6 @@ export const ProfileAddTechnology = () => {
             <ProfilePage/>
 
           <AddTechnologyModal
-              technologiesList={technologiesList}
-              setReload={setReload}
           />
 
         </div>

@@ -1,35 +1,19 @@
-import {useEffect, useState} from "react";
+import {memo, useEffect, useState} from "react";
 import profileService from "../../services/profileService";
 import {ListElement} from "./ListElement";
 import {ProfileModule} from "./ProfileModule";
+import {AddLanguagesModal} from "../ProfileEditModal/AddLanguagesModal";
+import {scrollToTop} from "../../services/utils";
 
-export const Languages = ({id}) => {
-    const [languages, setLanguages] = useState();
-
-    useEffect(() => {
-        return () => {
-            getLanguages();
-        };
-    }, []);
-
-    const getLanguages = () => {
-        profileService.getLanguages(id)
-            .then(response => {
-                if (response.status === 200) {
-                    setLanguages(response.data['hydra:member']);
-                }
-            }).catch(err => {
-
-            console.log(err);
-        });
-    }
+export const Languages = memo(({id, languages, setShowModals}) => {
 
     const onClickEdit = () => {
         window.location.href = '/profil/' + id + '/edytuj/jezyk';
     }
 
     const onClickAdd = () => {
-        window.location.href = '/profil/' + id + '/dodaj/jezyk';
+        setShowModals((prevState) => ({...prevState, ['languages']: true}));
+
     }
 
     if (languages) {
@@ -48,12 +32,10 @@ export const Languages = ({id}) => {
                         key={element['@id']}
                     />)
                 })}
-                <ListElement name={"Test"} metaData={"Zaawansowany"}/>
-
 
             </ProfileModule>
         );
     } else {
         return null;
     }
-}
+});

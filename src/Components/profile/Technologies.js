@@ -1,16 +1,39 @@
 import {ProfileModule} from "./ProfileModule";
 import {Technology} from "../Button/Technology";
+import {memo, useEffect, useState} from "react";
+import {AddTechnologyModal} from "../ProfileEditModal/AddTechnologyModal";
+import {getData, scrollToTop} from "../../services/utils";
 
-export const Technologies = ({personalData}) => {
+export const Technologies = memo(({personalData, setShowModals}) => {
+    const [showAddModal, setShowAddModal] = useState(false);
+    const [technologiesList, setTechnologiesList] = useState([]);
+    const [reload, setReload] = useState([]);
+
+    // useEffect(() => {
+    //     setReload(false);
+    // }, [reload])
+    //
+    //
+    // useEffect(() => {
+    //     return () => {
+    //         if (showAddModal) {
+    //             getData('/api/technologies').then(technologies => {
+    //                 setTechnologiesList(technologies['hydra:member']);
+    //             });
+    //         }
+    //     };
+    // }, [showAddModal]);
+
 
     const onClickEdit = () => {
         window.location.href = '/profil/' + personalData.id + '/edytuj/technologie';
     }
 
     const onClickAdd = () => {
-        console.log(personalData)
-        window.location.href = '/profil/' + personalData.id + '/dodaj/technologie';
+        setShowModals((prevState) => ({...prevState, ['technologies']: true}));
+
     }
+
 
     return (
         <ProfileModule
@@ -29,7 +52,12 @@ export const Technologies = ({personalData}) => {
 
             </div>
 
-
+            {showAddModal ?
+                <AddTechnologyModal
+                    technologiesList={technologiesList}
+                    setReload={setReload}
+                    setShowModal={setShowAddModal}
+                /> : null}
         </ProfileModule>
     );
-}
+});

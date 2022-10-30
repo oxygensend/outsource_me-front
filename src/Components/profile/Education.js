@@ -1,10 +1,10 @@
-import {useEffect, useState} from "react";
+import {memo, useEffect, useState} from "react";
 import profileService from "../../services/profileService";
 import {ListElement} from "./ListElement";
 import {ProfileModule} from "./ProfileModule";
 import formatTimePeriod from "../../helpers/formatTimePeriod";
 
-export const Education = ({id}) => {
+export const Education = memo(({id, setShowModals}) => {
 
     const [education, setEducation] = useState();
 
@@ -27,7 +27,7 @@ export const Education = ({id}) => {
         });
     }
     const onClickAdd = () => {
-        window.location.href = '/profil/' + id + '/dodaj/wyksztalcenie';
+        setShowModals((prevState) => ({...prevState, ['education']: true}));
     }
 
     if (education) {
@@ -55,4 +55,4 @@ export const Education = ({id}) => {
     } else {
         return null;
     }
-}
+});

@@ -19,8 +19,8 @@ export const ProfileAddExpirience = () => {
         <div>
 
             <ProfilePage/>
-            <AddExpirienceModal
-                universitiesList={universitiesList}
+            {/*<AddExpirienceModal*/}
+            {/*    universitiesList={universitiesList}*/}
             />
 
 

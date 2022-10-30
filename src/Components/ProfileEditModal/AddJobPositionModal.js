@@ -1,15 +1,31 @@
 import {EditModal} from "./EditModal";
 import {Search} from "../Search/Search";
-import {searchArray} from "../../services/utils";
-import React, {useState} from "react";
+import {getData, searchArray} from "../../services/utils";
+import React, {useEffect, useState} from "react";
 import close_icon from "../../assets/icons/close-icon.svg";
 import {AddJobPositionForm} from "../Forms/AddJobPositionForm";
 
-export const AddJobPositionModal = ({companiesList, formOfEmployments}) => {
+export const AddJobPositionModal = ({ setShowModals}) => {
 
     const [search, setSearch] = useState('')
     const [results, setResults] = useState([]);
     const [selectedCompany, setSelectedCompany] = useState(null);
+    const [companiesList, setCompaniesList] = useState([]);
+    const [formOfEmployments, setFormOfEmployments] = useState([]);
+
+    useEffect(() => {
+        return () => {
+            Promise.all([
+                getData('/api/companies').then(companies => {
+                    setCompaniesList(companies['hydra:member']);
+                }),
+                getData('/api/form_of_employments').then(data => {
+                    setFormOfEmployments(data['hydra:member']);
+                })
+
+            ])
+        };
+    }, []);
 
     const onChangeHandler = async (event) => {
 
@@ -41,6 +57,8 @@ export const AddJobPositionModal = ({companiesList, formOfEmployments}) => {
     return (
         <EditModal
             title={"Dodaj miejce pracy"}
+            prop={"jobPositions"}
+            setShowModals={setShowModals}
             // onSubmitHandler={onSubmitHandler}
             // errors={errors}
         >
