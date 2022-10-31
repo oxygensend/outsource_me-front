@@ -34,7 +34,6 @@ export const AddTechnologyModal = memo(({ setShowModals}) => {
     }, []);
 
 
-    console.log(technologiesList);
     const onClickTechnology = (technology) => {
 
         if (isInArray(technology['@id'], selectedTechnologies)) {
@@ -91,7 +90,7 @@ export const AddTechnologyModal = memo(({ setShowModals}) => {
             title={"Dodaj technologie"}
             onSubmitHandler={onSubmitHandler}
             setShowModals={setShowModals}
-            prop={"technology"}
+            prop={"technologies"}
             errors={errors}
         >
             <Search

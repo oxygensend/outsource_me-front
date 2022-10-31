@@ -48,7 +48,11 @@ export const DeveloperCard = ({developer}) => {
             <div className={"mt-5 md:flex md:flex-row  md:ml-8 md:mr-8 md:justify-end"}>
 
 
-                <ButtonLink class={"developer-button mt-5  md:mb-4 md:mt-0 col-span-full"} value={"Pokaż profil"}/>
+                <ButtonLink
+                    class={"developer-button mt-5  md:mb-4 md:mt-0 col-span-full"}
+                    value={"Pokaż profil"}
+                    route={'/profil/' + developer.id}
+                />
             </div>
 
         </div>

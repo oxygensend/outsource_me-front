@@ -13,9 +13,9 @@ export class LoginForm extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            email: null,
-            password: null,
-            errors: null,
+            email: '',
+            password: '',
+            errors: '',
         }
 
         this.handleSubmit = this.handleSubmit.bind(this)

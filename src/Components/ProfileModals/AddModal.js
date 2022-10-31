@@ -12,7 +12,7 @@ export const AddModal = ({title, children, onSubmitHandler, errors, setShowModal
         <div className={" z-50 order-10 w-full h-full fixed inset-0 bg-gray-600 bg-opacity-50 "}>
 
             <div
-                className={"fixed top-40 left-1/2 transform -translate-x-1/2  edit"}>
+                className={"fixed top-40 left-1/2 transform -translate-x-1/2 overflow-y-auto edit"}>
                 <p className={"text-xl pb-2 pl-1 mb-2"}>{title}</p>
 
                 {children}

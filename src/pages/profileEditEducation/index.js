@@ -8,10 +8,13 @@ import authAxios from "../../services/authAxios";
 import {PersonalInfo} from "../../Components/ProfileEdit/PersonalInfo";
 import edit_icon from "../../assets/icons/edit-icon.png";
 import {deleteElementFromArray} from "../../services/utils";
+import formatTimePeriod from "../../helpers/formatTimePeriod";
+import {JobPositions} from "../../Components/profile/JobPosition";
+import {ListElement} from "../../Components/profile/ListElement";
 
-export const ProfileEditLanguages = () => {
+export const ProfileEditEducation = () => {
 
-    const [languages, setLanguages] = useState([]);
+    const [education, setEducation] = useState([]);
     const location = useLocation();
     const [personalData, setPersonalData] = useState(location.state);
     const {id} = useParams();
@@ -20,7 +23,7 @@ export const ProfileEditLanguages = () => {
 
     useEffect(() => {
         return () => {
-            getLanguages();
+            getEducation();
             if (!personalData) {
                 getPersonalData();
             }
@@ -40,12 +43,12 @@ export const ProfileEditLanguages = () => {
     }
 
 
-    const getLanguages = () => {
-        profileService.getLanguages('1')
+    const getEducation = () => {
+        profileService.getEducations('1')
             .then(response => {
                 if (response.status === 200) {
                     console.log(response.data)
-                    setLanguages(response.data['hydra:member']);
+                    setEducation(response.data['hydra:member']);
                 }
             }).catch(err => {
 
@@ -53,9 +56,9 @@ export const ProfileEditLanguages = () => {
         });
     }
 
-    const onClickDelete = (language) => {
-        authAxios.delete(API_URL + '/users/' + '1' + '/languages/' + language.id).then((data) => {
-            setLanguages(deleteElementFromArray(languages, language))
+    const onClickDelete = (uni) => {
+        authAxios.delete(API_URL + '/users/' + '1' + '/educations/' + uni.id).then((data) => {
+            setEducation(deleteElementFromArray(education, uni))
         }).catch((e) => {
             console.log(e);
         });
@@ -68,24 +71,36 @@ export const ProfileEditLanguages = () => {
                 <PersonalInfo personalData={personalData}/>
 
                 <EditModule
-                    title={"Języki"}
+                    title={"Wykształcenie"}
                     lastCol={'8'}
                     class={"mb-52"}
                 >
                     <div className={" gap-5  mt-5 flex-wrap mb-12"}>
-                        {languages ? languages.map(language => {
+                        {education ? education.map(element => {
                             return (
                                 <div className={" pt-2 flex flex-row justify-between"}
                                      style={{borderBottom: "1px solid rgb(15,82,139, 0.4)"}}
-                                     key={language['@id']}>
-                                    <p className={"text-xl"}>{language.name}</p>
+                                     key={element['@id']}>
+                                    <ListElement
+                                        name={element.university.name}
+                                        timePeriod={element.fieldOfStudy + formatTimePeriod(element.startDate, element.endDate)
+                                            + (element.title ? ' - ' + element.title : '')
+                                        }
+                                        key={element['@id']}
+                                    >
+                                        <p style={{fontSize: "14px"}}> {element.grade ? 'Ocena: ' + element.grade : null}</p>
+
+                                    </ListElement>
+
                                     <div className={"flex flex-row gap-1"}>
-                                        <img src={edit_icon} alt={"edit"} className={"mb-1 mt-1 cursor-pointer"}/>
+                                        <img src={edit_icon} alt={"edit"}
+                                             className={"mb-1 pt-8  pb-8 mt-1 cursor-pointer"}/>
                                         <img src={close_icon}
-                                             className={"mb-1 mt-1 cursor-pointer"}
+                                             className={"mb-1 mt-1 cursor-pointer pb-8 pt-8"}
                                              alt={"delete"}
                                              width={20}
-                                             onClick={() => onClickDelete(language)}
+                                             height={10}
+                                             onClick={() => onClickDelete(element)}
                                         />
                                     </div>
                                 </div>

@@ -12,17 +12,6 @@ export const AddJobPositionForm = ({company, options}) => {
     const {register, handleSubmit, reset} = useForm();
     const [errors, setErrors] = useState(null);
 
-    // useEffect(() => {
-    //     return () => {
-    //         if (options) {
-    //             reset([
-    //                 {formOfEmployment: options[0]}
-    //             ]);
-    //         }
-    //     };
-    // }, [options]);
-
-
     const onSubmit = async data => {
 
         console.log(data, company);
@@ -74,8 +63,10 @@ export const AddJobPositionForm = ({company, options}) => {
             <Select
                 name={"formOfEmployment"}
                 label={"Forma zatrudnienia"}
+                className={"jobPosition-select"}
                 register={register}
                 options={options}
+                property={"name"}
             />
 
             <InputProfile

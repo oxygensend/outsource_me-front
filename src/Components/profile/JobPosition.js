@@ -4,7 +4,7 @@ import formatTimePeriod from "../../helpers/formatTimePeriod";
 import {ListElement} from "./ListElement";
 import {ProfileModule} from "./ProfileModule";
 
-export const JobPositions = ({id, setShowModals}) => {
+export const JobPositions = ({id, setShowModals, personalData}) => {
     const [jobPositions, setJobPositions] = useState();
     const [showResults, setShowResults] = useState(false);
     const results = [];
@@ -64,6 +64,8 @@ export const JobPositions = ({id, setShowModals}) => {
                 breakLine={true}
                 onClickAdd={onClickAdd}
                 onClickEdit={onClickEdit}
+                personalData={personalData}
+                editRedirectUrl={"/profil/me/edytuj/miejsca_pracy"}
             >
 
                 {showResults ? results : results.slice(0, 3)}

@@ -1,11 +1,20 @@
 import edit_icon from "../../assets/icons/edit-icon.png";
 import plus from "../../assets/icons/plus.png";
 import '../../pages/profile/index.css'
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import tokenService from "../../services/tokenService";
 import {useState} from "react";
 
-export const ProfileModule = ({lastCol, title, breakLine, onClickEdit, onClickAdd, children}) => {
+export const ProfileModule = ({
+                                  lastCol,
+                                  title,
+                                  breakLine,
+                                  onClickEdit,
+                                  onClickAdd,
+                                  children,
+                                  personalData,
+                                  editRedirectUrl
+                              }) => {
     const {id} = useParams();
 
     return (
@@ -21,7 +30,9 @@ export const ProfileModule = ({lastCol, title, breakLine, onClickEdit, onClickAd
             {tokenService.checkIfMe(id) ?
                 <div className={"col-end-11  row-span-0 cursor-pointer"}>
                     <img src={plus} alt={"add"} onClick={onClickAdd}/>
-                    <img src={edit_icon} alt={"edit"} className={"mt-2"} onClick={onClickEdit}/>
+                    <Link to={editRedirectUrl} state={personalData}
+                          children={<img src={edit_icon} alt={"edit"} className={"mt-2"}/>}/>
+
                 </div>
                 : null}
             {

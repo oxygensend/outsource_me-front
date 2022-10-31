@@ -27,8 +27,8 @@ export const Technologies = memo(({personalData, setShowModals}) => {
 
 
     const onClickEdit = () => {
-        navigate('/profil/1/edytuj/technologie', {state: {personalData: personalData}});
-        // window.location.href = '/profil/' + personalData.id + '/edytuj/technologie';
+        // navigate('/profil/1/edytuj/technologie', {state: {personalData: personalData}});
+        window.location.href = '/profil/' + personalData.id + '/edytuj/technologie';
     }
 
     const onClickAdd = () => {
@@ -42,8 +42,10 @@ export const Technologies = memo(({personalData, setShowModals}) => {
             title={"Technologie"}
             lastCol={'8'}
             class={"mb-52"}
-            onClickEdit={() => onClickEdit()}
+            personalData={personalData}
+            editRedirectUrl={"/profil/me/edytuj/technologie"}
             onClickAdd={() => onClickAdd()}
+
         >
 
             <div className={"flex flex-row gap-5  mt-5 flex-wrap mb-12"}>

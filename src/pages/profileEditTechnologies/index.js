@@ -1,22 +1,28 @@
 import {API_URL, SERVER_URL} from "../../config";
 import {EditModule} from "../../Components/ProfileEdit/EditModule";
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import profileService from "../../services/profileService";
 import close_icon_red from '../../assets/icons/close_icon_red.png'
 import authAxios from "../../services/authAxios";
 import {PersonalInfo} from "../../Components/ProfileEdit/PersonalInfo";
+import close_icon from "../../assets/icons/trashcan.png";
 
 export const ProfileEditTechnologies = () => {
 
-    const [personalData, setPersonalData] = useState();
+    const location = useLocation();
+    const [personalData, setPersonalData] = useState(location.state);
     const {id} = useParams();
-    const [technologies, setTechnologies] = useState([]);
+    const [technologies, setTechnologies] = useState(location.state.technologies);
 
 
     useEffect(() => {
         return () => {
-            getPersonalData();
+            console.log(personalData);
+            if(!personalData){
+               console.log('x')
+                getPersonalData();
+            }
         };
     }, []);
 
@@ -63,9 +69,12 @@ export const ProfileEditTechnologies = () => {
                                      style={{borderBottom: "1px solid rgb(15,82,139, 0.4)"}}
                                      key={technology['@id']}>
                                     <p className={"text-xl"}>{technology.name}</p>
-                                    <img src={close_icon_red} className={"cursor-pointer"} alt={"delete"} width={28}
-                                         height={8}
-                                         onClick={() => onClickDelete(technology)}/>
+                                    <img src={close_icon}
+                                         className={"mb-1 mt-1 cursor-pointer"}
+                                         alt={"delete"}
+                                         width={20}
+                                         onClick={() => onClickDelete(technology)}
+                                    />
                                 </div>
 
                             )

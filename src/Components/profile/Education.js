@@ -4,7 +4,7 @@ import {ListElement} from "./ListElement";
 import {ProfileModule} from "./ProfileModule";
 import formatTimePeriod from "../../helpers/formatTimePeriod";
 
-export const Education = memo(({id, setShowModals}) => {
+export const Education = memo(({id, setShowModals, personalData}) => {
 
     const [education, setEducation] = useState();
 
@@ -36,6 +36,8 @@ export const Education = memo(({id, setShowModals}) => {
                 title={"Wykształcenie"}
                 breakLine={true}
                 onClickAdd={onClickAdd}
+                personalData={personalData}
+                editRedirectUrl={"/profil/me/edytuj/wyksztalcenie"}
             >
                 {education.map((element) => {
                     return <ListElement

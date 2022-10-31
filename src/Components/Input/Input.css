@@ -108,7 +108,6 @@
         gap: 10px;
 
 
-
         /* Inside auto layout */
 
 
@@ -141,14 +140,19 @@
     }
 
     .select {
-        height: 24px;
 
+        height: 32px;
         padding-left: 5px;
-        width: 150px;
         line-height: 32px;
         background: rgba(128, 128, 128, 0.21);
         border-radius: 10px;
     }
 
+    .jobPosition-select {
+
+        height: 24px;
+        width: 150px;
+
+    }
 
 }

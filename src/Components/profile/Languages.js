@@ -2,7 +2,7 @@ import {memo, useEffect, useState} from "react";
 import {ListElement} from "./ListElement";
 import {ProfileModule} from "./ProfileModule";
 
-export const Languages = memo(({id, languages, setShowModals}) => {
+export const Languages = memo(({id, languages, setShowModals, personalData}) => {
 
     const onClickEdit = () => {
         window.location.href = '/profil/' + id + '/edytuj/jezyk';
@@ -21,6 +21,8 @@ export const Languages = memo(({id, languages, setShowModals}) => {
                 breakLine={true}
                 onClickAdd={onClickAdd}
                 onClickEdit={onClickEdit}
+                personalData={personalData}
+                editRedirectUrl={"/profil/me/edytuj/jezyki"}
             >
                 {languages.map((element) => {
                     return (<ListElement

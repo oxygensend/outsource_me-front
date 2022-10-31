@@ -77,3 +77,12 @@ export const postData = async (endpoint, data) => {
         .catch((error) => {throw error});
 
 }
+
+export const deleteElementFromArray =  (array, element) => {
+
+    let newArray = [...array];
+    let index = newArray.indexOf(element)
+    newArray.splice(index, 1);
+
+    return newArray;
+}
