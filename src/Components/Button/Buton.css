@@ -324,3 +324,20 @@
     left: 25%;
 
 }
+
+.application-button2 {
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    padding: 10px 10px;
+    position: relative;
+
+    font-size: 12px;
+    font-weight: 524;
+
+    background: #D82521;
+    color: #FFFFFF;
+    border-radius: 4px;
+    justify-content: center;
+    height: 40px;
+}

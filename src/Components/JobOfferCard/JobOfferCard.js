@@ -50,7 +50,12 @@ export const JobOfferCard = ({jobOffer}) => {
                     <p>{jobOffer.numberOfApplications + ' aplikacje'}</p>
                 </div>
 
-                <ButtonLink class={"application-button mt-5  md:mb-4 md:mt-0 col-span-full"} value={"Aplikuj"}/>
+                <ButtonLink
+                    class={"application-button mt-5  md:mb-4 md:mt-0 col-span-full"}
+                    value={"Aplikuj"}
+                    route={"/oferty-zlecen/" + jobOffer.slug}
+                    state={jobOffer}
+                />
             </div>
 
         </div>
