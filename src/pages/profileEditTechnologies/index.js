@@ -7,12 +7,13 @@ import close_icon_red from '../../assets/icons/close_icon_red.png'
 import authAxios from "../../services/authAxios";
 import {PersonalInfo} from "../../Components/ProfileEdit/PersonalInfo";
 import close_icon from "../../assets/icons/trashcan.png";
+import tokenService from "../../services/tokenService";
 
 export const ProfileEditTechnologies = () => {
 
     const location = useLocation();
     const [personalData, setPersonalData] = useState(location.state);
-    const {id} = useParams();
+    const {id} = tokenService.getUser();
     const [technologies, setTechnologies] = useState(location.state.technologies);
 
 
@@ -41,7 +42,7 @@ export const ProfileEditTechnologies = () => {
     }
 
     const onClickDelete = (technology) => {
-        authAxios.delete(API_URL + '/users/' + personalData.id + '/technologies/' + technology.id).then((data) => {
+        authAxios.delete(API_URL + '/users/' + id + '/technologies/' + technology.id).then((data) => {
             let newTechnologies = [...technologies];
             let index = newTechnologies.indexOf(technology)
             newTechnologies.splice(index, 1);

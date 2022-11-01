@@ -2,6 +2,8 @@ import axios from "axios";
 import {API_URL, SERVER_URL} from "../config";
 import TokenService from "./tokenService";
 import authAxios from "./authAxios";
+import {useParams} from "react-router-dom";
+import tokenService from "./tokenService";
 
 export const scrollToTop = () => {
     window.scrollTo({top: 0, behavior: 'smooth'})
@@ -85,4 +87,9 @@ export const deleteElementFromArray =  (array, element) => {
     newArray.splice(index, 1);
 
     return newArray;
+}
+
+export const getId = (id) => {
+
+    return id === 'me'? tokenService.getUser().id : id;
 }

@@ -13,7 +13,7 @@ export const ProfileModule = ({
                                   onClickAdd,
                                   children,
                                   personalData,
-                                  editRedirectUrl
+                                  editRedirectUrl,
                               }) => {
     const {id} = useParams();
 

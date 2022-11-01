@@ -44,7 +44,7 @@ export const JobPositions = ({id, setShowModals, personalData}) => {
             results.push(
                 <ListElement
                     name={element.company.name}
-                    timePeriod={formatTimePeriod(element.validFrom, element.validTo)}
+                    timePeriod={formatTimePeriod(element.startDate, element.endDate)}
                     metaData={element.description}
                     key={element['@id']}
 

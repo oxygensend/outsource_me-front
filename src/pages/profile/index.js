@@ -10,12 +10,13 @@ import {useParams} from "react-router-dom";
 import tokenService from "../../services/tokenService";
 import profileService from "../../services/profileService";
 import {EditPersonalInfoModal} from "../../Components/ProfileModals/EditPersonalInfoModal";
+import {getId} from "../../services/utils";
 
 
 export const Profile = () => {
     const [personalData, setPersonalData] = useState();
     const [languages, setLanguages] = useState();
-    const {id} = useParams();
+    const id = getId(useParams().id);
 
     useEffect(() => {
         return () => {
@@ -26,7 +27,7 @@ export const Profile = () => {
 
 
     const getLanguages = () => {
-        profileService.getLanguages('1')
+        profileService.getLanguages(id)
             .then(response => {
                 if (response.status === 200) {
                     console.log(response.data)

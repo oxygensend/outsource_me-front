@@ -1,18 +1,26 @@
-import {AddModal} from "./AddModal";
-import React, {useState} from "react";
-import {AddLanguageForm} from "../Forms/AddLanguageForm";
+import {ModalWrapper} from "./ModalWrapper"; import React, {useState} from "react";
+import {LanguageForm} from "../Forms/LanguageForm";
+import authAxios from "../../services/authAxios";
+import {API_URL} from "../../config";
 
 export  const AddLanguagesModal = ({universitiesList, setShowModals}) => {
 
 
+    const request = async data => {
+        return  authAxios.post(API_URL + '/languages', data);
+    }
+
     return (
-        <AddModal
+        <ModalWrapper
             title={"Dodaj język"}
             setShowModals={setShowModals}
             prop={"languages"}
         >
-            <AddLanguageForm/>
-        </AddModal>
+            <LanguageForm
+                afterSubmit={ () => { window.location.href = '/profil/me' }}
+                request={request}
+            />
+        </ModalWrapper>
     );
 
 }

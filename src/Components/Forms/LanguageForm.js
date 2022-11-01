@@ -6,20 +6,24 @@ import {useForm} from "react-hook-form";
 import authAxios from "../../services/authAxios";
 import {API_URL} from "../../config";
 
-export const AddLanguageForm = () => {
+export const LanguageForm = ({language, request, afterSubmit, buttonName}) => {
 
-    const {register, handleSubmit} = useForm();
+    const {register, handleSubmit} = useForm({
+        defaultValues: {
+            name: language?.name ?? '',
+            description: language?.description ?? ''
+        }
+    });
     const [errors, setErrors] = useState(null);
 
 
     const onSubmit = async data => {
 
 
-        authAxios.post(API_URL + '/languages', data).then(data => {
-            window.location.href = '/profil/me';
+        request(data).then(data => {
+            afterSubmit(data);
         })
             .catch((e) => {
-
                 if (e.response.status === 422) {
                     setErrors(e.response.data.violations);
                 }
@@ -57,7 +61,7 @@ export const AddLanguageForm = () => {
 
             <SubmitButton
                 class={"edit-button"}
-                value={"Dodaj"}
+                value={buttonName ?? "Dodaj"}
             />
         </form>
     );

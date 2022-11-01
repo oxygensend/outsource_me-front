@@ -11,15 +11,18 @@ import {deleteElementFromArray} from "../../services/utils";
 import formatTimePeriod from "../../helpers/formatTimePeriod";
 import {JobPositions} from "../../Components/profile/JobPosition";
 import {ListElement} from "../../Components/profile/ListElement";
+import tokenService from "../../services/tokenService";
+import {EditEducationModal} from "../../Components/ProfileModals/EditEducationModal";
 
 export const ProfileEditEducation = () => {
 
     const [education, setEducation] = useState([]);
     const location = useLocation();
     const [personalData, setPersonalData] = useState(location.state);
-    const {id} = useParams();
+    const [showModals, setShowModals] = useState({jobPositions: false});
+    const [selectedEducation, setSelectedEducation] = useState(null);
+    const {id} = tokenService.getUser();
 
-    console.log(id);
 
     useEffect(() => {
         return () => {
@@ -44,7 +47,7 @@ export const ProfileEditEducation = () => {
 
 
     const getEducation = () => {
-        profileService.getEducations('1')
+        profileService.getEducations(id)
             .then(response => {
                 if (response.status === 200) {
                     console.log(response.data)
@@ -57,62 +60,82 @@ export const ProfileEditEducation = () => {
     }
 
     const onClickDelete = (uni) => {
-        authAxios.delete(API_URL + '/users/' + '1' + '/educations/' + uni.id).then((data) => {
+        authAxios.delete(API_URL + '/users/' + id + '/educations/' + uni.id).then((data) => {
             setEducation(deleteElementFromArray(education, uni))
         }).catch((e) => {
             console.log(e);
         });
     }
 
+    const onClickEdit = (education) => {
+        setSelectedEducation(education);
+        setShowModals({education: true});
+    }
+
+
     if (personalData) {
 
         return (
-            <div className={"profile-container "}>
-                <PersonalInfo personalData={personalData}/>
+            <>
+                <div className={"profile-container "}>
+                    <PersonalInfo personalData={personalData}/>
 
-                <EditModule
-                    title={"Wykształcenie"}
-                    lastCol={'8'}
-                    class={"mb-52"}
-                >
-                    <div className={" gap-5  mt-5 flex-wrap mb-12"}>
-                        {education ? education.map(element => {
-                            return (
-                                <div className={" pt-2 flex flex-row justify-between"}
-                                     style={{borderBottom: "1px solid rgb(15,82,139, 0.4)"}}
-                                     key={element['@id']}>
-                                    <ListElement
-                                        name={element.university.name}
-                                        timePeriod={element.fieldOfStudy + formatTimePeriod(element.startDate, element.endDate)
-                                            + (element.title ? ' - ' + element.title : '')
-                                        }
-                                        key={element['@id']}
-                                    >
-                                        <p style={{fontSize: "14px"}}> {element.grade ? 'Ocena: ' + element.grade : null}</p>
+                    <EditModule
+                        title={"Wykształcenie"}
+                        lastCol={'8'}
+                        class={"mb-52"}
+                    >
+                        <div className={" gap-5  mt-5 flex-wrap mb-12"}>
+                            {education ? education.map(element => {
+                                return (
+                                    <div className={" pt-2 flex flex-row justify-between"}
+                                         style={{borderBottom: "1px solid rgb(15,82,139, 0.4)"}}
+                                         key={element['@id']}>
+                                        <ListElement
+                                            name={element.university.name}
+                                            timePeriod={element.fieldOfStudy + formatTimePeriod(element.startDate, element.endDate)
+                                                + (element.title ? ' - ' + element.title : '')
+                                            }
+                                            key={element['@id']}
+                                        >
+                                            <p style={{fontSize: "14px"}}> {element.grade ? 'Ocena: ' + element.grade : null}</p>
 
-                                    </ListElement>
+                                        </ListElement>
 
-                                    <div className={"flex flex-row gap-1"}>
-                                        <img src={edit_icon} alt={"edit"}
-                                             className={"mb-1 pt-8  pb-8 mt-1 cursor-pointer"}/>
-                                        <img src={close_icon}
-                                             className={"mb-1 mt-1 cursor-pointer pb-8 pt-8"}
-                                             alt={"delete"}
-                                             width={20}
-                                             height={10}
-                                             onClick={() => onClickDelete(element)}
-                                        />
+                                        <div className={"flex flex-row gap-1"}>
+                                            <img src={edit_icon}
+                                                 alt={"edit"}
+                                                 className={"mb-1 pt-8  pb-8 mt-1 cursor-pointer"}
+                                                 onClick={() => onClickEdit(element)}
+                                            />
+                                            <img src={close_icon}
+                                                 className={"mb-1 mt-1 cursor-pointer pb-8 pt-8"}
+                                                 alt={"delete"}
+                                                 width={20}
+                                                 height={10}
+                                                 onClick={() => onClickDelete(element)}
+                                            />
+                                        </div>
                                     </div>
-                                </div>
 
-                            )
-                        }) : null}
+                                )
+                            }) : null}
 
-                    </div>
+                        </div>
 
-                </EditModule>
+                    </EditModule>
 
-            </div>
+                </div>
+
+                {showModals.education ?
+                    <EditEducationModal
+                        setShowModals={setShowModals}
+                        education={education}
+                        selectedEducation={selectedEducation}
+                    /> : null
+
+                }
+            </>
 
 
         );

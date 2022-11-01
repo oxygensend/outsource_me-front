@@ -1,18 +1,18 @@
-import {AddModal} from "./AddModal";
+import {ModalWrapper} from "./ModalWrapper";
 import {Search} from "../Search/Search";
 import {TechnologiesBox} from "../FiltersModal/TechnologiesBox";
 import {memo, useEffect, useState} from "react";
-import {getData, isInArray, patchData, postData, searchArray} from "../../services/utils";
-import {useParams} from "react-router-dom";
+import {getData, isInArray, searchArray} from "../../services/utils";
 import authAxios from "../../services/authAxios";
 import {Button} from "../Button/Button";
+import tokenService from "../../services/tokenService";
 
-export const AddTechnologyModal = memo(({ setShowModals}) => {
+export const AddTechnologyModal = memo(({setShowModals}) => {
     const [search, setSearch] = useState('')
     const [results, setResults] = useState(null);
     const [selectedTechnologies, setSelectedTechnologies] = useState([]);
     const [errors, setErrors] = useState(false);
-    const {id} = useParams();
+    const {id} = tokenService.getUser();
 
 
     const [technologiesList, setTechnologiesList] = useState([]);
@@ -25,10 +25,10 @@ export const AddTechnologyModal = memo(({ setShowModals}) => {
     useEffect(() => {
 
         return () => {
-                getData('/api/technologies').then(technologies => {
-                    console.log(technologies);
-                    setTechnologiesList(technologies['hydra:member']);
-                });
+            getData('/api/technologies').then(technologies => {
+                console.log(technologies);
+                setTechnologiesList(technologies['hydra:member']);
+            });
 
         }
     }, []);
@@ -70,7 +70,7 @@ export const AddTechnologyModal = memo(({ setShowModals}) => {
 
         for (const technology of selectedTechnologies) {
 
-            await authAxios.post('/users/' + '1' + '/technologies', {iri: technology}).then((response) => {
+            await authAxios.post('/users/' + id + '/technologies', {iri: technology}).then((response) => {
                 countSuccessfullResponses++;
             }).catch((e) => {
                 if (e.response.status === 400) {
@@ -86,7 +86,7 @@ export const AddTechnologyModal = memo(({ setShowModals}) => {
     }
 
     return (
-        <AddModal
+        <ModalWrapper
             title={"Dodaj technologie"}
             onSubmitHandler={onSubmitHandler}
             setShowModals={setShowModals}
@@ -113,6 +113,6 @@ export const AddTechnologyModal = memo(({ setShowModals}) => {
                 onClick={() => onSubmitHandler()}
             />
 
-        </AddModal>
+        </ModalWrapper>
     );
 });

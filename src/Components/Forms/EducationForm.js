@@ -1,29 +1,99 @@
 import {InputProfile} from "../Input/InputProfile";
 import {Textarea} from "../Input/Textarea";
 import {SubmitButton} from "../Button/SubmitButton";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import authAxios from "../../services/authAxios";
 import {API_URL} from "../../config";
+import {Select} from "../Input/Select";
+import {getDataAuthentication, searchArray} from "../../services/utils";
+import close_icon from "../../assets/icons/close-icon.svg";
+import {Search} from "../Search/Search";
+import {SearchInput} from "../Input/SearchInput";
 
-export const AddEducationForm = ({university}) => {
+export const EducationForm = ({options, education, request, afterSubmit, buttonName}) => {
 
-    const {register, handleSubmit} = useForm();
+    const {register, handleSubmit, reset} = useForm();
     const [errors, setErrors] = useState(null);
+    const [search, setSearch] = useState('')
+    const [results, setResults] = useState([]);
+    const [selectedUni, setSelectedUni] = useState(education?.university ?? null);
+    const [universitiesList, setUniversitiesList] = useState([]);
+
+    useEffect(() => {
+        return () => {
+            getDataAuthentication('/api/universities').then(universities => {
+                setUniversitiesList(universities['hydra:member']);
+            });
+        };
+    }, []);
+
+    console.log(education);
+
+    useEffect(() => {
+        return () => {
+            if (education) {
+                reset({
+                    fieldOfStudy: education.fieldOfStudy,
+                    grade: education.grade,
+                    title: education.title,
+                    startDate: education.startDate.split('T')[0],
+                    endDate: education.endDate ? education.endDate.split('T')[0] : '',
+                    description: education.description
+                })
+            }
+        };
+    }, [education]);
+
+
+    const onChangeHandler = async (event) => {
+
+        const search = event.target.value.toLowerCase();
+        setSearch(search);
+
+        if (search === '') {
+            return setResults([]);
+        }
+
+        const results = searchArray(search, universitiesList, 'name')
+
+
+        setResults(results.slice(1, 6));
+    }
+
+    const onClickClearButton = () => {
+        setSelectedUni(null);
+        setSearch("");
+
+    }
+
+    const onSearchedElementClick = (uni) => {
+        setSelectedUni(uni);
+        setSearch(uni.name);
+        setResults([]);
+    }
 
 
     const onSubmit = async data => {
 
         data.grade = Number(data.grade);
-        data.university = university['@id'];
+        try {
+            data.university = selectedUni['@id'];
+        } catch (e) {
+            setErrors([{propertyPath: 'search', message: 'Musisz wybrać jedeną z uczelni'}])
+            return;
+        }
 
         if (data.endDate === '') {
             data.endDate = null;
         }
 
         authAxios.post(API_URL + '/education', data).then(data => {
+            afterSubmit(data);
         })
             .catch((e) => {
+
+                console.log(e);
 
                 if (e.response.status === 400) {
                     setErrors([{propertyPath: 'startDate', message: 'Nie poprawny format daty.'}])
@@ -41,6 +111,20 @@ export const AddEducationForm = ({university}) => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
+
+
+            <SearchInput
+                label={"Wybierz uczelnie *"}
+                search={selectedUni ? selectedUni.name : search}
+                onChangeHandler={onChangeHandler}
+                error={findErrors('search')}
+                onSearchedElementClick={onSearchedElementClick}
+                selected={selectedUni}
+                onClickClearButton={onClickClearButton}
+                results={results}
+                placeholder={"Wybierz uczelnie *"}
+            />
+
 
             <InputProfile
                 name={"fieldOfStudy"}
@@ -93,7 +177,7 @@ export const AddEducationForm = ({university}) => {
                 className={"input-field-second"}
                 register={register}
                 required={false}
-                error={findErrors('endDate')}
+                error={findErrors('')}
             />
 
 
@@ -109,7 +193,8 @@ export const AddEducationForm = ({university}) => {
 
             <SubmitButton
                 class={"edit-button"}
-                value={"Dodaj"}
+                value={buttonName ?? 'Dodaj'}
+
             />
         </form>
     );

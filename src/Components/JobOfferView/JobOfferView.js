@@ -4,6 +4,15 @@ import avatar from '../../assets/images/avatar.png';
 import {Technology} from "../Button/Technology";
 
 export const JobOfferView = ({jobOffer}) => {
+
+    const workTypeInfoMappings = {
+        remote: 'Oferta całkowicie zdalna',
+        office: 'Oferta z praca w biurze',
+        hybrid: 'Możliwość pracy zdalnej i z biura',
+        negotiations: 'Miejsce pracy do ustalenia'
+    }
+
+
     return (
         <div className={"profile-container"}>
             <div className={"grid grid-cols-12 md:flex md:flex-row md:justify-between md:ml-8 md:mr-8"}>
@@ -26,9 +35,9 @@ export const JobOfferView = ({jobOffer}) => {
 
             <div className={"text-center mt-12"}>
                 <p className={"joboffer-title-font"}>{jobOffer.name}</p>
-                <p className={"joboffer-company-font mt-2"}>Apple</p>
+                <p className={"joboffer-company-font mt-2"}>{jobOffer?.comapnyName ?? "Oferta prywatna"}</p>
 
-                <p className={"joboffer-workType-font mt-10"}>Oferta calkowicie zdalna</p>
+                <p className={"joboffer-workType-font mt-10"}>{workTypeInfoMappings[jobOffer.workType[0].name]}</p>
             </div>
 
 
@@ -46,7 +55,7 @@ export const JobOfferView = ({jobOffer}) => {
                 </div>
                 <div className={"col-start-2  flex gap-2 col-end-10 mt-5"}>
                     <p className={"font-module"}>Wymagania: </p>
-                    <p className={"font-submodule"}>Senior</p>
+                    <p className={"font-submodule"}>{jobOffer.experience}</p>
                 </div>
 
                 <div className={"col-start-2 flex gap-2 col-end-10 mt-5"}>
