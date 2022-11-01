@@ -2,6 +2,7 @@ import {SERVER_URL} from "../../config";
 import React from "react";
 import avatar from '../../assets/images/avatar.png';
 import {Technology} from "../Button/Technology";
+import {Link} from "react-router-dom";
 
 export const JobOfferView = ({jobOffer}) => {
 
@@ -18,8 +19,16 @@ export const JobOfferView = ({jobOffer}) => {
             <div className={"grid grid-cols-12 md:flex md:flex-row md:justify-between md:ml-8 md:mr-8"}>
 
                 <div className={"flex flex-row  gap-3 col-start-2 md:col-start-1 col-span-7 mt-10  "}>
-                    <img src={SERVER_URL + '/' + jobOffer.user.imagePath} width={54} height={54}
-                         className={"rounded-2xl border-2  "} alt={"avatar"}/>
+                    <Link to={'/profil/' + jobOffer.user.id}
+                          children={
+                              <img
+                                  src={SERVER_URL + '/' + jobOffer.user.imagePath}
+                                  width={54} height={54}
+                                  className={"rounded-2xl border-2  "}
+                                  alt={"avatar"}
+                              />
+                          }
+                    />
 
                     <div className={"relative bottom-0 pt-1"}>
                         <p className={"fullname-font2 "}>{jobOffer.user.fullName}</p>
@@ -37,9 +46,10 @@ export const JobOfferView = ({jobOffer}) => {
                 <p className={"joboffer-title-font"}>{jobOffer.name}</p>
                 <p className={"joboffer-company-font mt-2"}>{jobOffer?.comapnyName ?? "Oferta prywatna"}</p>
 
-                <p className={"joboffer-workType-font mt-10"}>{workTypeInfoMappings[jobOffer.workType[0].name]}</p>
+                <p className={"joboffer-workType-font mt-4"}>{workTypeInfoMappings[jobOffer.workType[0].name]}</p>
             </div>
 
+            <hr className={"col-span-full mt-5"} style={{backgroundColor: "#0F528B", opacity: "0.8"}}/>
 
             <div className={"col-span-full mt-12 grid grid-cols-10 "}>
 

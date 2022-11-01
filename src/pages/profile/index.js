@@ -11,6 +11,7 @@ import tokenService from "../../services/tokenService";
 import profileService from "../../services/profileService";
 import {EditPersonalInfoModal} from "../../Components/ProfileModals/EditPersonalInfoModal";
 import {getId} from "../../services/utils";
+import {OpenAdvertisementModal} from "../../Components/ProfileModals/OpenAdvertisementModal";
 
 
 export const Profile = () => {
@@ -58,7 +59,9 @@ export const Profile = () => {
             jobPositions: false,
             education: false,
             description: false,
-            personalInfo: false
+            personalInfo: false,
+            openAdvertisement: false,
+
         }
     )
 
@@ -106,6 +109,12 @@ export const Profile = () => {
                 <EditPersonalInfoModal
                     setShowModals={setShowModals}
                     personalData={personalData}
+                /> : null
+            }
+
+            {showModals.openAdvertisement === true ?
+                <OpenAdvertisementModal
+                    setShowModals={setShowModals}
                 /> : null
             }
         </>

@@ -5,15 +5,28 @@ import linkedin from "../../assets/icons/linkedin.png";
 import mail from "../../assets/icons/mail.svg";
 import edit_icon from "../../assets/icons/edit-icon.png";
 import tokenService from "../../services/tokenService";
+import {Button} from "../Button/Button";
+import {set} from "react-hook-form";
 
 export const PersonalInfo = ({personalData, setShowModals}) => {
 
     const checkIfMe = tokenService.checkIfMe(personalData.id);
 
+    console.log(personalData);
     const onClickEdit = () => {
         setShowModals((prevState) => ({...prevState, ['personalInfo']: true}));
 
     }
+
+    const onClickOpenAdvertisement = () => {
+        setShowModals((prevState) => ({...prevState, ['openAdvertisement']: true}));
+
+    }
+
+    const onClickCloseAdvertisement = () => {
+
+    }
+
     return (
         <div className={"col-span-full grid grid-cols-10"}>
             <div className={"md:col-start-2 md:col-span-4 col-start-2 col-span-6 mt-10"}>
@@ -50,6 +63,21 @@ export const PersonalInfo = ({personalData, setShowModals}) => {
                         />
                     }
                 </div>
+
+                {personalData.lookingForJob ?
+                    <Button
+                        className={"outsourceme_button outsource_takeOff"}
+                        onClick={() => onClickCloseAdvertisement()}
+                        value={"Zamknij ogłoszenie"}
+                    />
+                    :
+                    <Button
+                        className={"outsourceme_button outsource_takeOn"}
+                        onClick={() => onClickOpenAdvertisement()}
+                        value={"Ogłoś się"}
+                    />
+
+                }
 
             </div>
             <div className={" col-start-8 col-span-2 "}>

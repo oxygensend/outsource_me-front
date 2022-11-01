@@ -8,6 +8,7 @@ import {Technologies} from "./Technologies";
 import {Description} from "./Description";
 import {PersonalInfo} from "./PersonalInfo";
 import tokenService from "../../services/tokenService";
+import {JobOffers} from "./JobOffers";
 
 export const ProfilePage = memo(({style, setShowModals, personalData, languages}) => {
 
@@ -55,10 +56,9 @@ export const ProfilePage = memo(({style, setShowModals, personalData, languages}
                         setShowModals={setShowModals}
                     />
                     :
-                    // <JobOffers
-                    //     personalData={personalData}
-                    // />
-                    null
+                    <JobOffers
+                        personalData={personalData}
+                    />
 
 
                 }

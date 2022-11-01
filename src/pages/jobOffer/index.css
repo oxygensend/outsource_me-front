@@ -89,3 +89,9 @@
     grid-template-columns: repeat(16, 1fr);;
 
 }
+
+.job-offer {
+    margin-top: 20px;
+    background:  #E1DFDF;
+    border-radius: 12px;
+}

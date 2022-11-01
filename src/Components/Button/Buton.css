@@ -341,3 +341,34 @@
     justify-content: center;
     height: 40px;
 }
+
+.outsourceme_button {
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    padding: 10px 10px;
+    position: relative;
+
+    font-size: 12px;
+    font-weight: 524;
+
+    border-radius: 4px;
+    justify-content: center;
+    width: 100px;
+    height: 35px;
+}
+
+.outsource_takeOn {
+    background: #35D81A;
+    color: #000000;
+}
+
+.outsource_takeOff2{
+    background: #D82521;
+    color: #FFFFFF;
+}
+.outsource_takeOff {
+    background: #D82521;
+    color: #FFFFFF;
+    width: 160px;
+}
