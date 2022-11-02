@@ -16,7 +16,8 @@ export const ApplicationBox = ({jobOffer}) => {
             <ButtonLink
                 class={"application-button2"}
                 value={"Aplikuj"}
-                route={'/oferty_zlecen/' + jobOffer.slug + '/aplikuj'}
+                route={'/oferty-zlecen/' + jobOffer.slug + '/aplikuj'}
+                state={jobOffer}
             />
             <div className={"flex flex-row gap-2 mt-4"}>
                 <img src={calendar} alt={"calendar"}/>

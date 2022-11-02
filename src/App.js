@@ -14,6 +14,7 @@ import {ProfileEditLanguages} from "./pages/profileEditLanguages";
 import {ProfileEditJobPositions} from "./pages/profileEditJobPositions";
 import {ProfileEditEducation} from "./pages/profileEditEducation";
 import {JobOffer} from "./pages/jobOffer";
+import {ApplicateForJobOffer} from "./pages/applicateForJobOffer";
 
 function App() {
     return (
@@ -32,6 +33,7 @@ function App() {
                 <Route path={"/profil/:id/edytuj/wyksztalcenie"}  element={<ProfileEditEducation/>}/>
                 <Route path={"/oferty-zlecen"} element={<JobOffers/>}/>
                 <Route path={'/oferty-zlecen/:slug'} element={<JobOffer/>} />
+                <Route path={'/oferty-zlecen/:slug/aplikuj'} element={<ApplicateForJobOffer/>} />
             </Routes>
             {/*<Footer/>*/}
         </Router>

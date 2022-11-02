@@ -154,5 +154,73 @@
         width: 150px;
 
     }
+    .application-description {
+        position: relative;
+        width: 80%;
+        left: 50%;
 
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, 0);
+
+    }
+
+
+}
+
+.form-file-upload {
+    height: 400px;
+    width: 100px;
+    text-align: center;
+    position: relative;
+}
+
+.input-file-upload {
+    display: none;
+}
+
+.label-file-upload {
+    margin-top: 10px;
+    height: 120px;
+    width: 80%;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    border-width: 2px;
+    border-radius: 1rem;
+    border-style: dashed;
+    border-color: #cbd5e1;
+    background-color: #fafafa;
+    left: 50%;
+
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, 0);
+}
+
+
+.label-file-upload.drag-active {
+    background-color: #ffffff;
+}
+
+.upload-button {
+    cursor: pointer;
+    padding: 0.25rem;
+    font-size: 1rem;
+    border: none;
+    font-family: 'Oswald', sans-serif;
+    background-color: transparent;
+}
+
+.upload-button:hover {
+    text-decoration-line: underline;
+}
+
+.drag-file-element {
+    position: absolute;
+    height: 100%;
+    border-radius: 1rem;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
 }
