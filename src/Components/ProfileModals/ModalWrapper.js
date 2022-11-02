@@ -2,9 +2,10 @@ import close_icon from "../../assets/icons/close-icon.svg";
 import {useParams} from "react-router-dom";
 import {useEffect, useRef} from "react";
 
-export const ModalWrapper = ({title, children, onSubmitHandler, errors, setShowModals, prop}) => {
+export const ModalWrapper = ({title, children, onSubmitHandler, errors, setShowModals, prop, type}) => {
     const {id} = useParams();
     const modalRef = useRef();
+    const modalClass = { 'edit': 'edit', 'info': 'info'};
 
     useEffect(() => {
         const handleCloseDropdown = (event) => {
@@ -32,7 +33,7 @@ export const ModalWrapper = ({title, children, onSubmitHandler, errors, setShowM
 
             <div
                 ref={modalRef}
-                className={"fixed top-40 left-1/2 transform -translate-x-1/2 overflow-y-auto info"}>
+                className={"fixed top-40 left-1/2 transform -translate-x-1/2 overflow-y-auto " + modalClass[type] }>
                 <p className={"text-xl pb-2 pl-1 mb-2"}>{title}</p>
 
                 {children}

@@ -11,6 +11,7 @@ export const EditDescriptionModal = ({setShowModals, personalData}) => {
                 title={"O mnie"}
                 setShowModals={setShowModals}
                 prop={"description"}
+                type={'edit'}
             >
                 <EditProfileDescriptionForm personalData={personalData}/>
             </ModalWrapper>

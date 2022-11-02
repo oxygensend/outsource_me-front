@@ -15,6 +15,7 @@ export  const AddLanguagesModal = ({universitiesList, setShowModals}) => {
             title={"Dodaj język"}
             setShowModals={setShowModals}
             prop={"languages"}
+            type={'edit'}
         >
             <LanguageForm
                 afterSubmit={ () => { window.location.href = '/profil/me' }}

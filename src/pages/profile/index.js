@@ -11,13 +11,20 @@ import tokenService from "../../services/tokenService";
 import profileService from "../../services/profileService";
 import {EditPersonalInfoModal} from "../../Components/ProfileModals/EditPersonalInfoModal";
 import {getId} from "../../services/utils";
-import {OpenAdvertisementModal} from "../../Components/ProfileModals/OpenAdvertisementModal";
+import {ConfirmModal} from "../../Components/ProfileModals/ConfirmModal";
+import authAxios from "../../services/authAxios";
+import {API_URL} from "../../config";
 
 
 export const Profile = () => {
     const [personalData, setPersonalData] = useState();
     const [languages, setLanguages] = useState();
     const id = getId(useParams().id);
+    const openAdvertisementModalContent = "Przed dodaniem zgłoszenia upewnij się, ze w zakładkach na twoim profilu zawarte są wszystkie potrzebne\n" +
+        "                informacje. Jeżeli chcesz, coś zmienić zrób to teraz, więcej informacji o Tobie pomaga rekruterom w\n" +
+        "                wyborze."
+
+    const closeAdvertisementModalContent = "Czy na pewno chcesz ściągnąć swoje zgłoszenie z tablicy?"
 
     useEffect(() => {
         return () => {
@@ -25,6 +32,20 @@ export const Profile = () => {
             getLanguages();
         };
     }, []);
+
+    const [showModals, setShowModals] = useState(
+        {
+            technologies: false,
+            languages: false,
+            jobPositions: false,
+            education: false,
+            description: false,
+            personalInfo: false,
+            openAdvertisement: false,
+            closeAdvertisement: false
+
+        }
+    )
 
 
     const getLanguages = () => {
@@ -52,19 +73,27 @@ export const Profile = () => {
         });
     }
 
-    const [showModals, setShowModals] = useState(
-        {
-            technologies: false,
-            languages: false,
-            jobPositions: false,
-            education: false,
-            description: false,
-            personalInfo: false,
-            openAdvertisement: false,
+    const onClickChangeUserStatus = (status, modalName) => {
 
-        }
-    )
+        authAxios.patch(API_URL + '/users/' + id, {
+            lookingForJob: status
+        }, {
+            headers: {
+                "Content-Type": "application/merge-patch+json"
+            }
+        }).then(data => {
+            closeModal(modalName);
+            setPersonalData((prevState) => ({...prevState, ['lookingForJob']: status}));
+        })
+            .catch((e) => {
 
+                console.log(e);
+
+            })
+    }
+    const closeModal = (modalName) => {
+        setShowModals((prevState) => ({...prevState, [modalName]: false}));
+    }
 
     return (
         <>
@@ -113,8 +142,24 @@ export const Profile = () => {
             }
 
             {showModals.openAdvertisement === true ?
-                <OpenAdvertisementModal
+                <ConfirmModal
                     setShowModals={setShowModals}
+                    onAgreeClick={() => onClickChangeUserStatus(true, 'openAdvertisement')}
+                    onDeclineClick={() => closeModal('openAdvertisement')}
+                    content={openAdvertisementModalContent}
+                    confirmButtonValue={"Potwierdź"}
+                    declineButtonValue={"Anuluj"}
+                /> : null
+            }
+
+            {showModals.closeAdvertisement === true ?
+                <ConfirmModal
+                    setShowModals={setShowModals}
+                    onAgreeClick={() => onClickChangeUserStatus(false, 'closeAdvertisement')}
+                    onDeclineClick={() => closeModal('closeAdvertisement')}
+                    content={closeAdvertisementModalContent}
+                    confirmButtonValue={"Tak"}
+                    declineButtonValue={"Nie"}
                 /> : null
             }
         </>

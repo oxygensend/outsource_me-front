@@ -29,6 +29,7 @@ export const EditEducationModal = ({setShowModals, selectedEducation, education}
             title={"Edytuj uczelnię "}
             prop={"education"}
             setShowModals={setShowModals}
+            type={'edit'}
         >
 
             <EducationForm

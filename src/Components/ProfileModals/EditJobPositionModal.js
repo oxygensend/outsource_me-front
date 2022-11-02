@@ -41,6 +41,7 @@ export const EditJobPositionModal = ({setShowModals, jobPosition, jobPositions})
             title={"Edytuj informacje o miejscu pracy"}
             prop={"jobPositions"}
             setShowModals={setShowModals}
+            type={'edit'}
         >
 
             <JobPositionForm

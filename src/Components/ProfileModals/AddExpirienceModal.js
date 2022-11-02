@@ -19,6 +19,7 @@ export const AddExpirienceModal = ({setShowModals}) => {
             title={"Dodaj wykształcenie"}
             setShowModals={setShowModals}
             prop={"education"}
+            type={'edit'}
         >
 
 

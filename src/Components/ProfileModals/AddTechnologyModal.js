@@ -92,6 +92,7 @@ export const AddTechnologyModal = memo(({setShowModals}) => {
             setShowModals={setShowModals}
             prop={"technologies"}
             errors={errors}
+            type={'edit'}
         >
             <Search
                 value={search}

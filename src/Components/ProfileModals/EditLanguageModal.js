@@ -26,6 +26,7 @@ export const EditLanguageModal = ({setShowModals, language, languages}) => {
             title={"Edytuj informacje o danym języku"}
             setShowModals={setShowModals}
             prop={"languages"}
+            type={'edit'}
         >
             <LanguageForm
                 language={language}
