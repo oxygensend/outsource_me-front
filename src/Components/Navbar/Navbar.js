@@ -10,6 +10,7 @@ import tokenService from "../../services/tokenService";
 import avatar from '../../assets/images/avatar.png';
 import {DropdownElement} from "./DropdownElement";
 import authService from "../../services/authService";
+import {SERVER_URL} from "../../config";
 
 export const Navbar = (props) => {
 
@@ -61,7 +62,7 @@ export const Navbar = (props) => {
                     <div className={"div-avatar cursor-pointer"} ref={avatarRef}>
                         <img
                             alt={"avatar"}
-                            src={avatar}
+                            src={SERVER_URL + tokenService.getUser().thumbnail}
                             className={"avatar rounded-2xl"}
                             height={"50px"}
                             width={"50px"}

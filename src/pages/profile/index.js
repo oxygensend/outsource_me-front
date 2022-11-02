@@ -149,6 +149,7 @@ export const Profile = () => {
                     content={openAdvertisementModalContent}
                     confirmButtonValue={"Potwierdź"}
                     declineButtonValue={"Anuluj"}
+                    prop={"openAdvertisement"}
                 /> : null
             }
 
@@ -160,6 +161,7 @@ export const Profile = () => {
                     content={closeAdvertisementModalContent}
                     confirmButtonValue={"Tak"}
                     declineButtonValue={"Nie"}
+                    prop={"closeAdvertisement"}
                 /> : null
             }
         </>

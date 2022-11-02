@@ -108,7 +108,7 @@ export const PersonalInfo = ({personalData, setShowModals}) => {
                             <Star fill={"yellow"}/>
                             <Star fill={"yellow"}/>
                             <Star fill={"yellow"}/>
-                            <Star fill={"yellow"}/>
+                            <Star fill={"none"}/>
 
                         </div>
                         <p className={"red-font mt-3"}>43 Opinie</p>

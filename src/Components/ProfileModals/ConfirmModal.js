@@ -9,7 +9,8 @@ export const ConfirmModal = ({
                                  setShowModals,
                                  content,
                                  declineButtonValue,
-                                 confirmButtonValue
+                                 confirmButtonValue,
+                                 prop
                              }) => {
 
     const {id} = useParams();
@@ -19,7 +20,7 @@ export const ConfirmModal = ({
         <ModalWrapper
             title={"Pokaż, że jesteś otwarty na nowe zlecenia!"}
             setShowModals={setShowModals}
-            prop={"openAdvertisement"}
+            prop={prop}
             type={"info"}
         >
             <p>{content}</p>
