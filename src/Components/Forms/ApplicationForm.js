@@ -1,36 +1,41 @@
-import {InputProfile} from "../Input/InputProfile";
 import {Textarea} from "../Input/Textarea";
 import {SubmitButton} from "../Button/SubmitButton";
-import React, {useEffect, useRef, useState} from "react";
+import React, { useRef, useState} from "react";
 import {useForm} from "react-hook-form";
+import {Dropbox} from "../Input/Dropbox";
 import authAxios from "../../services/authAxios";
 import {API_URL} from "../../config";
-import {FileUploader} from "react-drag-drop-files";
-import {Dropbox} from "../Input/Dropbox";
 
-export const ApplicationForm = () => {
+export const ApplicationForm = ({jobOffer}) => {
 
     const {register, handleSubmit} = useForm();
     const [errors, setErrors] = useState(null);
     const [dragActive, setDragActive] = useState(false);
+    const [attachments, setAttachments] = useState([]);
     const inputRef = useRef(null);
 
     const onSubmit = async data => {
 
-        // authAxios.patch(API_URL + '/users/' + personalData.id, data, {
-        //     headers: {
-        //         "Content-Type": "application/merge-patch+json"
-        //     }
-        // }).then(data => {
-        //     window.location.href = '/profil/me';
-        // })
-        //     .catch((e) => {
-        //
-        //         if (e.response.status === 422) {
-        //             setErrors(e.response.data.violations);
-        //         }
-        //
-        //     })
+        data.jobOffer = jobOffer['@id'];
+        data.attachments = attachments;
+
+        console.log(data);
+        authAxios.post(API_URL + '/applications', data, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        }).then(data => {
+            console.log(data);
+            // info modal
+        })
+            .catch((e) => {
+
+                console.log(e);
+                if (e.response.status === 422) {
+                    setErrors(e.response.data.violations);
+                }
+
+            })
     }
     // ref
 
@@ -51,7 +56,7 @@ export const ApplicationForm = () => {
         e.stopPropagation();
         setDragActive(false);
         if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-            console.log(e.dataTransfer.files);
+            setAttachments((prevState) => [...prevState, e.dataTransfer.files[0]])
         }
     };
 
@@ -59,13 +64,9 @@ export const ApplicationForm = () => {
     const handleChange = (e) => {
         e.preventDefault();
         if (e.target.files && e.target.files[0]) {
-            // handleFiles(e.target.files);
-        }
-    };
+            setAttachments((prevState) => [...prevState, e.target.files[0]])
 
-// triggers the input when the button is clicked
-    const onButtonClick = () => {
-        inputRef.current.click();
+        }
     };
 
     const findErrors = (property) => {
@@ -73,7 +74,12 @@ export const ApplicationForm = () => {
     }
 
     return (
-        <form className={"flex flex-col"} onSubmit={handleSubmit(onSubmit)} onDragEnter={handleDrag}>
+        <form
+            className={"flex flex-col"}
+            onSubmit={handleSubmit(onSubmit)}
+            onDragEnter={handleDrag}
+            encType={"multipart/form-data"}
+        >
 
 
             <Textarea
@@ -92,6 +98,8 @@ export const ApplicationForm = () => {
                 handleDrag={handleDrag}
                 handleChange={handleChange}
                 dragActive={dragActive}
+                files={attachments}
+                setFiles={setAttachments}
             />
 
             <SubmitButton

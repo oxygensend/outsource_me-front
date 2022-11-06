@@ -80,7 +80,9 @@ export const ApplicateForJobOffer = () => {
                 <p className={" mt-4 pl-24 pr-24 pt-10 pb-2"}>Aplikujesz na <b>{jobOffer.name}</b>. Możesz dodać
                     wiadomość dla zleceniodawcy i załączniki. Zleceniodawca dodatkowo dostanie twój profil, sprawdź czy
                     wszystkie potrzebne informacje są tam zawarte.</p>
-                <ApplicationForm/>
+                <ApplicationForm
+                    jobOffer={jobOffer}
+                />
 
             </div>
 

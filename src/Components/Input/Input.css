@@ -180,7 +180,7 @@
 
 .label-file-upload {
     margin-top: 10px;
-    height: 120px;
+    min-height: 120px;
     width: 80%;
     display: flex;
     position: relative;

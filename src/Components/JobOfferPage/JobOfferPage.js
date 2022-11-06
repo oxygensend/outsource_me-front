@@ -108,7 +108,7 @@ export const JobOfferPage = ({defaultFiltersSettings, searchParams, updatingUrlC
 
     const updateEndpointUrl = () => {
         const {developers} = filtersSettings;
-        return developers ? '/api/users?accountType=Developer' : '/api/job_offers?';
+        return developers ? '/api/users?accountType=Developer&lookingForJob=true' : '/api/job_offers?';
     }
 
     const updateQueryParams = () => {

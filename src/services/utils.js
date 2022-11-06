@@ -1,8 +1,6 @@
 import axios from "axios";
 import {API_URL, SERVER_URL} from "../config";
-import TokenService from "./tokenService";
 import authAxios from "./authAxios";
-import {useParams} from "react-router-dom";
 import tokenService from "./tokenService";
 
 export const scrollToTop = () => {
@@ -47,8 +45,10 @@ export const isInArray = (element, array) => {
 }
 
 
-export const getData = (endpoint) =>
-    axios.get(SERVER_URL + endpoint)
+export const getData = (endpoint) => {
+
+    const instance = tokenService.getLocalAccessToken() ? authAxios : axios;
+    return instance.get(SERVER_URL + endpoint)
         .then(({data}) => data)
         .catch(function (error) {
             if (error.response) {
@@ -59,6 +59,7 @@ export const getData = (endpoint) =>
                 throw error
             }
         })
+}
 export const getDataAuthentication = (endpoint) =>
     authAxios.get(SERVER_URL + endpoint)
         .then(({data}) => data)
