@@ -8,9 +8,10 @@ export const JobOffersList = ({filtersModal, jobOffers, getJobOffers, hasMore, d
 
     if (jobOffers) {
 
+        console.log(filtersModal);
         return (
             <div
-                className={'md:col-start-5 md:col-end-13 xl:col-start-5 xl:col-end-11 md:mr-12 xl:mr-0  md:flex' + (!filtersModal ? 'hidden' : null)}>
+                className={'md:col-start-5 md:col-end-13 xl:col-start-5 xl:col-end-11 md:mr-12 xl:mr-0  md:flex ' + (!filtersModal ? 'hidden' : null)}>
 
 
                 <InfiniteScroll
