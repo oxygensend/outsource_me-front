@@ -1,33 +1,29 @@
-import {useEffect, useState} from "react";
-import profileService from "../../services/profileService";
+import {memo, useEffect, useState} from "react";
 import {ListElement} from "./ListElement";
 import {ProfileModule} from "./ProfileModule";
 
-export const Languages = ({id}) => {
-    const [languages, setLanguages] = useState();
+export const Languages = memo(({id, languages, setShowModals, personalData}) => {
 
-    useEffect(() => {
-        return () => {
-            getLanguages();
-        };
-    }, []);
+    const onClickEdit = () => {
+        window.location.href = '/profil/' + id + '/edytuj/jezyk';
+    }
 
-    const getLanguages = () => {
-        profileService.getLanguages(id)
-            .then(response => {
-                if (response.status === 200) {
-                    setLanguages(response.data['hydra:member']);
-                }
-            }).catch(err => {
+    const onClickAdd = () => {
+        setShowModals((prevState) => ({...prevState, ['languages']: true}));
 
-            console.log(err);
-        });
     }
 
     if (languages) {
 
         return (
-            <ProfileModule title={"Języki"} breakLine={true}>
+            <ProfileModule
+                title={"Języki"}
+                breakLine={true}
+                onClickAdd={onClickAdd}
+                onClickEdit={onClickEdit}
+                personalData={personalData}
+                editRedirectUrl={"/profil/me/edytuj/jezyki"}
+            >
                 {languages.map((element) => {
                     return (<ListElement
                         name={element.name}
@@ -35,12 +31,10 @@ export const Languages = ({id}) => {
                         key={element['@id']}
                     />)
                 })}
-                <ListElement name={"Test"} metaData={"Zaawansowany"}/>
-
 
             </ProfileModule>
         );
     } else {
         return null;
     }
-}
+});

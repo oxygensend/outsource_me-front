@@ -1,5 +1,5 @@
 import {Input} from "../Input/Input";
-import {Button} from "../Button/Button";
+import {SubmitButton} from "../Button/SubmitButton";
 import React, {useState} from "react";
 import AuthService from "../../services/authService";
 import './Form.css'
@@ -72,7 +72,7 @@ export const PasswordResetSendLinkForm = (props) => {
                         error={errors}
                     />
 
-                    <Button
+                    <SubmitButton
                         class={"button-login2 justify-center cursor-pointer"}
                         value={"Prześlij email"}
                     />

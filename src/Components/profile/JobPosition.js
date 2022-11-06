@@ -1,10 +1,10 @@
-import {useEffect, useState} from "react";
+import {memo, useEffect, useState} from "react";
 import profileService from "../../services/profileService";
 import formatTimePeriod from "../../helpers/formatTimePeriod";
 import {ListElement} from "./ListElement";
 import {ProfileModule} from "./ProfileModule";
 
-export const JobPositions = ({id}) => {
+export const JobPositions = ({id, setShowModals, personalData}) => {
     const [jobPositions, setJobPositions] = useState();
     const [showResults, setShowResults] = useState(false);
     const results = [];
@@ -29,13 +29,22 @@ export const JobPositions = ({id}) => {
 
     }
 
+    const onClickEdit = () => {
+        window.location.href = '/profil/' + id + '/edytuj/miejsce_pracy';
+    }
+
+    const onClickAdd = () => {
+        setShowModals((prevState) => ({...prevState, ['jobPositions']: true}));
+    }
+
+
     if (jobPositions) {
 
         jobPositions.forEach(element => {
             results.push(
                 <ListElement
                     name={element.company.name}
-                    timePeriod={formatTimePeriod(element.validFrom, element.validTo)}
+                    timePeriod={formatTimePeriod(element.startDate, element.endDate)}
                     metaData={element.description}
                     key={element['@id']}
 
@@ -50,7 +59,14 @@ export const JobPositions = ({id}) => {
 
 
         return (
-            <ProfileModule title={"Doświadczenie"} breakLine={true}>
+            <ProfileModule
+                title={"Doświadczenie"}
+                breakLine={true}
+                onClickAdd={onClickAdd}
+                onClickEdit={onClickEdit}
+                personalData={personalData}
+                editRedirectUrl={"/profil/me/edytuj/miejsca_pracy"}
+            >
 
                 {showResults ? results : results.slice(0, 3)}
                 {results.length > 3 && !showResults ?

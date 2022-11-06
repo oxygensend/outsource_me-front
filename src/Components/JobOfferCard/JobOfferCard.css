@@ -1,0 +1,95 @@
+
+.card {
+    background: #fff;
+    margin-bottom: 20px;
+
+}
+
+.fullname-font {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+}
+.company-font {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    /* identical to box height */
+
+
+    color: rgba(0, 0, 0, 0.46);
+
+}
+
+.application-font {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height */
+    color: #7C8DB0;
+
+}
+
+@media screen  and  (min-width: 320px){
+ .application-button {
+    align-items: center;
+    padding: 12px 20px;
+
+    background: #D82521;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+
+    font-size: 16px;
+    font-weight: 524;
+
+    color: #FFFFFF;
+    text-align: center;
+    justify-content: center;
+     display: flex;
+
+    margin-right: 5px;
+    margin-left: 5px;
+}
+}
+
+
+
+@media screen and (min-width: 768px) {
+
+    .card {
+        border-radius: 18px ;
+
+    }
+
+    .application-button {
+        align-items: center;
+        padding: 5px 50px;
+
+        background: #D82521;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 4px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 8px;
+        font-size: 16px;
+        font-weight: 400;
+
+        color: #FFFFFF;
+        text-align: center;
+
+    }
+
+    .fullname-font {
+        font-size: 20px;
+        line-height: 22px;
+    }
+    .company-font {
+        font-size: 14px;
+        line-height: 16px;
+
+    }
+}

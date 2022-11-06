@@ -1,0 +1,164 @@
+.joboffer-title-font {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 47px;
+}
+
+.joboffer-company-font {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+
+    color: rgba(0, 0, 0, 0.46);
+
+}
+
+.joboffer-workType-font {
+    font-style: italic;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.font-submodule {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+
+    color: rgba(0, 0, 0, 0.46);
+
+}
+
+.font-time {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    align-items: center;
+    text-align: center;
+
+    color: #000000;
+}
+
+.fullname-font2 {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 22px;
+}
+
+.company-font2 {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+    /* identical to box height */
+
+
+    color: rgba(0, 0, 0, 0.46);
+
+}
+
+.main {
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);;
+
+}
+
+.job-offer {
+    margin-top: 20px;
+    background: #E1DFDF;
+    border-radius: 12px;
+}
+
+
+@media screen and (min-width: 320px) {
+
+    .application-box {
+        box-shadow: 0 -1px 6px #00000020;
+
+        margin-top: 3.5rem;
+
+        padding: 10px;
+        top: 50px;
+        bottom: 0;
+        z-index: 2;
+        position: sticky;
+
+        width: 100%;
+        background: #FFFFFF;
+    }
+
+    .font-type {
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    .font-info {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+        color: rgba(0, 0, 0, 0.46);
+        padding-left: 15px;
+        padding-top: 2px;
+
+    }
+}
+
+@media screen and (min-width: 900px) {
+
+    .box-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .application-box {
+        top: 100px;
+        padding: 20px;
+
+        background: #FFFFFF;
+    }
+
+    .font-type {
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 21px;
+    }
+
+    .font-info {
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 21px;
+        color: rgba(0, 0, 0, 0.46);
+        padding-left: 15px;
+        padding-top: 2px;
+
+    }
+
+
+
+}
+
+@media screen and (min-width: 1280px) {
+
+    .box-wrapper {
+        display: block;
+    }
+
+    .application-box {
+        position: fixed;
+        top: 100px;
+        padding: 30px;
+        right:3%;
+        margin-top: 10px;
+        width: unset;
+        bottom: unset;
+
+        background: #FFFFFF;
+        border-radius: 10px
+    }
+}

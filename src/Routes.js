@@ -15,7 +15,7 @@ import SomeOtherPage from './components/SomeOtherPage';
  */
 export default (
     <Route path="/" component={App}>
-        <IndexRoute component={MainPage} />
+        <IndexRouteObject component={MainPage} />
         <Route path="/we" component={SomePage} />
         <Route path="/some/otherpage" component={SomeOtherPage} />
     </Route>

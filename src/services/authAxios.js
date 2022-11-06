@@ -30,18 +30,18 @@ instance.interceptors.response.use(
     async err => {
         const originalConfig = err.config;
 
-        console.log(err);
         if (err.response) {
             if (err.response.status === 401 && !originalConfig._retry) {
                 originalConfig._retry = true;
 
-                console.log('c');
                 try {
                     const response = await AuthService.refreshToken();
-                    const {accessToken, refreshToken} = response.data;
-                    TokenService.setLocalAccessToken(accessToken);
+                    const {token, refreshToken} = response.data;
+                    console.log(token, refreshToken, response.data)
+                    console.log(response);
+                    TokenService.setLocalAccessToken(token);
                     TokenService.setLocalRefreshToken(refreshToken);
-                    instance.defaults.headers.common['Authorization'] = accessToken;
+                    instance.defaults.headers.common['Authorization'] = token;
 
                     return instance(originalConfig);
                 } catch (e) {

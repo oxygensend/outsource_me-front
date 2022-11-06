@@ -1,10 +1,10 @@
-import {useEffect, useState} from "react";
+import {memo, useEffect, useState} from "react";
 import profileService from "../../services/profileService";
 import {ListElement} from "./ListElement";
 import {ProfileModule} from "./ProfileModule";
 import formatTimePeriod from "../../helpers/formatTimePeriod";
 
-export const Education = ({id}) => {
+export const Education = memo(({id, setShowModals, personalData}) => {
 
     const [education, setEducation] = useState();
 
@@ -26,15 +26,24 @@ export const Education = ({id}) => {
             console.log(err);
         });
     }
+    const onClickAdd = () => {
+        setShowModals((prevState) => ({...prevState, ['education']: true}));
+    }
 
     if (education) {
         return (
-            <ProfileModule title={"Wykształcenie"} breakLine={true}>
+            <ProfileModule
+                title={"Wykształcenie"}
+                breakLine={true}
+                onClickAdd={onClickAdd}
+                personalData={personalData}
+                editRedirectUrl={"/profil/me/edytuj/wyksztalcenie"}
+            >
                 {education.map((element) => {
                     return <ListElement
                         name={element.university.name}
                         timePeriod={element.fieldOfStudy + formatTimePeriod(element.startDate, element.endDate)
-                            + (element.title ? ' - ' + element.title : null)
+                            + (element.title ? ' - ' + element.title : '')
                         }
                         metaData={element.description}
                         key={element['@id']}
@@ -48,4 +57,4 @@ export const Education = ({id}) => {
     } else {
         return null;
     }
-}
+});

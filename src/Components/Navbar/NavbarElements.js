@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import AuthService from "../../services/authService";
+import tokenService from "../../services/tokenService";
 
 
 export const NavLink = (props) => {
@@ -54,7 +55,7 @@ export const MenuItem = (props) => {
 export const Watermark = (props) => {
 
     return (
-        <div className={"nav-watermark cursor-pointer cur"}>
+        <div className={"nav-watermark cursor-pointer "}>
             <a href={"/"}>
                 <picture>
                     <source srcSet={props.image} media="(min-width: 900px)" alt={"watermark"}/>
@@ -70,7 +71,12 @@ export const Searchbar = (props) => {
     return (
         <div className={"nav-search"}>
 
-            <input className={"nav-search-content "}/>
+            <input
+                className={"search"}
+                type="text"
+                placeholder="Szukaj..."
+
+            />
         </div>
     )
 }
@@ -78,13 +84,18 @@ export const Searchbar = (props) => {
 export const DashboardMenu = (props) => {
 
     return (<div className={"nav-dashboard"}>
+            <MenuItem>
+                Wyszukaj
+            </MenuItem>
             {props.login ? (
-                <MenuItem
-                    route={'/'}
-                >
-                    Strona główna
-                </MenuItem
-                >
+                tokenService.getUser().accountType === 'Developer' ?
+                    <MenuItem route={'/profil/me/twoje-aplikacje'}>
+                        Twoje aplikacje
+                    </MenuItem>
+                    :
+                    <MenuItem route={'/profil/me/twoje-oferty'}>
+                        Twoje oferty
+                    </MenuItem>
             ) : (
                 <MenuItem
                     route={'/o-nas'}
@@ -94,11 +105,6 @@ export const DashboardMenu = (props) => {
                 >
             )
             }
-            <MenuItem
-                route={'/spolecznosc'}>
-                Społeczność
-            </MenuItem
-            >
             <MenuItem
                 route={'/oferty-zlecen'}>
                 Oferty zleceń
@@ -129,25 +135,28 @@ export const NavbarMenu = (props) => {
     return (
         <div className={"nav-wrapper"}>
             {props.login ? (
-                <NavLink route={'/'}>
-                    Strona główna
-                </NavLink>
+                tokenService.getUser().accountType === 'Developer' ?
+                    <NavLink route={'/profil/me/twoje-aplikacje'}>
+                        Twoje aplikacje
+                    </NavLink>
+                    :
+                    <NavLink route={'/profil/me/twoje-oferty'}>
+                        Twoje oferty
+                    </NavLink>
+
             ) : (
                 <NavLink route={'/o-nas'}>
                     O nas
                 </NavLink>
             )
             }
-            <NavLink route={'/spolecznosc'}>
-                Społeczność
-            </NavLink>
             <NavLink route={'/oferty-zlecen'}>
                 Oferty zleceń
             </NavLink>
             {props.login ? (
-                <Logout logout={() => AuthService.logout()}>
-                    Wyloguj się
-                </Logout>
+                <NavLink rotue={'/powiadomienia'}>
+                    Powiadomienia
+                </NavLink>
             ) : (
                 <NavLink route={'/logowanie'}>
                     Zaloguj się

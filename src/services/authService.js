@@ -4,7 +4,8 @@ import {API_URL} from "../config";
 
 class AuthService {
     async refreshToken() {
-        return axios.post(API_URL + '/refresh_token', {
+        console.log(TokenService.getLocalRefreshToken())
+        return await axios.post(API_URL + '/refresh_token', {
             refresh_token: TokenService.getLocalRefreshToken(),
         }, {
             headers: {

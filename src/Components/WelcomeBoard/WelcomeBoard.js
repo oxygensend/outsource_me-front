@@ -1,5 +1,5 @@
 import React from "react";
-import {Button} from "../Button/Button";
+import {SubmitButton} from "../Button/SubmitButton";
 import './WelcomeBoard.css'
 import {ButtonLink} from "../Button/ButtonLink";
 import {HomeImage} from "./HomeImage";

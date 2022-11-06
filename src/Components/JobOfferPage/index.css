@@ -1,0 +1,38 @@
+.mobile-filters-panel {
+    background: #FFF;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding: 8px 24px;
+}
+.mobile-hide {
+    display: none;
+}
+
+@media screen  and (max-width: 767px){
+
+    .mobile-hide2 {
+        display: none;
+    }
+}
+
+@media screen  and (min-width: 768px){
+
+    .mobile-filters-panel {
+        display: none
+
+    }
+
+}
+
+.loader {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    margin-top: 40px;
+    left: 50%;
+
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}

@@ -1,37 +1,65 @@
 import './index.css';
-import avatar from '../../assets/images/avatar.png';
-import edit_icon from '../../assets/icons/edit-icon.png';
-import github from '../../assets/icons/github.png';
-import linkedin from '../../assets/icons/linkedin.png'
-import mail from '../../assets/icons/mail.svg'
-import {ProfileModule} from "../../Components/profile/ProfileModule";
-import {Technology} from "../../Components/Button/Technology";
-import profileService from "../../services/profileService";
+import {ProfilePage} from "../../Components/profile/ProfilePage";
+import {AddTechnologyModal} from "../../Components/ProfileModals/AddTechnologyModal";
 import {useEffect, useState} from "react";
-
+import {AddLanguagesModal} from "../../Components/ProfileModals/AddLanguagesModal";
+import {AddJobPositionModal} from "../../Components/ProfileModals/AddJobPositionModal";
+import {AddExpirienceModal} from "../../Components/ProfileModals/AddExpirienceModal";
+import {EditDescriptionModal} from "../../Components/ProfileModals/EditDescriptionModal";
 import {useParams} from "react-router-dom";
-import accountType from "../../translations/accountType";
-import {SERVER_URL} from "../../config";
-import {Education} from "../../Components/profile/Education";
-import {JobPositions} from "../../Components/profile/JobPosition";
-import {Languages} from "../../Components/profile/Languages";
-
-
-
+import tokenService from "../../services/tokenService";
+import profileService from "../../services/profileService";
+import {EditPersonalInfoModal} from "../../Components/ProfileModals/EditPersonalInfoModal";
+import {getId} from "../../services/utils";
+import {ConfirmModal} from "../../Components/ProfileModals/ConfirmModal";
+import authAxios from "../../services/authAxios";
+import {API_URL} from "../../config";
 
 
 export const Profile = () => {
-
     const [personalData, setPersonalData] = useState();
-    const {id} = useParams();
-    const DEVELOPER_ROLE = 'Developer';
-    const PRINCIPLE_ROLE = 'Principle';
+    const [languages, setLanguages] = useState();
+    const id = getId(useParams().id);
+    const openAdvertisementModalContent = "Przed dodaniem zgłoszenia upewnij się, ze w zakładkach na twoim profilu zawarte są wszystkie potrzebne\n" +
+        "                informacje. Jeżeli chcesz, coś zmienić zrób to teraz, więcej informacji o Tobie pomaga rekruterom w\n" +
+        "                wyborze."
+
+    const closeAdvertisementModalContent = "Czy na pewno chcesz ściągnąć swoje zgłoszenie z tablicy?"
 
     useEffect(() => {
         return () => {
             getPersonalData();
+            getLanguages();
         };
     }, []);
+
+    const [showModals, setShowModals] = useState(
+        {
+            technologies: false,
+            languages: false,
+            jobPositions: false,
+            education: false,
+            description: false,
+            personalInfo: false,
+            openAdvertisement: false,
+            closeAdvertisement: false
+
+        }
+    )
+
+
+    const getLanguages = () => {
+        profileService.getLanguages(id)
+            .then(response => {
+                if (response.status === 200) {
+                    console.log(response.data)
+                    setLanguages(response.data['hydra:member']);
+                }
+            }).catch(err => {
+
+            console.log(err);
+        });
+    }
 
     const getPersonalData = () => {
         profileService.getPersonalData(id)
@@ -45,110 +73,97 @@ export const Profile = () => {
         });
     }
 
+    const onClickChangeUserStatus = (status, modalName) => {
 
-    const getTechnologies = () => {
-        profileService.getTechnologies(id)
-            .then(response => {
-                if (response.status === 200) {
-                }
-            }).catch(err => {
+        authAxios.patch(API_URL + '/users/' + id, {
+            lookingForJob: status
+        }, {
+            headers: {
+                "Content-Type": "application/merge-patch+json"
+            }
+        }).then(data => {
+            closeModal(modalName);
+            setPersonalData((prevState) => ({...prevState, ['lookingForJob']: status}));
+        })
+            .catch((e) => {
 
-            console.log(err);
-        });
+                console.log(e);
+
+            })
+    }
+    const closeModal = (modalName) => {
+        setShowModals((prevState) => ({...prevState, [modalName]: false}));
     }
 
+    return (
+        <>
+            <ProfilePage
+                setShowModals={setShowModals}
+                personalData={personalData}
+                languages={languages}
+            />
 
-    /**
-     * Personal data have to be rendered first
-     */
-    if (personalData)
-        return (
-            <div className={"profile-container "}>
-                <div className={"col-span-full grid grid-cols-10"}>
-                    <div className={"md:col-start-2 md:col-span-4 col-start-2 col-span-6 mt-10"}>
+            {showModals.technologies ?
+                <AddTechnologyModal
+                    setShowModals={setShowModals}
+                /> : null
+            }
 
-                        <img src={SERVER_URL + '/' + personalData.imagePath} width={120} height={120}
-                             className={"rounded-2xl border-2  "} alt={"avatar"}/>
+            {showModals.education ?
+                <AddExpirienceModal
+                    setShowModals={setShowModals}
+                    showModals={showModals}
+                /> : null
+            }
 
-                        <p className={"profile-fullname mt-2"}>{personalData.fullName}</p>
-                        <p className={" gray-font"}>{accountType(personalData.accountType)}</p>
-                        {personalData.address ?
-                            <p className={"only-for-small-media gray-font2 italic"}>{personalData.address.city}</p>
-                            : null}
+            {showModals.jobPositions ?
+                <AddJobPositionModal
+                    setShowModals={setShowModals}
+                /> : null
+            }
+            {showModals.languages === true ?
+                <AddLanguagesModal
+                    setShowModals={setShowModals}
+                /> : null
+            }
 
+            {showModals.description === true ?
+                <EditDescriptionModal
+                    setShowModals={setShowModals}
+                    personalData={personalData}
+                /> : null
+            }
 
-                        <div className={"flex flex-row gap-3 mt-2 items-center"}>
-                            {personalData.githubUrl ?
-                                <img src={github}
-                                     alt={"github"}
-                                     className={"cursor-pointer"}
-                                     onClick={() => window.location.href = personalData.githubUrl}/>
-                                : null}
-                            {personalData.linkedinUrl ?
-                                <img src={linkedin}
-                                     alt={"linkedin"}
-                                     className={"cursor-pointer"}
-                                     onClick={() => window.location.href = personalData.linkedinUrl}/>
-                                : null}
-                            <img className={"only-for-small-media cursor-pointer"}
-                                 src={mail}
-                                 alt={"mail"}
-                                 width={16}
-                                 height={16}
-                            />
-                        </div>
+            {showModals.personalInfo === true ?
+                <EditPersonalInfoModal
+                    setShowModals={setShowModals}
+                    personalData={personalData}
+                /> : null
+            }
 
-                    </div>
-                    <div className={" col-start-8 col-span-2 "}>
-                        <div className={"relative flex flex-col gap-4 cursor-pointer"} style={{top: '75%'}}>
-                            <div>
-                                <p className={"red-font"}>43 Opinie</p>
-                            </div>
-                            <div>
-                                {personalData.address ?
-                                    <p className={"gray-font2 italic only-for-big-media "}>{personalData.address.city}</p>
-                                    : null}
-                                <div className={"flex flex-row gap-2  only-for-big-media cursor-pointer"}>
-                                    <img src={mail} alt={"mail"} width={16} height={16}/>
-                                    <p className={"red-font "}>Skontaktuj się</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className={"col-end-11 mt-10 row-span-0"}>
-                        <img src={edit_icon} alt={"edit"}/>
-                    </div>
+            {showModals.openAdvertisement === true ?
+                <ConfirmModal
+                    setShowModals={setShowModals}
+                    onAgreeClick={() => onClickChangeUserStatus(true, 'openAdvertisement')}
+                    onDeclineClick={() => closeModal('openAdvertisement')}
+                    content={openAdvertisementModalContent}
+                    confirmButtonValue={"Potwierdź"}
+                    declineButtonValue={"Anuluj"}
+                    prop={"openAdvertisement"}
+                /> : null
+            }
 
-                    <hr className={"col-span-full mt-10 "} style={{backgroundColor: "#0F528B", opacity: "0.8"}}/>
-                </div>
-                <div className={"col-span-full grid grid-cols-10 mt-5"}>
-                    <div className={"col-start-2 col-end-10"}>
-                        <p className={"font-module pb-2"}>O mnie</p>
-                        <p className={"italic pl-1 mt-5"}>{personalData.description ?? 'Brak opisu.'}</p>
-                    </div>
-                    <hr className={"col-span-full mt-10 "} style={{backgroundColor: "#0F528B", opacity: "0.8"}}/>
-                </div>
-
-                <Languages id={id}/>
-                <JobPositions id={id}/>
-                <Education id={id}/>
-
-                {personalData.accountType === DEVELOPER_ROLE ?
-                <ProfileModule title={"Technologie"} lastCol={'8'} class={"mb-52"}>
-
-                    <div className={"flex flex-row gap-5  mt-5 flex-wrap mb-12"}>
-                        {personalData.technologies ? personalData.technologies.map(technology => {
-                            return (
-                                <Technology name={technology.name} key={technology['@id']}/>);
-                        }) : null}
-
-                    </div>
-
-
-                </ProfileModule>
-                    : null}
-            </div>
-        );
-    else
-        return null;
+            {showModals.closeAdvertisement === true ?
+                <ConfirmModal
+                    setShowModals={setShowModals}
+                    onAgreeClick={() => onClickChangeUserStatus(false, 'closeAdvertisement')}
+                    onDeclineClick={() => closeModal('closeAdvertisement')}
+                    content={closeAdvertisementModalContent}
+                    confirmButtonValue={"Tak"}
+                    declineButtonValue={"Nie"}
+                    prop={"closeAdvertisement"}
+                /> : null
+            }
+        </>
+    )
 }

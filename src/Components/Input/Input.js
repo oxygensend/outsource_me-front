@@ -2,7 +2,7 @@ import './Input.css'
 
 export const Input = (props) => {
     return (
-        <div className={`input-field ${props.class ?? null } ${ (props.error ? ' mb-10' : null)}`}>
+        <div className={ props.className ?? `input-field ${props.class ?? null } ${ (props.error ? ' mb-10' : null)} ${props.position ?? ' center-input'}` }>
             <label className={"input-label"}>{props.label}</label>
             <input
                 className={"input "}
