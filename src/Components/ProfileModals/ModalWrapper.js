@@ -43,7 +43,7 @@ export const ModalWrapper = ({title, children, onSubmitHandler, errors, setShowM
 
             <div
                 ref={modalRef}
-                className={"fixed top-40 left-1/2 transform -translate-x-1/2 overflow-y-auto " + modalClass[type]}>
+                className={"fixed top-1/2 -translate-y-1/2 left-1/2 transform -translate-x-1/2 overflow-y-auto " + modalClass[type]}>
                 <p className={"text-xl pb-2 pl-1 mb-2"}>{title}</p>
 
                 {children}

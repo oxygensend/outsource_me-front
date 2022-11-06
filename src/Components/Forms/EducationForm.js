@@ -122,7 +122,7 @@ export const EducationForm = ({options, education, request, afterSubmit, buttonN
                 selected={selectedUni}
                 onClickClearButton={onClickClearButton}
                 results={results}
-                placeholder={"Wybierz uczelnie *"}
+                placeholder={"Wybierz uczelnie "}
             />
 
 

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import AuthService from "../../services/authService";
+import tokenService from "../../services/tokenService";
 
 
 export const NavLink = (props) => {
@@ -87,12 +88,14 @@ export const DashboardMenu = (props) => {
                 Wyszukaj
             </MenuItem>
             {props.login ? (
-                <MenuItem
-                    route={'/'}
-                >
-                    Strona główna
-                </MenuItem
-                >
+                tokenService.getUser().accountType === 'Developer' ?
+                    <MenuItem route={'/profil/me/twoje-aplikacje'}>
+                        Twoje aplikacje
+                    </MenuItem>
+                    :
+                    <MenuItem route={'/profil/me/twoje-oferty'}>
+                        Twoje oferty
+                    </MenuItem>
             ) : (
                 <MenuItem
                     route={'/o-nas'}
@@ -132,9 +135,15 @@ export const NavbarMenu = (props) => {
     return (
         <div className={"nav-wrapper"}>
             {props.login ? (
-                <NavLink route={'/'}>
-                    Strona główna
-                </NavLink>
+                tokenService.getUser().accountType === 'Developer' ?
+                    <NavLink route={'/profil/me/twoje-aplikacje'}>
+                        Twoje aplikacje
+                    </NavLink>
+                    :
+                    <NavLink route={'/profil/me/twoje-oferty'}>
+                        Twoje oferty
+                    </NavLink>
+
             ) : (
                 <NavLink route={'/o-nas'}>
                     O nas

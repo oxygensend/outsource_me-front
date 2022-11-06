@@ -26,6 +26,7 @@ export const JobOfferView = ({jobOffer}) => {
                                   width={54} height={54}
                                   className={"rounded-2xl border-2  "}
                                   alt={"avatar"}
+                                  style={{maxWidth:"54px"}}
                               />
                           }
                     />
@@ -76,7 +77,7 @@ export const JobOfferView = ({jobOffer}) => {
                 <div className={"col-start-2 gap-2 col-end-10 mt-5 mb-10"}>
                     <p className={"font-module mb-2"}>Opis</p>
                     <p>
-                        {jobOffer.description}
+                        Est fuga eveniet possimus dolor et. Suscipit et doloremque enim. Non fugit reprehenderit ipsa similique.Est fuga eveniet possimus dolor et. Suscipit et doloremque enim. Non fugit reprehenderit ipsa similique.Est fuga eveniet possimus dolor et. Suscipit et doloremque enim. Non fugit reprehenderit ipsa similique.Est fuga eveniet possimus dolor et. Suscipit et doloremque enim. Non fugit reprehenderit ipsa similique.
                     </p>
                 </div>
             </div>

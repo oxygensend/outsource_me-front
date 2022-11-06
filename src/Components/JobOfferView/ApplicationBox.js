@@ -9,16 +9,20 @@ export const ApplicationBox = ({jobOffer}) => {
 
     return (
         <div className={"application-box"}>
-            <p className={"font-type"}>Wynagrodzenie:</p>
-            <p className={"font-info"}>{salaryRange}</p>
-            <p className={"font-type mt-2"}>Lokalizacja:</p>
-            <p className={"font-info"}>{jobOffer?.address?.city ?? 'Zdalnie'}</p>
-            <ButtonLink
-                class={"application-button2"}
-                value={"Aplikuj"}
-                route={'/oferty-zlecen/' + jobOffer.slug + '/aplikuj'}
-                state={jobOffer}
-            />
+            <div className={"box-wrapper"}>
+                <div>
+                    <p className={"font-type"}>Wynagrodzenie:</p>
+                    <p className={"font-info"}>{salaryRange}</p>
+                    <p className={"font-type mt-2"}>Lokalizacja:</p>
+                    <p className={"font-info"}>{jobOffer?.address?.city ?? 'Zdalnie'}</p>
+                </div>
+                <ButtonLink
+                    class={"application-button2"}
+                    value={"Aplikuj"}
+                    route={'/oferty-zlecen/' + jobOffer.slug + '/aplikuj'}
+                    state={jobOffer}
+                />
+            </div>
             <div className={"flex flex-row gap-2 mt-4"}>
                 <img src={calendar} alt={"calendar"}/>
                 <p className={"font-time italic"}>Do wygasniecia oferty

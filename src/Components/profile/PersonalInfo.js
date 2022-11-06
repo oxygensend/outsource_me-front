@@ -45,9 +45,9 @@ export const PersonalInfo = ({personalData, setShowModals}) => {
             }
             <div className={"md:col-start-2  md:col-span-4 col-start-2 col-span-6 " + (checkIfMe ? '' : 'mt-14')}>
 
-                {checkIfUserHaveAnyJobOffer() ? <img src={recruiting} className={"left-20 top-6 absolute "}/> : null}
+                {checkIfUserHaveAnyJobOffer() ? <img src={recruiting} className={"right-2 relative "}/> : null}
                 {checkIfUserIsDeveloper() && personalData.lookingForJob ?
-                    <img src={keen_to_work} className={"left-12 ml-4 top-6 absolute "}/> : null}
+                    <img src={keen_to_work} className={"right-5 relative "}/> : null}
                 <img src={SERVER_URL + '/' + personalData.imagePath} width={120} height={120}
                      className={"rounded-2xl border-2  "} alt={"avatar"}/>
 

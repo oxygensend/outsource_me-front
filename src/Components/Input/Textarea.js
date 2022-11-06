@@ -2,7 +2,7 @@ import './Input.css'
 
 export const Textarea = ({label, name, placeholder, type, required, onChange, register, error, className, wrapperClass}) => {
     return (
-        <div className={"mt-2 " + className}>
+        <div className={"mt-2 " }>
             <label className={"input-label"}>{label}</label>
             <textarea
                 className={"textarea"}

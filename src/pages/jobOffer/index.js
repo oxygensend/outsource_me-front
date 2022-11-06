@@ -21,7 +21,7 @@ export const JobOffer = () => {
 
         return (
 
-            <div className={"flex flex-row"}>
+            <div className={""}>
                 <JobOfferView
                     jobOffer={jobOffer}
                 />
