@@ -12,7 +12,7 @@ import formatTimePeriod from "../../helpers/formatTimePeriod";
 import {JobPositions} from "../../Components/profile/JobPosition";
 import {ListElement} from "../../Components/profile/ListElement";
 import tokenService from "../../services/tokenService";
-import {EditEducationModal} from "../../Components/ProfileModals/EditEducationModal";
+import {EditEducationModal} from "../../Components/Modals/EditEducationModal";
 
 export const ProfileEditEducation = () => {
 

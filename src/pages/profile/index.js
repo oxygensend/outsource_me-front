@@ -1,17 +1,17 @@
 import './index.css';
 import {ProfilePage} from "../../Components/profile/ProfilePage";
-import {AddTechnologyModal} from "../../Components/ProfileModals/AddTechnologyModal";
+import {AddTechnologyModal} from "../../Components/Modals/AddTechnologyModal";
 import {useEffect, useState} from "react";
-import {AddLanguagesModal} from "../../Components/ProfileModals/AddLanguagesModal";
-import {AddJobPositionModal} from "../../Components/ProfileModals/AddJobPositionModal";
-import {AddExpirienceModal} from "../../Components/ProfileModals/AddExpirienceModal";
-import {EditDescriptionModal} from "../../Components/ProfileModals/EditDescriptionModal";
+import {AddLanguagesModal} from "../../Components/Modals/AddLanguagesModal";
+import {AddJobPositionModal} from "../../Components/Modals/AddJobPositionModal";
+import {AddExpirienceModal} from "../../Components/Modals/AddExpirienceModal";
+import {EditDescriptionModal} from "../../Components/Modals/EditDescriptionModal";
 import {useParams} from "react-router-dom";
 import tokenService from "../../services/tokenService";
 import profileService from "../../services/profileService";
-import {EditPersonalInfoModal} from "../../Components/ProfileModals/EditPersonalInfoModal";
+import {EditPersonalInfoModal} from "../../Components/Modals/EditPersonalInfoModal";
 import {getId} from "../../services/utils";
-import {ConfirmModal} from "../../Components/ProfileModals/ConfirmModal";
+import {ConfirmModal} from "../../Components/Modals/ConfirmModal";
 import authAxios from "../../services/authAxios";
 import {API_URL} from "../../config";
 
@@ -143,6 +143,7 @@ export const Profile = () => {
 
             {showModals.openAdvertisement === true ?
                 <ConfirmModal
+                    title={"Pokaż, że jesteś otwarty na nowe zlecenia!"}
                     setShowModals={setShowModals}
                     onAgreeClick={() => onClickChangeUserStatus(true, 'openAdvertisement')}
                     onDeclineClick={() => closeModal('openAdvertisement')}
@@ -155,6 +156,7 @@ export const Profile = () => {
 
             {showModals.closeAdvertisement === true ?
                 <ConfirmModal
+                    title={"Pokaż, że jesteś otwarty na nowe zlecenia!"}
                     setShowModals={setShowModals}
                     onAgreeClick={() => onClickChangeUserStatus(false, 'closeAdvertisement')}
                     onDeclineClick={() => closeModal('closeAdvertisement')}

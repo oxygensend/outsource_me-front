@@ -10,7 +10,8 @@ export const ConfirmModal = ({
                                  content,
                                  declineButtonValue,
                                  confirmButtonValue,
-                                 prop
+                                 prop,
+                                title
                              }) => {
 
     const {id} = useParams();
@@ -18,11 +19,13 @@ export const ConfirmModal = ({
 
     return (
         <ModalWrapper
-            title={"Pokaż, że jesteś otwarty na nowe zlecenia!"}
+            title={title}
             setShowModals={setShowModals}
             prop={prop}
             type={"info"}
         >
+            <hr className={" mb-1 "} style={{backgroundColor: "#0F528B", opacity: "0.8"}}/>
+
             <p>{content}</p>
 
             <div className={"flex flex-row justify-between"}>

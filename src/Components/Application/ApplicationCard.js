@@ -6,7 +6,7 @@ import close_icon from "../../assets/icons/trashcan.png";
 import show from "../../assets/icons/search.png";
 import React from "react";
 
-export const ApplicationCard = ({application, id, onClickDelete}) => {
+export const ApplicationCard = ({application, id, onClickDelete, onClickPreview}) => {
 
 
     return (
@@ -27,7 +27,7 @@ export const ApplicationCard = ({application, id, onClickDelete}) => {
                          alt={"delete"}
                          style={{maxHeight: '17px', maxWidth: '17px'}}
                          width={20}
-                         onClick={() => onClickDelete()}
+                         onClick={() => onClickPreview()}
                     />
                     {application.status ?
                         <img src={close_icon}
@@ -53,7 +53,7 @@ export const ApplicationCard = ({application, id, onClickDelete}) => {
                      alt={"delete"}
                      style={{maxHeight: '17px', maxWidth: '17px'}}
                      width={20}
-                     onClick={() => onClickDelete()}
+                     onClick={() => onClickPreview()}
                 />
                 {application.status ?
                     <img src={close_icon}

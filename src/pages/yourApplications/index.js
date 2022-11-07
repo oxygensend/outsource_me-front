@@ -5,16 +5,25 @@ import tokenService from "../../services/tokenService";
 import moment from "moment/moment";
 import 'moment/locale/pl'
 import {ApplicationCard} from "../../Components/Application/ApplicationCard";
+import {UserApplicationPage} from "../../Components/Application/UserApplicationPage";
+import {ConfirmModal} from "../../Components/Modals/ConfirmModal";
+import parse from 'html-react-parser'
+import {ApplicationPreviewModal} from "../../Components/Modals/ApplicationPreviewModal";
 
 moment.locale('pl');
 
 export const YourApplications = () => {
     const [activeApplications, setActiveApplications] = useState(null)
     const [deactiveApplications, setDeactiveApplications] = useState(null)
-    const [showActiveApplications, setShowActiveApplications] = useState(false);
-    const [showDeactivedApplications, setShowDeactivedApplications] = useState(false);
-
+    const [selectedApplication, setSelectedApplication] = useState(null);
+    const [showModals, setShowModals] = useState({
+        deleteApplication: false,
+        previewApplication: false,
+    })
     const {id} = tokenService.getUser();
+    const openDeleteApplicationModalContent = (application) => {
+        return parse(`Czy na pewno chcesz usunąć aplikacje na stanowisko <b>` + application.jobOffer.name + `</b>?`);
+    }
 
     useEffect(() => {
         return () => {
@@ -28,6 +37,7 @@ export const YourApplications = () => {
                                     id={i}
                                     application={application}
                                     onClickDelete={() => onClickDelete(application)}
+                                    onClickPreview={() => onClickPreview(application)}
                                 />
                             )
                         else {
@@ -36,6 +46,7 @@ export const YourApplications = () => {
                                     id={i}
                                     application={application}
                                     onClickDelete={() => onClickDelete(application)}
+                                    onClickPreview={() => onClickPreview(application)}
                                 />
                             )
                         }
@@ -48,59 +59,52 @@ export const YourApplications = () => {
     }, []);
 
     const onClickDelete = (application) => {
-        console.log(activeApplications);
-        // authAxios.delete(API_URL + '/applications/' + application.id).then((data) => {
-        //     console.log(application);
-        //     let newApplications = [...activeApplications];
-        //     let index = newApplications.indexOf(application)
-        //     newApplications.splice(index, 1);
-        //     setActiveApplications(newApplications)
-        // }).catch((e) => {
-        //     console.log(e);
-        // });
+        setShowModals((prevState) => ({...prevState, ['deleteApplication']: true}));
+        setSelectedApplication(application)
+
+    }
+    const closeModal = (modalName) => {
+        setTimeout(() => {
+            setShowModals((prevState) => ({...prevState, [modalName]: false}));
+        }, 200)
+    }
+    const onClickPreview = (application) => {
+        console.log('s');
+        setSelectedApplication(application)
+        setShowModals((prevState) => ({...prevState, ['previewApplication']: true}));
     }
 
     if (deactiveApplications || activeApplications) {
         return (
-            <div className={"applications-wrapper pt-4"}>
-                <div className={"text-center text-3xl "}>
-                    <p>Twoje aplikacje </p>
-                </div>
+            <>
 
-                <hr className={" mt-4 "} style={{backgroundColor: "#0F528B", opacity: "0.8"}}/>
+                <UserApplicationPage
+                    deactiveApplications={deactiveApplications}
+                    activeApplications={activeApplications}
+                />
+                {
+                    showModals.deleteApplication === true ?
+                        <ConfirmModal
+                            title={"Aplikacja na stanowisko " + selectedApplication.jobOffer.name}
+                            setShowModals={setShowModals}
+                            onAgreeClick={() => onClickDelete(true, 'deleteApplication')}
+                            onDeclineClick={() => closeModal('deleteApplication')}
+                            content={openDeleteApplicationModalContent(selectedApplication)}
+                            confirmButtonValue={"Tak"}
+                            declineButtonValue={"Nie"}
+                            prop={"deleteApplication"}
+                        /> : null
+                }
 
-                <div>
-                    <p className={"font-module mt-5 margin-l "}>{"Aktywne aplikacje(" + activeApplications.length + ")"} </p>
-                    <div className="flex flex-col mt-5 gap-3 items-center">
+                {
+                    showModals.previewApplication === true ?
+                        <ApplicationPreviewModal
+                            application={selectedApplication}
+                            setShowModals={setShowModals}
+                        />: null
+                }
 
-                        {showActiveApplications ? activeApplications : activeApplications.slice(0, 3)}
-
-                    </div>
-                    {activeApplications.length > 3 && !showActiveApplications ?
-                        <p className={"red-font mt-2 margin-l cursor-pointer"}
-                           onClick={() => setShowActiveApplications(true)}>
-                            Pokaż wszystkie...
-                        </p>
-                        : null}
-                </div>
-
-                <div>
-                    <p className={"font-module mt-5 margin-l "}>{"Wygaśnięte aplikacje(" + deactiveApplications.length + ")"} </p>
-                    <div className="flex flex-col mt-5 gap-3 items-center">
-
-                        {showDeactivedApplications ? deactiveApplications : deactiveApplications.slice(0, 3)}
-
-                    </div>
-                    {deactiveApplications.length > 3 && !showDeactivedApplications ?
-                        <p className={"red-font mt-2 mb-2 margin-l cursor-pointer"}
-                           onClick={() => setShowDeactivedApplications(true)}>
-                            Pokaż wszystkie...
-                        </p>
-                        : null}
-                </div>
-            </div>
-
-
+            < />
         );
     } else {
         return null;
