@@ -3,6 +3,7 @@ import {SERVER_URL} from "../../config";
 import bookmark from '../../assets/icons/Bookmark.png'
 import {ButtonLink} from "../Button/ButtonLink";
 import React, {useState} from "react";
+import {Link} from "react-router-dom";
 
 export const JobOfferCard = ({jobOffer}) => {
 
@@ -13,8 +14,17 @@ export const JobOfferCard = ({jobOffer}) => {
             <div className={"grid grid-cols-12 md:flex md:flex-row md:justify-between md:ml-8 md:mr-8"}>
 
                 <div className={"flex flex-row  gap-3 col-start-2 md:col-start-1 col-span-7 mt-2  "}>
-                    <img src={SERVER_URL + '/' + jobOffer.user.imagePath} width={54} height={54}
-                         className={"rounded-2xl border-2  "} alt={"avatar"}/>
+                    <Link
+                        to={'/profil/' + jobOffer.user.id}
+                        children={<img
+                            src={SERVER_URL + '/' + jobOffer.user.imagePath}
+                            width={54}
+                            height={54}
+                            className={"rounded-2xl border-2  "}
+                            alt={"avatar"}
+                        />
+                        }
+                    />
 
                     <div>
                         <p className={"fullname-font "}>{jobOffer.user.fullName}</p>
