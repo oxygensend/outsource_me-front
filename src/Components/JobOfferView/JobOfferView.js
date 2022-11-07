@@ -55,7 +55,7 @@ export const JobOfferView = ({jobOffer}) => {
             <div className={"col-span-full mt-12 grid grid-cols-10 "}>
 
                 <div className={"col-start-2 col-end-10 md:col-end-"}>
-                    <p className={"font-module pb-2"}>{"Technologie"}</p>
+                    <p className={"font-module pb-2"}>{"Technologie:"}</p>
                     <div className={"flex flex-row gap-5  mt-2 flex-wrap "}>
                         {jobOffer.technologies.map((technology, i) => {
                             return (
