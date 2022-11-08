@@ -7,13 +7,13 @@ import {AddJobPositionModal} from "../../Components/Modals/AddJobPositionModal";
 import {AddExpirienceModal} from "../../Components/Modals/AddExpirienceModal";
 import {EditDescriptionModal} from "../../Components/Modals/EditDescriptionModal";
 import {useParams} from "react-router-dom";
-import tokenService from "../../services/tokenService";
 import profileService from "../../services/profileService";
 import {EditPersonalInfoModal} from "../../Components/Modals/EditPersonalInfoModal";
 import {getId} from "../../services/utils";
 import {ConfirmModal} from "../../Components/Modals/ConfirmModal";
 import authAxios from "../../services/authAxios";
 import {API_URL} from "../../config";
+import {InfoModal} from "../../Components/Modals/InfoModal";
 
 
 export const Profile = () => {
@@ -42,7 +42,8 @@ export const Profile = () => {
             description: false,
             personalInfo: false,
             openAdvertisement: false,
-            closeAdvertisement: false
+            closeAdvertisement: false,
+            contactModal: false
 
         }
     )
@@ -165,6 +166,17 @@ export const Profile = () => {
                     declineButtonValue={"Nie"}
                     prop={"closeAdvertisement"}
                 /> : null
+            }
+
+            {showModals.contactModal === true ?
+                <InfoModal
+                    title={personalData.fullName}
+                    setShowModals={setShowModals}
+                    prop={"contactModal"}
+                    personalData={personalData}
+                />
+                : null
+
             }
         </>
     )

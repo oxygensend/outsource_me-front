@@ -362,6 +362,8 @@
     justify-content: center;
     width: 100px;
     height: 35px;
+
+    cursor: pointer;
 }
 
 .outsource_takeOn {

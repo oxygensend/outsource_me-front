@@ -5,7 +5,7 @@ import {useEffect, useRef} from "react";
 export const ModalWrapper = ({title, children, onSubmitHandler, errors, setShowModals, prop, type, titleCenter}) => {
     const {id} = useParams();
     const modalRef = useRef();
-    const modalClass = {'edit': 'edit', 'info': 'info'};
+    const modalClass = {'edit': 'edit', 'info': 'info', 'preview': 'preview'};
 
     useEffect(() => {
         const handleCloseModal = (event) => {

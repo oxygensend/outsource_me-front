@@ -40,7 +40,7 @@ export const JobOfferCard = ({jobOffer}) => {
             <div className={"grid grid-cols-12 mt-5"}>
 
                 <div className={"col-start-2 col-end-12"}>
-                    <h1 className={"text-lg font-bold mb-1"}>{jobOffer.name}</h1>
+                    <h1 className={"text-xl text-red-700 font-bold mb-1"}>{jobOffer.name}</h1>
                     {!showWholeDescription ?
                         <p>{jobOffer.shortDescription} </p> : <p>{jobOffer.description}</p>
                     }

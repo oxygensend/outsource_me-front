@@ -78,7 +78,7 @@ export const ApplicateForJobOffer = () => {
                 <hr className={"col-span-full mt-5"} style={{backgroundColor: "#0F528B", opacity: "0.8"}}/>
 
                 <p className={" mt-4 pl-24 pr-24 pt-10 pb-2"}>Aplikujesz na <b>{jobOffer.name}</b>. Możesz dodać
-                    wiadomość dla zleceniodawcy i załączniki. Zleceniodawca dodatkowo dostanie twój profil, sprawdź czy
+                    wiadomość dla zleceniodawcy i załączniki. Zleceniodawca dodatkowo dostanie twój profil, dlatego sprawdź czy
                     wszystkie potrzebne informacje są tam zawarte.</p>
                 <ApplicationForm
                     jobOffer={jobOffer}

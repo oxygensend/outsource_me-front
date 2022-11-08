@@ -25,6 +25,11 @@ export const PersonalInfo = ({personalData, setShowModals}) => {
 
     }
 
+    const onClickOpenContactModal = () => {
+        setShowModals((prevState) => ({...prevState, ['contactModal']: true}));
+
+    }
+
     const onClickCloseAdvertisement = () => {
         setShowModals((prevState) => ({...prevState, ['closeAdvertisement']: true}));
     }
@@ -52,7 +57,7 @@ export const PersonalInfo = ({personalData, setShowModals}) => {
                      className={"rounded-2xl border-2  "} alt={"avatar"}/>
 
                 <p className={"profile-fullname mt-2"}>{personalData.fullName}</p>
-                <p className={" gray-font"}>{accountType(personalData.accountType)}</p>
+                <p className={" gray-font text-red-300"}>{accountType(personalData.accountType)}</p>
                 {personalData.address ?
                     <p className={"only-for-small-media gray-font2 italic"}>{personalData.address.city}</p>
                     : null}
@@ -77,6 +82,7 @@ export const PersonalInfo = ({personalData, setShowModals}) => {
                              alt={"mail"}
                              width={16}
                              height={16}
+                             onClick={() => onClickOpenContactModal()}
                         />
                     }
                 </div>
@@ -120,7 +126,7 @@ export const PersonalInfo = ({personalData, setShowModals}) => {
                         {/*{checkIfMe ? null :*/}
                         <div className={"flex flex-row gap-2 mt-1 only-for-big-media cursor-pointer"}>
                             <img src={mail} alt={"mail"} width={16} height={16}/>
-                            <p className={"red-font "}>Skontaktuj się</p>
+                            <p  onClick={() => onClickOpenContactModal()} className={"red-font hover:underline "}>Skontaktuj się</p>
                         </div>
                         {/*}*/}
                     </div>

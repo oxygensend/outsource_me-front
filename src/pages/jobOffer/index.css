@@ -33,13 +33,13 @@
 
 .font-time {
     font-style: italic;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 14px;
     line-height: 20px;
     align-items: center;
     text-align: center;
 
-    color: #000000;
+    color: #3ec786;
 }
 
 .fullname-font2 {

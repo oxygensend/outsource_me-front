@@ -9,12 +9,14 @@ import {UserApplicationPage} from "../../Components/Application/UserApplicationP
 import {ConfirmModal} from "../../Components/Modals/ConfirmModal";
 import parse from 'html-react-parser'
 import {ApplicationPreviewModal} from "../../Components/Modals/ApplicationPreviewModal";
+import authAxios from "../../services/authAxios";
+import app from "../../App";
 
 moment.locale('pl');
 
 export const YourApplications = () => {
-    const [activeApplications, setActiveApplications] = useState(null)
-    const [deactiveApplications, setDeactiveApplications] = useState(null)
+    const [activeApplications, setActiveApplications] = useState([])
+    const [deactiveApplications, setDeactiveApplications] = useState([])
     const [selectedApplication, setSelectedApplication] = useState(null);
     const [showModals, setShowModals] = useState({
         deleteApplication: false,
@@ -63,18 +65,31 @@ export const YourApplications = () => {
         setSelectedApplication(application)
 
     }
+
+    const onClickDeleteElement = (application) => {
+
+        authAxios.delete(application['@id']).then(data => {
+            let newApplications = [...activeApplications];
+            let deleted = newApplications.filter((el) => el.props.application !== application);
+            setActiveApplications(deleted)
+            setSelectedApplication(null);
+        }).catch(e => {
+            console.log(e)
+        });
+        closeModal('deleteApplication');
+    }
+
     const closeModal = (modalName) => {
         setTimeout(() => {
             setShowModals((prevState) => ({...prevState, [modalName]: false}));
         }, 200)
     }
     const onClickPreview = (application) => {
-        console.log('s');
         setSelectedApplication(application)
         setShowModals((prevState) => ({...prevState, ['previewApplication']: true}));
     }
 
-    if (deactiveApplications || activeApplications) {
+    if (activeApplications) {
         return (
             <>
 
@@ -83,11 +98,11 @@ export const YourApplications = () => {
                     activeApplications={activeApplications}
                 />
                 {
-                    showModals.deleteApplication === true ?
+                    showModals.deleteApplication === true && selectedApplication ?
                         <ConfirmModal
                             title={"Aplikacja na stanowisko " + selectedApplication.jobOffer.name}
                             setShowModals={setShowModals}
-                            onAgreeClick={() => onClickDelete(true, 'deleteApplication')}
+                            onAgreeClick={() => onClickDeleteElement(selectedApplication)}
                             onDeclineClick={() => closeModal('deleteApplication')}
                             content={openDeleteApplicationModalContent(selectedApplication)}
                             confirmButtonValue={"Tak"}
@@ -101,7 +116,7 @@ export const YourApplications = () => {
                         <ApplicationPreviewModal
                             application={selectedApplication}
                             setShowModals={setShowModals}
-                        />: null
+                        /> : null
                 }
 
             < />

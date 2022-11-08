@@ -39,7 +39,7 @@ export const ConfirmModal = ({
                 />
 
                 <Button
-                    className={"outsourceme_button outsource_takeOff2"}
+                    className={"outsourceme_button outsource_takeOff2 "}
                     onClick={() => onDeclineClick()}
                     value={declineButtonValue}
                 />
