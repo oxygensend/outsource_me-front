@@ -38,7 +38,8 @@ export const PersonalInfo = ({personalData, setShowModals}) => {
         return personalData.accountType === 'Developer'
     }
     const checkIfUserHaveAnyJobOffer = () => {
-        return personalData.accountType === 'Principle' && personalData.jobOffers.length > 0;
+        const activeJobOffers = personalData.jobOffers.filter(el => !el.archived)
+        return personalData.accountType === 'Principle' && activeJobOffers.length > 0;
     }
 
     return (
@@ -126,7 +127,8 @@ export const PersonalInfo = ({personalData, setShowModals}) => {
                         {/*{checkIfMe ? null :*/}
                         <div className={"flex flex-row gap-2 mt-1 only-for-big-media cursor-pointer"}>
                             <img src={mail} alt={"mail"} width={16} height={16}/>
-                            <p  onClick={() => onClickOpenContactModal()} className={"red-font hover:underline "}>Skontaktuj się</p>
+                            <p onClick={() => onClickOpenContactModal()}
+                               className={"red-font hover:underline "}>Skontaktuj się</p>
                         </div>
                         {/*}*/}
                     </div>

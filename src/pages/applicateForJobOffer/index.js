@@ -50,6 +50,7 @@ export const ApplicateForJobOffer = () => {
                                   <img
                                       src={SERVER_URL + '/' + jobOffer.user.imagePath}
                                       width={54} height={54}
+                                      style={{minHeight:'54px', minWidth: '54px'}}
                                       className={"rounded-2xl border-2  "}
                                       alt={"avatar"}
                                   />
@@ -77,7 +78,7 @@ export const ApplicateForJobOffer = () => {
 
                 <hr className={"col-span-full mt-5"} style={{backgroundColor: "#0F528B", opacity: "0.8"}}/>
 
-                <p className={" mt-4 pl-24 pr-24 pt-10 pb-2"}>Aplikujesz na <b>{jobOffer.name}</b>. Możesz dodać
+                <p className={" mt-4 pl-12 sm:pl-24 sm:pr-24 pr-12 pt-10 pb-2"}>Aplikujesz na <b>{jobOffer.name}</b>. Możesz dodać
                     wiadomość dla zleceniodawcy i załączniki. Zleceniodawca dodatkowo dostanie twój profil, dlatego sprawdź czy
                     wszystkie potrzebne informacje są tam zawarte.</p>
                 <ApplicationForm
