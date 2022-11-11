@@ -104,6 +104,9 @@
 
     }
 
+    .nav-new-offer {
+        display: none;
+    }
     .nav-mobile-menu {
 
         width: 32px;
@@ -184,6 +187,7 @@
     }
 
 
+
     .nav-wrapper {
         display: flex;
         flex-direction: row
@@ -245,6 +249,10 @@
     }
 }
 @media screen and (min-width: 1060px) {
+
+    .nav-new-offer {
+        display: block;
+    }
     .nav-search {
         /* & SearchBar */
 

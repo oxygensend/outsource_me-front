@@ -25,8 +25,13 @@ export const ApplicationBox = ({jobOffer}) => {
             </div>
             <div className={"flex flex-row gap-2 mt-4"}>
                 <img src={calendar} alt={"calendar"}/>
-                <p className={"font-time italic"}>Do wygasniecia oferty
-                    pozostalo {moment(jobOffer.validTo).diff(Date(), 'days')} dni</p>
+
+                <p className={"font-time italic"}>
+                    {jobOffer.validTo ?
+                        "Do wygasniecia oferty pozostalo" + moment(jobOffer.validTo).diff(Date(), 'days') + " dni"
+                        : "Brak daty wygaśnięcia oferty"
+                    }
+                </p>
             </div>
         </div>
     );

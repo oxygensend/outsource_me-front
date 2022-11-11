@@ -18,6 +18,7 @@ import {ApplicateForJobOffer} from "./pages/applicateForJobOffer";
 import {YourApplications} from "./pages/yourApplications";
 import {YourJobOffers} from "./pages/yourJobOffers";
 import {JobOfferManagement} from "./pages/jobOfferManagement";
+import {NewJobOffer} from "./pages/newJobOffer";
 
 function App() {
     return (
@@ -36,6 +37,7 @@ function App() {
                 <Route path={"/profil/:id/edytuj/wyksztalcenie"}  element={<ProfileEditEducation/>}/>
                 <Route path={"/oferty-zlecen"} element={<JobOffers/>}/>
                 <Route path={'/oferty-zlecen/:slug'} element={<JobOffer/>} />
+                <Route path={'/nowe-zlecenie'} element={<NewJobOffer/>} />
                 <Route path={'/twoje-oferty/:slug'} element={<JobOfferManagement/>} />
                 <Route path={'/oferty-zlecen/:slug/aplikuj'} element={<ApplicateForJobOffer/>} />
                 <Route path={"/profil/:id/twoje-aplikacje"} element={<YourApplications/>}/>

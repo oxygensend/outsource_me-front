@@ -1,6 +1,6 @@
 import './Input.css'
 
-export const InputProfile = ({label, name, placeholder, type, required, onChange, register, error}) => {
+export const InputProfile = ({label, name, placeholder, type, required, onChange, register, error, step}) => {
     return (
         <div className={"mt-2"}>
             <label className={"input-label"}>{label}</label>
@@ -9,6 +9,7 @@ export const InputProfile = ({label, name, placeholder, type, required, onChange
                 name={name}
                 placeholder={placeholder}
                 type={type}
+                step={step}
                 required={required}
                 onChange={onChange}
                 {...register(name, {required})}

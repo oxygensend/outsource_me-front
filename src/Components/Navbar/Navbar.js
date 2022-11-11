@@ -54,7 +54,15 @@ export const Navbar = (props) => {
                 <DashboardMenu login={isAuthenticated}/>
                 : null}
             <Searchbar/>
+
             <div className={"nav-menu"}>
+                <div className={"nav-new-offer"}>
+                    <ButtonLink
+                        class={"outsourceme_button outsource_takeOff nav-new-offer"}
+                        value={"Nowa oferta"}
+                        route={"/nowe-zlecenie"}
+                    />
+                </div>
                 <NavbarMenu login={isAuthenticated}/>
                 {!isAuthenticated ?
                     <ButtonLink value={"Dołącz do nas"} route={"/rejestracja"}/>

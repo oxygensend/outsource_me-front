@@ -38,7 +38,7 @@ export const PersonalInfo = ({personalData, setShowModals}) => {
         return personalData.accountType === 'Developer'
     }
     const checkIfUserHaveAnyJobOffer = () => {
-        const activeJobOffers = personalData.jobOffers.filter(el => !el.archived)
+        const activeJobOffers = personalData.jobOffers ? personalData.jobOffers.filter(el => !el.archived) : [];
         return personalData.accountType === 'Principle' && activeJobOffers.length > 0;
     }
 
@@ -91,13 +91,13 @@ export const PersonalInfo = ({personalData, setShowModals}) => {
                 {checkIfMe && checkIfUserIsDeveloper() ?
                     personalData.lookingForJob ?
                         <Button
-                            className={"outsourceme_button outsource_takeOff"}
+                            className={"outsourceme_button outsource_takeOff  mt-4"}
                             onClick={() => onClickCloseAdvertisement()}
                             value={"Zamknij ogłoszenie"}
                         />
                         :
                         <Button
-                            className={"outsourceme_button outsource_takeOn"}
+                            className={"outsourceme_button outsource_takeOn mt-4"}
                             onClick={() => onClickOpenAdvertisement()}
                             value={"Ogłoś się"}
                         />

@@ -2,10 +2,10 @@ import calendar from "../../assets/icons/calendar.png";
 import moment from "moment";
 import React from "react";
 
-export const JobOfferManagementCard = ({jobOffer, id, onClickDelete, onClickPreview}) => {
+export const JobOfferManagementCard = ({jobOffer, id}) => {
 
     const moveToManagementPage = () => {
-        window.location.href = '/twoje-oferty/' + jobOffer.id;
+        window.location.href = '/twoje-oferty/' + jobOffer.slug;
     }
 
     return (
@@ -23,8 +23,9 @@ export const JobOfferManagementCard = ({jobOffer, id, onClickDelete, onClickPrev
                 <p className={"application-font"}>{jobOffer.numberOfApplications + ' aplikacje'}</p>
                 <div className={"flex flex-row gap-2 mt-4"}>
                     <img src={calendar} alt={"calendar"} style={{maxHeight: '16px'}}/>
-                    <p className={"font-time italic bottom-0.5 relative"}>Oferta
-                        wygasa {moment(jobOffer.validTo).fromNow()} </p>
+                    <p className={"font-time italic bottom-0.5 relative"}>
+                        {jobOffer.validTo ? "Oferta wygasa " + moment(jobOffer.validTo).fromNow() :
+                            "Brak daty wygasniecia oferty"} </p>
                 </div>
             </div>
 
