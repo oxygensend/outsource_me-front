@@ -5,9 +5,12 @@ import approve from "../../assets/icons/circle-check-fill-24.svg"
 import decline from "../../assets/icons/circle-x-fill-24.svg"
 import React from "react";
 
-export const PrincipleApplicationCard = ({application, id, onClickReject, onClickAccept}) => {
+export const PrincipleApplicationCard = ({application, id, onClickReject, onClickAccept, jobOfferStatus}) => {
 
-    console.log(application);
+
+    const onClickShowApplication = () => {
+        window.location.href = window.location.pathname + '/aplikacja/' + application.id;
+    }
 
     return (
         <div key={id}
@@ -21,6 +24,7 @@ export const PrincipleApplicationCard = ({application, id, onClickReject, onClic
                              alt={"delete"}
                              style={{maxHeight: '17px', maxWidth: '17px'}}
                              width={20}
+                             onClick={() => onClickShowApplication()}
                         />
                     </div>
 
@@ -34,29 +38,32 @@ export const PrincipleApplicationCard = ({application, id, onClickReject, onClic
 
             <div className={" flex flex-row gap-2 items-center"}>
 
-                {application.status >= 0 ?
-                    <img src={approve}
-                         className={" cursor-pointer"}
-                         alt={"approve"}
-                         style={{maxHeight: '24px', maxWidth: '24px'}}
-                         width={24}
-                         height={24}
-                         onClick={() => application.status = 0 ? onClickAccept() : onClickReject()}
-                    /> : null
+                {jobOfferStatus ?
+                    null :
+                    <>
+                        {application.status >= 0 ?
+                            <img src={approve}
+                                 className={" cursor-pointer"}
+                                 alt={"approve"}
+                                 style={{maxHeight: '24px', maxWidth: '24px'}}
+                                 width={24}
+                                 height={24}
+                                 onClick={() => application.status = 0 ? onClickAccept() : onClickReject()}
+                            /> : null}
+
+
+                        {application.status <= 0 ?
+                            <img src={decline}
+                                 className={" cursor-pointer"}
+                                 alt={"usun"}
+                                 style={{maxHeight: '24px', maxWidth: '24px'}}
+                                 width={24}
+                                 height={24}
+                                 onClick={() => application.status = 0 ? onClickReject() : onClickAccept()}
+
+                            /> : null}
+                    </>
                 }
-
-
-                {application.status <= 0 ?
-                    <img src={decline}
-                         className={" cursor-pointer"}
-                         alt={"usun"}
-                         style={{maxHeight: '24px', maxWidth: '24px'}}
-                         width={24}
-                         height={24}
-                         onClick={() => application.status = 0 ? onClickReject() : onClickAccept()}
-
-                    /> : null}
-
             </div>
         </div>
     );

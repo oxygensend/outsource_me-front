@@ -18,7 +18,7 @@ export const JobOfferStatistics = ({jobOffer, setShowModals}) => {
     return (
         <div className={"text-center"}>
 
-            <p className={"joboffer-title-font pt-10"}>{jobOffer.name}</p>
+            <p className={"joboffer-title-font pt-10"}>{jobOffer.name + (jobOffer.archived ? " [wygasła]" : null)}</p>
 
             <p className={"application-font"}>{jobOffer.numberOfApplications + ' aplikacje'}</p>
             <p className={"text-red-500 font-medium"}>
@@ -31,23 +31,20 @@ export const JobOfferStatistics = ({jobOffer, setShowModals}) => {
                     wygasa za {moment(jobOffer.validTo).fromNow()} </p>
             </div>
             <div className={"flex flex-row gap-4 mt-4 justify-center"}>
-
-                <img src={gear}
-                     className={" cursor-pointer mt-0.5"}
-                     alt={"settings"}
-                     onClick={() => onClickOpenModal('editOfferModal')}
-                />
                 {jobOffer.archived ?
-                    <img src={check}
-                         className={" cursor-pointer mt-0.5"}
-                         alt={"delete"}
-                         onClick={() => onClickOpenModal('openOfferModal')}
-                    /> :
-                    <img src={bin}
-                         className={" cursor-pointer mt-0.5"}
-                         alt={"delete"}
-                         onClick={() => onClickOpenModal('closeOfferModal')}
-                    />
+                    null :
+                    <>
+                        <img src={gear}
+                             className={" cursor-pointer mt-0.5"}
+                             alt={"settings"}
+                             onClick={() => onClickOpenModal('editOfferModal')}
+                        />
+                        <img src={bin}
+                             className={" cursor-pointer mt-0.5"}
+                             alt={"delete"}
+                             onClick={() => onClickOpenModal('closeOfferModal')}
+                        />
+                    </>
                 }
                 <img src={search}
                      className={" cursor-pointer mt-0.5"}

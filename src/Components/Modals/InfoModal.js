@@ -4,6 +4,7 @@ import parse from "html-react-parser";
 import mail from "../../assets/icons/mail.svg";
 import phone from "../../assets/icons/device-mobile.png";
 import linkedin from "../../assets/icons/linkedin.png";
+import {onClickShowModal} from "../../services/utils";
 
 export const InfoModal = ({prop, setShowModals, personalData, onConfirmClick, confirmButtonValue, title}) => {
 
@@ -23,7 +24,11 @@ export const InfoModal = ({prop, setShowModals, personalData, onConfirmClick, co
                          width={16}
                          height={16}
                     />
-                    <p className={"text-blue-500  hover:underline cursor-pointer"}>{personalData.email} </p>
+                    <p
+                        className={"text-blue-500  hover:underline cursor-pointer"}
+                        onClick={() => onClickShowModal('messageModal', setShowModals)}
+                    >
+                        {personalData.email} </p>
                 </div>
                 <div className={"flex flex-row gap-2 "}>
                     <img src={linkedin}

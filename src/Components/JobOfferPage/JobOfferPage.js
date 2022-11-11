@@ -84,7 +84,6 @@ export const JobOfferPage = ({defaultFiltersSettings, searchParams, updatingUrlC
                     setJobOffers(items);
                 }
 
-
             }).catch(err => {
             console.log(err);
         });
@@ -119,6 +118,7 @@ export const JobOfferPage = ({defaultFiltersSettings, searchParams, updatingUrlC
         if (developers) {
             searchQuery += (searchQuery.startsWith('?') ? '&offers=developers' : '?offers=developers');
         }
+
         if (principles) {
             searchQuery += (searchQuery.startsWith('?') ? '&offers=principles' : '?offers=principles');
         }

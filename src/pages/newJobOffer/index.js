@@ -27,7 +27,7 @@ export const NewJobOffer = () => {
     }
 
     const afterSubmit = (data) => {
-        console.log(data);
+        window.location.href = '/profile/me/twoje-owerty';
     }
     return (
         <div className={"applications-wrapper pt-4"}>

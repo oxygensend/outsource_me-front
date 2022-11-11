@@ -34,7 +34,7 @@ export const ProfilePage = memo(({style, setShowModals, personalData, languages}
      */
     if (personalData)
         return (
-            <div className={"profile-container "} style={style}>
+            <div className={"profile-container  "} style={style}>
 
                 <PersonalInfo
                     personalData={personalData}
@@ -45,7 +45,7 @@ export const ProfilePage = memo(({style, setShowModals, personalData, languages}
                     personalData={personalData}
                     setShowModals={setShowModals}
                 />
-                <Languages id={personalData.id} languages={languages} personalData={personalData}
+                <Languages id={personalData.id} personalData={personalData}
                            setShowModals={setShowModals}/>
                 <JobPositions id={personalData.id} personalData={personalData} setShowModals={setShowModals}/>
                 <Education id={personalData.id} personalData={personalData} setShowModals={setShowModals}/>

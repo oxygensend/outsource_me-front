@@ -9,11 +9,12 @@ import {EditDescriptionModal} from "../../Components/Modals/EditDescriptionModal
 import {useParams} from "react-router-dom";
 import profileService from "../../services/profileService";
 import {EditPersonalInfoModal} from "../../Components/Modals/EditPersonalInfoModal";
-import {getId} from "../../services/utils";
+import {closeModal, getId} from "../../services/utils";
 import {ConfirmModal} from "../../Components/Modals/ConfirmModal";
 import authAxios from "../../services/authAxios";
 import {API_URL} from "../../config";
 import {InfoModal} from "../../Components/Modals/InfoModal";
+import {ContactModal} from "../../Components/Modals/ContactModal";
 
 
 export const Profile = () => {
@@ -43,7 +44,8 @@ export const Profile = () => {
             personalInfo: false,
             openAdvertisement: false,
             closeAdvertisement: false,
-            contactModal: false
+            contactModal: false,
+            messageModal: true
 
         }
     )
@@ -83,7 +85,7 @@ export const Profile = () => {
                 "Content-Type": "application/merge-patch+json"
             }
         }).then(data => {
-            closeModal(modalName);
+            closeModal(modalName, setShowModals);
             setPersonalData((prevState) => ({...prevState, ['lookingForJob']: status}));
         })
             .catch((e) => {
@@ -92,16 +94,12 @@ export const Profile = () => {
 
             })
     }
-    const closeModal = (modalName) => {
-        setShowModals((prevState) => ({...prevState, [modalName]: false}));
-    }
 
     return (
         <>
             <ProfilePage
                 setShowModals={setShowModals}
                 personalData={personalData}
-                languages={languages}
             />
 
             {showModals.technologies ?
@@ -147,7 +145,7 @@ export const Profile = () => {
                     title={"Pokaż, że jesteś otwarty na nowe zlecenia!"}
                     setShowModals={setShowModals}
                     onAgreeClick={() => onClickChangeUserStatus(true, 'openAdvertisement')}
-                    onDeclineClick={() => closeModal('openAdvertisement')}
+                    onDeclineClick={() => closeModal('openAdvertisement', setShowModals)}
                     content={openAdvertisementModalContent}
                     confirmButtonValue={"Potwierdź"}
                     declineButtonValue={"Anuluj"}
@@ -160,7 +158,7 @@ export const Profile = () => {
                     title={"Pokaż, że jesteś otwarty na nowe zlecenia!"}
                     setShowModals={setShowModals}
                     onAgreeClick={() => onClickChangeUserStatus(false, 'closeAdvertisement')}
-                    onDeclineClick={() => closeModal('closeAdvertisement')}
+                    onDeclineClick={() => closeModal('closeAdvertisement', setShowModals)}
                     content={closeAdvertisementModalContent}
                     confirmButtonValue={"Tak"}
                     declineButtonValue={"Nie"}
@@ -177,6 +175,14 @@ export const Profile = () => {
                 />
                 : null
 
+            }
+
+            {showModals.messageModal === true ?
+                <ContactModal
+                    userIri={personalData['@id']}
+                    setShowModals={setShowModals}
+                />
+                : null
             }
         </>
     )

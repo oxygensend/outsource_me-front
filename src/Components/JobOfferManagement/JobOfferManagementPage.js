@@ -10,6 +10,9 @@ export const JobOfferManagementPage = ({jobOffer, setShowModals}) => {
     const [acceptedApplications, setAcceptedApplications] = useState([]);
     const [rejectedApplications, setRejectedApplications] = useState([]);
     const [applications, setApplications] = useState([])
+    const [showApplications, setShowApplications] = useState(false);
+    const [showAcceptedApplications, setShowAcceptedApplications] = useState(false);
+    const [showReApplications, setShowRejectedApplications] = useState(false);
 
 
     useEffect(() => {
@@ -44,9 +47,7 @@ export const JobOfferManagementPage = ({jobOffer, setShowModals}) => {
             {jobOffer ?
                 (
                     <div>
-
                         <div>
-
                             <JobOfferStatistics
                                 jobOffer={jobOffer}
                                 setShowModals={setShowModals}
@@ -64,11 +65,11 @@ export const JobOfferManagementPage = ({jobOffer, setShowModals}) => {
                                         application={application}
                                         onClickReject={() => onClickChangeStatus(application, -1)}
                                         onClickAccept={() => onClickChangeStatus(application, 1)}
+                                        jobOfferStatus={jobOffer.archived}
                                         id={id}
                                     />);
                             })}
                         </div>
-
 
                         <p className={"font-module mt-5 margin-l "}>{"Zaakceptowane (" + acceptedApplications.length + ")"} </p>
                         <div className={"mt-4 flex flex-col items-center"}>
@@ -79,6 +80,7 @@ export const JobOfferManagementPage = ({jobOffer, setShowModals}) => {
                                         id={id}
                                         onClickReject={() => onClickChangeStatus(application, -1)}
                                         onClickAccept={() => onClickChangeStatus(application, 1)}
+                                        jobOfferStatus={jobOffer.archived}
                                     />);
                             })}
                         </div>
@@ -92,6 +94,7 @@ export const JobOfferManagementPage = ({jobOffer, setShowModals}) => {
                                         id={id}
                                         onClickReject={() => onClickChangeStatus(application, -1)}
                                         onClickAccept={() => onClickChangeStatus(application, 1)}
+                                        jobOfferStatus={jobOffer.archived}
                                     />);
                             })}
                         </div>

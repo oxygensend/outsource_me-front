@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import './index.css';
-import {getData} from "../../services/utils";
+import {closeModal, getData} from "../../services/utils";
 import tokenService from "../../services/tokenService";
 import moment from "moment/moment";
 import 'moment/locale/pl'
@@ -76,14 +76,10 @@ export const YourApplications = () => {
         }).catch(e => {
             console.log(e)
         });
-        closeModal('deleteApplication');
+        closeModal('deleteApplication', setShowModals);
     }
 
-    const closeModal = (modalName) => {
-        setTimeout(() => {
-            setShowModals((prevState) => ({...prevState, [modalName]: false}));
-        }, 200)
-    }
+
     const onClickPreview = (application) => {
         setSelectedApplication(application)
         setShowModals((prevState) => ({...prevState, ['previewApplication']: true}));
@@ -103,7 +99,7 @@ export const YourApplications = () => {
                             title={"Aplikacja na stanowisko " + selectedApplication.jobOffer.name}
                             setShowModals={setShowModals}
                             onAgreeClick={() => onClickDeleteElement(selectedApplication)}
-                            onDeclineClick={() => closeModal('deleteApplication')}
+                            onDeclineClick={() => closeModal('deleteApplication', setShowModals)}
                             content={openDeleteApplicationModalContent(selectedApplication)}
                             confirmButtonValue={"Tak"}
                             declineButtonValue={"Nie"}

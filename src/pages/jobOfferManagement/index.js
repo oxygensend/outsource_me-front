@@ -1,6 +1,6 @@
 import {useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
-import {getData} from "../../services/utils";
+import {closeModal, getData} from "../../services/utils";
 import authAxios from "../../services/authAxios";
 import {JobOfferManagementPage} from "../../Components/JobOfferManagement/JobOfferManagementPage";
 import {ConfirmModal} from "../../Components/Modals/ConfirmModal";
@@ -14,7 +14,6 @@ export const JobOfferManagement = () => {
         {
             closeOfferModal: false,
             editOfferModal: false,
-            openOfferModal: false
         }
     )
     useEffect(() => {
@@ -31,15 +30,10 @@ export const JobOfferManagement = () => {
             console.log(e);
         })
     }
-    const closeModal = (modalName) => {
-        setShowModals((prevState) => ({...prevState, [modalName]: false}));
-    }
 
-    const openOfferContent = (offerName) => {
-        return parse("Czy na pewno chcesz otworzyć oferte na stanowisko <b>" + offerName + "</b>?");
-    }
+
     const closeOfferContent = (offerName) => {
-        return parse("Czy na pewno chcesz zamknąć oferte na stanowisko <b>" + offerName + "</b>?");
+        return parse("Czy na pewno chcesz zamknąć oferte na stanowisko <b>" + offerName + "</b>? Po zamknieciu oferty nie bedzie możliwości jej ponownego otwarcia.");
     }
     return (
         <>
@@ -53,23 +47,11 @@ export const JobOfferManagement = () => {
                     title={"Zamknij oferte"}
                     setShowModals={setShowModals}
                     onAgreeClick={() => onClickArchiveJobOffer()}
-                    onDeclineClick={() => closeModal('closeOfferModal')}
+                    onDeclineClick={() => closeModal('closeOfferModal', setShowModals)}
                     content={closeOfferContent(jobOffer.name)}
                     confirmButtonValue={"Tak"}
                     declineButtonValue={"Nie"}
                     prop={"closeOfferModal"}
-                /> : null
-            }
-            {showModals.openOfferModal ?
-                <ConfirmModal
-                    title={"Otwórz oferte"}
-                    setShowModals={setShowModals}
-                    onAgreeClick={() => onClickArchiveJobOffer()}
-                    onDeclineClick={() => closeModal('openOfferModal')}
-                    content={openOfferContent(jobOffer.name)}
-                    confirmButtonValue={"Tak"}
-                    declineButtonValue={"Nie"}
-                    prop={"openOfferModal"}
                 /> : null
             }
 
