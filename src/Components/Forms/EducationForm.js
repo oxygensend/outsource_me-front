@@ -185,7 +185,6 @@ export const EducationForm = ({options, education, request, afterSubmit, buttonN
                 name={"description"}
                 placeholder={"Dodaj opis"}
                 label={"Opis"}
-                className={"input-field-second"}
                 register={register}
                 required={false}
                 error={findErrors('description')}

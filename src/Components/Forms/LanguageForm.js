@@ -53,7 +53,6 @@ export const LanguageForm = ({language, request, afterSubmit, buttonName}) => {
                 name={"description"}
                 placeholder={"Dodaj opis"}
                 label={"Opis"}
-                className={"input-field-second"}
                 register={register}
                 required={false}
                 error={findErrors('description')}

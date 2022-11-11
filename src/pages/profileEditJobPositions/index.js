@@ -12,7 +12,7 @@ import formatTimePeriod from "../../helpers/formatTimePeriod";
 import {JobPositions} from "../../Components/profile/JobPosition";
 import {ListElement} from "../../Components/profile/ListElement";
 import tokenService from "../../services/tokenService";
-import {EditJobPositionModal} from "../../Components/ProfileModals/EditJobPositionModal";
+import {EditJobPositionModal} from "../../Components/Modals/EditJobPositionModal";
 
 export const ProfileEditJobPositions = () => {
 
@@ -76,7 +76,7 @@ export const ProfileEditJobPositions = () => {
 
         return (
             <>
-                <div className={"profile-container "}>
+                <div className={"profile-container  full-height"}>
                     <PersonalInfo personalData={personalData}/>
 
                     <EditModule

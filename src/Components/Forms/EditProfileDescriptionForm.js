@@ -48,7 +48,6 @@ export const EditProfileDescriptionForm = ({personalData}) => {
                 name={"description"}
                 placeholder={"Dodaj opis"}
                 label={descriptionLabel}
-                className={"input-field-second"}
                 register={register}
                 required={false}
                 error={findErrors('description')}

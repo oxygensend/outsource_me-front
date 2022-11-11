@@ -224,3 +224,15 @@
     bottom: 0px;
     left: 0px;
 }
+
+
+div.DraftEditor-root {
+    margin:auto;
+    height:300px;
+    overflow-y: scroll;
+    width: 100%;
+    padding: 12px;
+    background: rgba(128, 128, 128, 0.21);
+    border-radius: 10px;
+    resize: none;
+}

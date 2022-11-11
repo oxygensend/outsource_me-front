@@ -9,8 +9,8 @@ import {PersonalInfo} from "../../Components/ProfileEdit/PersonalInfo";
 import edit_icon from "../../assets/icons/edit-icon.png";
 import {deleteElementFromArray} from "../../services/utils";
 import tokenService from "../../services/tokenService";
-import {AddTechnologyModal} from "../../Components/ProfileModals/AddTechnologyModal";
-import {EditLanguageModal} from "../../Components/ProfileModals/EditLanguageModal";
+import {AddTechnologyModal} from "../../Components/Modals/AddTechnologyModal";
+import {EditLanguageModal} from "../../Components/Modals/EditLanguageModal";
 
 export const ProfileEditLanguages = () => {
 
@@ -74,7 +74,7 @@ export const ProfileEditLanguages = () => {
 
         return (
             <>
-                <div className={"profile-container "}>
+                <div className={"profile-container full-height "}>
                     <PersonalInfo personalData={personalData}/>
 
                     <EditModule

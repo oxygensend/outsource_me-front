@@ -1,10 +1,10 @@
 import axios from "axios";
-import {API_URL} from "../config";
+import {API_URL, SERVER_URL} from "../config";
 import AuthService from "./authService";
 import TokenService from "./tokenService";
 
 const instance = axios.create({
-    baseURL: API_URL,
+    baseURL: SERVER_URL,
     headers: {
         "Content-Type": "application/json",
     }

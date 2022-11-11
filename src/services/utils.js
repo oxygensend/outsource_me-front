@@ -94,3 +94,13 @@ export const getId = (id) => {
 
     return id === 'me'? tokenService.getUser().id : id;
 }
+
+export const closeModal = (modalName, setShowModals) => {
+    setTimeout(() => {
+        setShowModals((prevState) => ({...prevState, [modalName]: false}));
+    }, 200)
+}
+
+export const  onClickShowModal = (modalName, setShowModals) => {
+    setShowModals((prevState) => ({...prevState, [modalName]: true}));
+}

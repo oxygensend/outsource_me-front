@@ -1,18 +1,11 @@
-import {ModalWrapper} from "./ModalWrapper";
-import {Search} from "../Search/Search";
+import {Search} from "./Search";
 import {TechnologiesBox} from "../FiltersModal/TechnologiesBox";
-import {memo, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {getData, isInArray, searchArray} from "../../services/utils";
-import authAxios from "../../services/authAxios";
-import {Button} from "../Button/Button";
-import tokenService from "../../services/tokenService";
 
-export const AddTechnologyModal = memo(({setShowModals}) => {
+export const TechnologySearch = ({selectedTechnologies, setSelectedTechnologies}) => {
     const [search, setSearch] = useState('')
     const [results, setResults] = useState(null);
-    const [selectedTechnologies, setSelectedTechnologies] = useState([]);
-    const [errors, setErrors] = useState(false);
-    const {id} = tokenService.getUser();
 
 
     const [technologiesList, setTechnologiesList] = useState([]);
@@ -26,7 +19,6 @@ export const AddTechnologyModal = memo(({setShowModals}) => {
 
         return () => {
             getData('/api/technologies').then(technologies => {
-                console.log(technologies);
                 setTechnologiesList(technologies['hydra:member']);
             });
 
@@ -61,39 +53,9 @@ export const AddTechnologyModal = memo(({setShowModals}) => {
 
         setResults(results.slice(1, 6));
     }
-
-
-    const onSubmitHandler = async () => {
-
-        let countSuccessfullResponses = 0;
-        setErrors(null);
-
-        for (const technology of selectedTechnologies) {
-
-            await authAxios.post('/users/' + id + '/technologies', {iri: technology}).then((response) => {
-                countSuccessfullResponses++;
-            }).catch((e) => {
-                if (e.response.status === 400) {
-                    setErrors(true);
-                }
-            })
-        }
-
-        if (countSuccessfullResponses === selectedTechnologies.length) {
-            window.location.href = '/profil/me';
-        }
-
-    }
-
     return (
-        <ModalWrapper
-            title={"Dodaj technologie"}
-            onSubmitHandler={onSubmitHandler}
-            setShowModals={setShowModals}
-            prop={"technologies"}
-            errors={errors}
-            type={'edit'}
-        >
+
+        <div>
             <Search
                 value={search}
                 onChangeHandler={onChangeHandler}
@@ -107,13 +69,6 @@ export const AddTechnologyModal = memo(({setShowModals}) => {
                 filterProperty={'@id'}
 
             />
-
-            <Button
-                className={"edit-button"}
-                value={"Dodaj"}
-                onClick={() => onSubmitHandler()}
-            />
-
-        </ModalWrapper>
-    );
-});
+        </div>
+    )
+}

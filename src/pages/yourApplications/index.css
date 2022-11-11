@@ -1,0 +1,54 @@
+@media screen and (min-width: 320px) {
+    .applications-wrapper {
+        position: relative;
+        top: 70px;
+        left: 50%;
+        margin-top: 10px;
+
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, 0);
+
+        background: #FFFFFF;
+        min-height: 100vh;
+    }
+
+    .application-deactivated {
+        background: #E1DFDF;
+
+    }
+    .application-active {
+        background: #fafafa;
+    }
+
+    .application {
+        width: 100%;
+        border-radius: 12px;
+        padding: 10px 20px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+
+    }
+    .margin-l {
+        margin-left: 1rem;
+    }
+}
+
+@media screen and (min-width: 900px) {
+
+    .applications-wrapper {
+        top: 100px;
+        width: 900px;
+        border-radius: 10px;
+        position: relative;
+        margin-bottom: 150px;
+
+    }
+
+    .margin-l {
+        margin-left: 6rem;
+    }
+
+    .application {
+       width: 80%;
+        border-radius: 12px;
+    }
+}

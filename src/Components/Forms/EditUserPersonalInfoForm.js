@@ -31,7 +31,13 @@ export const EditUserPersonalInfoForm = ({personalData}) => {
 
     const onSubmit = async data => {
 
-        console.log(data);
+        if (data.githubUrl === undefined) {
+            data.githubUrl = null;
+        }
+        if (data.linkedinUrl === undefined) {
+            data.linkedinUrl = null;
+        }
+
         authAxios.patch(API_URL + '/users/' + personalData.id, data, {
             headers: {
                 "Content-Type": "application/merge-patch+json"

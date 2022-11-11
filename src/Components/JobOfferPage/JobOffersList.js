@@ -8,7 +8,6 @@ export const JobOffersList = ({filtersModal, jobOffers, getJobOffers, hasMore, d
 
     if (jobOffers) {
 
-        console.log(filtersModal);
         return (
             <div
                 className={'md:col-start-5 md:col-end-13 xl:col-start-5 xl:col-end-11 md:mr-12 xl:mr-0  md:flex ' + (!filtersModal ? 'hidden' : null)}>
@@ -20,6 +19,7 @@ export const JobOffersList = ({filtersModal, jobOffers, getJobOffers, hasMore, d
                     hasMore={hasMore}
                     loader={<img src={loader} alt={"loader"} className={"loader"} key={-1} width={40} height={40}/>}
                     useWindow={true}
+                    threshold={1500}
                 >
                     {principles ?
                         jobOffers.map((jobOffer, i) => {
@@ -51,7 +51,6 @@ export const JobOffersList = ({filtersModal, jobOffers, getJobOffers, hasMore, d
                         })
                     }
                 </InfiniteScroll>
-
             </div>
         );
     } else {

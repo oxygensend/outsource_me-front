@@ -33,13 +33,13 @@
 
 .font-time {
     font-style: italic;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 14px;
     line-height: 20px;
     align-items: center;
     text-align: center;
 
-    color: #000000;
+    color: #3ec786;
 }
 
 .fullname-font2 {
@@ -69,8 +69,10 @@
 
 .job-offer {
     margin-top: 20px;
-    background: #E1DFDF;
+    background: #fafafa;
     border-radius: 12px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+
 }
 
 
@@ -79,10 +81,8 @@
     .application-box {
         box-shadow: 0 -1px 6px #00000020;
 
-        margin-top: 3.5rem;
 
         padding: 10px;
-        top: 50px;
         bottom: 0;
         z-index: 2;
         position: sticky;

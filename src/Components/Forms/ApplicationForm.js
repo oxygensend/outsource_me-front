@@ -84,7 +84,7 @@ export const ApplicationForm = ({jobOffer}) => {
 
             <Textarea
                 name={"description"}
-                placeholder={"Dodaj dodatkowe informacje, np. dlaczego jesteś zainteresowany tym zleceniem"}
+                placeholder={"Dodaj dodatkowe informacje lub wiadomość do zleceniodawcy, np. dlaczego jesteś zainteresowany tym zleceniem"}
                 className={"application-description"}
                 register={register}
                 required={false}

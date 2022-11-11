@@ -3,20 +3,20 @@ import AuthService from "../../services/authService";
 import tokenService from "../../services/tokenService";
 
 
-export const NavLink = (props) => {
+export const NavLink = ({route, children}) => {
 
     return (
         <div className={"nav-div "}>
-            <a className={"nav-link "} href={props.route}>{props.children}</a>
+            <a className={"nav-link "} href={route}>{children}</a>
         </div>
     );
 }
 
-export const Logout = (props) => {
+export const NavText = ({onClick, children}) => {
 
     return (
         <div className={"nav-div "}>
-            <p className={"nav-link "} onClick={props.logout}>{props.children}</p>
+            <p className={"nav-link cursor-pointer "} onClick={onClick}>{children}</p>
         </div>
     );
 }
@@ -154,9 +154,9 @@ export const NavbarMenu = (props) => {
                 Oferty zleceń
             </NavLink>
             {props.login ? (
-                <NavLink rotue={'/powiadomienia'}>
+                <NavText >
                     Powiadomienia
-                </NavLink>
+                </NavText>
             ) : (
                 <NavLink route={'/logowanie'}>
                     Zaloguj się

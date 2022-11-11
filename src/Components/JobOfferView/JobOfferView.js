@@ -15,7 +15,7 @@ export const JobOfferView = ({jobOffer}) => {
 
 
     return (
-        <div className={"profile-container"}>
+        <div className={"profile-container full-height"}>
             <div className={"grid grid-cols-12 md:flex md:flex-row md:justify-between md:ml-8 md:mr-8"}>
 
                 <div className={"flex flex-row  gap-3 col-start-2 md:col-start-1 col-span-7 mt-10  "}>
@@ -26,7 +26,7 @@ export const JobOfferView = ({jobOffer}) => {
                                   width={54} height={54}
                                   className={"rounded-2xl border-2  "}
                                   alt={"avatar"}
-                                  style={{maxWidth:"54px"}}
+                                  style={{maxWidth: "54px"}}
                               />
                           }
                     />
@@ -55,7 +55,7 @@ export const JobOfferView = ({jobOffer}) => {
             <div className={"col-span-full mt-12 grid grid-cols-10 "}>
 
                 <div className={"col-start-2 col-end-10 md:col-end-"}>
-                    <p className={"font-module pb-2"}>{"Technologie"}</p>
+                    <p className={"font-module pb-2"}>{"Technologie:"}</p>
                     <div className={"flex flex-row gap-5  mt-2 flex-wrap "}>
                         {jobOffer.technologies.map((technology, i) => {
                             return (
@@ -77,7 +77,7 @@ export const JobOfferView = ({jobOffer}) => {
                 <div className={"col-start-2 gap-2 col-end-10 mt-5 mb-10"}>
                     <p className={"font-module mb-2"}>Opis</p>
                     <p>
-                        Est fuga eveniet possimus dolor et. Suscipit et doloremque enim. Non fugit reprehenderit ipsa similique.Est fuga eveniet possimus dolor et. Suscipit et doloremque enim. Non fugit reprehenderit ipsa similique.Est fuga eveniet possimus dolor et. Suscipit et doloremque enim. Non fugit reprehenderit ipsa similique.Est fuga eveniet possimus dolor et. Suscipit et doloremque enim. Non fugit reprehenderit ipsa similique.
+                        {jobOffer.description}
                     </p>
                 </div>
             </div>
