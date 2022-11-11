@@ -94,6 +94,10 @@
     .only-for-big-media {
         display: flex;
     }
+
+    .full-height {
+        height: unset;
+    }
 }
 
 
@@ -162,6 +166,10 @@
         max-width: 50rem;
         max-height: 750px;
 
+    }
+
+    .full-height {
+        height: 100vh;
     }
 }
 

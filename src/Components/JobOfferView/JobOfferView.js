@@ -15,7 +15,7 @@ export const JobOfferView = ({jobOffer}) => {
 
 
     return (
-        <div className={"profile-container"}>
+        <div className={"profile-container full-height"}>
             <div className={"grid grid-cols-12 md:flex md:flex-row md:justify-between md:ml-8 md:mr-8"}>
 
                 <div className={"flex flex-row  gap-3 col-start-2 md:col-start-1 col-span-7 mt-10  "}>

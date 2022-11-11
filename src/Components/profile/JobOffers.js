@@ -8,7 +8,7 @@ export const JobOffers = ({personalData}) => {
     const results = [];
 
     const onClickAdd = () => {
-        window.location.href = '/oferty_zlecen/dodaj_oferte';
+        window.location.href = '/nowe-zlecenie';
     }
 
     personalData.jobOffers.forEach(jobOffer => {
@@ -27,7 +27,7 @@ export const JobOffers = ({personalData}) => {
             breakLine={true}
             onClickAdd={onClickAdd}
             personalData={personalData}
-            editRedirectUrl={'/profil/' + personalData.id + '/oferty_zlecen'}
+            editRedirectUrl={'/profil/' + personalData.id + '/twoje-oferty'}
         >
 
             {showResults ? results : results.slice(0, 3)}

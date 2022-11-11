@@ -55,7 +55,7 @@ export const ProfileEditTechnologies = () => {
     if (personalData) {
 
         return (
-            <div className={"profile-container "}>
+            <div className={"profile-container full-height "}>
                 <PersonalInfo personalData={personalData}/>
 
                 <EditModule
