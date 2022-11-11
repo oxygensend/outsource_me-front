@@ -45,7 +45,7 @@ export const Profile = () => {
             openAdvertisement: false,
             closeAdvertisement: false,
             contactModal: false,
-            messageModal: true
+            messageModal: false
 
         }
     )

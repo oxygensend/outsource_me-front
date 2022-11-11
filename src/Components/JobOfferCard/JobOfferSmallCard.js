@@ -2,6 +2,7 @@ import bookmark from "../../assets/icons/Bookmark.png";
 import {ButtonLink} from "../Button/ButtonLink";
 import tokenService from "../../services/tokenService";
 import React from "react";
+import {applicationsStringPluralForm} from "../../services/utils";
 
 export const JobOfferSmallCard = ({jobOffer, id}) => {
     return (
@@ -22,7 +23,7 @@ export const JobOfferSmallCard = ({jobOffer, id}) => {
 
 
                 <div className={"application-font col-start-2 md:mt-2 col-span-6"}>
-                    <p>{jobOffer.numberOfApplications + ' aplikacje'}</p>
+                    <p>{jobOffer.numberOfApplications + applicationsStringPluralForm(jobOffer.numberOfApplications)}</p>
                 </div>
 
                 <ButtonLink
