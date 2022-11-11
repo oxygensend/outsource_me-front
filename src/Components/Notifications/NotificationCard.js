@@ -5,7 +5,7 @@ export const NotificationCard = ({setShowModals}) => {
 
     return (
         <div
-            className={"notification-card hover:bg-gray-100 cursor-default  delay-75 " + (1 ? 'notification-unseen' : 'notification-seen')}>
+            className={"notification-card  cursor-default  delay-75 " + (1 ? 'notification-unseen' : 'notification-seen')}>
 
             <div>
                 <p>Cll help us to build the future for Precima's embedded analytics platform. This is a highly technical
