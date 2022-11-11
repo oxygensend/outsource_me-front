@@ -3,6 +3,7 @@ import React from "react";
 import avatar from '../../assets/images/avatar.png';
 import {Technology} from "../Button/Technology";
 import {Link} from "react-router-dom";
+import {applicationsStringPluralForm} from "../../services/utils";
 
 export const JobOfferView = ({jobOffer}) => {
 
@@ -38,7 +39,7 @@ export const JobOfferView = ({jobOffer}) => {
                 </div>
 
                 <div className={"mobile-hide2 application-font col-start-2 md:mt-11 col-span-6"}>
-                    <p>{jobOffer.numberOfApplications + ' aplikacje'}</p>
+                    <p>{jobOffer.numberOfApplications + applicationsStringPluralForm(jobOffer.numberOfApplications)}</p>
                 </div>
 
             </div>
