@@ -20,6 +20,7 @@ import {YourJobOffers} from "./pages/yourJobOffers";
 import {JobOfferManagement} from "./pages/jobOfferManagement";
 import {NewJobOffer} from "./pages/newJobOffer";
 import {Application} from "./pages/application";
+import {Notifications} from "./pages/notifications";
 
 function App() {
     return (
@@ -29,21 +30,22 @@ function App() {
                 <Route exact path={'/'} exact element={<WelcomeBoard/>}/>
                 <Route path={"/rejestracja"} element={<Register/>}/>
                 <Route path={"/logowanie"} element={<Login/>}/>
-                <Route path={"/odzyskiwanie-hasla"}  element={<PasswordReset/>}/>
+                <Route path={"/odzyskiwanie-hasla"} element={<PasswordReset/>}/>
                 <Route path={"/odzyskiwanie-hasla-email"} element={<PasswordSendLink/>}/>
                 <Route path={"/profil/:id"} element={<Profile/>}/>
                 <Route path={"/profil/:id/edytuj/jezyki"} element={<ProfileEditLanguages/>}/>
-                <Route path={"/profil/:id/edytuj/technologie"}  element={<ProfileEditTechnologies/>}/>
-                <Route path={"/profil/:id/edytuj/miejsca_pracy"}  element={<ProfileEditJobPositions/>}/>
-                <Route path={"/profil/:id/edytuj/wyksztalcenie"}  element={<ProfileEditEducation/>}/>
+                <Route path={"/profil/:id/edytuj/technologie"} element={<ProfileEditTechnologies/>}/>
+                <Route path={"/profil/:id/edytuj/miejsca_pracy"} element={<ProfileEditJobPositions/>}/>
+                <Route path={"/profil/:id/edytuj/wyksztalcenie"} element={<ProfileEditEducation/>}/>
                 <Route path={"/oferty-zlecen"} element={<JobOffers/>}/>
-                <Route path={'/oferty-zlecen/:slug'} element={<JobOffer/>} />
-                <Route path={'/nowe-zlecenie'} element={<NewJobOffer/>} />
-                <Route path={'/twoje-oferty/:slug'} element={<JobOfferManagement/>} />
-                <Route path={'/twoje-oferty/:slug/aplikacja/:id'} element={<Application/>} />
-                <Route path={'/oferty-zlecen/:slug/aplikuj'} element={<ApplicateForJobOffer/>} />
+                <Route path={'/oferty-zlecen/:slug'} element={<JobOffer/>}/>
+                <Route path={'/nowe-zlecenie'} element={<NewJobOffer/>}/>
+                <Route path={'/twoje-oferty/:slug'} element={<JobOfferManagement/>}/>
+                <Route path={'/twoje-oferty/:slug/aplikacja/:id'} element={<Application/>}/>
+                <Route path={'/oferty-zlecen/:slug/aplikuj'} element={<ApplicateForJobOffer/>}/>
                 <Route path={"/profil/:id/twoje-aplikacje"} element={<YourApplications/>}/>
                 <Route path={"/profil/:id/twoje-oferty"} element={<YourJobOffers/>}/>
+                <Route path={"/powiadomienia"} element={<Notifications/>}/>
             </Routes>
             {/*<Footer/>*/}
         </Router>
