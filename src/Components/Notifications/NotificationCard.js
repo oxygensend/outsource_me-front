@@ -27,7 +27,6 @@ export const NotificationCard = ({setShowModals, setSelectedNotification, notifi
 
         authAxios.post('api/users/' + id + '/notifications/' + notification.id + '/mark_seen', {}).then(response => {
             notification.displayedAt = response.data.displayedAt;
-            console.log(notification);
             setTimeout( () => setReload(true), 500);
         })
     }
@@ -40,12 +39,12 @@ export const NotificationCard = ({setShowModals, setSelectedNotification, notifi
         >
 
             <div>
-                <p>{notification.content}</p>
+                <p className={"text-sm sm:text-base"}>{notification.content}</p>
             </div>
             <div className={"ml-2"}>
                 <p className={"date-font"}>{moment(notification.createdAt).fromNow()}</p>
                 <img src={close_icon}
-                     className={"mb-1 mt-1 cursor-pointer"}
+                     className={"mb-1 mt-1 cursor-pointer relative left-10"}
                      alt={"delete"}
                      onClick={() => onClickDelete()}
                 />
