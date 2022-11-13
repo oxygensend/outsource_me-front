@@ -124,13 +124,13 @@ export const PersonalInfo = ({personalData, setShowModals}) => {
                         {personalData.address ?
                             <p className={"gray-font2 italic only-for-big-media "}>{personalData.address.city}</p>
                             : null}
-                        {/*{checkIfMe ? null :*/}
+                        {checkIfMe ? null :
                         <div className={"flex flex-row gap-2 mt-1 only-for-big-media cursor-pointer"}>
                             <img src={mail} alt={"mail"} width={16} height={16}/>
                             <p onClick={() => onClickOpenContactModal()}
                                className={"red-font hover:underline "}>Skontaktuj się</p>
                         </div>
-                        {/*}*/}
+                        }
                     </div>
                 </div>
             </div>
