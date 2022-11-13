@@ -25,7 +25,6 @@ export const JobOfferPage = ({defaultFiltersSettings, searchParams, updatingUrlC
     const [technologiesList, setTechnologiesList] = useState();
     const [workTypesList, setWorkTypesList] = useState();
 
-
     /* Data readers */
 
     useEffect(() => {

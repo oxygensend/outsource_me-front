@@ -2,7 +2,7 @@ import {ModalWrapper} from "./ModalWrapper";
 import React, {useState} from "react";
 import {MessageForm} from "../Forms/MessageForm";
 
-export const ContactModal = ({setShowModals, userIri, application}) => {
+export const ContactModal = ({setShowModals, userIri}) => {
 
 
     return (
@@ -14,8 +14,8 @@ export const ContactModal = ({setShowModals, userIri, application}) => {
         >
 
             <MessageForm
-                application={application}
                 userIri={userIri}
+                setShowModals={setShowModals}
             />
 
         </ModalWrapper>

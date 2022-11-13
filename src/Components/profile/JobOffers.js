@@ -1,24 +1,36 @@
 import {ProfileModule} from "./ProfileModule";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {JobOfferSmallCard} from "../JobOfferCard/JobOfferSmallCard";
+import {getData} from "../../services/utils";
+import {JobOfferManagementCard} from "../JobOfferCard/JobOfferManagementCard";
 
 export const JobOffers = ({personalData}) => {
 
     const [showResults, setShowResults] = useState(false);
-    const results = [];
+    const [results, setResults] = useState([]);
 
     const onClickAdd = () => {
         window.location.href = '/nowe-zlecenie';
     }
+    useEffect(() => {
+        return () => {
+            getData('/api/users/' + personalData.id + '/job_offers?order=newest').then(data => {
+                    let temp = [];
+                    data['hydra:member'].forEach((jobOffer, i) => {
+                        temp.push(
+                            <JobOfferSmallCard
+                                jobOffer={jobOffer}
+                                id={i}
+                            />
+                        )
+                    });
 
-    personalData.jobOffers.forEach(jobOffer => {
-        results.push(
-            <JobOfferSmallCard
-                jobOffer={jobOffer}
-                id={personalData.id}
-            />
-        )
-    });
+                    setResults(temp);
+
+                }
+            );
+        };
+    }, []);
 
 
     return (
