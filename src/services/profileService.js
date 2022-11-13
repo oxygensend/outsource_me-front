@@ -1,22 +1,23 @@
 import authAxios from "./authAxios";
 import {API_URL} from "../config";
+import axios from "axios";
 
 class ProfileService {
 
      getPersonalData(id){
-        return  authAxios.get(API_URL + '/users/' + id);
+        return  axios.get(API_URL + '/users/' + id);
     }
      getTechnologies(id){
-        return authAxios.get(API_URL + '/users/' + id + '/technologies');
+        return axios.get(API_URL + '/users/' + id + '/technologies');
     }
     async getJobPositions(id){
-        return authAxios.get(API_URL + '/users/' + id + '/job_positions');
+        return axios.get(API_URL + '/users/' + id + '/job_positions');
     }
     async getEducations(id){
-        return authAxios.get(API_URL + '/users/' + id + '/educations');
+        return axios.get(API_URL + '/users/' + id + '/educations');
     }
     async getLanguages(id){
-        return authAxios.get(API_URL + '/users/' + id + '/languages');
+        return axios.get(API_URL + '/users/' + id + '/languages');
     }
 }
 

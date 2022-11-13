@@ -34,7 +34,7 @@ class TokenService {
     }
 
     checkIfMe(id) {
-        return this.getUser().id == id || id === 'me';
+        return(this.getLocalAccessToken() &&  this.getUser().id == id )|| id === 'me';
     }
 
 }

@@ -2,6 +2,7 @@ import axios from "axios";
 import {API_URL, SERVER_URL} from "../config";
 import authAxios from "./authAxios";
 import tokenService from "./tokenService";
+import {ROLE_DEVELOPER, ROLE_ME, ROLE_PRINCIPLE} from "../helpers/Roles";
 
 export const scrollToTop = () => {
     window.scrollTo({top: 0, behavior: 'smooth'})
@@ -94,7 +95,8 @@ export const deleteElementFromArray = (array, element) => {
 
 export const getId = (id) => {
 
-    return id === 'me' ? tokenService.getUser().id : id;
+    return id === 'me' && tokenService.getLocalAccessToken() ? tokenService.getUser().id : id;
+
 }
 
 export const closeModal = (modalName, setShowModals) => {
@@ -138,4 +140,29 @@ export const redirectsCountStringPluralForm = (nbOfRedirects) => {
     } else {
         return ' razy';
     }
+}
+
+export const checkUserRoles = (checkRoles, id) => {
+    for (const role of checkRoles) {
+
+        switch (role) {
+            case ROLE_ME:
+                if (!tokenService.checkIfMe(id)) {
+                    return false;
+                }
+                break;
+            case ROLE_DEVELOPER:
+                if (tokenService.getUser().accountType !== ROLE_DEVELOPER)
+                    return false;
+                break;
+            case ROLE_PRINCIPLE:
+                if (tokenService.getUser().accountType !== ROLE_PRINCIPLE)
+                    return false;
+                break;
+            default:
+                return false;
+        }
+    }
+
+    return true;
 }

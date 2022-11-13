@@ -6,7 +6,7 @@ import {applicationsStringPluralForm} from "../../services/utils";
 export const JobOfferManagementCard = ({jobOffer, id}) => {
 
     const moveToManagementPage = () => {
-        window.location.href = '/twoje-oferty/' + jobOffer.slug;
+        window.location.href = window.location.pathname + '/' + jobOffer.slug;
     }
 
     return (
