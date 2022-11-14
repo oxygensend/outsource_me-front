@@ -38,9 +38,9 @@ function App() {
             <Routes>
                 <Route path="*" element={<PageNotFound/>}/>
                 <Route exact path={'/'} exact element={<WelcomeBoard/>}/>
-                <Route exact path={'/wyszukaj'} exact element={<Search/>}/>
-                <Route exact path={'/wyszukaj/uzytkownicy'} exact element={<SearchUsers/>}/>
-                <Route exact path={'/wyszukaj/oferty-zlecen'} exact element={<SearchJobOffers/>}/>
+                <Route  path={'/wyszukaj'}  element={<Search/>}/>
+                <Route  path={'/wyszukaj/uzytkownicy'}  element={<SearchUsers/>}/>
+                <Route  path={'/wyszukaj/oferty-zlecen'}  element={<SearchJobOffers/>}/>
                 <Route element={<ProtectedRoute isAuthorizated={!user} redirect={'/'}/>}>
                     <Route path={"/rejestracja"} element={<Register/>}/>
                     <Route path={"/logowanie"} element={<Login/>}/>

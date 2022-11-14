@@ -1,4 +1,4 @@
-import {Link,  useSearchParams} from "react-router-dom";
+import {Link, useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getData} from "../../services/utils";
 import {JobOfferSmallCard} from "../../Components/JobOfferCard/JobOfferSmallCard";
@@ -11,22 +11,21 @@ export const Search = () => {
     const searchText = searchParams.get('value');
     const [resultUsers, setResultUsers] = useState([]);
     const [resultJobOffers, setResultJobOffers] = useState([]);
-
     useEffect(() => {
         return (() => {
-            Promise.all([
-                getData('/api/search/users?search=' + searchText),
-                getData('/api/search/job_offers?search=' + searchText)
-            ]).then(([responseUsers, responseJobOffers]) => {
-                setResultJobOffers(responseJobOffers['hydra:member']);
-                setResultUsers(responseUsers['hydra:member']);
-            });
+                Promise.all([
+                    getData('/api/search/users?search=' + searchText),
+                    getData('/api/search/job_offers?search=' + searchText)
+                ]).then(([responseUsers, responseJobOffers]) => {
+                    setResultJobOffers(responseJobOffers['hydra:member']);
+                    setResultUsers(responseUsers['hydra:member']);
+                });
         })
     }, []);
 
 
     return (
-        <SearchPageWrapper searchText={searchText} >
+        <SearchPageWrapper searchText={searchText}>
 
             {!resultJobOffers.length && !resultUsers.length ?
                 <p className="mb-8 text-center text-gray-500 mt-40 md:text-xl">Brak wyników</p> : null}
