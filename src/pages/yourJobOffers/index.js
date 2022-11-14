@@ -78,7 +78,7 @@ export const YourJobOffers = () => {
 
                 </div>
                 {activeJobOffers.length > 3 && !showActiveJobOffers ?
-                    <p className={"red-font mt-2 margin-l cursor-pointer"}
+                    <p className={"red-font mt-2 margin-l cursor-pointer hover:underline hover:text-red-400"}
                        onClick={() => setShowActiveJobOffers(true)}>
                         Pokaż wszystkie...
                     </p>
@@ -93,7 +93,7 @@ export const YourJobOffers = () => {
 
                 </div>
                 {archivedJobOffers.length > 3 && !showArchivedJobOffers ?
-                    <p className={"red-font mt-2 mb-2 margin-l cursor-pointer"}
+                    <p className={"red-font mt-2 mb-2 margin-l cursor-pointer hover:underline hover:text-red-400"}
                        onClick={() => setShowArchivedJobOffers(true)}>
                         Pokaż wszystkie...
                     </p>

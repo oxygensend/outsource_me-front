@@ -1,0 +1,25 @@
+@media screen and (min-width: 320px) {
+    .search-card {
+        width: 100%;
+    }
+    .hide-900 {
+        display: block;
+    }
+    .hide-320 {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .search-card {
+        width: 80%;
+    }
+
+    .hide-900 {
+       display: none;
+    }
+
+    .hide-320 {
+        display: block;
+    }
+}

@@ -67,7 +67,6 @@ export const Application = () => {
                 {showModals.messageModal === true ?
                     <ContactModal
                         userIri={application.applying_person['@id']}
-                        application={application}
                         setShowModals={setShowModals}
                     />
                     : null

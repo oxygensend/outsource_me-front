@@ -66,27 +66,19 @@ export const Watermark = (props) => {
     );
 }
 
-export const Searchbar = (props) => {
-
-    return (
-        <div className={"nav-search"}>
-
-            <input
-                className={"search"}
-                type="text"
-                placeholder="Szukaj..."
-
-            />
-        </div>
-    )
-}
 
 export const DashboardMenu = (props) => {
 
     return (<div className={"nav-dashboard"}>
-            <MenuItem>
+            <MenuItem route={"/wyszukaj"}>
                 Wyszukaj
             </MenuItem>
+
+            {props.login ?
+                <MenuItem route={'/powiadomienia'}>
+                    Powiadomienia
+                </MenuItem> : null}
+
             {props.login ? (
                 tokenService.getUser().accountType === 'Developer' ?
                     <MenuItem route={'/profil/me/twoje-aplikacje'}>
@@ -96,6 +88,7 @@ export const DashboardMenu = (props) => {
                     <MenuItem route={'/profil/me/twoje-oferty'}>
                         Twoje oferty
                     </MenuItem>
+
             ) : (
                 <MenuItem
                     route={'/o-nas'}
@@ -154,9 +147,9 @@ export const NavbarMenu = (props) => {
                 Oferty zleceń
             </NavLink>
             {props.login ? (
-                <NavText >
+                <NavLink route={"/powiadomienia"}>
                     Powiadomienia
-                </NavText>
+                </NavLink>
             ) : (
                 <NavLink route={'/logowanie'}>
                     Zaloguj się

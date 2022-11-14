@@ -4,6 +4,7 @@ import bookmark from '../../assets/icons/Bookmark.png'
 import {ButtonLink} from "../Button/ButtonLink";
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
+import {applicationsStringPluralForm} from "../../services/utils";
 
 export const JobOfferCard = ({jobOffer}) => {
 
@@ -18,7 +19,7 @@ export const JobOfferCard = ({jobOffer}) => {
                         to={'/profil/' + jobOffer.user.id}
                         children={<img
                             src={SERVER_URL + '/' + jobOffer.user.imagePath}
-                            style={{height:'54px', width: '54px', minWidth: '54px'}}
+                            style={{height: '54px', width: '54px', minWidth: '54px'}}
                             className={"rounded-2xl border-2  "}
                             alt={"avatar"}
                         />
@@ -56,7 +57,7 @@ export const JobOfferCard = ({jobOffer}) => {
             <div className={"grid grid-cols-12 mt-5 md:flex md:flex-row md:justify-between md:ml-8 md:mr-8 "}>
 
                 <div className={"application-font col-start-2 md:mt-2 col-span-6"}>
-                    <p>{jobOffer.numberOfApplications + ' aplikacje'}</p>
+                    <p>{jobOffer.numberOfApplications + applicationsStringPluralForm(jobOffer.numberOfApplications)}</p>
                 </div>
 
                 <ButtonLink

@@ -4,6 +4,7 @@ import bin from "../../assets/icons/no-entry-24.svg";
 import check from "../../assets/icons/circle-check-24.svg";
 import calendar from "../../assets/icons/calendar.png";
 import moment from "moment/moment";
+import {applicationsStringPluralForm, redirectsCountStringPluralForm} from "../../services/utils";
 
 export const JobOfferStatistics = ({jobOffer, setShowModals}) => {
 
@@ -20,9 +21,9 @@ export const JobOfferStatistics = ({jobOffer, setShowModals}) => {
 
             <p className={"joboffer-title-font pt-10"}>{jobOffer.name + (jobOffer.archived ? " [wygasła]" : null)}</p>
 
-            <p className={"application-font"}>{jobOffer.numberOfApplications + ' aplikacje'}</p>
+            <p className={"application-font"}>{jobOffer.numberOfApplications + applicationsStringPluralForm(jobOffer.numberOfApplications)}</p>
             <p className={"text-red-500 font-medium"}>
-                {'Oferta została wyświetlona ' + jobOffer.redirectCount + ' razy'}
+                {'Oferta została wyświetlona ' + jobOffer.redirectCount + redirectsCountStringPluralForm(jobOffer.redirectCount)}
             </p>
 
             <div className={"flex flex-row gap-2 mt-4 justify-center"}>

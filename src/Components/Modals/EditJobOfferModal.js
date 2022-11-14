@@ -32,7 +32,7 @@ export const EditJobOfferModal = ({setShowModals, jobOffer}) => {
 
     const afterSubmit = (data) => {
 
-        window.location.href = '/twoje-oferty/' + jobOffer.slug
+        window.location.href = '/profil/' + jobOffer.user.id + '/twoje-oferty/' + jobOffer.slug
     }
 
     return (

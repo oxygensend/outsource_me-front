@@ -42,63 +42,6 @@
     display: none;
 }
 
-@media screen and (min-width: 900px) {
-
-    .profile-container {
-        height: unset;
-        position: relative;
-        top: 100px;
-        width: 900px;
-        margin-bottom: 150px;
-        left: 50%;
-        margin-top: 10px;
-
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, 0);
-
-        background: #FFFFFF;
-        border-radius: 10px
-    }
-
-    .profile-fullname {
-        font-style: normal;
-        font-size: 30px;
-        line-height: 47px;
-
-    }
-
-
-    .gray-font {
-
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 18px;
-        color: rgba(0, 0, 0, 46%);
-
-    }
-
-    .gray-font2 {
-
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 16px;
-        color: rgba(0, 0, 0, 46%);
-
-    }
-
-
-    .only-for-small-media {
-        display: none
-    }
-
-    .only-for-big-media {
-        display: flex;
-    }
-
-    .full-height {
-        height: unset;
-    }
-}
 
 
 .gray-font3 {
@@ -169,7 +112,7 @@
     }
 
     .full-height {
-        height: 100vh;
+        min-height: 100vh;
     }
 }
 
@@ -181,6 +124,63 @@
         max-width: 40rem;
     }
 
+}
+@media screen and (min-width: 900px) {
+
+    .profile-container {
+        height: unset;
+        position: relative;
+        top: 100px;
+        width: 900px;
+        margin-bottom: 150px;
+        left: 50%;
+        margin-top: 10px;
+
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, 0);
+
+        background: #FFFFFF;
+        border-radius: 10px
+    }
+
+    .profile-fullname {
+        font-style: normal;
+        font-size: 30px;
+        line-height: 47px;
+
+    }
+
+
+    .gray-font {
+
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 18px;
+        color: rgba(0, 0, 0, 46%);
+
+    }
+
+    .gray-font2 {
+
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        color: rgba(0, 0, 0, 46%);
+
+    }
+
+
+    .only-for-small-media {
+        display: none
+    }
+
+    .only-for-big-media {
+        display: flex;
+    }
+
+    .full-height {
+        height: unset;
+    }
 }
 
 @media screen and (min-width: 1024px    ) {

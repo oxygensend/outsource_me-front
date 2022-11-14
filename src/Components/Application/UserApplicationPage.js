@@ -21,7 +21,7 @@ export const UserApplicationPage = ({activeApplications, deactiveApplications}) 
 
                 </div>
                 {activeApplications.length > 3 && !showActiveApplications ?
-                    <p className={"red-font mt-2 margin-l cursor-pointer"}
+                    <p className={"red-font mt-2 margin-l cursor-pointer hover:underline hover:text-red-400"}
                        onClick={() => setShowActiveApplications(true)}>
                         Pokaż wszystkie...
                     </p>
@@ -36,7 +36,7 @@ export const UserApplicationPage = ({activeApplications, deactiveApplications}) 
 
                 </div>
                 {deactiveApplications.length > 3 && !showDeactivedApplications ?
-                    <p className={"red-font mt-2 mb-2 margin-l cursor-pointer"}
+                    <p className={"red-font mt-2 mb-2 margin-l cursor-pointer hover:underline hover:text-red-400"}
                        onClick={() => setShowDeactivedApplications(true)}>
                         Pokaż wszystkie...
                     </p>

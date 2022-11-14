@@ -3,7 +3,13 @@ import filter_icon from "../../assets/icons/filter-24.png";
 import {FiltersModal} from "../FiltersModal/FiltersModal";
 import {JobOffersList} from "./JobOffersList";
 import './index.css';
-import {generateQueryParameters, getData, scrollToTop} from "../../services/utils";
+import {
+    developersStringPluralForm,
+    generateQueryParameters,
+    getData,
+    jobOffersStringPluralForm,
+    scrollToTop
+} from "../../services/utils";
 
 export const JobOfferPage = ({defaultFiltersSettings, searchParams, updatingUrlCompleted, setSearchParams}) => {
 
@@ -18,7 +24,6 @@ export const JobOfferPage = ({defaultFiltersSettings, searchParams, updatingUrlC
     const [addressesList, setAddressesList] = useState([]);
     const [technologiesList, setTechnologiesList] = useState();
     const [workTypesList, setWorkTypesList] = useState();
-
 
     /* Data readers */
 
@@ -139,7 +144,12 @@ export const JobOfferPage = ({defaultFiltersSettings, searchParams, updatingUrlC
 
             <div
                 className={"md:col-start-11 md:col-end-13 md:ml-10 xl:col-start-10 xl:col-end-12 xl:ml-5 xl:mb-2 mobile-hide2"}>
-                <p style={{color: "#7C8DB0"}}>{totalNumberOfItems ? totalNumberOfItems + (filtersSettings.principles ? ' zleceń' : ' programistów') : null}</p>
+                <p style={{color: "#7C8DB0"}}>
+                    {totalNumberOfItems ? totalNumberOfItems + (filtersSettings.principles ?
+                        jobOffersStringPluralForm(totalNumberOfItems) : developersStringPluralForm(totalNumberOfItems))
+                        : null
+                    }
+                </p>
             </div>
             <div className={"mobile-filters-panel " + (!filtersModal ? 'mobile-hide' : null)}>
                 <div className={"flex flex-row gap-2 cursor-pointer"} onClick={() => setFiltersModal(false)}>

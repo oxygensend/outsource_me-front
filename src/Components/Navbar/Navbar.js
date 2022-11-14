@@ -4,13 +4,14 @@ import './Navbar.css';
 import OutsourceMe from '../../assets/images/Outsource me (1).png'
 import OutsourceMe_mobile from '../../assets/images/logo-mobile.png'
 import menu from '../../assets/images/menu.png'
-import {DashboardMenu, MenuItem, NavbarMenu, NavLink, Searchbar, Watermark} from "./NavbarElements";
+import {DashboardMenu, MenuItem, NavbarMenu, NavLink, Watermark} from "./NavbarElements";
 import {ButtonLink} from "../Button/ButtonLink";
 import tokenService from "../../services/tokenService";
 import avatar from '../../assets/images/avatar.png';
 import {DropdownElement} from "./DropdownElement";
 import authService from "../../services/authService";
 import {SERVER_URL} from "../../config";
+import {Searchbar} from "../Search/Searchbar";
 
 export const Navbar = (props) => {
 
@@ -56,13 +57,15 @@ export const Navbar = (props) => {
             <Searchbar/>
 
             <div className={"nav-menu"}>
-                <div className={"nav-new-offer"}>
-                    <ButtonLink
-                        class={"outsourceme_button outsource_takeOff nav-new-offer"}
-                        value={"Nowa oferta"}
-                        route={"/nowe-zlecenie"}
-                    />
-                </div>
+                {isAuthenticated && tokenService.getUser().accountType === 'Principle' ?
+                    <div className={"nav-new-offer"}>
+                        <ButtonLink
+                            class={"outsourceme_button outsource_takeOff nav-new-offer"}
+                            value={"Nowa oferta"}
+                            route={"/nowe-zlecenie"}
+                        />
+                    </div> : null
+                }
                 <NavbarMenu login={isAuthenticated}/>
                 {!isAuthenticated ?
                     <ButtonLink value={"Dołącz do nas"} route={"/rejestracja"}/>

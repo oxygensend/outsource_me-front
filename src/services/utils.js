@@ -2,6 +2,7 @@ import axios from "axios";
 import {API_URL, SERVER_URL} from "../config";
 import authAxios from "./authAxios";
 import tokenService from "./tokenService";
+import {ROLE_DEVELOPER, ROLE_ME, ROLE_PRINCIPLE} from "../helpers/Roles";
 
 export const scrollToTop = () => {
     window.scrollTo({top: 0, behavior: 'smooth'})
@@ -76,12 +77,14 @@ export const getDataAuthentication = (endpoint) =>
 
 export const postData = async (endpoint, data) => {
     authAxios.post(API_URL + endpoint, data)
-        .then(({data}) => console.log(data) )
-        .catch((error) => {throw error});
+        .then(({data}) => console.log(data))
+        .catch((error) => {
+            throw error
+        });
 
 }
 
-export const deleteElementFromArray =  (array, element) => {
+export const deleteElementFromArray = (array, element) => {
 
     let newArray = [...array];
     let index = newArray.indexOf(element)
@@ -92,7 +95,8 @@ export const deleteElementFromArray =  (array, element) => {
 
 export const getId = (id) => {
 
-    return id === 'me'? tokenService.getUser().id : id;
+    return id === 'me' && tokenService.getLocalAccessToken() ? tokenService.getUser().id : id;
+
 }
 
 export const closeModal = (modalName, setShowModals) => {
@@ -101,6 +105,64 @@ export const closeModal = (modalName, setShowModals) => {
     }, 200)
 }
 
-export const  onClickShowModal = (modalName, setShowModals) => {
+export const onClickShowModal = (modalName, setShowModals) => {
     setShowModals((prevState) => ({...prevState, [modalName]: true}));
+}
+
+export const jobOffersStringPluralForm = (nbOfOffers) => {
+
+    if (nbOfOffers === 1) {
+        return ' zlecenie';
+    } else if (nbOfOffers % 10 >= 2 && nbOfOffers % 10 <= 4) {
+        return ' zlecenia';
+    } else {
+        return ' zleceń';
+    }
+}
+export const developersStringPluralForm = (nbOfDevelopers) => {
+    return nbOfDevelopers === 1 ? ' programista' : ' programistów';
+}
+
+export const applicationsStringPluralForm = (nbApplications) => {
+
+    if (nbApplications === 1) {
+        return ' aplikacja';
+    } else if (nbApplications % 10 >= 2 && nbApplications % 10 <= 4) {
+        return ' aplikacje';
+    } else {
+        return ' aplikacji';
+    }
+}
+
+export const redirectsCountStringPluralForm = (nbOfRedirects) => {
+    if (nbOfRedirects === 1) {
+        return ' raz';
+    } else {
+        return ' razy';
+    }
+}
+
+export const checkUserRoles = (checkRoles, id) => {
+    for (const role of checkRoles) {
+
+        switch (role) {
+            case ROLE_ME:
+                if (!tokenService.checkIfMe(id)) {
+                    return false;
+                }
+                break;
+            case ROLE_DEVELOPER:
+                if (tokenService.getUser().accountType !== ROLE_DEVELOPER)
+                    return false;
+                break;
+            case ROLE_PRINCIPLE:
+                if (tokenService.getUser().accountType !== ROLE_PRINCIPLE)
+                    return false;
+                break;
+            default:
+                return false;
+        }
+    }
+
+    return true;
 }
