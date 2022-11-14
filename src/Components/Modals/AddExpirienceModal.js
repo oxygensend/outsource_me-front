@@ -1,8 +1,5 @@
 import {ModalWrapper} from "./ModalWrapper";
-import {Search} from "../Search/Search";
-import {getData, getDataAuthentication, searchArray} from "../../services/utils";
 import React, {useEffect, useState} from "react";
-import close_icon from "../../assets/icons/close-icon.svg";
 import {AddEducationForm, EducationForm} from "../Forms/EducationForm";
 import authAxios from "../../services/authAxios";
 import {API_URL} from "../../config";
@@ -13,6 +10,10 @@ export const AddExpirienceModal = ({setShowModals}) => {
         return authAxios.post(API_URL + '/education', data);
     }
 
+    const afterSubmit = () => {
+        window.location.href = '/profil/me'
+        window.flash('Uczelnia została dodana', 'success')
+    }
 
     return (
         <ModalWrapper
@@ -25,7 +26,7 @@ export const AddExpirienceModal = ({setShowModals}) => {
 
             <EducationForm
                 request={request}
-                afterSubmit={() => window.location.href = '/profil/me'}
+                afterSubmit={afterSubmit}
             />
 
         </ModalWrapper>

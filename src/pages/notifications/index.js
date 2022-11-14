@@ -21,6 +21,7 @@ export const Notifications = () => {
             newNotifications.splice(index, 1);
             setNotifications(newNotifications)
             closeModal('deleteNotificationModal', setShowModals);
+            window.flash("Powiadomienie zostało usuniete", 'error')
         }).catch(e => {
             console.log(e);
         })

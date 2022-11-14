@@ -28,13 +28,16 @@ import {ROLE_DEVELOPER, ROLE_ME, ROLE_PRINCIPLE} from "./helpers/Roles";
 import {Search} from "./pages/search";
 import {SearchJobOffers} from "./pages/searchJobOffers";
 import {SearchUsers} from "./pages/searchUsers";
+import {Flash} from "./Components/Flash/Flash";
+import Bus from "./services/Bus";
 
 function App() {
-
+    window.flash = (message, type="success") => Bus.emit('flash', ({message, type}));
     const user = tokenService.getLocalAccessToken();
     return (
         <Router>
             <Navbar/>
+            <Flash />
             <Routes>
                 <Route path="*" element={<PageNotFound/>}/>
                 <Route exact path={'/'} exact element={<WelcomeBoard/>}/>
@@ -64,12 +67,12 @@ function App() {
                     <Route path={'/profil/:id/twoje-oferty/:slug/aplikacja/:id'} element={<Application/>}/>
                 </Route>
                 <Route path={'/nowe-zlecenie'} element={
-                    <ProtectedRoute isAuthorizated={user} checkRoles={ROLE_PRINCIPLE}>
+                    <ProtectedRoute isAuthorizated={user} checkRoles={[ROLE_PRINCIPLE]}>
                         <NewJobOffer/>
                     </ProtectedRoute>
                 }/>
                 <Route path={'/oferty-zlecen/:slug/aplikuj'} element={
-                    <ProtectedRoute isAuthorizated={user} checkRoles={ROLE_DEVELOPER}>
+                    <ProtectedRoute isAuthorizated={user} checkRoles={[ROLE_DEVELOPER]}>
                         <ApplicateForJobOffer/>
                     </ProtectedRoute>
                 }/>

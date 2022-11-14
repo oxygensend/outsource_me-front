@@ -24,6 +24,10 @@ export const AddJobPositionModal = ({setShowModals}) => {
     const request = async data => {
         return  authAxios.post(API_URL + '/job_positions', data);
     }
+    const afterSubmit = () => {
+        window.location.href = '/profil/me'
+        window.flash('Miejsce pracy zostało pomyślnie dodane', 'success')
+    }
 
     return (
         <ModalWrapper
@@ -34,7 +38,7 @@ export const AddJobPositionModal = ({setShowModals}) => {
         >
 
             <JobPositionForm
-                afterSubmit={() => window.location.href = '/profil/me'}
+                afterSubmit={afterSubmit}
                 options={formOfEmployments}
                 request={request}
 

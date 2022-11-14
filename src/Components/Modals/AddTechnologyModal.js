@@ -29,6 +29,8 @@ export const AddTechnologyModal = memo(({setShowModals}) => {
 
         if (countSuccessfullResponses === selectedTechnologies.length) {
             window.location.href = '/profil/me';
+            window.flash('Technologie zostały dodane', 'success')
+
         }
 
     }

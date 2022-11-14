@@ -90,7 +90,7 @@ export const JobPositionForm = ({options, jobPosition, request, afterSubmit, but
             return;
         }
 
-        authAxios.post(API_URL + '/job_positions', data).then(data => {
+        request(data).then((data) => {
             afterSubmit(data);
         })
             .catch((e) => {

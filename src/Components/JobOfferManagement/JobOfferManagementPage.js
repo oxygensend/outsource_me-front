@@ -14,6 +14,10 @@ export const JobOfferManagementPage = ({jobOffer, setShowModals}) => {
     const [showAcceptedApplications, setShowAcceptedApplications] = useState(false);
     const [showReApplications, setShowRejectedApplications] = useState(false);
 
+    const statusMessage = {
+        '1': 'zaakceptowana',
+        '-1': 'odrzucona'
+    }
 
     useEffect(() => {
         if (jobOffer) {
@@ -37,6 +41,7 @@ export const JobOfferManagementPage = ({jobOffer, setShowModals}) => {
             let index = newApplications.indexOf(application)
             newApplications[index].status = newStatus;
             splitApplications(applications);
+            window.flash("Status aplikacji został zmieniony na " + statusMessage[status] , status === 1 ? 'success' : 'error')
         }).catch((e) => {
             console.log(e);
         });

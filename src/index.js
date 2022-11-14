@@ -9,6 +9,7 @@ import {
     Route,
 } from "react-router-dom";
 import {Footer} from "./Components/Footer/Footer";
+import moment from "moment/moment";
 
 const router = createBrowserRouter([
     {
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
     },
 ]);
 
+moment.locale('pl');
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

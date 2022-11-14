@@ -21,14 +21,14 @@ export const YourJobOffers = () => {
                         if (!jobOffer.archived) {
                             active.push(
                                 <JobOfferManagementCard
-                                    id={i}
+                                    key={i}
                                     jobOffer={jobOffer}
                                 />
                             )
                         } else {
                             archived.push(
                                 <JobOfferManagementCard
-                                    id={i}
+                                    key={i}
                                     jobOffer={jobOffer}
                                 />
                             )

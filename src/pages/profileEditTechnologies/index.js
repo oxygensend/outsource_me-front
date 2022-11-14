@@ -47,6 +47,8 @@ export const ProfileEditTechnologies = () => {
             let index = newTechnologies.indexOf(technology)
             newTechnologies.splice(index, 1);
             setTechnologies(newTechnologies)
+            window.flash("Technologia została usunieta", 'error')
+
         }).catch((e) => {
             console.log(e);
         });

@@ -80,7 +80,10 @@ export const SearchUsers = () => {
                             <div className={"flex flex-col items-center"}>
                                 {results.map((user, i) => {
                                     return (
-                                        <UserSmallCard user={user} id={i} className={"search-card "}/>
+                                        <UserSmallCard
+                                            user={user}
+                                            key={i}
+                                            className={"search-card "}/>
                                     )
                                 })}
 

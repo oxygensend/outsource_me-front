@@ -26,6 +26,8 @@ export const EditProfileDescriptionForm = ({personalData}) => {
             }
         }).then(data => {
             window.location.href = '/profil/me';
+            window.flash('Opis został zmieniony', 'success')
+
         })
             .catch((e) => {
 

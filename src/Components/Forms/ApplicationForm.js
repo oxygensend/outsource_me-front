@@ -5,6 +5,7 @@ import {useForm} from "react-hook-form";
 import {Dropbox} from "../Input/Dropbox";
 import authAxios from "../../services/authAxios";
 import {API_URL} from "../../config";
+import {useNavigate} from "react-router-dom";
 
 export const ApplicationForm = ({jobOffer}) => {
 
@@ -13,6 +14,7 @@ export const ApplicationForm = ({jobOffer}) => {
     const [dragActive, setDragActive] = useState(false);
     const [attachments, setAttachments] = useState([]);
     const inputRef = useRef(null);
+    const navigate = useNavigate();
 
     const onSubmit = async data => {
 
@@ -26,11 +28,16 @@ export const ApplicationForm = ({jobOffer}) => {
             }
         }).then(data => {
             console.log(data);
-            // info modal
-        })
-            .catch((e) => {
+            window.flash('Aplikacja została przesłana', 'success')
+            setTimeout(() => {
+                navigate(-1);
+            },2000)
 
-                console.log(e);
+            // info modal
+        }).catch((e) => {
+
+                    window.flash('Aplikowałeś już na to stanowisko', 'error')
+
                 if (e.response.status === 422) {
                     setErrors(e.response.data.violations);
                 }

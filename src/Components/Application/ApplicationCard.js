@@ -6,11 +6,11 @@ import close_icon from "../../assets/icons/trashcan.png";
 import show from "../../assets/icons/search.png";
 import React from "react";
 
-export const ApplicationCard = ({application, id, onClickDelete, onClickPreview}) => {
+export const ApplicationCard = ({application,  onClickDelete, onClickPreview}) => {
 
 
     return (
-        <div key={id}
+        <div
              className={'application flex justify-between ' + (application.status ? 'application-active' : 'application-deactivated')}>
             <div>
                 <div className="flex items-center">

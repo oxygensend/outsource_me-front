@@ -33,6 +33,8 @@ export const EditJobOfferModal = ({setShowModals, jobOffer}) => {
     const afterSubmit = (data) => {
 
         window.location.href = '/profil/' + jobOffer.user.id + '/twoje-oferty/' + jobOffer.slug
+        window.flash('Pomyślnie edytowano oferte pracy', 'success')
+
     }
 
     return (

@@ -44,6 +44,8 @@ export const EditUserPersonalInfoForm = ({personalData}) => {
             }
         }).then(data => {
             window.location.href = '/profil/me';
+            window.flash('Informacje zostały zaktualizowane', 'success')
+
         })
             .catch((e) => {
 

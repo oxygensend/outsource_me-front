@@ -2,7 +2,7 @@ import {SERVER_URL} from "../../config";
 import React from "react";
 import {ButtonLink} from "../Button/ButtonLink";
 
-export const UserSmallCard = ({user, id, className}) => {
+export const UserSmallCard = ({user,  className}) => {
 
     return (
         <div className={"job-offer " + className ?? null}>

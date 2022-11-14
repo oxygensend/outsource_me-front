@@ -63,6 +63,8 @@ export const ProfileEditJobPositions = () => {
     const onClickDelete = (jobPosition) => {
         authAxios.delete(API_URL + '/users/' + id + '/job_positions/' + jobPosition.id).then((data) => {
             setJobPositions(deleteElementFromArray(jobPositions, jobPosition))
+            window.flash("Miejsce pracy zostało usunięte", 'error')
+
         }).catch((e) => {
             console.log(e);
         });

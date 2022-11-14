@@ -9,7 +9,10 @@ export  const AddLanguagesModal = ({universitiesList, setShowModals}) => {
     const request = async data => {
         return  authAxios.post(API_URL + '/languages', data);
     }
-
+    const afterSubmit = () => {
+        window.location.href = '/profil/me'
+        window.flash('Nowy język został pomyślnie dodany', 'success')
+    }
     return (
         <ModalWrapper
             title={"Dodaj język"}
@@ -18,7 +21,7 @@ export  const AddLanguagesModal = ({universitiesList, setShowModals}) => {
             type={'edit'}
         >
             <LanguageForm
-                afterSubmit={ () => { window.location.href = '/profil/me' }}
+                afterSubmit={ afterSubmit}
                 request={request}
             />
         </ModalWrapper>

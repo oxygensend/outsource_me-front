@@ -12,7 +12,7 @@ import {ApplicationPreviewModal} from "../../Components/Modals/ApplicationPrevie
 import authAxios from "../../services/authAxios";
 import app from "../../App";
 
-moment.locale('pl');
+
 
 export const YourApplications = () => {
     const [activeApplications, setActiveApplications] = useState([])
@@ -36,7 +36,7 @@ export const YourApplications = () => {
                         if (application.status === 1)
                             active.push(
                                 <ApplicationCard
-                                    id={i}
+                                    key={i}
                                     application={application}
                                     onClickDelete={() => onClickDelete(application)}
                                     onClickPreview={() => onClickPreview(application)}
@@ -45,7 +45,7 @@ export const YourApplications = () => {
                         else {
                             deactive.push(
                                 <ApplicationCard
-                                    id={i}
+                                    key={i}
                                     application={application}
                                     onClickDelete={() => onClickDelete(application)}
                                     onClickPreview={() => onClickPreview(application)}
@@ -63,6 +63,8 @@ export const YourApplications = () => {
     const onClickDelete = (application) => {
         setShowModals((prevState) => ({...prevState, ['deleteApplication']: true}));
         setSelectedApplication(application)
+        window.flash(parse("Aplikacja na stanowisko <b>" + application.jobOffer.name + "</b> zostala usunięta"), 'error')
+
 
     }
 

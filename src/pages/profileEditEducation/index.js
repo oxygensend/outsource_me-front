@@ -62,6 +62,8 @@ export const ProfileEditEducation = () => {
     const onClickDelete = (uni) => {
         authAxios.delete(API_URL + '/users/' + id + '/educations/' + uni.id).then((data) => {
             setEducation(deleteElementFromArray(education, uni))
+            window.flash("Uczelnia została usunięta", 'error')
+
         }).catch((e) => {
             console.log(e);
         });
