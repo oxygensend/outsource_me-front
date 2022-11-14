@@ -25,6 +25,9 @@ import {PageNotFound} from "./pages/pageNotFound";
 import {ProtectedRoute} from "./Components/ProtecedRoute/ProtectedRoute";
 import tokenService from "./services/tokenService";
 import {ROLE_DEVELOPER, ROLE_ME, ROLE_PRINCIPLE} from "./helpers/Roles";
+import {Search} from "./pages/search";
+import {SearchJobOffers} from "./pages/searchJobOffers";
+import {SearchUsers} from "./pages/searchUsers";
 
 function App() {
 
@@ -35,6 +38,9 @@ function App() {
             <Routes>
                 <Route path="*" element={<PageNotFound/>}/>
                 <Route exact path={'/'} exact element={<WelcomeBoard/>}/>
+                <Route exact path={'/wyszukaj'} exact element={<Search/>}/>
+                <Route exact path={'/wyszukaj/uzytkownicy'} exact element={<SearchUsers/>}/>
+                <Route exact path={'/wyszukaj/oferty-zlecen'} exact element={<SearchJobOffers/>}/>
                 <Route element={<ProtectedRoute isAuthorizated={!user} redirect={'/'}/>}>
                     <Route path={"/rejestracja"} element={<Register/>}/>
                     <Route path={"/logowanie"} element={<Login/>}/>
@@ -52,7 +58,7 @@ function App() {
                 <Route path={"/oferty-zlecen"} element={<JobOffers/>}/>
                 <Route path={'/oferty-zlecen/:slug'} element={<JobOffer/>}/>
                 <Route
-                    element={<ProtectedRoute isAuthorizated={!user} checkRoles={[ROLE_ME, ROLE_PRINCIPLE]}/>}>
+                    element={<ProtectedRoute isAuthorizated={user} checkRoles={[ROLE_ME, ROLE_PRINCIPLE]}/>}>
                     <Route path={"/profil/:id/twoje-oferty"} element={<YourJobOffers/>}/>
                     <Route path={'/profil/:id/twoje-oferty/:slug'} element={<JobOfferManagement/>}/>
                     <Route path={'/profil/:id/twoje-oferty/:slug/aplikacja/:id'} element={<Application/>}/>

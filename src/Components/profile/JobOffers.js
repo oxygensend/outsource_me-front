@@ -44,7 +44,7 @@ export const JobOffers = ({personalData}) => {
 
             {showResults ? results : results.slice(0, 3)}
             {results.length > 3 && !showResults ?
-                <p className={"red-font mt-5 cursor-pointer"}
+                <p className={"red-font mt-5 cursor-pointer hover:underline hover:text-red-400"}
                    onClick={() => setShowResults(true)}>
                     Pokaż więcej...
                 </p>

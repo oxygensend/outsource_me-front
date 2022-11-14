@@ -66,25 +66,11 @@ export const Watermark = (props) => {
     );
 }
 
-export const Searchbar = (props) => {
-
-    return (
-        <div className={"nav-search"}>
-
-            <input
-                className={"search"}
-                type="text"
-                placeholder="Szukaj..."
-
-            />
-        </div>
-    )
-}
 
 export const DashboardMenu = (props) => {
 
     return (<div className={"nav-dashboard"}>
-            <MenuItem>
+            <MenuItem route={"/wyszukaj"}>
                 Wyszukaj
             </MenuItem>
 
