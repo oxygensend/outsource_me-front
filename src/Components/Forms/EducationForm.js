@@ -28,7 +28,6 @@ export const EducationForm = ({options, education, request, afterSubmit, buttonN
         };
     }, []);
 
-    console.log(education);
 
     useEffect(() => {
         return () => {

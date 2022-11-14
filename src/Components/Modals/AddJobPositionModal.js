@@ -36,7 +36,7 @@ export const AddJobPositionModal = ({setShowModals}) => {
             <JobPositionForm
                 afterSubmit={() => window.location.href = '/profil/me'}
                 options={formOfEmployments}
-                request={request()}
+                request={request}
 
             />
 

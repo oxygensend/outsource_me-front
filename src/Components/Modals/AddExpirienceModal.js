@@ -24,7 +24,7 @@ export const AddExpirienceModal = ({setShowModals}) => {
 
 
             <EducationForm
-                request={request()}
+                request={request}
                 afterSubmit={() => window.location.href = '/profil/me'}
             />
 
