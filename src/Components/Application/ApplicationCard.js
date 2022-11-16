@@ -42,7 +42,7 @@ export const ApplicationCard = ({application,  onClickDelete, onClickPreview}) =
             </div>
 
             <ButtonLink
-                class={"outsourceme_button outsource_takeOff  mt-5  md:mb-4 md:mt-0 mobile-hide2 "}
+                class={"outsourceme_button outsource_takeOff  mt-5  md:mb-4  mobile-hide2 "}
                 value={"Przejdź do oferty"}
                 route={"/oferty-zlecen/" + application.jobOffer.slug}
             />

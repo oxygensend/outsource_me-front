@@ -58,7 +58,10 @@ export const PersonalInfo = ({personalData, setShowModals}) => {
                      className={"rounded-2xl border-2  "} alt={"avatar"}/>
 
                 <p className={"profile-fullname mt-2"}>{personalData.fullName}</p>
-                <p className={" gray-font text-red-300"}>{accountType(personalData.accountType)}</p>
+                <p className={" gray-font text-red-300"}>
+                    {accountType(personalData.accountType) +
+                        (personalData.accountType === 'Developer' && personalData.experience ? "("+personalData.experience+")" : '')}
+                </p>
                 {personalData.address ?
                     <p className={"only-for-small-media gray-font2 italic"}>{personalData.address.city}</p>
                     : null}
