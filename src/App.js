@@ -30,6 +30,7 @@ import {SearchJobOffers} from "./pages/searchJobOffers";
 import {SearchUsers} from "./pages/searchUsers";
 import {Flash} from "./Components/Flash/Flash";
 import Bus from "./services/Bus";
+import {AboutUs} from "./pages/aboutUs";
 
 function App() {
     window.flash = (message, type="success") => Bus.emit('flash', ({message, type}));
@@ -42,6 +43,7 @@ function App() {
                 <Route path="*" element={<PageNotFound/>}/>
                 <Route exact path={'/'} exact element={<WelcomeBoard/>}/>
                 <Route  path={'/wyszukaj'}  element={<Search/>}/>
+                <Route path={"/o-nas"} element={<AboutUs/>} />
                 <Route  path={'/wyszukaj/uzytkownicy'}  element={<SearchUsers/>}/>
                 <Route  path={'/wyszukaj/oferty-zlecen'}  element={<SearchJobOffers/>}/>
                 <Route element={<ProtectedRoute isAuthorizated={!user} redirect={'/'}/>}>
@@ -64,7 +66,7 @@ function App() {
                     element={<ProtectedRoute isAuthorizated={user} checkRoles={[ROLE_ME, ROLE_PRINCIPLE]}/>}>
                     <Route path={"/profil/:id/twoje-oferty"} element={<YourJobOffers/>}/>
                     <Route path={'/profil/:id/twoje-oferty/:slug'} element={<JobOfferManagement/>}/>
-                    <Route path={'/profil/:id/twoje-oferty/:slug/aplikacja/:id'} element={<Application/>}/>
+                    <Route path={'/profil/:id/twoje-oferty/:slug/aplikacja/:applicationId'} element={<Application/>}/>
                 </Route>
                 <Route path={'/nowe-zlecenie'} element={
                     <ProtectedRoute isAuthorizated={user} checkRoles={[ROLE_PRINCIPLE]}>
@@ -82,7 +84,7 @@ function App() {
                     </ProtectedRoute>
                 }/>
             </Routes>
-            {/*<Footer/>*/}
+            <Footer/>
         </Router>
     );
 }

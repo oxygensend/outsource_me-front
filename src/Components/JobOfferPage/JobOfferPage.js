@@ -193,6 +193,7 @@ export const JobOfferPage = ({defaultFiltersSettings, searchParams, updatingUrlC
                 hasMore={hasMore}
                 developers={filtersSettings.developers}
                 principles={filtersSettings.principles}
+                order={filtersSettings.order}
             />
         </div>
     );

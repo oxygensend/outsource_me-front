@@ -25,7 +25,7 @@ export const JobOfferManagement = () => {
     }, []);
 
     const onClickArchiveJobOffer = () => {
-        authAxios.delete('/api/job_offers/' + jobOffer.id).then(response => {
+        authAxios.delete(jobOffer['@id']).then(response => {
             setShowModals((prevState) => ({...prevState, ['closeOfferModal']: false}));
             jobOffer.archived = 1;
             window.flash("Oferta została zarchiwizowana", "error");

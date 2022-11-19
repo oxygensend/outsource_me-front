@@ -114,6 +114,11 @@
     .full-height {
         min-height: 100vh;
     }
+
+    .profile-container {
+        border-radius: 0;
+
+    }
 }
 
 

@@ -4,11 +4,13 @@ import React, {useEffect, useState} from "react";
 import authAxios from "../../services/authAxios";
 import {API_URL} from "../../config";
 import {JobOfferForm} from "../Forms/JobOfferForm";
+import {useParams} from "react-router-dom";
 
 export const EditJobOfferModal = ({setShowModals, jobOffer}) => {
 
     const [formOfEmployments, setFormOfEmployments] = useState([]);
     const [workTypes, setWorkTypes] = useState([]);
+    const {slug} = useParams();
 
     useEffect(() => {
         return () => {
@@ -23,7 +25,7 @@ export const EditJobOfferModal = ({setShowModals, jobOffer}) => {
     }, []);
 
     const request = async data => {
-        return authAxios.patch(API_URL + '/job_offers/' + jobOffer.id, data, {
+        return authAxios.patch(API_URL + '/job_offers/' + slug, data, {
             headers: {
                 "Content-Type": "application/merge-patch+json"
             }

@@ -16,11 +16,11 @@ export const Application = () => {
         messageModal: false,
         applicationMessageModal: false,
     })
-    const {id} = useParams();
+    const {applicationId} = useParams();
 
     useEffect(() => {
         return () => {
-            getData('/api/applications/' + id).then(data => setApplication(data));
+            getData('/api/applications/' + applicationId).then(data => setApplication(data));
         };
     }, []);
 

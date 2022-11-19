@@ -2,7 +2,8 @@ import './Footer.css'
 import facebook from '../../assets/icons/facebook.png';
 import twitter from '../../assets/icons/twitter.png';
 import linkedin from '../../assets/icons/linkedin.png';
-import logo from '../../assets/images/logo_footer.png';
+import logo from '../../assets/images/Outsource me (1).png';
+import tokenService from "../../services/tokenService";
 
 export const Footer = () => {
 
@@ -25,18 +26,25 @@ export const Footer = () => {
                     </a>
                 </div>
                 <div className={"footer-links "}>
-                    <a className={"footer-text"} href={"/spolecznosc"}>
-                        Społeczność
+                    <a className={"footer-text"} href={"/wyszukaj"}>
+                        Wyszukaj
                     </a>
-                    <a className={"footer-text"} href={"oferty-zlecen"}>
+                    <a className={"footer-text"} href={"/oferty-zlecen"}>
                         Oferty zleceń
                     </a>
-                    <a className={"footer-text"} href={"/rejestracja"}>
-                        Rejestracja
-                    </a>
-                    <a className={"footer-text"} href={"/logowanie"}>
-                        Logowanie
-                    </a>
+                    {!tokenService.getLocalAccessToken() ?
+                        <a className={"footer-text"} href={"/rejestracja"}>
+                            Rejestracja
+                        </a> :
+                        <a className={"footer-text"} href={"/"}>
+                            Reklama
+                        </a>
+                    }
+                    {!tokenService.getLocalAccessToken() ?
+                        <a className={"footer-text"} href={"/logowanie"}>
+                            Logowanie
+                        </a> : null
+                    }
                 </div>
             </div>
             <hr/>

@@ -23,9 +23,9 @@ export const EditUserPersonalInfoForm = ({personalData}) => {
         }
     });
 
-    const postalCodeFormApi = personalData.address.postCodes.split(',')[0]
+    const postalCodeFormApi = personalData.address?.postCodes.split(',')[0]
     const [postalCode, setPostalCode] = useState(postalCodeFormApi);
-    const [foundAddress, setFoundAddress] = useState([personalData.address]);
+    const [foundAddress, setFoundAddress] = useState(personalData.address ? [personalData.address] : []);
     const [errors, setErrors] = useState(null);
     const [postalCodeError, setPostalCodeError] = useState();
     const experienceOptions = ['', 'Senior', 'Junior', 'Mid', 'Expert', 'Stażysta'];
