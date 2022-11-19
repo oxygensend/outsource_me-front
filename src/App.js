@@ -31,12 +31,18 @@ import {SearchUsers} from "./pages/searchUsers";
 import {Flash} from "./Components/Flash/Flash";
 import Bus from "./services/Bus";
 import {AboutUs} from "./pages/aboutUs";
+import {SessionTimeout} from "./Components/SessionTimeout/SessionTimeout";
+
+
+
 
 function App() {
     window.flash = (message, type="success") => Bus.emit('flash', ({message, type}));
     const user = tokenService.getLocalAccessToken();
+
     return (
         <Router>
+            <SessionTimeout/>
             <Navbar/>
             <Flash />
             <Routes>
@@ -86,7 +92,7 @@ function App() {
             </Routes>
             <Footer/>
         </Router>
-    );
+    )
 }
 
 export default App;
