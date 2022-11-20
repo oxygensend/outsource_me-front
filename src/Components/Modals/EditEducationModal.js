@@ -22,6 +22,8 @@ export const EditEducationModal = ({setShowModals, selectedEducation, education}
         const index = education.indexOf(selectedEducation);
         education[index] = data.data;
         setShowModals({education: false});
+        window.flash('Pomyślnie edytowano uczelnie', 'success')
+
     }
 
     return (

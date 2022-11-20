@@ -36,7 +36,10 @@ export const Search = () => {
                     <div className={"flex flex-col items-center"}>
                         {resultJobOffers.slice(0, 3).map((offer, i) => {
                             return (
-                                <JobOfferSmallCard jobOffer={offer} id={i} description={true}
+                                <JobOfferSmallCard jobOffer={offer}
+                                                   key={i}
+                                                   id={i}
+                                                   description={true}
                                                    className={"search-card "}/>
                             )
                         })}
@@ -57,7 +60,10 @@ export const Search = () => {
                     <div className={"flex flex-col items-center"}>
                         {resultUsers.slice(0, 3).map((user, i) => {
                             return (
-                                <UserSmallCard user={user} id={i} className={"search-card "}/>
+                                <UserSmallCard
+                                    user={user}
+                                    key={i}
+                                    className={"search-card "}/>
                             )
                         })}
 

@@ -39,14 +39,14 @@ export const Education = memo(({id, setShowModals, personalData}) => {
                 personalData={personalData}
                 editRedirectUrl={"/profil/me/edytuj/wyksztalcenie"}
             >
-                {education.map((element) => {
+                {education.map((element,i) => {
                     return <ListElement
                         name={element.university.name}
                         timePeriod={element.fieldOfStudy + formatTimePeriod(element.startDate, element.endDate)
                             + (element.title ? ' - ' + element.title : '')
                         }
                         metaData={element.description}
-                        key={element['@id']}
+                        key={i}
                     >
                         <p style={{fontSize: "14px"}}> {element.grade ? 'Ocena: ' + element.grade : null}</p>
 

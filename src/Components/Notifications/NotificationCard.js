@@ -5,7 +5,7 @@ import authAxios from "../../services/authAxios";
 import TokenService from "../../services/tokenService";
 import {useEffect, useState} from "react";
 
-export const NotificationCard = ({setShowModals, setSelectedNotification, notification, i}) => {
+export const NotificationCard = ({setShowModals, setSelectedNotification, notification}) => {
 
     const [reload, setReload] = useState();
     const {id} = TokenService.getUser();
@@ -34,7 +34,6 @@ export const NotificationCard = ({setShowModals, setSelectedNotification, notifi
     return (
         <div
             className={"notification-card  cursor-default  delay-75 " + (!notification.displayedAt ? 'notification-unseen' : 'notification-seen')}
-            key={i}
             onMouseEnter={ () => onMouseEnterMarkSeen()}
         >
 

@@ -4,11 +4,13 @@ import {getData} from "../../services/utils";
 import authAxios from "../../services/authAxios";
 import {API_URL} from "../../config";
 import './index.css'
+import {useNavigate} from "react-router-dom";
 
 export const NewJobOffer = () => {
 
     const [formOfEmployments, setFormOfEmployments] = useState([]);
     const [workTypes, setWorkTypes] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         return () => {
@@ -27,7 +29,8 @@ export const NewJobOffer = () => {
     }
 
     const afterSubmit = (data) => {
-        window.location.href = '/profile/me/twoje-owerty';
+        window.flash("Oferta została pomyślnie dodana", 'success');
+        navigate('/profil/me/twoje-oferty');
     }
     return (
         <div className={"applications-wrapper pt-4"}>

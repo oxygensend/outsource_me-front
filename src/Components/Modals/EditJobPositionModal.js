@@ -33,6 +33,8 @@ export const EditJobPositionModal = ({setShowModals, jobPosition, jobPositions})
         const index = jobPositions.indexOf(jobPosition);
         jobPositions[index] = data.data;
         setShowModals({jobPositions: false});
+        window.flash('Miejsce pracy zostało zaktualizowane', 'success')
+
     }
 
 

@@ -17,16 +17,18 @@ export const EditUserPersonalInfoForm = ({personalData}) => {
             email: personalData.email,
             dateOfBirth: personalData.dateOfBirth.split('T')[0],
             githubUrl: personalData.githubUrl,
-            linkedinUrl: personalData.linkedinUrl
+            linkedinUrl: personalData.linkedinUrl,
+            experience: personalData.experience
 
         }
     });
 
-    const postalCodeFormApi = personalData.address.postCodes.split(',')[0]
+    const postalCodeFormApi = personalData.address?.postCodes.split(',')[0]
     const [postalCode, setPostalCode] = useState(postalCodeFormApi);
-    const [foundAddress, setFoundAddress] = useState([personalData.address]);
+    const [foundAddress, setFoundAddress] = useState(personalData.address ? [personalData.address] : []);
     const [errors, setErrors] = useState(null);
     const [postalCodeError, setPostalCodeError] = useState();
+    const experienceOptions = ['', 'Senior', 'Junior', 'Mid', 'Expert', 'Stażysta'];
 
 
     const onSubmit = async data => {
@@ -38,12 +40,18 @@ export const EditUserPersonalInfoForm = ({personalData}) => {
             data.linkedinUrl = null;
         }
 
+        if(data.experience === ''){
+            data.experience = null;
+        }
+
         authAxios.patch(API_URL + '/users/' + personalData.id, data, {
             headers: {
                 "Content-Type": "application/merge-patch+json"
             }
         }).then(data => {
             window.location.href = '/profil/me';
+            window.flash('Informacje zostały zaktualizowane', 'success')
+
         })
             .catch((e) => {
 
@@ -128,7 +136,12 @@ export const EditUserPersonalInfoForm = ({personalData}) => {
                     required={false}
                     error={findErrors('dateOfBirth')}
                 />
-
+                <Select
+                    name={"experience"}
+                    label={"Doświadczenie"}
+                    register={register}
+                    options={experienceOptions}
+                />
             </div>
 
             <div className={"mt-5"}>
@@ -181,6 +194,7 @@ export const EditUserPersonalInfoForm = ({personalData}) => {
                     error={findErrors('linkedinUrl')}
                 />
             </div>
+
             <SubmitButton
                 class={"edit-button mb-4"}
                 value={"Zmień"}

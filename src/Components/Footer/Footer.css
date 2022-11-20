@@ -3,6 +3,7 @@
     position: relative;
     height: 400px;
     background-color: #e3dada;
+    top: 70px;
 }
 .social-media {
     display: flex;
@@ -91,7 +92,7 @@
     .footer {
         position: relative;
         height: 400px;
-        background-color: #e3dada
+        background-color: #E1DFDF;
 
     }
 
@@ -120,7 +121,6 @@
 @media screen and (min-width: 600px) {
 
     .footer {
-        margin-top: 8rem;
     }
 
     .footer-ui {
@@ -183,9 +183,8 @@
         position: absolute;
         left: 40px;
         top: 17px;
-        margin-top: 30px;
+        margin-top: 70px;
         margin-left: 2rem;
-        background-image: url("../../assets/images/logo_footer.png");
     }
 
     .social-media {

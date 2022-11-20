@@ -48,7 +48,7 @@ export const ApplicateForJobOffer = () => {
                         <Link to={'/profil/' + jobOffer.user.id}
                               children={
                                   <img
-                                      src={SERVER_URL + '/' + jobOffer.user.imagePath}
+                                      src={SERVER_URL + '/' + jobOffer.user.thumbnailPath}
                                       width={54} height={54}
                                       style={{minHeight:'54px', minWidth: '54px'}}
                                       className={"rounded-2xl border-2  "}

@@ -81,7 +81,11 @@ export const SearchJobOffers = () => {
                             <div className={"flex flex-col items-center"}>
                                 {results.map((jobOffer, i) => {
                                     return (
-                                        <JobOfferSmallCard jobOffer={jobOffer} id={i} className={"search-card "}/>
+                                        <JobOfferSmallCard
+                                            jobOffer={jobOffer}
+                                            key={i}
+                                            id={i}
+                                            className={"search-card "}/>
                                     )
                                 })}
 

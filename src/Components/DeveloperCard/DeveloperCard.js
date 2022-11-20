@@ -15,7 +15,8 @@ export const DeveloperCard = ({developer}) => {
             <div className={"grid grid-cols-12 md:flex md:flex-row md:justify-between md:ml-8 md:mr-8"}>
 
                 <div className={"flex flex-row  gap-3 col-start-2 md:col-start-1 col-span-7 mt-2  "}>
-                    <img src={SERVER_URL + '/' + developer.imagePath} width={54} height={54}
+                    <img src={SERVER_URL + '/' + developer.thumbnailPath}
+                         style={{width: '54px', height: '54px'}}
                          className={"rounded-2xl border-2  "} alt={"avatar"}/>
 
                     <div>

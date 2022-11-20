@@ -20,6 +20,7 @@ export const JobOffers = ({personalData}) => {
                         temp.push(
                             <JobOfferSmallCard
                                 jobOffer={jobOffer}
+                                key={i}
                                 id={i}
                             />
                         )

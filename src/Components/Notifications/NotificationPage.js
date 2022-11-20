@@ -13,7 +13,6 @@ export const NotificationPage = ({setShowModals, setSelectedNotification, notifi
 
     useEffect(() => {
         return () => {
-            console.log('x');
             getNotifications();
         };
     }, []);
@@ -65,7 +64,7 @@ export const NotificationPage = ({setShowModals, setSelectedNotification, notifi
                             setShowModals={setShowModals}
                             setSelectedNotification={setSelectedNotification}
                             notification={notification}
-                            i={i}
+                            key={i}
                         />
                     );
                 }) :

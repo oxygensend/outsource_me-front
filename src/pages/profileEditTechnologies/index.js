@@ -14,7 +14,7 @@ export const ProfileEditTechnologies = () => {
     const location = useLocation();
     const [personalData, setPersonalData] = useState(location.state);
     const {id} = tokenService.getUser();
-    const [technologies, setTechnologies] = useState(location.state.technologies);
+    const [technologies, setTechnologies] = useState(location.state?.technologies);
 
 
     useEffect(() => {
@@ -47,6 +47,8 @@ export const ProfileEditTechnologies = () => {
             let index = newTechnologies.indexOf(technology)
             newTechnologies.splice(index, 1);
             setTechnologies(newTechnologies)
+            window.flash("Technologia została usunieta", 'error')
+
         }).catch((e) => {
             console.log(e);
         });

@@ -60,6 +60,8 @@ export const ProfileEditLanguages = () => {
     const onClickDelete = (language) => {
         authAxios.delete(API_URL + '/users/' + id + '/languages/' + language.id).then((data) => {
             setLanguages(deleteElementFromArray(languages, language))
+            window.flash("Język został usunięty", 'error')
+
         }).catch((e) => {
             console.log(e);
         });

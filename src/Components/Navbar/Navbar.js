@@ -94,8 +94,8 @@ export const Navbar = (props) => {
                     />
                     <DropdownElement
                         key={2}
-                        href={"/pomoc"}
-                        name={"Pomoc"}
+                        href={"/powiadomienia"}
+                        name={"Powiadomienia"}
                         onClick={() => setToggleDropdown(false)}
                     />
                     <DropdownElement

@@ -19,6 +19,8 @@ export const EditLanguageModal = ({setShowModals, language, languages}) => {
         const index = languages.indexOf(language);
         languages[index] = data.data;
         setShowModals({languages: false});
+        window.flash('Język został zaktualizowany', 'success')
+
     }
 
     return (

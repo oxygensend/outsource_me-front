@@ -3,14 +3,14 @@ import moment from "moment";
 import React from "react";
 import {applicationsStringPluralForm} from "../../services/utils";
 
-export const JobOfferManagementCard = ({jobOffer, id}) => {
+export const JobOfferManagementCard = ({jobOffer}) => {
 
     const moveToManagementPage = () => {
         window.location.href = window.location.pathname + '/' + jobOffer.slug;
     }
 
     return (
-        <div key={id}
+        <div
              className={'application flex justify-between cursor-pointer ' + (!jobOffer.archived ? 'application-active' : 'application-deactivated')}
              onClick={() => moveToManagementPage()}
         >

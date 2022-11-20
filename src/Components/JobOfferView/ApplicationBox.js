@@ -1,6 +1,7 @@
 import {ButtonLink} from "../Button/ButtonLink";
 import calendar from '../../assets/icons/calendar.png';
 import moment from "moment";
+import tokenService from "../../services/tokenService";
 
 export const ApplicationBox = ({jobOffer}) => {
     const salaryRange = jobOffer.salaryRange ?
@@ -16,7 +17,7 @@ export const ApplicationBox = ({jobOffer}) => {
                     <p className={"font-type mt-2"}>Lokalizacja:</p>
                     <p className={"font-info"}>{jobOffer?.address?.city ?? 'Zdalnie'}</p>
                 </div>
-                {jobOffer.archived ? null :
+                {jobOffer.archived || tokenService.checkIfMe(jobOffer.user.id) ? null :
                     <ButtonLink
                         class={"application-button2"}
                         value={"Aplikuj"}

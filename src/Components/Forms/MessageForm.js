@@ -22,6 +22,8 @@ export const MessageForm = ({userIri, setShowModals}) => {
             receiverIri: userIri
         }).then(data => {
             closeModal('messageModal', setShowModals);
+            window.flash('Wiadomość została wysłana', 'success')
+
         })
             .catch((e) => {
 
