@@ -9,6 +9,7 @@ import keen_to_work from '../../assets/images/keen_to_work.svg';
 import recruiting from '../../assets/images/recruiting.svg';
 import tokenService from "../../services/tokenService";
 import {Button} from "../Button/Button";
+import {onClickShowModal} from "../../services/utils";
 
 export const PersonalInfo = ({personalData, setShowModals}) => {
 
@@ -34,6 +35,12 @@ export const PersonalInfo = ({personalData, setShowModals}) => {
         setShowModals((prevState) => ({...prevState, ['closeAdvertisement']: true}));
     }
 
+    const onClickOpenUploadPhotoModal = () => {
+        if (tokenService.checkIfMe(personalData.id)) {
+            onClickShowModal('uploadPhotoModal', setShowModals);
+        }
+    }
+
     const checkIfUserIsDeveloper = () => {
         return personalData.accountType === 'Developer'
     }
@@ -53,14 +60,19 @@ export const PersonalInfo = ({personalData, setShowModals}) => {
 
                 {checkIfUserHaveAnyJobOffer() ? <img src={recruiting} className={"right-2 relative "}/> : null}
                 {checkIfUserIsDeveloper() && personalData.lookingForJob ?
-                    <img src={keen_to_work} className={"right-5 relative "}/> : null}
-                <img src={SERVER_URL + '/' + personalData.imagePath} width={120} height={120}
-                     className={"rounded-2xl border-2  "} alt={"avatar"}/>
+                    <img src={keen_to_work} className={"right-6 relative "}/> : null}
+
+                <img src={SERVER_URL + '/' + personalData.imagePath}
+                     style={{width: '120px', height: '120px'}}
+                     className={"rounded-2xl border-2  " + (tokenService.checkIfMe(personalData.id) ? 'cursor-pointer' : null)}
+                     alt={"avatar"}
+                     onClick={() => onClickOpenUploadPhotoModal()}
+                />
 
                 <p className={"profile-fullname mt-2"}>{personalData.fullName}</p>
                 <p className={" gray-font text-red-300"}>
                     {accountType(personalData.accountType) +
-                        (personalData.accountType === 'Developer' && personalData.experience ? "("+personalData.experience+")" : '')}
+                        (personalData.accountType === 'Developer' && personalData.experience ? "(" + personalData.experience + ")" : '')}
                 </p>
                 {personalData.address ?
                     <p className={"only-for-small-media gray-font2 italic"}>{personalData.address.city}</p>
@@ -128,11 +140,11 @@ export const PersonalInfo = ({personalData, setShowModals}) => {
                             <p className={"gray-font2 italic only-for-big-media "}>{personalData.address.city}</p>
                             : null}
                         {checkIfMe ? null :
-                        <div className={"flex flex-row gap-2 mt-1 only-for-big-media cursor-pointer"}>
-                            <img src={mail} alt={"mail"} width={16} height={16}/>
-                            <p onClick={() => onClickOpenContactModal()}
-                               className={"red-font hover:underline "}>Skontaktuj się</p>
-                        </div>
+                            <div className={"flex flex-row gap-2 mt-1 only-for-big-media cursor-pointer"}>
+                                <img src={mail} alt={"mail"} width={16} height={16}/>
+                                <p onClick={() => onClickOpenContactModal()}
+                                   className={"red-font hover:underline "}>Skontaktuj się</p>
+                            </div>
                         }
                     </div>
                 </div>

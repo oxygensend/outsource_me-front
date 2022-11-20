@@ -18,7 +18,7 @@ export const JobOfferCard = ({jobOffer}) => {
                     <Link
                         to={'/profil/' + jobOffer.user.id}
                         children={<img
-                            src={SERVER_URL + '/' + jobOffer.user.imagePath}
+                            src={SERVER_URL + '/' + jobOffer.user.thumbnailPath}
                             style={{height: '54px', width: '54px', minWidth: '54px'}}
                             className={"rounded-2xl border-2  "}
                             alt={"avatar"}

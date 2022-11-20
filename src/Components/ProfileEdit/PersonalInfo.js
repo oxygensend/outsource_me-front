@@ -10,7 +10,8 @@ export const PersonalInfo = ({personalData}) => {
             <img src={arrow} alt={"back"} className={"mt-5 ml-5 cursor-pointer"} onClick={() => window.history.go(-1)}/>
             <div className={"md:col-start-2 md:col-span-4 col-start-2 col-span-6 mt-10"}>
 
-                <img src={SERVER_URL + '/' + personalData.imagePath} width={120} height={120}
+                <img src={SERVER_URL + '/' + personalData.imagePath}
+                     style={{width: '120px', height: '120px'}}
                      className={"rounded-2xl border-2  "} alt={"avatar"}/>
 
                 <p className={"profile-fullname mt-2"}>{personalData.fullName}</p>

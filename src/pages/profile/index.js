@@ -15,6 +15,7 @@ import authAxios from "../../services/authAxios";
 import {API_URL} from "../../config";
 import {InfoModal} from "../../Components/Modals/InfoModal";
 import {ContactModal} from "../../Components/Modals/ContactModal";
+import {UploadPhotoModal} from "../../Components/Modals/UploadPhotoModal";
 
 
 export const Profile = () => {
@@ -45,7 +46,8 @@ export const Profile = () => {
             openAdvertisement: false,
             closeAdvertisement: false,
             contactModal: false,
-            messageModal: false
+            messageModal: false,
+            uploadPhotoModal: false,
 
         }
     )
@@ -183,6 +185,14 @@ export const Profile = () => {
                     setShowModals={setShowModals}
                 />
                 : null
+            }
+
+
+            {showModals.uploadPhotoModal === true ?
+                <UploadPhotoModal
+                    setShowModals={setShowModals}
+                    personalData={personalData}
+                /> : null
             }
         </>
     )
