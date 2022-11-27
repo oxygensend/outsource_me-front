@@ -5,6 +5,7 @@ import {ButtonLink} from "../Button/ButtonLink";
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import {applicationsStringPluralForm} from "../../services/utils";
+import parse from "html-react-parser";
 
 export const JobOfferCard = ({jobOffer}) => {
 
@@ -42,7 +43,7 @@ export const JobOfferCard = ({jobOffer}) => {
                 <div className={"col-start-2 col-end-12"}>
                     <h1 className={"text-xl text-red-700 font-bold mb-1"}>{jobOffer.name}</h1>
                     {!showWholeDescription ?
-                        <p>{jobOffer.shortDescription} </p> : <p>{jobOffer.description}</p>
+                        parse(jobOffer.shortDescription) : parse(jobOffer.description)
                     }
 
                     <p

@@ -3,6 +3,7 @@ import {ButtonLink} from "../Button/ButtonLink";
 import tokenService from "../../services/tokenService";
 import React from "react";
 import {applicationsStringPluralForm} from "../../services/utils";
+import parse from "html-react-parser";
 
 export const JobOfferSmallCard = ({jobOffer, id, className, description, applications}) => {
     return (
@@ -20,7 +21,7 @@ export const JobOfferSmallCard = ({jobOffer, id, className, description, applica
             </div>
 
             {description ?
-                <p className={"pl-8 pt-2 pr-4"}>{jobOffer.shortDescription} </p> : null
+                <div className={"pl-8 pt-2 pr-4"}>{parse(jobOffer.shortDescription)} </div>  : null
             }
             <div
                 className={"grid grid-cols-12 mt-5 md:flex md:flex-row md:justify-between md:ml-8 md:mr-8 "}>

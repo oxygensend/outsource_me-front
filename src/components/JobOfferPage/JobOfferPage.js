@@ -31,7 +31,7 @@ export const JobOfferPage = ({defaultFiltersSettings, searchParams, updatingUrlC
         return () => {
             Promise.all([
                 getData('/api/addresses'),
-                getData('/api/technologies'),
+                getData('/api/technologies?order[featured]=desc'),
                 getData('/api/work_types')
             ]).then(([addresses, technologies, work_types]) => {
                 setAddressesList(addresses['hydra:member']);

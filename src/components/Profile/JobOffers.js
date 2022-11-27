@@ -14,7 +14,7 @@ export const JobOffers = ({personalData}) => {
     }
     useEffect(() => {
         return () => {
-            getData('/api/users/' + personalData.id + '/job_offers?order=newest').then(data => {
+            getData('/api/users/' + personalData.id + '/job_offers?order=newest&archived=0').then(data => {
                     let temp = [];
                     data['hydra:member'].forEach((jobOffer, i) => {
                         temp.push(
