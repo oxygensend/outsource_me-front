@@ -46,7 +46,6 @@ export const JobOfferForm = ({
     useEffect(() => {
         return () => {
             if (jobOffer) {
-                console.log(jobOffer);
 
                 reset({
                     name: jobOffer.name,
@@ -58,7 +57,6 @@ export const JobOfferForm = ({
                     address: jobOffer.address,
                 })
 
-                console.log(jobOffer.technologies);
                 setAddSalaryRange(jobOffer.salaryRange);
                 setAddAddress(jobOffer.address);
                 setSelectedTechnologies(jobOffer.technologies.map(el => el['@id']));
