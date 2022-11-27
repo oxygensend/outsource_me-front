@@ -1,16 +1,16 @@
 import {API_URL, SERVER_URL} from "../../config";
-import {EditModule} from "../../Components/ProfileEdit/EditModule";
+import {EditModule} from "../../components/ProfileEdit/EditModule";
 import {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 import profileService from "../../services/profileService";
 import close_icon from '../../assets/icons/trashcan.png'
 import authAxios from "../../services/authAxios";
-import {PersonalInfo} from "../../Components/ProfileEdit/PersonalInfo";
+import {PersonalInfo} from "../../components/ProfileEdit/PersonalInfo";
 import edit_icon from "../../assets/icons/edit-icon.png";
 import {deleteElementFromArray} from "../../services/utils";
 import tokenService from "../../services/tokenService";
-import {AddTechnologyModal} from "../../Components/Modals/AddTechnologyModal";
-import {EditLanguageModal} from "../../Components/Modals/EditLanguageModal";
+import {AddTechnologyModal} from "../../components/Modals/AddTechnologyModal";
+import {EditLanguageModal} from "../../components/Modals/EditLanguageModal";
 
 export const ProfileEditLanguages = () => {
 

@@ -1,11 +1,11 @@
 import {useLocation, useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getData} from "../../services/utils";
-import {JobOfferSmallCard} from "../../Components/JobOfferCard/JobOfferSmallCard";
-import {SearchPageWrapper} from "../../Components/Search/SearchPageWrapper";
+import {JobOfferSmallCard} from "../../components/JobOfferCard/JobOfferSmallCard";
+import {SearchPageWrapper} from "../../components/Search/SearchPageWrapper";
 import InfiniteScroll from "react-infinite-scroller";
 import loader from "../../assets/images/loader.gif";
-import {UserSmallCard} from "../../Components/DeveloperCard/UserSmallCard";
+import {UserSmallCard} from "../../components/DeveloperCard/UserSmallCard";
 
 export const SearchJobOffers = () => {
     const location = useLocation();

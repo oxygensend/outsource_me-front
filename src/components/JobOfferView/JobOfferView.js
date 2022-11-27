@@ -4,6 +4,7 @@ import avatar from '../../assets/images/avatar.png';
 import {Technology} from "../Button/Technology";
 import {Link} from "react-router-dom";
 import {applicationsStringPluralForm} from "../../services/utils";
+import parse from "html-react-parser";
 
 export const JobOfferView = ({jobOffer}) => {
 
@@ -77,9 +78,7 @@ export const JobOfferView = ({jobOffer}) => {
 
                 <div className={"col-start-2 gap-2 col-end-10 mt-5 mb-10"}>
                     <p className={"font-module mb-2"}>Opis</p>
-                    <p>
-                        {jobOffer.description}
-                    </p>
+                        {parse(jobOffer.description)}
                 </div>
             </div>
 

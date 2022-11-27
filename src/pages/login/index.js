@@ -1,8 +1,8 @@
 import './index.css'
-import '../../Components/WelcomeBoard/WelcomeBoard.css'
+import '../../components/WelcomeBoard/WelcomeBoard.css'
 import React from "react";
-import {LoginForm} from "../../Components/Forms/LoginForm";
-import {HomeImage} from "../../Components/WelcomeBoard/HomeImage";
+import {LoginForm} from "../../components/Forms/LoginForm";
+import {HomeImage} from "../../components/WelcomeBoard/HomeImage";
 
 export class Login extends React.Component {
     render() {

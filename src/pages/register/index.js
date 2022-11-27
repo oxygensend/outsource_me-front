@@ -1,9 +1,9 @@
-import {HomeImage} from "../../Components/WelcomeBoard/HomeImage";
+import {HomeImage} from "../../components/WelcomeBoard/HomeImage";
 import '../login/index.css'
 import './index.css'
-import '../../Components/WelcomeBoard/WelcomeBoard.css'
+import '../../components/WelcomeBoard/WelcomeBoard.css'
 import React from "react";
-import {RegistrationForm} from "../../Components/Forms/RegistrationForm";
+import {RegistrationForm} from "../../components/Forms/RegistrationForm";
 
 export class Register extends React.Component {
 

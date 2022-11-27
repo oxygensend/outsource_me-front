@@ -1,11 +1,11 @@
 import {API_URL, SERVER_URL} from "../../config";
-import {EditModule} from "../../Components/ProfileEdit/EditModule";
+import {EditModule} from "../../components/ProfileEdit/EditModule";
 import {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 import profileService from "../../services/profileService";
 import close_icon_red from '../../assets/icons/close_icon_red.png'
 import authAxios from "../../services/authAxios";
-import {PersonalInfo} from "../../Components/ProfileEdit/PersonalInfo";
+import {PersonalInfo} from "../../components/ProfileEdit/PersonalInfo";
 import close_icon from "../../assets/icons/trashcan.png";
 import tokenService from "../../services/tokenService";
 

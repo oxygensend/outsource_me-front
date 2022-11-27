@@ -1,10 +1,10 @@
 import {Link, useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getData} from "../../services/utils";
-import {JobOfferSmallCard} from "../../Components/JobOfferCard/JobOfferSmallCard";
+import {JobOfferSmallCard} from "../../components/JobOfferCard/JobOfferSmallCard";
 import './index.css'
-import {UserSmallCard} from "../../Components/DeveloperCard/UserSmallCard";
-import {SearchPageWrapper} from "../../Components/Search/SearchPageWrapper";
+import {UserSmallCard} from "../../components/DeveloperCard/UserSmallCard";
+import {SearchPageWrapper} from "../../components/Search/SearchPageWrapper";
 
 export const Search = () => {
     const [searchParams, setSearchParams] = useSearchParams();

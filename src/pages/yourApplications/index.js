@@ -4,11 +4,11 @@ import {closeModal, getData} from "../../services/utils";
 import tokenService from "../../services/tokenService";
 import moment from "moment/moment";
 import 'moment/locale/pl'
-import {ApplicationCard} from "../../Components/Application/ApplicationCard";
-import {UserApplicationPage} from "../../Components/Application/UserApplicationPage";
-import {ConfirmModal} from "../../Components/Modals/ConfirmModal";
+import {ApplicationCard} from "../../components/Application/ApplicationCard";
+import {UserApplicationPage} from "../../components/Application/UserApplicationPage";
+import {ConfirmModal} from "../../components/Modals/ConfirmModal";
 import parse from 'html-react-parser'
-import {ApplicationPreviewModal} from "../../Components/Modals/ApplicationPreviewModal";
+import {ApplicationPreviewModal} from "../../components/Modals/ApplicationPreviewModal";
 import authAxios from "../../services/authAxios";
 import app from "../../App";
 

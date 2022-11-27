@@ -87,7 +87,7 @@ export const EducationForm = ({options, education, request, afterSubmit, buttonN
             data.endDate = null;
         }
 
-        authAxios.post(API_URL + '/education', data).then(data => {
+       request(data).then(data => {
             afterSubmit(data);
         })
             .catch((e) => {

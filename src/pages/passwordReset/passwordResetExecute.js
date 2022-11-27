@@ -1,6 +1,6 @@
-import {HomeImage} from "../../Components/WelcomeBoard/HomeImage";
+import {HomeImage} from "../../components/WelcomeBoard/HomeImage";
 import React from "react";
-import {PasswordResetFormExecute} from "../../Components/Forms/PasswordResetFormExecute";
+import {PasswordResetFormExecute} from "../../components/Forms/PasswordResetFormExecute";
 
 export const PasswordReset = (props) => {
 

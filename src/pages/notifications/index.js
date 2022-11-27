@@ -1,7 +1,7 @@
 import './index.css'
-import {NotificationPage} from "../../Components/Notifications/NotificationPage";
+import {NotificationPage} from "../../components/Notifications/NotificationPage";
 import {useState} from "react";
-import {ConfirmModal} from "../../Components/Modals/ConfirmModal";
+import {ConfirmModal} from "../../components/Modals/ConfirmModal";
 import {closeModal} from "../../services/utils";
 import authAxios from "../../services/authAxios";
 

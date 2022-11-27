@@ -1,11 +1,11 @@
-import {ApplicationInfoBox} from "../../Components/Application/ApplicationInfoBox";
+import {ApplicationInfoBox} from "../../components/Application/ApplicationInfoBox";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {getData} from "../../services/utils";
-import {ProfilePage} from "../../Components/profile/ProfilePage";
-import {InfoModal} from "../../Components/Modals/InfoModal";
-import {ApplicationMessageModal} from "../../Components/Modals/ApplicationMessageModal";
-import {ContactModal} from "../../Components/Modals/ContactModal";
+import {ProfilePage} from "../../components/Profile/ProfilePage";
+import {InfoModal} from "../../components/Modals/InfoModal";
+import {ApplicationMessageModal} from "../../components/Modals/ApplicationMessageModal";
+import {ContactModal} from "../../components/Modals/ContactModal";
 
 export const Application = () => {
 

@@ -1,4 +1,4 @@
-import {RedirectPage} from "../../Components/RedirectPage/RedirectPage";
+import {RedirectPage} from "../../components/RedirectPage/RedirectPage";
 
 export const PageNotFound = () => {
 

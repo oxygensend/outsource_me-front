@@ -1,6 +1,6 @@
-import {HomeImage} from "../../Components/WelcomeBoard/HomeImage";
+import {HomeImage} from "../../components/WelcomeBoard/HomeImage";
 import React from "react";
-import {PasswordResetSendLinkForm} from "../../Components/Forms/PasswordResetSendLinkForm";
+import {PasswordResetSendLinkForm} from "../../components/Forms/PasswordResetSendLinkForm";
 
 export const PasswordSendLink = (props) => {
 

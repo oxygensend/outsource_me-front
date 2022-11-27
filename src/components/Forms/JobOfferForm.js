@@ -7,6 +7,11 @@ import {Select} from "../Input/Select";
 import {Checkbox} from "../Input/Checkbox";
 import {TechnologySearch} from "../Search/TechnologySearch";
 import {AddressSearch} from "../Search/AddressSearch";
+import RichText from "../Input/RichText";
+import {EditorState} from "draft-js";
+import {stateToHTML} from "draft-js-export-html";
+import htmlToDraft from 'html-to-draftjs';
+import ContentState from "draft-js/lib/ContentState";
 
 export const JobOfferForm = ({
                                  jobOffer,
@@ -16,8 +21,19 @@ export const JobOfferForm = ({
                                  buttonName,
                                  request
                              }) => {
+    const setEditorState = () => {
 
-    const {register, handleSubmit, reset} = useForm();
+        if (jobOffer) {
+            const blocksFromHtml = htmlToDraft(jobOffer.description);
+            const {contentBlocks, entityMap} = blocksFromHtml;
+            const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap);
+            return EditorState.createWithContent(contentState);
+        } else {
+            return EditorState.createEmpty();
+        }
+    }
+    const editorState = setEditorState();
+    const {register, handleSubmit, reset, control} = useForm({defaultValues: {description: editorState}});
     const [errors, setErrors] = useState(null);
     const experienceOptions = ['Senior', 'Junior', 'Mid', 'Expert', 'Stażysta'];
     const currencyOptions = ['PLN', 'EUR', 'USD'];
@@ -30,15 +46,16 @@ export const JobOfferForm = ({
     useEffect(() => {
         return () => {
             if (jobOffer) {
+                console.log(jobOffer);
+
                 reset({
                     name: jobOffer.name,
                     formOfEmployment: jobOffer.formOfEmployment['@id'],
                     workType: jobOffer.workType['@id'],
                     validTo: jobOffer.validTo ? jobOffer.validTo.split('T')[0] : '',
-                    description: jobOffer.description,
                     experience: jobOffer.experience,
                     salaryRange: jobOffer.salaryRange,
-                    address: jobOffer.address
+                    address: jobOffer.address,
                 })
 
                 console.log(jobOffer.technologies);
@@ -55,6 +72,7 @@ export const JobOfferForm = ({
 
         setErrors(null);
 
+        console.log(data);
         if (data.validTo === '') {
             data.validTo = null;
         }
@@ -86,6 +104,7 @@ export const JobOfferForm = ({
         }
 
         console.log(data);
+        data.description = stateToHTML(data.description.getCurrentContent());
         request(data).then(response => {
             afterSubmit(response)
         })
@@ -147,15 +166,10 @@ export const JobOfferForm = ({
                 register={register}
                 options={experienceOptions}
             />
-            <Textarea
-                name={"description"}
-                placeholder={"Dodaj opis"}
-                label={"Opis *"}
-                register={register}
-                required={false}
-                error={findErrors('description')}
-            />
-
+            <div className={"mt-2"}>
+                <label className={"input-label"}>Dodaj opis</label>
+                <RichText name={"description"} control={control} placeholder={"Dodaj opis"}/>
+            </div>
             <div>
                 <p className={"mb-1 mt-2 text-xl"}>Technologie</p>
                 <TechnologySearch

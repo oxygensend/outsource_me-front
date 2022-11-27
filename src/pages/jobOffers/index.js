@@ -1,4 +1,4 @@
-import {JobOfferPage} from "../../Components/JobOfferPage/JobOfferPage";
+import {JobOfferPage} from "../../components/JobOfferPage/JobOfferPage";
 import {useState, useEffect} from "react";
 import {useSearchParams} from "react-router-dom";
 import {defaultFiltersSettings, isInArray} from "../../services/utils";

@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import tokenService from "../../services/tokenService";
 import {getData} from "../../services/utils";
-import {JobOfferManagementCard} from "../../Components/JobOfferCard/JobOfferManagementCard";
-import {ButtonLink} from "../../Components/Button/ButtonLink";
+import {JobOfferManagementCard} from "../../components/JobOfferCard/JobOfferManagementCard";
+import {ButtonLink} from "../../components/Button/ButtonLink";
 
 export const YourJobOffers = () => {
 

@@ -1,4 +1,4 @@
-import {JobOfferForm} from "../../Components/Forms/JobOfferForm";
+import {JobOfferForm} from "../../components/Forms/JobOfferForm";
 import React, {useEffect, useState} from "react";
 import {getData} from "../../services/utils";
 import authAxios from "../../services/authAxios";

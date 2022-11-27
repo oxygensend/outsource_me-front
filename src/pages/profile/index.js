@@ -1,21 +1,21 @@
 import './index.css';
-import {ProfilePage} from "../../Components/profile/ProfilePage";
-import {AddTechnologyModal} from "../../Components/Modals/AddTechnologyModal";
+import {ProfilePage} from "../../components/Profile/ProfilePage";
+import {AddTechnologyModal} from "../../components/Modals/AddTechnologyModal";
 import {useEffect, useState} from "react";
-import {AddLanguagesModal} from "../../Components/Modals/AddLanguagesModal";
-import {AddJobPositionModal} from "../../Components/Modals/AddJobPositionModal";
-import {AddExpirienceModal} from "../../Components/Modals/AddExpirienceModal";
-import {EditDescriptionModal} from "../../Components/Modals/EditDescriptionModal";
+import {AddLanguagesModal} from "../../components/Modals/AddLanguagesModal";
+import {AddJobPositionModal} from "../../components/Modals/AddJobPositionModal";
+import {AddExpirienceModal} from "../../components/Modals/AddExpirienceModal";
+import {EditDescriptionModal} from "../../components/Modals/EditDescriptionModal";
 import {useParams} from "react-router-dom";
 import profileService from "../../services/profileService";
-import {EditPersonalInfoModal} from "../../Components/Modals/EditPersonalInfoModal";
+import {EditPersonalInfoModal} from "../../components/Modals/EditPersonalInfoModal";
 import {closeModal, getId} from "../../services/utils";
-import {ConfirmModal} from "../../Components/Modals/ConfirmModal";
+import {ConfirmModal} from "../../components/Modals/ConfirmModal";
 import authAxios from "../../services/authAxios";
 import {API_URL} from "../../config";
-import {InfoModal} from "../../Components/Modals/InfoModal";
-import {ContactModal} from "../../Components/Modals/ContactModal";
-import {UploadPhotoModal} from "../../Components/Modals/UploadPhotoModal";
+import {InfoModal} from "../../components/Modals/InfoModal";
+import {ContactModal} from "../../components/Modals/ContactModal";
+import {UploadPhotoModal} from "../../components/Modals/UploadPhotoModal";
 
 
 export const Profile = () => {

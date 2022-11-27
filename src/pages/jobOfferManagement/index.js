@@ -2,10 +2,10 @@ import {useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {closeModal, getData} from "../../services/utils";
 import authAxios from "../../services/authAxios";
-import {JobOfferManagementPage} from "../../Components/JobOfferManagement/JobOfferManagementPage";
-import {ConfirmModal} from "../../Components/Modals/ConfirmModal";
+import {JobOfferManagementPage} from "../../components/JobOfferManagement/JobOfferManagementPage";
+import {ConfirmModal} from "../../components/Modals/ConfirmModal";
 import parse from "html-react-parser";
-import {EditJobOfferModal} from "../../Components/Modals/EditJobOfferModal";
+import {EditJobOfferModal} from "../../components/Modals/EditJobOfferModal";
 
 export const JobOfferManagement = () => {
     const {slug} = useParams();

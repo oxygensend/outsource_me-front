@@ -203,7 +203,7 @@ export class RegistrationForm extends React.Component {
                                 name={"password"}
                                 label={"Hasło"}
                                 type={"password"}
-                                placeholder={"***** ***"}
+                                placeholder={"********"}
                                 class={"mb-4"}
                                 required={true}
                                 value={this.state.password}
@@ -214,7 +214,7 @@ export class RegistrationForm extends React.Component {
                                 name={"passwordConfirmation"}
                                 label={"Potwierdź hasło"}
                                 type={"password"}
-                                placeholder={"***** ***"}
+                                placeholder={"********"}
                                 class={"mb-4"}
                                 required={true}
                                 value={this.state.passwordConfirmation}

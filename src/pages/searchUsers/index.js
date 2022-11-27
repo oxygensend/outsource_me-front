@@ -1,8 +1,8 @@
 import {Link, useLocation, useSearchParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getData} from "../../services/utils";
-import {UserSmallCard} from "../../Components/DeveloperCard/UserSmallCard";
-import {SearchPageWrapper} from "../../Components/Search/SearchPageWrapper";
+import {UserSmallCard} from "../../components/DeveloperCard/UserSmallCard";
+import {SearchPageWrapper} from "../../components/Search/SearchPageWrapper";
 import loader from "../../assets/images/loader.gif";
 import InfiniteScroll from "react-infinite-scroller";
 

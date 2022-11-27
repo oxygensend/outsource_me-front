@@ -1,18 +1,18 @@
 import {API_URL, SERVER_URL} from "../../config";
-import {EditModule} from "../../Components/ProfileEdit/EditModule";
+import {EditModule} from "../../components/ProfileEdit/EditModule";
 import {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 import profileService from "../../services/profileService";
 import close_icon from '../../assets/icons/trashcan.png'
 import authAxios from "../../services/authAxios";
-import {PersonalInfo} from "../../Components/ProfileEdit/PersonalInfo";
+import {PersonalInfo} from "../../components/ProfileEdit/PersonalInfo";
 import edit_icon from "../../assets/icons/edit-icon.png";
 import {deleteElementFromArray} from "../../services/utils";
 import formatTimePeriod from "../../helpers/formatTimePeriod";
-import {JobPositions} from "../../Components/profile/JobPosition";
-import {ListElement} from "../../Components/profile/ListElement";
+import {JobPositions} from "../../components/Profile/JobPosition";
+import {ListElement} from "../../components/Profile/ListElement";
 import tokenService from "../../services/tokenService";
-import {EditEducationModal} from "../../Components/Modals/EditEducationModal";
+import {EditEducationModal} from "../../components/Modals/EditEducationModal";
 
 export const ProfileEditEducation = () => {
 

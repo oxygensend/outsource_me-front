@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {JobOfferView} from "../../Components/JobOfferView/JobOfferView";
+import {JobOfferView} from "../../components/JobOfferView/JobOfferView";
 import './index.css';
-import {ApplicationBox} from "../../Components/JobOfferView/ApplicationBox";
+import {ApplicationBox} from "../../components/JobOfferView/ApplicationBox";
 import {useParams} from "react-router-dom";
 import {getData, getDataAuthentication} from "../../services/utils";
 

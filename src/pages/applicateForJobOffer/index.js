@@ -2,7 +2,7 @@ import {API_URL, SERVER_URL} from "../../config";
 import React, {useEffect, useState} from "react";
 import {Link, useLocation, useParams} from "react-router-dom";
 import profileService from "../../services/profileService";
-import {ApplicationForm} from "../../Components/Forms/ApplicationForm";
+import {ApplicationForm} from "../../components/Forms/ApplicationForm";
 
 export const ApplicateForJobOffer = () => {
 
