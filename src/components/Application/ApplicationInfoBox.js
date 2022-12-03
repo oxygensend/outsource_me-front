@@ -18,7 +18,6 @@ export const ApplicationInfoBox = ({application, setShowModals}) => {
     }
 
 
-    console.log(application);
     return (
         <div className={"application-box mt-20 "}>
 
@@ -62,7 +61,6 @@ export const ApplicationInfoBox = ({application, setShowModals}) => {
             </div>
             <div className={"flex flex-row gap-2 mt-4"}>
                 <img src={calendar} alt={"calendar"}/>
-
                 <p className={"font-time italic cursor-default"}>
                     {"Aplikowano " + moment(application.createdAt).fromNow()}
                 </p>

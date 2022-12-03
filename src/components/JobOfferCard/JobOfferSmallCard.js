@@ -12,7 +12,6 @@ export const JobOfferSmallCard = ({jobOffer, id, className, description, applica
 
                 <div className={"mt-2"}>
                     <p className={"fullname-font "}>{jobOffer.name}</p>
-                    <p className={"company-font"}>{jobOffer?.companyName ?? "Ogłoszenie prywatne"}</p>
                 </div>
 
                 <div className={"col-start-11 col-start-12 mt-2"}>

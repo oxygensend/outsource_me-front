@@ -19,7 +19,7 @@ export const JobOfferStatistics = ({jobOffer, setShowModals}) => {
     return (
         <div className={"text-center"}>
 
-            <p className={"joboffer-title-font pt-10"}>{jobOffer.name + (jobOffer.archived ? " [wygasła]" : null)}</p>
+            <p className={"joboffer-title-font pt-10"}>{jobOffer.name + (jobOffer.archived ? " [wygasła]" : '')}</p>
 
             <p className={"application-font"}>{jobOffer.numberOfApplications + applicationsStringPluralForm(jobOffer.numberOfApplications)}</p>
             <p className={"text-red-500 font-medium"}>
@@ -28,8 +28,11 @@ export const JobOfferStatistics = ({jobOffer, setShowModals}) => {
 
             <div className={"flex flex-row gap-2 mt-4 justify-center"}>
                 <img src={calendar} alt={"calendar"} style={{maxHeight: '16px'}}/>
-                <p className={"font-time italic bottom-0.5 relative"}>Oferta
-                    wygasa za {moment(jobOffer.validTo).fromNow()} </p>
+                <p className={"font-time italic bottom-0.5 relative"}>
+                    {jobOffer.validTo ?  (jobOffer.archived ? "Oferta wygasła " : "Oferta wygasa ") + moment(jobOffer.validTo).fromNow() :
+                        "Brak daty wygasniecia oferty"}
+
+                </p>
             </div>
             <div className={"flex flex-row gap-4 mt-4 justify-center"}>
                 {jobOffer.archived ?

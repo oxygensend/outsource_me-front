@@ -29,7 +29,7 @@ export const JobOfferManagementPage = ({jobOffer, setShowModals}) => {
     const splitApplications = (applications) => {
         setApplications(applications);
         setAcceptedApplications(applications.filter(el => el.status === 1))
-        setRejectedApplications(applications.filter(el => el.status !== 1))
+        setRejectedApplications(applications.filter(el => el.status === -1))
     }
 
     const onClickChangeStatus = (application, status) => {

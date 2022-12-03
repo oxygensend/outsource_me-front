@@ -54,7 +54,7 @@ export const JobOfferForm = ({
                     validTo: jobOffer.validTo ? jobOffer.validTo.split('T')[0] : '',
                     experience: jobOffer.experience,
                     salaryRange: jobOffer.salaryRange,
-                    address: jobOffer.address,
+                    address: jobOffer.address['@id'],
                 })
 
                 setAddSalaryRange(jobOffer.salaryRange);

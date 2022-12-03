@@ -18,7 +18,7 @@ export const TechnologySearch = ({selectedTechnologies, setSelectedTechnologies}
     useEffect(() => {
 
         return () => {
-            getData('/api/technologies').then(technologies => {
+            getData('/api/technologies?a').then(technologies => {
                 setTechnologiesList(technologies['hydra:member']);
             });
 

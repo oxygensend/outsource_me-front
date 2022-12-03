@@ -11,8 +11,8 @@ export const JobOfferManagementCard = ({jobOffer}) => {
 
     return (
         <div
-             className={'application flex justify-between cursor-pointer ' + (!jobOffer.archived ? 'application-active' : 'application-deactivated')}
-             onClick={() => moveToManagementPage()}
+            className={'application flex justify-between cursor-pointer ' + (!jobOffer.archived ? 'application-active' : 'application-deactivated')}
+            onClick={() => moveToManagementPage()}
         >
             <div>
                 <div className="flex items-center">
@@ -25,8 +25,11 @@ export const JobOfferManagementCard = ({jobOffer}) => {
                 <div className={"flex flex-row gap-2 mt-4"}>
                     <img src={calendar} alt={"calendar"} style={{maxHeight: '16px'}}/>
                     <p className={"font-time italic bottom-0.5 relative"}>
-                        {jobOffer.validTo ? "Oferta wygasa " + moment(jobOffer.validTo).fromNow() :
-                            "Brak daty wygasniecia oferty"} </p>
+                        {jobOffer.validTo ?  (jobOffer.archived ? "Oferta wygasła " : "Oferta wygasa ") + moment(jobOffer.validTo).fromNow() :
+                            "Brak daty wygasniecia oferty"}
+
+                    </p>
+
                 </div>
             </div>
 

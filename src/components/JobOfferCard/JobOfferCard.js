@@ -29,7 +29,7 @@ export const JobOfferCard = ({jobOffer}) => {
 
                     <div>
                         <p className={"fullname-font "}>{jobOffer.user.fullName}</p>
-                        <p className={"company-font"}>Apple</p>
+                        <p className={"company-font"}>{jobOffer.user.activeJobPosition}</p>
                     </div>
                 </div>
 

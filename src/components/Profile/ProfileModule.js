@@ -15,7 +15,6 @@ export const ProfileModule = ({
                                   personalData,
                                   editRedirectUrl,
                               }) => {
-    const {id} = useParams();
 
     return (
 
@@ -27,7 +26,7 @@ export const ProfileModule = ({
                 {children}
 
             </div>
-            {tokenService.checkIfMe(id) ?
+            {tokenService.checkIfMe(personalData.id) ?
                 <div className={"col-end-11  row-span-0 cursor-pointer"}>
                     <img src={plus} alt={"add"} onClick={onClickAdd}/>
                     <Link to={editRedirectUrl} state={personalData}
