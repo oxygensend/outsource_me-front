@@ -31,7 +31,7 @@ export const ApplicationBox = ({jobOffer}) => {
 
                 <p className={"font-time italic"}>
                     {jobOffer.validTo ?
-                        "Do wygasniecia oferty pozostalo" + moment(jobOffer.validTo).diff(Date(), 'days') + " dni"
+                        "Do wygasniecia oferty pozostalo " + moment(jobOffer.validTo).diff(Date(), 'days') + " dni"
                         : "Brak daty wygaśnięcia oferty"
                     }
                 </p>

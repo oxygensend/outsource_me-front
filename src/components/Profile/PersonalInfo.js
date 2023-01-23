@@ -9,13 +9,12 @@ import keen_to_work from '../../assets/images/keen_to_work.svg';
 import recruiting from '../../assets/images/recruiting.svg';
 import tokenService from "../../services/tokenService";
 import {Button} from "../Button/Button";
-import {onClickShowModal} from "../../services/utils";
+import {onClickShowModal, opinionsStringPluralForm} from "../../services/utils";
 
 export const PersonalInfo = ({personalData, setShowModals}) => {
 
     const checkIfMe = tokenService.checkIfMe(personalData.id);
 
-    console.log(personalData);
     const onClickEdit = () => {
         setShowModals((prevState) => ({...prevState, ['personalInfo']: true}));
 
@@ -133,7 +132,7 @@ export const PersonalInfo = ({personalData, setShowModals}) => {
                             <Star fill={"none"}/>
 
                         </div>
-                        <p className={"red-font mt-3"}>43 Opinie</p>
+                        <p className={"red-font mt-3"}>{personalData.opinionCount + opinionsStringPluralForm(personalData.opinionCount)}</p>
                     </div>
                     <div>
                         {personalData.address ?

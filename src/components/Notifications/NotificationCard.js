@@ -4,6 +4,7 @@ import moment from "moment/moment";
 import authAxios from "../../services/authAxios";
 import TokenService from "../../services/tokenService";
 import {useEffect, useState} from "react";
+import parse from "html-react-parser";
 
 export const NotificationCard = ({setShowModals, setSelectedNotification, notification}) => {
 
@@ -38,7 +39,7 @@ export const NotificationCard = ({setShowModals, setSelectedNotification, notifi
         >
 
             <div>
-                <p className={"text-sm sm:text-base"}>{notification.content}</p>
+                <p className={"text-sm sm:text-base"}>{parse(notification.content)}</p>
             </div>
             <div className={"ml-2"}>
                 <p className={"date-font"}>{moment(notification.createdAt).fromNow()}</p>

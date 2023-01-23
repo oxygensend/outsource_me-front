@@ -15,7 +15,7 @@ export const EditUserPersonalInfoForm = ({personalData}) => {
             surname: personalData.surname,
             phoneNumber: personalData.phoneNumber,
             email: personalData.email,
-            dateOfBirth: personalData.dateOfBirth.split('T')[0],
+            dateOfBirth: personalData.dateOfBirth?.split('T')[0],
             githubUrl: personalData.githubUrl,
             linkedinUrl: personalData.linkedinUrl,
             experience: personalData.experience
@@ -33,15 +33,24 @@ export const EditUserPersonalInfoForm = ({personalData}) => {
 
     const onSubmit = async data => {
 
-        if (data.githubUrl === undefined) {
+        console.log(data.address)
+        if (!data.githubUrl) {
             data.githubUrl = null;
         }
-        if (data.linkedinUrl === undefined) {
+        if (!data.linkedinUrl) {
             data.linkedinUrl = null;
         }
 
-        if(data.experience === ''){
+        if(!data.experience){
             data.experience = null;
+        }
+
+        if(!data.dateOfBirth){
+            data.dateOfBirth = null;
+        }
+
+        if(data.address){
+            data.address = data.address['@id'];
         }
 
         authAxios.patch(API_URL + '/users/' + personalData.id, data, {
@@ -86,6 +95,7 @@ export const EditUserPersonalInfoForm = ({personalData}) => {
 
 
     }
+    console.log(foundAddress)
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
 

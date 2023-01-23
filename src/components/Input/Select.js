@@ -8,7 +8,7 @@ export const Select = ({options, register, label, name, className, property}) =>
                 {options.map((el, i) => {
                     if (property) {
                         return (
-                            <option key={i} value={el['@id']}>{el[property]}</option>
+                            <option key={i} value={el}>{el[property]}</option>
                         );
                     } else {
                         return (

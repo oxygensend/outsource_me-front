@@ -20,7 +20,6 @@ import {UploadPhotoModal} from "../../components/Modals/UploadPhotoModal";
 
 export const Profile = () => {
     const [personalData, setPersonalData] = useState();
-    const [languages, setLanguages] = useState();
     const id = getId(useParams().id);
     const openAdvertisementModalContent = "Przed dodaniem zgłoszenia upewnij się, ze w zakładkach na twoim profilu zawarte są wszystkie potrzebne\n" +
         "                informacje. Jeżeli chcesz, coś zmienić zrób to teraz, więcej informacji o Tobie pomaga lepszym\n" +
@@ -28,10 +27,20 @@ export const Profile = () => {
 
     const closeAdvertisementModalContent = "Czy na pewno chcesz ściągnąć swoje zgłoszenie z tablicy?"
 
+    const advertisementFlashMessage = {
+        true: {
+            key: 'success',
+            message: 'Ogłoszenie zostało umieszczone.'
+        },
+        false: {
+            key: 'error',
+            message: 'Ogłoszenie zostało ściągniete z listy ofert.'
+        }
+    }
+
     useEffect(() => {
         return () => {
             getPersonalData();
-            getLanguages();
         };
     }, []);
 
@@ -51,20 +60,6 @@ export const Profile = () => {
 
         }
     )
-
-
-    const getLanguages = () => {
-        profileService.getLanguages(id)
-            .then(response => {
-                if (response.status === 200) {
-                    console.log(response.data)
-                    setLanguages(response.data['hydra:member']);
-                }
-            }).catch(err => {
-
-            console.log(err);
-        });
-    }
 
     const getPersonalData = () => {
         profileService.getPersonalData(id)
@@ -89,6 +84,8 @@ export const Profile = () => {
         }).then(data => {
             closeModal(modalName, setShowModals);
             setPersonalData((prevState) => ({...prevState, ['lookingForJob']: status}));
+            window.flash(advertisementFlashMessage[status].message, advertisementFlashMessage[status].key)
+
         })
             .catch((e) => {
 

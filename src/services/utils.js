@@ -142,6 +142,18 @@ export const redirectsCountStringPluralForm = (nbOfRedirects) => {
     }
 }
 
+export const opinionsStringPluralForm = (nbOfOpinions) => {
+
+    if (nbOfOpinions === 1) {
+        return ' opinia';
+    } else if (nbOfOpinions % 10 >= 2 && nbOfOpinions % 10 <= 4) {
+        return ' opinie';
+    } else {
+        return ' opinii';
+    }
+}
+
+
 export const checkUserRoles = (checkRoles, id) => {
     for (const role of checkRoles) {
 

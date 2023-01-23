@@ -12,6 +12,9 @@ import {EditorState} from "draft-js";
 import {stateToHTML} from "draft-js-export-html";
 import htmlToDraft from 'html-to-draftjs';
 import ContentState from "draft-js/lib/ContentState";
+import {Search} from "../Search/Search";
+import authAxios from "../../services/authAxios";
+import {API_URL} from "../../config";
 
 export const JobOfferForm = ({
                                  jobOffer,
@@ -23,6 +26,7 @@ export const JobOfferForm = ({
                              }) => {
     const setEditorState = () => {
 
+        // TODO SOMETHING IS WRONG WITH ADDRESS SEARCH - TO CHECK
         if (jobOffer) {
             const blocksFromHtml = htmlToDraft(jobOffer.description);
             const {contentBlocks, entityMap} = blocksFromHtml;
@@ -43,6 +47,12 @@ export const JobOfferForm = ({
     const [selectedTechnologies, setSelectedTechnologies] = useState([]);
     const [address, setAddress] = useState();
 
+    const postalCodeFormApi = jobOffer?.address?.postCodes.split(',')[0];
+    const [postalCode, setPostalCode] = useState(postalCodeFormApi);
+    const [foundAddress, setFoundAddress] = useState(jobOffer?.address ? [jobOffer?.address] : []);
+    const [postalCodeError, setPostalCodeError] = useState();
+
+
     useEffect(() => {
         return () => {
             if (jobOffer) {
@@ -54,7 +64,7 @@ export const JobOfferForm = ({
                     validTo: jobOffer.validTo ? jobOffer.validTo.split('T')[0] : '',
                     experience: jobOffer.experience,
                     salaryRange: jobOffer.salaryRange,
-                    address: jobOffer.address['@id'],
+                    address: jobOffer.address,
                 })
 
                 setAddSalaryRange(jobOffer.salaryRange);
@@ -70,7 +80,6 @@ export const JobOfferForm = ({
 
         setErrors(null);
 
-        console.log(data);
         if (data.validTo === '') {
             data.validTo = null;
         }
@@ -91,17 +100,23 @@ export const JobOfferForm = ({
             if (data.salaryRange.upRange !== '') {
                 data.salaryRange.upRange = Number(data.salaryRange.upRange)
             } else {
-                delete data.salaryRange.upRange;
+                data.salaryRange.upRange = null;
             }
         } else {
-            delete data.salaryRange;
+             data.salaryRange = null;
         }
 
         if (!addAddress) {
-            delete data.address;
+            data.address = null;
         }
 
-        console.log(data);
+        console.log(foundAddress)
+        if(!foundAddress ){
+            data.address = foundAddress[0]['@id'];
+        }
+
+        console.log(foundAddress);
+
         data.description = stateToHTML(data.description.getCurrentContent());
         request(data).then(response => {
             afterSubmit(response)
@@ -122,7 +137,27 @@ export const JobOfferForm = ({
     const findErrors = (property) => {
         return errors ? errors.find(el => el.propertyPath === property) : null;
     }
+    const onChangeHandler = async (event) => {
 
+        const search = event.target.value;
+
+        setPostalCode(search);
+
+        if (search === '') {
+            setFoundAddress([]);
+            return;
+        }
+
+        authAxios.get(API_URL + '/addresses?search=' + search).then((response) => {
+            setPostalCodeError(null);
+            setFoundAddress(response.data['hydra:member'])
+        }).catch((e) => {
+            setFoundAddress([]);
+            setPostalCodeError("Podany kod pocztowy jest niepoprawny");
+        });
+
+
+    }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
 
@@ -243,10 +278,29 @@ export const JobOfferForm = ({
                 />
 
                 {addAddress ?
-                    <AddressSearch
-                        register={register}
-                        address={address}
-                    />
+                    (<div>
+                        <label className={"input-label"}>Kod pocztowy</label>
+
+                        <Search
+                            search={postalCode}
+                            onChangeHandler={onChangeHandler}
+                            placeholder={"Podaj kod pocztowy"}
+                        />
+                        <span
+                            className={"font-medium tracking-wide ml-1 text-red-500 text-xs relative bottom-1 "}>
+                {postalCodeError ?? postalCodeError}
+                    </span>
+                        {foundAddress.length > 0 ?
+                            <Select
+                                name={"address"}
+                                label={"Miejscowość"}
+                                register={register}
+                                options={foundAddress}
+                                property={"city"}
+                            />
+                            : null}
+
+                    </div>)
                     : null
                 }
             </div>

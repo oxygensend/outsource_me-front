@@ -18,7 +18,7 @@ export const JobOfferManagement = () => {
     )
     useEffect(() => {
         return () => {
-            getData('/api/job_offers/' + slug).then(data => setJobOffer(data)).catch( e=> {
+            getData('/api/job_offers/' + slug + '/metadata').then(data => setJobOffer(data)).catch( e=> {
                 window.location.href='/logowanie';
             })
         };
