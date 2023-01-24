@@ -9,17 +9,19 @@ import {EditDescriptionModal} from "../../components/Modals/EditDescriptionModal
 import {useParams} from "react-router-dom";
 import profileService from "../../services/profileService";
 import {EditPersonalInfoModal} from "../../components/Modals/EditPersonalInfoModal";
-import {closeModal, getId} from "../../services/utils";
+import {closeModal, getData, getId} from "../../services/utils";
 import {ConfirmModal} from "../../components/Modals/ConfirmModal";
 import authAxios from "../../services/authAxios";
 import {API_URL} from "../../config";
 import {InfoModal} from "../../components/Modals/InfoModal";
 import {ContactModal} from "../../components/Modals/ContactModal";
 import {UploadPhotoModal} from "../../components/Modals/UploadPhotoModal";
+import {OpinionsModal} from "../../components/Modals/OpinionsModal";
 
 
 export const Profile = () => {
     const [personalData, setPersonalData] = useState();
+    const [opinions, setOpinions] = useState();
     const id = getId(useParams().id);
     const openAdvertisementModalContent = "Przed dodaniem zgłoszenia upewnij się, ze w zakładkach na twoim profilu zawarte są wszystkie potrzebne\n" +
         "                informacje. Jeżeli chcesz, coś zmienić zrób to teraz, więcej informacji o Tobie pomaga lepszym\n" +
@@ -41,6 +43,7 @@ export const Profile = () => {
     useEffect(() => {
         return () => {
             getPersonalData();
+            getOpinions();
         };
     }, []);
 
@@ -57,6 +60,7 @@ export const Profile = () => {
             contactModal: false,
             messageModal: false,
             uploadPhotoModal: false,
+            opinionsModal: false,
 
         }
     )
@@ -67,6 +71,16 @@ export const Profile = () => {
                 if (response.status === 200) {
                     setPersonalData(response.data)
                 }
+            }).catch(err => {
+
+            console.log(err);
+        });
+    }
+
+    const getOpinions = () => {
+        getData('/api/users/' +id + '/opinions')
+            .then(response => {
+                    setOpinions(response['hydra:member']);
             }).catch(err => {
 
             console.log(err);
@@ -88,9 +102,7 @@ export const Profile = () => {
 
         })
             .catch((e) => {
-
                 console.log(e);
-
             })
     }
 
@@ -189,6 +201,15 @@ export const Profile = () => {
                 <UploadPhotoModal
                     setShowModals={setShowModals}
                     personalData={personalData}
+                /> : null
+            }
+
+            {showModals.opinionsModal === true ?
+                <OpinionsModal
+                    setShowModals={setShowModals}
+                    opinions={opinions}
+                    personalData={personalData}
+                    setOpinions={setOpinions}
                 /> : null
             }
         </>

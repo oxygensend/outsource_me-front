@@ -15,6 +15,9 @@ export const PersonalInfo = ({personalData, setShowModals}) => {
 
     const checkIfMe = tokenService.checkIfMe(personalData.id);
 
+    const stars = (new Array(5)).fill("none").map((el,i) => i < personalData.opinionsRate  ? "yellow" : "none");
+
+
     const onClickEdit = () => {
         setShowModals((prevState) => ({...prevState, ['personalInfo']: true}));
 
@@ -123,13 +126,13 @@ export const PersonalInfo = ({personalData, setShowModals}) => {
             <div className={" col-start-8 col-span-3 " + (checkIfMe ? '' : 'mt-14')}>
                 <div className={"relative flex flex-col gap-32 cursor-pointer mr-5  mt-10"}>
 
-                    <div>
+                    <div onClick={() => onClickShowModal("opinionsModal", setShowModals)}>
                         <div className={"flex flex-row gap-1"}>
-                            <Star fill={"yellow"} witdh={"2px"}/>
-                            <Star fill={"yellow"}/>
-                            <Star fill={"yellow"}/>
-                            <Star fill={"yellow"}/>
-                            <Star fill={"none"}/>
+                            {stars.map((color,i) => {
+                                return (
+                                    <Star key={i} fill={color} />
+                                );
+                            })}
 
                         </div>
                         <p className={"red-font mt-3"}>{personalData.opinionCount + opinionsStringPluralForm(personalData.opinionCount)}</p>

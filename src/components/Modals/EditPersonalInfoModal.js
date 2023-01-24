@@ -1,5 +1,4 @@
 import {ModalWrapper} from "./ModalWrapper";
-import {EditProfileDescriptionForm} from "../Forms/EditProfileDescriptionForm";
 import React from "react";
 import {EditUserPersonalInfoForm} from "../Forms/EditUserPersonalInfoForm";
 
