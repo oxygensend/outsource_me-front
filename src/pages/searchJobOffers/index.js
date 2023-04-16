@@ -1,11 +1,11 @@
-import {useLocation, useSearchParams} from "react-router-dom";
-import {useEffect, useState} from "react";
-import {getData} from "../../services/utils";
-import {JobOfferSmallCard} from "../../Components/JobOfferCard/JobOfferSmallCard";
-import {SearchPageWrapper} from "../../Components/Search/SearchPageWrapper";
-import InfiniteScroll from "react-infinite-scroller";
-import loader from "../../assets/images/loader.gif";
-import {UserSmallCard} from "../../Components/DeveloperCard/UserSmallCard";
+import { useLocation, useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { getData } from '../../services/utils';
+import { JobOfferSmallCard } from '../../components/JobOfferCard/JobOfferSmallCard';
+import { SearchPageWrapper } from '../../components/Search/SearchPageWrapper';
+import InfiniteScroll from 'react-infinite-scroller';
+import loader from '../../assets/images/loader.gif';
+import { UserSmallCard } from '../../components/DeveloperCard/UserSmallCard';
 
 export const SearchJobOffers = () => {
     const location = useLocation();
@@ -26,14 +26,12 @@ export const SearchJobOffers = () => {
                 setHasMore(true);
                 setCurrentPaginationUrl(fetchUrl + 2);
             }
-
         };
     }, []);
 
     const getJobOffers = (clear = false) => {
-
         getData(currentPaginationUrl)
-            .then(response => {
+            .then((response) => {
                 if (response !== undefined) {
                     const incomingData = response['hydra:member'];
 
@@ -55,50 +53,49 @@ export const SearchJobOffers = () => {
                     const items = [...results, ...incomingData];
                     setResults(items);
                 }
-
-            }).catch(err => {
-            console.log(err);
-        });
-    }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
     if (searchText) {
         return (
             <SearchPageWrapper searchText={searchText}>
-                {!results.length ?
-                    <p className="mb-8 text-center text-gray-500 mt-40 md:text-xl">Brak wyników</p> : null}
+                {!results.length ? (
+                    <p className='mb-8 text-center text-gray-500 mt-40 md:text-xl'>Brak wyników</p>
+                ) : null}
 
-                {results.length > 0 ?
-                    <div className={"pb-14"}>
-                        <p className={"text-2xl font-bold pb-2 pt-5 pl-1 mb-2 ml-20 "}>Oferty zleceń</p>
+                {results.length > 0 ? (
+                    <div className={'pb-14'}>
+                        <p className={'text-2xl font-bold pb-2 pt-5 pl-1 mb-2 ml-20 '}>Oferty zleceń</p>
                         <InfiniteScroll
                             pageStart={2}
                             loadMore={getJobOffers}
                             hasMore={hasMore}
-                            loader={<img src={loader} alt={"loader"} className={"loader"} key={-1} width={40}
-                                         height={40}/>}
+                            loader={
+                                <img src={loader} alt={'loader'} className={'loader'} key={-1} width={40} height={40} />
+                            }
                             useWindow={true}
                         >
-                            <div className={"flex flex-col items-center"}>
+                            <div className={'flex flex-col items-center'}>
                                 {results.map((jobOffer, i) => {
                                     return (
                                         <JobOfferSmallCard
                                             jobOffer={jobOffer}
                                             key={i}
                                             id={i}
-                                            className={"search-card "}/>
-                                    )
+                                            className={'search-card '}
+                                        />
+                                    );
                                 })}
-
                             </div>
                         </InfiniteScroll>
-
-
-                    </div> : null}
-
-
+                    </div>
+                ) : null}
             </SearchPageWrapper>
-        )
+        );
     } else {
         return null;
     }
-}
+};

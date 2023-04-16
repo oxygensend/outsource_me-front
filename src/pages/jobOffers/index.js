@@ -1,25 +1,23 @@
-import {JobOfferPage} from "../../Components/JobOfferPage/JobOfferPage";
-import {useState, useEffect} from "react";
-import {useSearchParams} from "react-router-dom";
-import {defaultFiltersSettings, isInArray} from "../../services/utils";
+import { JobOfferPage } from '../../components/JobOfferPage/JobOfferPage';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { defaultFiltersSettings, isInArray } from '../../services/utils';
 
 export const JobOffers = () => {
-
     const [searchParams, setSearchParams] = useSearchParams(window.location.search);
     const [updatingUrlCompleted, setUpdatingUrlCompleted] = useState(null);
     const [filtersSettings, setFiltersSettings] = useState(defaultFiltersSettings);
 
-    const [castToArray] = ['technologies', 'workTypes']
+    const [castToArray] = ['technologies', 'workTypes'];
 
     useEffect(() => {
         return () => {
-            setFiltersBasedOfSearchParams()
+            setFiltersBasedOfSearchParams();
         };
     }, []);
 
     const setFiltersBasedOfSearchParams = () => {
-
-        let settings = {}
+        let settings = {};
         searchParams.forEach((param, key) => {
             //TODO change this shit
             if (param === 'developers') {
@@ -31,18 +29,15 @@ export const JobOffers = () => {
             } else {
                 settings[key] = isInArray(key, castToArray) ? param.split(',').map(Number) : param;
             }
-        })
+        });
 
-
-        setFiltersSettings(prevState => ({
+        setFiltersSettings((prevState) => ({
             ...prevState,
-            ...settings
-
+            ...settings,
         }));
 
         setUpdatingUrlCompleted(true);
-
-    }
+    };
     if (updatingUrlCompleted) {
         return (
             <JobOfferPage
@@ -51,9 +46,8 @@ export const JobOffers = () => {
                 defaultFiltersSettings={filtersSettings}
                 updatingUrlCompleted={updatingUrlCompleted}
             />
-
         );
     } else {
         return null;
     }
-}
+};

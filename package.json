@@ -12,6 +12,7 @@
     "draft-js-export-html": "^1.4.1",
     "events": "^3.3.0",
     "html-react-parser": "^3.0.4",
+    "html-to-draftjs": "^1.5.0",
     "js-file-download": "^0.4.12",
     "jwt-decode": "^3.1.2",
     "localforage": "^1.10.0",
@@ -31,7 +32,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier": "prettier --write \"{src,tests,example/src}/**/*.{js,ts,jsx,tsx,config.js}\""
   },
   "eslintConfig": {
     "extends": [
@@ -59,6 +61,7 @@
     "autoprefixer": "^10.4.12",
     "file-loader": "^6.2.0",
     "postcss": "^8.4.17",
+    "prettier": "^2.8.7",
     "tailwindcss": "^3.1.8"
   }
 }

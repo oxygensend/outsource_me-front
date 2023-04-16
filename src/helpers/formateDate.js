@@ -1,9 +1,8 @@
-
 export default function formatDate(isoDate) {
-   const date = new Date(isoDate);
+    const date = new Date(isoDate);
 
-   return date.toLocaleDateString("en-GB", {
-       month: "numeric",
-       year: "numeric"
-   });
-};
+    return date.toLocaleDateString('en-GB', {
+        month: 'numeric',
+        year: 'numeric',
+    });
+}
