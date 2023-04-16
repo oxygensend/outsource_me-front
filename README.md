@@ -1,71 +1,68 @@
-# Getting Started with Create React App
+# outsource me
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the fully responsive frontend client for my web application www.outsource-me.pl (IN PROGRESS). The application was created as my engineering work "Project of an application supporting finding orders for programmers". The genesis of the work stems from the  experience and the observation of many threads on community groups in Poland about the lack of availability of a specific tool in the web application market, which would focus primarily on helping to find additional or short-term jobs for programmers.
 
-## Available Scripts
+## Abstract
+Nowadays, more and more companies are looking for programmers to implement various types of projects. At the same time, programmers find it difficult to find the right jobs due to the lack of one specific tool that would enable this. Therefore, in the engineering thesis, a project of a web application supporting finding orders for programmers was presented. Existing solutions that help in finding orders and their advantages and disadvantages, functional and non-functional requirements and use case scenarios were presented. The technologies that were used and the course of application implementation along with the user interface were also described. In addition, to examine the application in terms of performance and how it copes under heavy load, tests were carried out, the results of which are satisfactory and meet the assumptions of the application. To sum up, the result of the work is a responsive web application based on the Client-Server architecture, which supports finding orders for programmers.
 
-In the project directory, you can run:
+## Demo
+https://drive.google.com/file/d/1wuqIrAkS4RgFoyuJ6divJgOSY2Isda-o/view?usp=sharing
 
-### `npm start`
+# Functional requirements
+- Ability to create an account in the application
+    - Selection of the type of account between the client and the programmer.
+    - An email should be sent to the email address with a specially generated URL to confirm the registration.
+    - Once the registration is confirmed, the user will receive an internal notification in the application and an email as a thank you.
+- Ability to log in with registered user account and password.
+- Ability to recover the password.
+    - A specially generated URL for changing the password is sent to the user's email address provided in the form.
+- Ability to log in using a Google account.
+- Viewing the About Us tab containing basic information about how the application works.
+- Viewing of the Contact tab allowing contact with the application administrators.
+- Viewing of job offers and programmer offers.
+- Ability to filter bid results.
+    - Ability to filter by technology.
+    - Ability to filter by bid type (programmer/assignment).
+    - Ability to filter by location.
+    - Ability to filter by job type.
+    - Ability to filter by experience.
+- Ability to sort bid results.
+    - Ability to sort by offer popularity.
+    - Ability to sort by date of addition.
+- After logging in at that time, possibility of displaying offers matched to the user's preferences.
+    - A user logged in as a programmer/contractor, respectively, has the ability to have only the programmer's job/offers matched under his/her preferences, respectively.
+    - Offers are tailored based on components such as: distance from the programmer/offer location, technologies included in the programmer/offer profile, programmer experience, programmer/contractor person reviews.
+- Ability to search for results through the application's internal search engine.
+    - Search for job listings.
+    - Search for users.
+- Ability to view profiles of other users.
+- Ability to view own profile.
+- Ability to edit one's own profile.
+    - Editing personal information.
+    - Changing the profile picture.
+    - Editing the description.
+    - Editing education.
+    - Editing jobs.
+    - Editing known technologies.
+- Ability to view notifications.
+    - Ability to remove a notification from the list.
+- Ability to add a new offer.
+- Ability to update an offer.
+- Ability to automatically expire an offer after time.
+    - Sending a notification internally in the application and to the email address with information about the expiration of the offer to the applicants and the principal.
+- Ability to download the offer manually.
+    - Sending an internal notification and an email with information about the expiration of the offer to the applicants.
+- Ability to apply for an offer.
+    - Based on the user's profile, the user's resume is generated and sent as an application for the offer.
+    - Ability to add attachments and messages to the principal in the application form.
+    - Sending an internal notification in the application and to the email address
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Use case diagram - in Polish
+![img_1.png](img_1.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Stack
+- ReactJS
+- Tailwind CSS
+- ReactRouter
+- yarn
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# outsource_me-front_praca_inzynierska
