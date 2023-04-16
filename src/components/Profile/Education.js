@@ -1,13 +1,11 @@
-import {memo, useEffect, useState} from "react";
-import profileService from "../../services/profileService";
-import {ListElement} from "./ListElement";
-import {ProfileModule} from "./ProfileModule";
-import formatTimePeriod from "../../helpers/formatTimePeriod";
+import { memo, useEffect, useState } from 'react';
+import profileService from '../../services/profileService';
+import { ListElement } from './ListElement';
+import { ProfileModule } from './ProfileModule';
+import formatTimePeriod from '../../helpers/formatTimePeriod';
 
-export const Education = memo(({id, setShowModals, personalData}) => {
-
+export const Education = memo(({ id, setShowModals, personalData }) => {
     const [education, setEducation] = useState();
-
 
     useEffect(() => {
         return () => {
@@ -16,44 +14,48 @@ export const Education = memo(({id, setShowModals, personalData}) => {
     }, []);
 
     const getEducations = () => {
-        profileService.getEducations(id)
-            .then(response => {
+        profileService
+            .getEducations(id)
+            .then((response) => {
                 if (response.status === 200) {
                     setEducation(response.data['hydra:member']);
                 }
-            }).catch(err => {
-
-            console.log(err);
-        });
-    }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
     const onClickAdd = () => {
-        setShowModals((prevState) => ({...prevState, ['education']: true}));
-    }
+        setShowModals((prevState) => ({ ...prevState, ['education']: true }));
+    };
 
     if (education) {
         return (
             <ProfileModule
-                title={"Wykształcenie"}
+                title={'Wykształcenie'}
                 breakLine={true}
                 onClickAdd={onClickAdd}
                 personalData={personalData}
-                editRedirectUrl={"/profil/me/edytuj/wyksztalcenie"}
+                editRedirectUrl={'/profil/me/edytuj/wyksztalcenie'}
             >
-                {education.map((element,i) => {
-                    return <ListElement
-                        name={element.university.name}
-                        timePeriod={element.fieldOfStudy + formatTimePeriod(element.startDate, element.endDate)
-                            + (element.title ? ' - ' + element.title : '')
-                        }
-                        metaData={element.description}
-                        key={i}
-                    >
-                        <p style={{fontSize: "14px"}}> {element.grade ? 'Ocena: ' + element.grade : null}</p>
-
-                    </ListElement>
+                {education.map((element, i) => {
+                    return (
+                        <ListElement
+                            name={element.university.name}
+                            timePeriod={
+                                element.fieldOfStudy +
+                                formatTimePeriod(element.startDate, element.endDate) +
+                                (element.title ? ' - ' + element.title : '')
+                            }
+                            metaData={element.description}
+                            key={i}
+                        >
+                            <p style={{ fontSize: '14px' }}> {element.grade ? 'Ocena: ' + element.grade : null}</p>
+                        </ListElement>
+                    );
                 })}
             </ProfileModule>
-        )
+        );
     } else {
         return null;
     }

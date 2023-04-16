@@ -1,28 +1,26 @@
-import {CheckboxOption} from "./CheckboxOption";
+import { CheckboxOption } from './CheckboxOption';
 
-export const WhatYouLookinFor = ({principles, developers, onFilterClick}) => {
-
+export const WhatYouLookinFor = ({ principles, developers, onFilterClick }) => {
     const onClick = (developers, principles) => {
-        onFilterClick('principles', !principles)
-        onFilterClick('developers', !developers)
+        onFilterClick('principles', !principles);
+        onFilterClick('developers', !developers);
     };
     return (
         <div>
             <CheckboxOption
-                name={"Zlecenia"}
+                name={'Zlecenia'}
                 onClick={() => {
-                    onClick(developers, principles)
+                    onClick(developers, principles);
                 }}
                 active={principles}
             />
             <CheckboxOption
-                name={"Programiści"}
+                name={'Programiści'}
                 onClick={() => {
-                    onClick(developers, principles)
+                    onClick(developers, principles);
                 }}
                 active={developers}
             />
         </div>
     );
-
-}
+};

@@ -1,17 +1,15 @@
-import {FilterSection} from "./FilterSection";
-import {FilterItem} from "./FilterItem";
-import {useState} from "react";
-import {isInArray, searchArray} from "../../services/utils";
-import {TechnologiesBox} from "./TechnologiesBox";
+import { FilterSection } from './FilterSection';
+import { FilterItem } from './FilterItem';
+import { useState } from 'react';
+import { isInArray, searchArray } from '../../services/utils';
+import { TechnologiesBox } from './TechnologiesBox';
 
-export const Technologies = ({technologiesList, onFilterClick, technologies}) => {
-
-    const [search, setSearch] = useState('')
+export const Technologies = ({ technologiesList, onFilterClick, technologies }) => {
+    const [search, setSearch] = useState('');
     const [results, setResults] = useState(null);
     const [selectedTechnologies] = useState(technologies ?? []);
 
     const onChangeHandler = async (event) => {
-
         const search = event.target.value.toLowerCase();
         setSearch(search);
 
@@ -19,14 +17,12 @@ export const Technologies = ({technologiesList, onFilterClick, technologies}) =>
             return setResults(null);
         }
 
-        const results = searchArray(search, technologiesList, 'name')
+        const results = searchArray(search, technologiesList, 'name');
 
-
-        setResults(results.slice(1, 6));
-    }
+        setResults(results.slice(0, 5));
+    };
 
     const onClickTechnology = (technology) => {
-
         if (isInArray(technology.id, selectedTechnologies)) {
             const index = selectedTechnologies.indexOf(technology.id);
             selectedTechnologies.splice(index, 1);
@@ -35,27 +31,17 @@ export const Technologies = ({technologiesList, onFilterClick, technologies}) =>
         }
 
         onFilterClick('technologies', selectedTechnologies);
-    }
+    };
 
     return (
-        <FilterSection subTitle={"Technologie"}>
-            <input
-                className={"search"}
-                type="text"
-                placeholder="Szukaj..."
-                value={search}
-                onChange={onChangeHandler}
+        <FilterSection subTitle={'Technologie'}>
+            <input className={'search'} type='text' placeholder='Szukaj...' value={search} onChange={onChangeHandler} />
+            <TechnologiesBox
+                results={results}
+                technologiesList={technologiesList}
+                onClickTechnology={onClickTechnology}
+                selectedTechnologies={selectedTechnologies}
             />
-                <TechnologiesBox
-                    results={results}
-                    technologiesList={technologiesList}
-                    onClickTechnology={onClickTechnology}
-                    selectedTechnologies={selectedTechnologies}
-
-                />
-
         </FilterSection>
-
     );
-
-}
+};

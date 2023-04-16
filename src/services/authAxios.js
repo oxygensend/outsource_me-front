@@ -1,33 +1,33 @@
-import axios from "axios";
-import {API_URL, SERVER_URL} from "../config";
-import AuthService from "./authService";
-import TokenService from "./tokenService";
+import axios from 'axios';
+import { API_URL, SERVER_URL } from '../config';
+import AuthService from './authService';
+import TokenService from './tokenService';
 
 const instance = axios.create({
     baseURL: SERVER_URL,
     headers: {
-        "Content-Type": "application/json",
-    }
+        'Content-Type': 'application/json',
+    },
 });
 
 instance.interceptors.request.use(
-    config => {
+    (config) => {
         const token = TokenService.getLocalAccessToken();
         if (token) {
-            config.headers["Authorization"] = 'Bearer ' + token;
+            config.headers['Authorization'] = 'Bearer ' + token;
         }
-        return config
+        return config;
     },
-    error => {
+    (error) => {
         return Promise.reject(error);
-    }
+    },
 );
 
 instance.interceptors.response.use(
-    res => {
+    (res) => {
         return res;
     },
-    async err => {
+    async (err) => {
         const originalConfig = err.config;
 
         if (err.response) {
@@ -36,8 +36,8 @@ instance.interceptors.response.use(
 
                 try {
                     const response = await AuthService.refreshToken();
-                    const {token, refreshToken} = response.data;
-                    console.log(token, refreshToken, response.data)
+                    const { token, refreshToken } = response.data;
+                    console.log(token, refreshToken, response.data);
                     console.log(response);
                     TokenService.setLocalAccessToken(token);
                     TokenService.setLocalRefreshToken(refreshToken);
@@ -56,11 +56,9 @@ instance.interceptors.response.use(
             if (err.response.status === 403 && err.response.data) {
                 return Promise.reject(err.response.data);
             }
-
         }
         return Promise.reject(err);
-    }
-)
-
+    },
+);
 
 export default instance;

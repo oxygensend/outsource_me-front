@@ -1,14 +1,13 @@
-import {ModalWrapper} from "./ModalWrapper";
-import React, {useEffect, useRef, useState} from "react";
-import ReactCrop from "react-image-crop";
-import 'react-image-crop/dist/ReactCrop.css'
-import {Button} from "../Button/Button";
-import authAxios from "../../services/authAxios";
-import {API_URL} from "../../config";
-import {closeModal} from "../../services/utils";
+import { ModalWrapper } from './ModalWrapper';
+import React, { useEffect, useRef, useState } from 'react';
+import ReactCrop from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
+import { Button } from '../Button/Button';
+import authAxios from '../../services/authAxios';
+import { API_URL } from '../../config';
+import { closeModal } from '../../services/utils';
 
-export const UploadPhotoModal = ({setShowModals, personalData}) => {
-
+export const UploadPhotoModal = ({ setShowModals, personalData }) => {
     const [src, setSrc] = useState();
     const imgRef = useRef();
     const [crop, setCrop] = useState({
@@ -22,7 +21,6 @@ export const UploadPhotoModal = ({setShowModals, personalData}) => {
     };
 
     const cropImage = () => {
-
         const canvas = document.createElement('canvas');
         const image = imgRef.current;
 
@@ -54,73 +52,60 @@ export const UploadPhotoModal = ({setShowModals, personalData}) => {
     };
 
     const saveImage = () => {
-        let canvas = cropImage()
+        let canvas = cropImage();
 
-        canvas.toBlob(blob => {
-            const file = new File([blob], "image.jpeg");
-            authAxios.post(API_URL + '/users/' + personalData.id + '/upload_photo', {
-                    file: file
-                }, {
-                    headers: {
-                        "Content-Type": "multipart/form-data"
-                    }
-                }
-            ).then(response => {
-                window.flash('Zdjecie zostało zmienione', 'success')
-                closeModal('uploadPhotoModal', setShowModals);
-                window.location.reload();
-            }).catch(e => {
-                console.log(e);
-            })
-
+        canvas.toBlob((blob) => {
+            const file = new File([blob], 'image.jpeg');
+            authAxios
+                .post(
+                    API_URL + '/users/' + personalData.id + '/upload_photo',
+                    {
+                        file: file,
+                    },
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                        },
+                    },
+                )
+                .then((response) => {
+                    window.flash('Zdjecie zostało zmienione', 'success');
+                    closeModal('uploadPhotoModal', setShowModals);
+                    window.location.reload();
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
         });
-    }
+    };
 
     const onFileChange = (e) => {
         e.preventDefault();
         if (e.target.files && e.target.files[0]) {
             selectImage(e.target.files[0]);
         }
-    }
+    };
     return (
-        <ModalWrapper
-            title={"Zdjęcie profilowe"}
-            prop={"uploadPhotoModal"}
-            setShowModals={setShowModals}
-            type={'edit'}
-        >
+        <ModalWrapper title={'Zdjęcie profilowe'} prop={'uploadPhotoModal'} setShowModals={setShowModals} type={'edit'}>
             <input
-                type="file"
-                accept="image/*"
+                type='file'
+                accept='image/*'
                 onChange={(e) => {
-                    onFileChange(e)
+                    onFileChange(e);
                 }}
             />
-            <br/>
-            <br/>
+            <br />
+            <br />
             <div>
                 {src && (
                     <div>
-                        <ReactCrop
-                            crop={crop}
-                            aspect={1}
-                            minWidth={120}
-                            minHeight={120}
-                            onChange={(c) => setCrop(c)}>
-                            <img
-                                src={src}
-                                ref={imgRef}
-                            />
+                        <ReactCrop crop={crop} aspect={1} minWidth={120} minHeight={120} onChange={(c) => setCrop(c)}>
+                            <img src={src} ref={imgRef} />
                         </ReactCrop>
-                        <Button
-                            className={"edit-button mb-8 "}
-                            value={"Zapisz"}
-                            onClick={() => saveImage()}
-                        />
+                        <Button className={'edit-button mb-8 '} value={'Zapisz'} onClick={() => saveImage()} />
                     </div>
                 )}
             </div>
         </ModalWrapper>
     );
-
-}
+};

@@ -1,7 +1,6 @@
-import {CheckboxOption} from "./CheckboxOption";
+import { CheckboxOption } from './CheckboxOption';
 
-export const Sorting = ({options, onFilterClick, selectedOption}) => {
-
+export const Sorting = ({ options, onFilterClick, selectedOption }) => {
     return (
         <div>
             {options.map((option, i) => {
@@ -9,12 +8,13 @@ export const Sorting = ({options, onFilterClick, selectedOption}) => {
                     <CheckboxOption
                         key={i}
                         name={option.placeholder}
-                        onClick={() => { onFilterClick('order', option.name)}}
+                        onClick={() => {
+                            onFilterClick('order', option.name);
+                        }}
                         active={selectedOption === option.name}
-                    />);
+                    />
+                );
             })}
-
-
         </div>
     );
-}
+};

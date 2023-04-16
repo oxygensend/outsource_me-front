@@ -1,21 +1,19 @@
-import React from "react";
-import {Controller} from "react-hook-form";
-import {Editor} from "draft-js";
+import React from 'react';
+import { Controller } from 'react-hook-form';
+import { Editor } from 'draft-js';
 
-const RichText = ({control, placeholder, name='DraftJS'}) => {
-
+const RichText = ({ control, placeholder, name = 'DraftJS' }) => {
     return (
-        <div
-        >
+        <div>
             <Controller
                 name={name}
                 control={control}
-                render={({field: {value, onChange}}) => {
-                    return <Editor placeholder={placeholder} editorState={value} onChange={onChange}/>;
+                render={({ field: { value, onChange } }) => {
+                    return <Editor placeholder={placeholder} editorState={value} onChange={onChange} />;
                 }}
             />
         </div>
     );
-}
+};
 
 export default RichText;

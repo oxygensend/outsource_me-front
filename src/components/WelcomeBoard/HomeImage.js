@@ -1,8 +1,5 @@
-import './WelcomeBoard.css'
+import './WelcomeBoard.css';
 
 export const HomeImage = (props) => {
-    return (
-        <div className={"home-image"}></div>
-
-    );
-}
+    return <div className={'home-image'}></div>;
+};

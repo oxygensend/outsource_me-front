@@ -1,10 +1,10 @@
-import {Link, useLocation, useSearchParams} from "react-router-dom";
-import {useEffect, useState} from "react";
-import {getData} from "../../services/utils";
-import {UserSmallCard} from "../../components/DeveloperCard/UserSmallCard";
-import {SearchPageWrapper} from "../../components/Search/SearchPageWrapper";
-import loader from "../../assets/images/loader.gif";
-import InfiniteScroll from "react-infinite-scroller";
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { getData } from '../../services/utils';
+import { UserSmallCard } from '../../components/DeveloperCard/UserSmallCard';
+import { SearchPageWrapper } from '../../components/Search/SearchPageWrapper';
+import loader from '../../assets/images/loader.gif';
+import InfiniteScroll from 'react-infinite-scroller';
 
 export const SearchUsers = () => {
     const location = useLocation();
@@ -25,14 +25,12 @@ export const SearchUsers = () => {
                 setHasMore(true);
                 setCurrentPaginationUrl(fetchUrl + 2);
             }
-
         };
     }, []);
 
     const getUsers = (clear = false) => {
-
         getData(currentPaginationUrl)
-            .then(response => {
+            .then((response) => {
                 if (response !== undefined) {
                     const incomingData = response['hydra:member'];
 
@@ -54,48 +52,41 @@ export const SearchUsers = () => {
                     const items = [...results, ...incomingData];
                     setResults(items);
                 }
-
-            }).catch(err => {
-            console.log(err);
-        });
-    }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
     if (searchText) {
         return (
             <SearchPageWrapper searchText={searchText}>
+                {!results.length ? (
+                    <p className='mb-8 text-center text-gray-500 mt-40 md:text-xl'>Brak wyników</p>
+                ) : null}
 
-                {!results.length ?
-                    <p className="mb-8 text-center text-gray-500 mt-40 md:text-xl">Brak wyników</p> : null}
-
-                {results.length > 0 ?
-                    <div className={"pb-14"}>
-                        <p className={"text-2xl font-bold pb-2 pt-5 pl-1 mb-2 ml-20 "}>Użytkownicy</p>
+                {results.length > 0 ? (
+                    <div className={'pb-14'}>
+                        <p className={'text-2xl font-bold pb-2 pt-5 pl-1 mb-2 ml-20 '}>Użytkownicy</p>
                         <InfiniteScroll
                             pageStart={2}
                             loadMore={getUsers}
                             hasMore={hasMore}
-                            loader={<img src={loader} alt={"loader"} className={"loader"} key={-1} width={40}
-                                         height={40}/>}
+                            loader={
+                                <img src={loader} alt={'loader'} className={'loader'} key={-1} width={40} height={40} />
+                            }
                             useWindow={true}
                         >
-                            <div className={"flex flex-col items-center"}>
+                            <div className={'flex flex-col items-center'}>
                                 {results.map((user, i) => {
-                                    return (
-                                        <UserSmallCard
-                                            user={user}
-                                            key={i}
-                                            className={"search-card "}/>
-                                    )
+                                    return <UserSmallCard user={user} key={i} className={'search-card '} />;
                                 })}
-
                             </div>
                         </InfiniteScroll>
-
-
-                    </div> : null}
-
+                    </div>
+                ) : null}
             </SearchPageWrapper>
-        )
+        );
     } else {
         return null;
     }
-}
+};

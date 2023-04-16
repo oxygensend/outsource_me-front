@@ -1,25 +1,38 @@
-import './Input.css'
+import './Input.css';
 
-export const Textarea = ({label, name, placeholder, type, required, onChange, register, error, className, wrapperClass}) => {
+export const Textarea = ({
+    label,
+    name,
+    placeholder,
+    type,
+    required,
+    onChange,
+    register,
+    error,
+    className,
+    wrapperClass,
+}) => {
     return (
-        <div className={"mt-2 " + className }>
-            <label className={"input-label"}>{label}</label>
+        <div className={'mt-2 ' + className}>
+            <label className={'input-label'}>{label}</label>
             <textarea
-                className={"textarea"}
+                className={'textarea'}
                 name={name}
                 placeholder={placeholder}
                 required={required}
                 onChange={onChange}
-                {...register(name, {required})}
+                {...register(name, { required })}
             />
 
-            {error ?
+            {error ? (
                 <span
-                    className={"flex mb-0.5 font-medium tracking-wide ml-1 text-red-500 text-xs flex order-2 relative bottom-2 "}>
-                   {error.message ?? error}
-                </span> : null
-            }
-
+                    className={
+                        'flex mb-0.5 font-medium tracking-wide ml-1 text-red-500 text-xs flex order-2 relative bottom-2 '
+                    }
+                >
+                    {error.message ?? error}
+                </span>
+            ) : null}
         </div>
     );
-}
+};

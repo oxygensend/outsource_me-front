@@ -1,11 +1,10 @@
-import jwtDecode from "jwt-decode";
+import jwtDecode from 'jwt-decode';
 
 class TokenService {
-
     #user;
 
     getLocalAccessToken() {
-        return window.localStorage.getItem("accessToken");
+        return window.localStorage.getItem('accessToken');
     }
 
     setLocalAccessToken(accessToken) {
@@ -14,7 +13,7 @@ class TokenService {
     }
 
     getLocalRefreshToken() {
-        return window.localStorage.getItem("refreshToken");
+        return window.localStorage.getItem('refreshToken');
     }
 
     setLocalRefreshToken(refreshToken) {
@@ -26,18 +25,16 @@ class TokenService {
     }
 
     #setUser(accessToken) {
-      this.#user = jwtDecode(accessToken);
+        this.#user = jwtDecode(accessToken);
     }
 
     getUser() {
-        return jwtDecode(this.getLocalAccessToken());
+        return this.getLocalAccessToken() ? jwtDecode(this.getLocalAccessToken()) : null;
     }
 
     checkIfMe(id) {
-        return(this.getLocalAccessToken() &&  this.getUser().id == id )|| id === 'me';
+        return (this.getLocalAccessToken() && this.getUser().id == id) || id === 'me';
     }
-
 }
 
 export default new TokenService();
-
