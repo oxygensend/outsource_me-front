@@ -9,23 +9,30 @@ export const scrollToTop = () => {
 };
 
 export const defaultFiltersSettings = {
-    order: 'newest',
+    order: 'NEWEST',
     developers: null,
     principles: true,
     technologies: [],
     address: null,
     workTypes: [],
+    page: 0,
+    size: 10
 };
 
 export const generateQueryParameters = (filtersSettings) => {
     let url = '';
 
-    if (filtersSettings.order) url += `&order=${filtersSettings.order}`;
-    if (filtersSettings.address) url += `&address.id=${filtersSettings.address}`;
+
+    if (filtersSettings.order) url += `&sort=${filtersSettings.order}`;
+    if (filtersSettings.address) url += `&address.city=${filtersSettings.address}`;
     if (Array.isArray(filtersSettings.technologies) && filtersSettings.technologies.length > 0)
         url += `&technologies=${filtersSettings.technologies.join(',')}`;
     if (Array.isArray(filtersSettings.workTypes) && filtersSettings.workTypes.length > 0)
         url += `&workTypes=${filtersSettings.workTypes.join(',')}`;
+
+
+    url += `&page=${filtersSettings.page}`
+    url += `&size=${filtersSettings.size}`
 
     return url;
 };
@@ -88,7 +95,7 @@ export const deleteElementFromArray = (array, element) => {
 };
 
 export const getId = (id) => {
-    return id === 'me' && tokenService.getLocalAccessToken() ? tokenService.getUser().id : id;
+    return id === 'me' && tokenService.getLocalAccessToken() ? tokenService.getUserId() : id;
 };
 
 export const closeModal = (modalName, setShowModals) => {
@@ -151,14 +158,15 @@ export const checkUserRoles = (checkRoles, id) => {
                 }
                 break;
             case ROLE_DEVELOPER:
-                if (tokenService.getUser().accountType !== ROLE_DEVELOPER) return false;
+                if (!tokenService.getUser().roles.includes(ROLE_DEVELOPER)) return false;
                 break;
             case ROLE_PRINCIPLE:
-                if (tokenService.getUser().accountType !== ROLE_PRINCIPLE) return false;
+                if (!tokenService.getUser().roles.includes(ROLE_PRINCIPLE)) return false;
                 break;
             default:
                 return false;
         }
+        console.log("X")
     }
 
     return true;

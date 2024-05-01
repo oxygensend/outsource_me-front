@@ -76,9 +76,9 @@ export const Profile = () => {
     };
 
     const getOpinions = () => {
-        getData('/api/users/' + id + '/opinions')
+        getData('/opinions?receiver=' + id)
             .then((response) => {
-                setOpinions(response['hydra:member']);
+                setOpinions(response);
             })
             .catch((err) => {
                 console.log(err);

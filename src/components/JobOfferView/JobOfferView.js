@@ -8,11 +8,28 @@ import parse from 'html-react-parser';
 
 export const JobOfferView = ({ jobOffer }) => {
     const workTypeInfoMappings = {
-        remote: 'Oferta całkowicie zdalna',
-        office: 'Oferta z praca w biurze',
-        hybrid: 'Możliwość pracy zdalnej i z biura',
-        negotiations: 'Miejsce pracy do ustalenia',
+        REMOTE: 'Oferta całkowicie zdalna',
+        OFFICE: 'Oferta z praca w biurze',
+        HYBRID: 'Możliwość pracy zdalnej i z biura',
+        NEGOTIATIONS: 'Miejsce pracy do ustalenia',
     };
+
+    const experienceMappings = {
+        SENIOR: 'Senior',
+        JUNIOR: 'Junior',
+        MID: 'Mid',
+        EXPERT: 'Expert',
+        TRAINEE: 'Stażysta'
+    }
+
+    const formOfEmploymentMappings = {
+        FULL_TIME: "Pełen etat",
+        PART_TIME: "Niepełny etat",
+        CONTRACT: "B2B",
+        FREELANCE: "Freelance",
+        INTERNSHIP: 'Staż',
+    }
+
 
     return (
         <div className={'profile-container full-height'}>
@@ -22,7 +39,7 @@ export const JobOfferView = ({ jobOffer }) => {
                         to={'/profil/' + jobOffer.user.id}
                         children={
                             <img
-                                src={SERVER_URL + '/' + jobOffer.user.thumbnailPath}
+                                src={jobOffer.user.thumbnailPath}
                                 width={54}
                                 height={54}
                                 className={'rounded-2xl border-2  '}
@@ -47,7 +64,7 @@ export const JobOfferView = ({ jobOffer }) => {
                 <p className={'joboffer-title-font'}>{jobOffer.name}</p>
                 <p className={'joboffer-company-font mt-2'}>{jobOffer?.comapnyName ?? 'Oferta prywatna'}</p>
 
-                <p className={'joboffer-workType-font mt-4'}>{workTypeInfoMappings[jobOffer.workType[0].name]}</p>
+                <p className={'joboffer-workType-font mt-4'}>{workTypeInfoMappings[jobOffer.workTypes[0]]}</p>
             </div>
 
             <hr className={'col-span-full mt-5'} style={{ backgroundColor: '#0F528B', opacity: '0.8' }} />
@@ -57,18 +74,18 @@ export const JobOfferView = ({ jobOffer }) => {
                     <p className={'font-module pb-2'}>{'Technologie:'}</p>
                     <div className={'flex flex-row gap-5  mt-2 flex-wrap '}>
                         {jobOffer.technologies.map((technology, i) => {
-                            return <Technology name={technology.name} key={i} />;
+                            return <Technology name={technology} key={i} />;
                         })}
                     </div>
                 </div>
                 <div className={'col-start-2  flex gap-2 col-end-10 mt-5'}>
                     <p className={'font-module'}>Wymagania: </p>
-                    <p className={'font-submodule'}>{jobOffer.experience}</p>
+                    <p className={'font-submodule'}>{experienceMappings[jobOffer.experience]}</p>
                 </div>
 
                 <div className={'col-start-2 flex gap-2 col-end-10 mt-5'}>
                     <p className={'font-module'}>Wymiar pracy: </p>
-                    <p className={'font-submodule'}>{jobOffer.formOfEmployment.name}</p>
+                    <p className={'font-submodule'}>{formOfEmploymentMappings[jobOffer.formOfEmployment]}</p>
                 </div>
 
                 <div className={'col-start-2 gap-2 col-end-10 mt-5 mb-10'}>

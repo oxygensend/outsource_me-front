@@ -37,6 +37,7 @@ import { Statute } from './pages/statute';
 function App() {
     window.flash = (message, type = 'success') => Bus.emit('flash', { message, type });
     const user = tokenService.getLocalAccessToken();
+    console.log(user)
 
     return (
         <Router>

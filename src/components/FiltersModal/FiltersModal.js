@@ -19,15 +19,15 @@ export const FiltersModal = ({
 }) => {
     const sortOptions = [
         {
-            name: 'newest',
+            name: 'NEWEST',
             placeholder: 'Najnowsze',
         },
         {
-            name: 'popular',
+            name: 'POPULAR',
             placeholder: 'Popularne',
         },
         {
-            name: 'for-you',
+            name: 'FOR_YOU',
             placeholder: 'Dla ciebie',
         },
     ];
@@ -64,7 +64,7 @@ export const FiltersModal = ({
             <Localization
                 addressesList={addressesList}
                 onFilterClick={onFilterClick}
-                address={addressesList.find((element) => element.id == address)}
+                address={addressesList.find((element) => element.city == address)}
             />
 
             <Technologies

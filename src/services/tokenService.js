@@ -31,9 +31,13 @@ class TokenService {
     getUser() {
         return this.getLocalAccessToken() ? jwtDecode(this.getLocalAccessToken()) : null;
     }
+    getUserId() {
+        return this.getLocalAccessToken() ? jwtDecode(this.getLocalAccessToken()).businessId : null;
+    }
+
 
     checkIfMe(id) {
-        return (this.getLocalAccessToken() && this.getUser().id == id) || id === 'me';
+        return (this.getLocalAccessToken() && this.getUserId() == id) || id === 'me';
     }
 }
 

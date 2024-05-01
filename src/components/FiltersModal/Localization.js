@@ -24,7 +24,7 @@ export const Localization = ({ addressesList, onFilterClick, address }) => {
     const onSearchedElementClick = (address) => {
         setSelectedAddress(address);
         setResults([]);
-        onFilterClick('address', address.id);
+        onFilterClick('address', address.city);
     };
 
     const onClickClearButton = () => {

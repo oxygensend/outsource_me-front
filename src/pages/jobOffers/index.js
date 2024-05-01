@@ -18,6 +18,7 @@ export const JobOffers = () => {
 
     const setFiltersBasedOfSearchParams = () => {
         let settings = {};
+        console.log(searchParams)
         searchParams.forEach((param, key) => {
             //TODO change this shit
             if (param === 'developers') {

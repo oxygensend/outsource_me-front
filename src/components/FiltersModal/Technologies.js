@@ -23,11 +23,11 @@ export const Technologies = ({ technologiesList, onFilterClick, technologies }) 
     };
 
     const onClickTechnology = (technology) => {
-        if (isInArray(technology.id, selectedTechnologies)) {
-            const index = selectedTechnologies.indexOf(technology.id);
+        if (isInArray(technology.name, selectedTechnologies)) {
+            const index = selectedTechnologies.indexOf(technology.name);
             selectedTechnologies.splice(index, 1);
         } else {
-            selectedTechnologies.push(technology.id);
+            selectedTechnologies.push(technology.name);
         }
 
         onFilterClick('technologies', selectedTechnologies);

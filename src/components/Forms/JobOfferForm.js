@@ -33,9 +33,9 @@ export const JobOfferForm = ({ jobOffer, employmentOptions, workTypeOptions, aft
         defaultValues: { description: editorState },
     });
     const [errors, setErrors] = useState(null);
-    const experienceOptions = ['Senior', 'Junior', 'Mid', 'Expert', 'Stażysta'];
+    const experienceOptions = {Senior: 'SENIOR' , Junior: 'JUNIOR', Mid: 'MID', Expert: 'EXPERT', Stażysta:'TRAINEE'};
     const currencyOptions = ['PLN', 'EUR', 'USD'];
-    const paymentsOptions = ['Brutto', 'Netto'];
+    const paymentsOptions = {Brutto: 'BRUTTO', Netto: 'NETTO'};
     const [addAddress, setAddAddress] = useState(false);
     const [addSalaryRange, setAddSalaryRange] = useState(false);
     const [selectedTechnologies, setSelectedTechnologies] = useState([]);
@@ -83,6 +83,9 @@ export const JobOfferForm = ({ jobOffer, employmentOptions, workTypeOptions, aft
         }
         data.workType = [data.workType];
         data.technologies = selectedTechnologies;
+        data.experience = experienceOptions[data.experience]
+        console.log(data.experience)
+
 
         if (addSalaryRange) {
             data.salaryRange.downRange = Number(data.salaryRange.downRange);
@@ -92,6 +95,9 @@ export const JobOfferForm = ({ jobOffer, employmentOptions, workTypeOptions, aft
             } else {
                 data.salaryRange.upRange = null;
             }
+
+            data.salaryRange.type = paymentsOptions[data.salaryRange.type]
+
         } else {
             data.salaryRange = null;
         }
@@ -137,10 +143,10 @@ export const JobOfferForm = ({ jobOffer, employmentOptions, workTypeOptions, aft
         }
 
         authAxios
-            .get(API_URL + '/addresses?search=' + search)
+            .get(API_URL + '/static-data/addresses?search=' + search)
             .then((response) => {
                 setPostalCodeError(null);
-                setFoundAddress(response.data['hydra:member']);
+                setFoundAddress(response.data);
             })
             .catch((e) => {
                 setFoundAddress([]);
@@ -168,7 +174,8 @@ export const JobOfferForm = ({ jobOffer, employmentOptions, workTypeOptions, aft
                 className={'jobPosition-select'}
                 register={register}
                 options={employmentOptions}
-                property={'name'}
+                property={'displayName'}
+                idProperty={'name'}
             />
 
             <Select
@@ -177,7 +184,8 @@ export const JobOfferForm = ({ jobOffer, employmentOptions, workTypeOptions, aft
                 className={'jobPosition-select'}
                 register={register}
                 options={workTypeOptions}
-                property={'name'}
+                property={'displayName'}
+                idProperty={'name'}
             />
 
             <Select
@@ -185,7 +193,7 @@ export const JobOfferForm = ({ jobOffer, employmentOptions, workTypeOptions, aft
                 label={'Wymagania *'}
                 className={'jobPosition-select'}
                 register={register}
-                options={experienceOptions}
+                options={Object.keys(experienceOptions)}
             />
             <div className={'mt-2'}>
                 <label className={'input-label'}>Dodaj opis</label>
@@ -249,7 +257,7 @@ export const JobOfferForm = ({ jobOffer, employmentOptions, workTypeOptions, aft
                         label={'Typ wynagrodzenia *'}
                         className={'jobPosition-select'}
                         register={register}
-                        options={paymentsOptions}
+                        options={Object.keys(paymentsOptions)}
                     />
                 </div>
             ) : null}

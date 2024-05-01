@@ -11,7 +11,7 @@ export class LoginForm extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            email: '',
+            identity: '',
             password: '',
             errors: '',
         };
@@ -37,7 +37,7 @@ export class LoginForm extends React.Component {
     clearPasswordInputs() {
         this.setState({
             password: '',
-            email: '',
+            identity: '',
         });
     }
 
@@ -53,8 +53,8 @@ export class LoginForm extends React.Component {
             .then((response) => {
                 if (response.status === 201 || response.status === 200) {
                     this.setState({ successfulResponse: response.data });
-                    tokenService.setLocalAccessToken(response.data.token);
-                    tokenService.setLocalRefreshToken(response.data.refresh_token);
+                    tokenService.setLocalAccessToken(response.data.accessToken);
+                    tokenService.setLocalRefreshToken(response.data.refreshToken);
                     window.location.href = '/';
                 }
             })
@@ -73,13 +73,13 @@ export class LoginForm extends React.Component {
                 </div>
                 <div className={'flex flex-col gap-2 '}>
                     <Input
-                        name={'email'}
+                        name={'identity'}
                         label={'Email'}
                         type={'text'}
                         placeholder={'test@test.com'}
                         class={'mb-2'}
                         required={true}
-                        value={this.state.email}
+                        value={this.state.identity}
                         onChange={this.handleInputChange}
                     />
 

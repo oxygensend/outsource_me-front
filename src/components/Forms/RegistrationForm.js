@@ -29,7 +29,7 @@ export class RegistrationForm extends React.Component {
 
     getFormData() {
         const { developerChecked, principalChecked, errors, ...data } = this.state;
-        data.accountType = developerChecked ? 'Developer' : 'Principle';
+        data.accountType = developerChecked ? 'DEVELOPER' : 'PRINCIPLE';
         return data;
     }
 
@@ -59,7 +59,12 @@ export class RegistrationForm extends React.Component {
     }
 
     findErrors(property) {
-        return this.state.errors ? this.state.errors.find((el) => el.propertyPath === property) : null;
+        console.log(this.state.errors)
+        return this.state.errors?.subExceptions ? this.state.errors.subExceptions.find((el) => el.field === property) : null;
+    }
+
+    findDuplicatedEmailError(){
+        return this.state.errors ? this.state.errors.message : null;
     }
 
     clearPasswordInputs() {
@@ -84,8 +89,9 @@ export class RegistrationForm extends React.Component {
                 }
             })
             .catch((err) => {
-                if (err.response.status === 422 || err.response.status === 400) {
-                    this.setState({ errors: err.response.data.violations });
+                if (err.response.status === 400) {
+                    console.log(err.response.data)
+                    this.setState({ errors: err.response.data});
                     this.clearPasswordInputs();
                 }
             });
@@ -163,7 +169,7 @@ export class RegistrationForm extends React.Component {
                                 required={true}
                                 value={this.state.email}
                                 onChange={this.handleInputChange}
-                                error={this.findErrors('email')}
+                                error={this.findDuplicatedEmailError()}
                             />
                             <Input
                                 name={'name'}
@@ -208,7 +214,7 @@ export class RegistrationForm extends React.Component {
                                 required={true}
                                 value={this.state.passwordConfirmation}
                                 onChange={this.handleInputChange}
-                                error={this.findErrors('')}
+                                error={this.findErrors(null)}
                             />
 
                             <GoogleButton>Dołącz przez Google</GoogleButton>

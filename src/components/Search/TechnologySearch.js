@@ -16,18 +16,18 @@ export const TechnologySearch = ({ selectedTechnologies, setSelectedTechnologies
 
     useEffect(() => {
         return () => {
-            getData('/api/technologies').then((technologies) => {
-                setTechnologiesList(technologies['hydra:member']);
+            getData('/static-data/technologies').then((technologies) => {
+                setTechnologiesList(technologies);
             });
         };
     }, []);
 
     const onClickTechnology = (technology) => {
-        if (isInArray(technology['@id'], selectedTechnologies)) {
-            const index = selectedTechnologies.indexOf(technology['@id']);
+        if (isInArray(technology.name, selectedTechnologies)) {
+            const index = selectedTechnologies.indexOf(technology.name);
             selectedTechnologies.splice(index, 1);
         } else {
-            selectedTechnologies.push(technology['@id']);
+            selectedTechnologies.push(technology.name);
         }
 
         setReload(true);
@@ -54,7 +54,7 @@ export const TechnologySearch = ({ selectedTechnologies, setSelectedTechnologies
                 technologiesList={technologiesList}
                 onClickTechnology={onClickTechnology}
                 selectedTechnologies={selectedTechnologies}
-                filterProperty={'@id'}
+                filterProperty={'name'}
             />
         </div>
     );

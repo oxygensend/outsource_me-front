@@ -4,6 +4,7 @@ export const WhatYouLookinFor = ({ principles, developers, onFilterClick }) => {
     const onClick = (developers, principles) => {
         onFilterClick('principles', !principles);
         onFilterClick('developers', !developers);
+        onFilterClick('page', 0)
     };
     return (
         <div>

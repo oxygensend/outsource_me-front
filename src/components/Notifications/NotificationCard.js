@@ -8,7 +8,7 @@ import parse from 'html-react-parser';
 
 export const NotificationCard = ({ setShowModals, setSelectedNotification, notification }) => {
     const [reload, setReload] = useState();
-    const { id } = TokenService.getUser();
+    const  id  = TokenService.getUserId();
 
     useEffect(() => {
         setReload(false);

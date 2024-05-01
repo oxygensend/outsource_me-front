@@ -13,17 +13,17 @@ export const NewJobOffer = () => {
 
     useEffect(() => {
         return () => {
-            Promise.all([getData('/api/form_of_employments'), getData('/api/work_types')]).then(
+            Promise.all([getData('/static-data/form-of-employments'), getData('/static-data/work-types')]).then(
                 ([formOfEmployments, workTypes]) => {
-                    setFormOfEmployments(formOfEmployments['hydra:member']);
-                    setWorkTypes(workTypes['hydra:member']);
+                    setFormOfEmployments(formOfEmployments);
+                    setWorkTypes(workTypes);
                 },
             );
         };
     }, []);
 
     const request = async (data) => {
-        return authAxios.post(API_URL + '/job_offers', data);
+        return authAxios.post(API_URL + '/job-offers', data);
     };
 
     const afterSubmit = (data) => {

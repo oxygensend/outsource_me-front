@@ -10,6 +10,7 @@ import recruiting from '../../assets/images/recruiting.svg';
 import tokenService from '../../services/tokenService';
 import { Button } from '../Button/Button';
 import { onClickShowModal, opinionsStringPluralForm } from '../../services/utils';
+import { check } from 'prettier';
 
 export const PersonalInfo = ({ personalData, setShowModals }) => {
     const checkIfMe = tokenService.checkIfMe(personalData.id);
@@ -45,12 +46,13 @@ export const PersonalInfo = ({ personalData, setShowModals }) => {
     };
 
     const checkIfUserIsDeveloper = () => {
-        return personalData.accountType === 'Developer';
+        return personalData.accountType === 'DEVELOPER';
     };
     const checkIfUserHaveAnyJobOffer = () => {
         const activeJobOffers = personalData.jobOffers ? personalData.jobOffers.filter((el) => !el.archived) : [];
-        return personalData.accountType === 'Principle' && activeJobOffers.length > 0;
+        return personalData.accountType === 'PRINCIPLE' && activeJobOffers.length > 0;
     };
+
 
     return (
         <div className={'col-span-full grid grid-cols-10'}>
@@ -78,7 +80,7 @@ export const PersonalInfo = ({ personalData, setShowModals }) => {
                 <p className={'profile-fullname mt-2'}>{personalData.fullName}</p>
                 <p className={' gray-font text-red-300'}>
                     {accountType(personalData.accountType) +
-                        (personalData.accountType === 'Developer' && personalData.experience
+                        (personalData.accountType === 'DEVELOPER' && personalData.experience
                             ? '(' + personalData.experience + ')'
                             : '')}
                 </p>

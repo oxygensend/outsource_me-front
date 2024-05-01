@@ -20,7 +20,7 @@ class AuthService {
     }
 
     async register(data) {
-        return axios.post(API_URL + '/register', data, {
+        return axios.post(API_URL + '/auth/register', data, {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ class AuthService {
     }
 
     async login(data) {
-        return axios.post(API_URL + '/login', data, {
+        return axios.post(API_URL + '/auth/access_token', data, {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ class AuthService {
     }
 
     async resetPassword(data) {
-        return axios.post(API_URL + '/reset_password_execute', data, {
+        return axios.post(API_URL + '/auth/reset_password', data, {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ class AuthService {
     }
 
     async sendResetPasswordLink(data) {
-        return axios.post(API_URL + '/reset_password_send_link', data, {
+        return axios.post(API_URL + '/auth/resend_password_reset_link', data, {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',

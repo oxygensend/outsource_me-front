@@ -11,7 +11,7 @@ export const JobOffer = () => {
 
     useEffect(() => {
         return () => {
-            getData('/api/job_offers/' + slug).then((jobOffer) => setJobOffer(jobOffer));
+            getData('/job-offers/' + slug).then((jobOffer) => setJobOffer(jobOffer));
         };
     }, []);
 

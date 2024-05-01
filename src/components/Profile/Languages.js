@@ -36,7 +36,6 @@ export const Languages = memo(({ id, setShowModals, personalData }) => {
         setShowModals((prevState) => ({ ...prevState, ['languages']: true }));
     };
 
-    if (languages) {
         return (
             <ProfileModule
                 title={'Języki'}
@@ -46,12 +45,10 @@ export const Languages = memo(({ id, setShowModals, personalData }) => {
                 personalData={personalData}
                 editRedirectUrl={'/profil/me/edytuj/jezyki'}
             >
-                {languages.map((element) => {
+                
+                {languages ? languages.map((element) => {
                     return <ListElement name={element.name} metaData={element.description} key={element['@id']} />;
-                })}
+                }): null}
             </ProfileModule>
         );
-    } else {
-        return null;
-    }
 });

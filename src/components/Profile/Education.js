@@ -29,7 +29,6 @@ export const Education = memo(({ id, setShowModals, personalData }) => {
         setShowModals((prevState) => ({ ...prevState, ['education']: true }));
     };
 
-    if (education) {
         return (
             <ProfileModule
                 title={'Wykształcenie'}
@@ -38,7 +37,7 @@ export const Education = memo(({ id, setShowModals, personalData }) => {
                 personalData={personalData}
                 editRedirectUrl={'/profil/me/edytuj/wyksztalcenie'}
             >
-                {education.map((element, i) => {
+                {education ? education.map((element, i) => {
                     return (
                         <ListElement
                             name={element.university.name}
@@ -53,10 +52,7 @@ export const Education = memo(({ id, setShowModals, personalData }) => {
                             <p style={{ fontSize: '14px' }}> {element.grade ? 'Ocena: ' + element.grade : null}</p>
                         </ListElement>
                     );
-                })}
+                }): null}
             </ProfileModule>
         );
-    } else {
-        return null;
-    }
 });

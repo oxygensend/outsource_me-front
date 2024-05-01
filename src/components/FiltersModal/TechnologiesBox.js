@@ -17,7 +17,7 @@ export const TechnologiesBox = ({
                               key={i}
                               name={technology.name}
                               onClick={() => onClickTechnology(technology)}
-                              active={isInArray(technology[filterProperty ?? 'id'], selectedTechnologies)}
+                              active={isInArray(technology.name, selectedTechnologies)}
                           />
                       );
                   })
@@ -28,7 +28,7 @@ export const TechnologiesBox = ({
                               key={i}
                               name={technology.name}
                               onClick={() => onClickTechnology(technology)}
-                              active={isInArray(technology[filterProperty ?? 'id'], selectedTechnologies)}
+                              active={isInArray(technology.name, selectedTechnologies)}
                           />
                       );
                   })

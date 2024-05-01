@@ -8,7 +8,7 @@ import loader from '../../assets/images/loader.gif';
 export const NotificationPage = ({ setShowModals, setSelectedNotification, notifications, setNotifications }) => {
     const [totalNumberOfItems, setTotalNumberOfItems] = useState();
     const [hasMore, setHasMore] = useState(false);
-    const { id } = TokenService.getUser();
+    const  id  = TokenService.getUserId;
     const [currentPaginationUrl, setCurrentPaginationUrl] = useState(
         '/api/users/' + id + '/notifications?order[createdAt]=desc',
     );

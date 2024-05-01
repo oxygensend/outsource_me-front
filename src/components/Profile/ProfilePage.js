@@ -12,7 +12,7 @@ import { JobOffers } from './JobOffers';
 
 export const ProfilePage = memo(({ style, setShowModals, personalData, languages }) => {
     const { id } = useParams();
-    const DEVELOPER_ROLE = 'Developer';
+    const DEVELOPER_ROLE = 'DEVELOPER';
 
     const getTechnologies = () => {
         profileService

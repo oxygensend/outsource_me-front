@@ -10,7 +10,7 @@ class ProfileService {
         return axios.get(API_URL + '/users/' + id + '/technologies');
     }
     async getJobPositions(id) {
-        return axios.get(API_URL + '/users/' + id + '/job_positions');
+        return axios.get(API_URL + '/users/' + id + '/job-positions');
     }
     async getEducations(id) {
         return axios.get(API_URL + '/users/' + id + '/educations');

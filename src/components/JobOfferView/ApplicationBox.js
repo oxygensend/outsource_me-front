@@ -4,11 +4,24 @@ import moment from 'moment';
 import tokenService from '../../services/tokenService';
 
 export const ApplicationBox = ({ jobOffer }) => {
-    const salaryRange = jobOffer.salaryRange
-        ? jobOffer.salaryRange.salaryRange +
-          (jobOffer?.salaryRange?.type ? ' (' + jobOffer.salaryRange.type + ')' : null)
-        : 'Nie podano';
 
+    const createSalaryRange = () => {
+        const salaryRange = jobOffer?.salaryRange
+        if(salaryRange === null){
+            return 'Nie podano'
+        }
+
+        let value = salaryRange.downRange;
+        if(salaryRange.upRange){
+            value += ' - ' + salaryRange.upRange
+        }
+
+        value += ' ' + salaryRange.currency + " (" + salaryRange.type.toLowerCase() + ") "
+
+        return value
+    }
+    const salaryRange = createSalaryRange()
+    
     return (
         <div className={'application-box'}>
             <div className={'box-wrapper'}>

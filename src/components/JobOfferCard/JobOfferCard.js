@@ -41,6 +41,7 @@ export const JobOfferCard = ({ jobOffer }) => {
                     <h1 className={'text-xl text-red-700 font-bold mb-1'}>{jobOffer.name}</h1>
                     {!showWholeDescription ? parse(jobOffer.shortDescription) : parse(jobOffer.description)}
 
+                    {jobOffer.shortDescription !== jobOffer.description ?
                     <p
                         className={
                             'underline cursor-pointer text-blue-700 hover:text-blue-500 no-underline ' +
@@ -49,7 +50,7 @@ export const JobOfferCard = ({ jobOffer }) => {
                         onClick={() => setShowWholeDescription(true)}
                     >
                         Pokaż więcej...{' '}
-                    </p>
+                    </p> : null }
                 </div>
             </div>
 

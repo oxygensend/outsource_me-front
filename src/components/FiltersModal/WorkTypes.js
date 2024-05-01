@@ -7,11 +7,11 @@ export const WorkTypes = ({ workTypesList, onFilterClick, workTypes }) => {
     const [selectedWorkTypes] = useState(workTypes);
 
     const onClickWorkType = (workType) => {
-        if (isInArray(workType.id, selectedWorkTypes)) {
-            const index = selectedWorkTypes.indexOf(workType.id);
+        if (isInArray(workType.name, selectedWorkTypes)) {
+            const index = selectedWorkTypes.indexOf(workType.name);
             selectedWorkTypes.splice(index, 1);
         } else {
-            selectedWorkTypes.push(workType.id);
+            selectedWorkTypes.push(workType.name);
         }
 
         onFilterClick('workTypes', selectedWorkTypes);
@@ -25,9 +25,9 @@ export const WorkTypes = ({ workTypesList, onFilterClick, workTypes }) => {
                           return (
                               <FilterItem
                                   key={i}
-                                  name={workType.name}
+                                  name={workType.displayName}
                                   onClick={() => onClickWorkType(workType)}
-                                  active={isInArray(workType.id, selectedWorkTypes)}
+                                  active={isInArray(workType.name, selectedWorkTypes)}
                               />
                           );
                       })

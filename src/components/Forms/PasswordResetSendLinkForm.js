@@ -7,7 +7,8 @@ import './Form.css';
 export const PasswordResetSendLinkForm = (props) => {
     const [email, setEmail] = useState(null);
     const [errors, setErrors] = useState(null);
-    const [response, setResponse] = useState(null);
+    const [success, setSuccess] = useState(false);
+    const message = "Email został przesłany blabla"
 
     const handleInputChange = (event) => {
         const target = event.target;
@@ -27,23 +28,24 @@ export const PasswordResetSendLinkForm = (props) => {
 
         AuthService.sendResetPasswordLink(data)
             .then((response) => {
-                if (response.status === 200) {
-                    setResponse(response.data);
+                console.log(response)
+                if (response.status === 202) {
+                    setSuccess(true)
                 }
             })
             .catch((err) => {
-                if (err.response.status === 422 || err.response.status === 400) {
-                    setErrors(err.response.data.detail);
+                if (err.response.status === 404 || err.response.status === 400) {
+                    setErrors(err.response.data.message);
                 }
             });
     };
-    if (response) {
+    if (success) {
         return (
             <div className={'login-content success'}>
-                <p className={''}> {response.description}</p>
+                <p className={''}> {message}</p>
                 <p
                     className={'underline cursor-pointer text-blue-700 hover:text-blue-500'}
-                    onClick={() => setResponse(null)}
+                    onClick={() => setSuccess(false)}
                 >
                     Spróbuj jeszcze raz{' '}
                 </p>

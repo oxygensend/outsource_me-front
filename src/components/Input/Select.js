@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Select = ({ options, register, label, name, className, property }) => {
+export const Select = ({ options, register, label, name, className, property, idProperty }) => {
     return (
         <div className={'flex flex-col mt-2'}>
             <label className={'input-label'}>{label}</label>
@@ -8,7 +8,7 @@ export const Select = ({ options, register, label, name, className, property }) 
                 {options.map((el, i) => {
                     if (property) {
                         return (
-                            <option key={i} value={el['@id']}>
+                            <option key={i} value={el[idProperty]}>
                                 {el[property]}
                             </option>
                         );

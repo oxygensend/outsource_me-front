@@ -17,7 +17,7 @@ export const JobOfferPage = ({ defaultFiltersSettings, searchParams, updatingUrl
     const [filtersSettings, setFiltersSettings] = useState(defaultFiltersSettings);
     const [jobOffers, setJobOffers] = useState([]);
     const [totalNumberOfItems, setTotalNumberOfItems] = useState();
-    const [currentPaginationUrl, setCurrentPaginationUrl] = useState('/api/job_offers');
+    const [currentPaginationUrl, setCurrentPaginationUrl] = useState('/job-offers');
     const [hasMore, setHasMore] = useState(false);
     const [isInitialLoad, setIsInitialLoad] = useState(true);
     const [addressesList, setAddressesList] = useState([]);
@@ -29,13 +29,13 @@ export const JobOfferPage = ({ defaultFiltersSettings, searchParams, updatingUrl
     useEffect(() => {
         return () => {
             Promise.all([
-                getData('/api/addresses'),
-                getData('/api/technologies?order[featured]=desc'),
-                getData('/api/work_types'),
+                getData('/static-data/addresses'),
+                getData('/static-data/technologies'),
+                getData('/static-data/work-types'),
             ]).then(([addresses, technologies, work_types]) => {
-                setAddressesList(addresses['hydra:member']);
-                setTechnologiesList(technologies['hydra:member']);
-                setWorkTypesList(work_types['hydra:member']);
+                setAddressesList(addresses);
+                setTechnologiesList(technologies);
+                setWorkTypesList(work_types);
             });
         };
     }, []);
@@ -57,21 +57,21 @@ export const JobOfferPage = ({ defaultFiltersSettings, searchParams, updatingUrl
     /* fetch job offer data  */
     const getJobOffers = (clear = false) => {
         const params = generateQueryParameters(filtersSettings);
-        const url = (isInitialLoad ? updateEndpointUrl() : currentPaginationUrl) + (isInitialLoad ? params : '');
+        const url =  updateEndpointUrl()  +  params;
 
         getData(url)
             .then((response) => {
                 if (response !== undefined) {
-                    const incomingData = response['hydra:member'];
+                    const incomingData = response['data'];
 
-                    setCurrentPaginationUrl(response['hydra:view']['hydra:next']);
-                    setTotalNumberOfItems(response['hydra:totalItems']);
+                    setTotalNumberOfItems(response['numberOfElements']);
                     setIsInitialLoad(false);
 
-                    if (!response['hydra:view']['hydra:next']) {
-                        setHasMore(false);
-                    } else {
+                    const hasMorePages = (response['totalPages'] - response['currentPage']) > 0
+                    if (hasMorePages) {
                         setHasMore(true);
+                    } else {
+                        setHasMore(false);
                     }
 
                     if (clear === true) {
@@ -88,8 +88,16 @@ export const JobOfferPage = ({ defaultFiltersSettings, searchParams, updatingUrl
             });
     };
 
+    const nextPage = (value) => {
+        return setFiltersSettings((prevState) => ({
+            ...prevState,
+            page: value
+        }))
+    }
+
     /* Handler that reload page after clicking specific filter */
     const onFilterClick = (key, value) => {
+        console.log(key, value)
         setReload(true);
         setIsInitialLoad(true);
         setHasMore(false);
@@ -103,7 +111,7 @@ export const JobOfferPage = ({ defaultFiltersSettings, searchParams, updatingUrl
 
     const updateEndpointUrl = () => {
         const { developers } = filtersSettings;
-        return developers ? '/api/users?accountType=Developer&lookingForJob=true' : '/api/job_offers?';
+        return developers ? '/users?accountType=DEVELOPER&lookingForJob=true' : '/job-offers?archived=false';
     };
 
     const updateQueryParams = () => {

@@ -36,7 +36,8 @@ export const JobPositions = ({ id, setShowModals, personalData }) => {
         setShowModals((prevState) => ({ ...prevState, ['jobPositions']: true }));
     };
 
-    if (jobPositions) {
+    if(jobPositions){
+
         jobPositions.forEach((element) => {
             results.push(
                 <ListElement
@@ -51,6 +52,7 @@ export const JobPositions = ({ id, setShowModals, personalData }) => {
                 </ListElement>,
             );
         });
+    }
 
         return (
             <ProfileModule
@@ -72,7 +74,4 @@ export const JobPositions = ({ id, setShowModals, personalData }) => {
                 ) : null}
             </ProfileModule>
         );
-    } else {
-        return null;
-    }
 };
