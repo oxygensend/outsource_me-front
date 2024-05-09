@@ -9,8 +9,8 @@ import { API_URL } from '../../config';
 export const LanguageForm = ({ language, request, afterSubmit, buttonName }) => {
     const { register, handleSubmit } = useForm({
         defaultValues: {
-            name: language?.name ?? '',
-            description: language?.description ?? '',
+            name: language?.name ?? null,
+            description: language?.description ?? null,
         },
     });
     const [errors, setErrors] = useState(null);
@@ -21,14 +21,14 @@ export const LanguageForm = ({ language, request, afterSubmit, buttonName }) => 
                 afterSubmit(data);
             })
             .catch((e) => {
-                if (e.response.status === 422) {
-                    setErrors(e.response.data.violations);
+                if (e.response.status === 400) {
+                    setErrors(e.response.data.subExceptions);
                 }
             });
     };
 
     const findErrors = (property) => {
-        return errors ? errors.find((el) => el.propertyPath === property) : null;
+        return errors ? errors.find((el) => el.field === property) : null;
     };
 
     return (

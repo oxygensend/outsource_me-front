@@ -19,8 +19,7 @@ export const Languages = memo(({ id, setShowModals, personalData }) => {
             .getLanguages(id)
             .then((response) => {
                 if (response.status === 200) {
-                    console.log(response.data);
-                    setLanguages(response.data['hydra:member']);
+                    setLanguages(response.data);
                 }
             })
             .catch((err) => {

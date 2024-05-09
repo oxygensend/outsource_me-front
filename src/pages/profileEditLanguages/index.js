@@ -18,7 +18,7 @@ export const ProfileEditLanguages = () => {
     const [personalData, setPersonalData] = useState(location.state);
     const [showModals, setShowModals] = useState({ languages: false });
     const [selectedLanguage, setSelectedLanguage] = useState(null);
-    const { id } = tokenService.getUser();
+    const  id  = tokenService.getUserId();
 
     useEffect(() => {
         return () => {
@@ -48,7 +48,7 @@ export const ProfileEditLanguages = () => {
             .then((response) => {
                 if (response.status === 200) {
                     console.log(response.data);
-                    setLanguages(response.data['hydra:member']);
+                    setLanguages(response.data);
                 }
             })
             .catch((err) => {

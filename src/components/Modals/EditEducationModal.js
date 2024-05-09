@@ -6,10 +6,11 @@ import { JobPositionForm } from '../Forms/JobPositionForm';
 import authAxios from '../../services/authAxios';
 import { API_URL } from '../../config';
 import { EducationForm } from '../Forms/EducationForm';
+import tokenService from '../../services/tokenService';
 
 export const EditEducationModal = ({ setShowModals, selectedEducation, education }) => {
     const request = async (data) => {
-        return authAxios.patch(API_URL + '/education/' + selectedEducation.id, data, {
+        return authAxios.patch(API_URL + '/users/'+ tokenService.getUserId() + '/educations/' + selectedEducation.id, data, {
             headers: {
                 'Content-Type': 'application/merge-patch+json',
             },

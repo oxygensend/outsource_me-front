@@ -3,10 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { AddEducationForm, EducationForm } from '../Forms/EducationForm';
 import authAxios from '../../services/authAxios';
 import { API_URL } from '../../config';
+import tokenService from '../../services/tokenService';
 
 export const AddExpirienceModal = ({ setShowModals }) => {
     const request = async (data) => {
-        return authAxios.post(API_URL + '/education', data);
+        return authAxios.post(API_URL + '/users/' + tokenService.getUserId() +  '/educations', data);
     };
 
     const afterSubmit = () => {

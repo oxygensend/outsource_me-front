@@ -31,14 +31,14 @@ export const EditProfileDescriptionForm = ({ personalData }) => {
                 window.flash('Opis został zmieniony', 'success');
             })
             .catch((e) => {
-                if (e.response.status === 422) {
-                    setErrors(e.response.data.violations);
+                if (e.response.status === 400) {
+                    setErrors(e.response.data.subExceptions);
                 }
             });
     };
 
     const findErrors = (property) => {
-        return errors ? errors.find((el) => el.propertyPath === property) : null;
+        return errors ? errors.find((el) => el.field === property) : null;
     };
 
     return (

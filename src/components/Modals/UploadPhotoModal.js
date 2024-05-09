@@ -58,7 +58,7 @@ export const UploadPhotoModal = ({ setShowModals, personalData }) => {
             const file = new File([blob], 'image.jpeg');
             authAxios
                 .post(
-                    API_URL + '/users/' + personalData.id + '/upload_photo',
+                    API_URL + '/users/' + personalData.id + '/upload-thumbnail',
                     {
                         file: file,
                     },

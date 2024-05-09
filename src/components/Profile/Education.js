@@ -18,7 +18,7 @@ export const Education = memo(({ id, setShowModals, personalData }) => {
             .getEducations(id)
             .then((response) => {
                 if (response.status === 200) {
-                    setEducation(response.data['hydra:member']);
+                    setEducation(response.data);
                 }
             })
             .catch((err) => {

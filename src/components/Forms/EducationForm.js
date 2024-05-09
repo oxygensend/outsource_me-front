@@ -21,8 +21,8 @@ export const EducationForm = ({ options, education, request, afterSubmit, button
 
     useEffect(() => {
         return () => {
-            getDataAuthentication('/api/universities').then((universities) => {
-                setUniversitiesList(universities['hydra:member']);
+            getDataAuthentication('/users/universities').then((universities) => {
+                setUniversitiesList(universities);
             });
         };
     }, []);
@@ -34,8 +34,8 @@ export const EducationForm = ({ options, education, request, afterSubmit, button
                     fieldOfStudy: education.fieldOfStudy,
                     grade: education.grade,
                     title: education.title,
-                    startDate: education.startDate.split('T')[0],
-                    endDate: education.endDate ? education.endDate.split('T')[0] : '',
+                    startDate: education.startDate,
+                    endDate: education.endDate ? education.endDate: '',
                     description: education.description,
                 });
             }
@@ -69,7 +69,7 @@ export const EducationForm = ({ options, education, request, afterSubmit, button
     const onSubmit = async (data) => {
         data.grade = Number(data.grade);
         try {
-            data.university = selectedUni['@id'];
+            data.universityId = selectedUni.id;
         } catch (e) {
             setErrors([{ propertyPath: 'search', message: 'Musisz wybrać jedeną z uczelni' }]);
             return;
@@ -84,19 +84,18 @@ export const EducationForm = ({ options, education, request, afterSubmit, button
                 afterSubmit(data);
             })
             .catch((e) => {
-                console.log(e);
-
                 if (e.response.status === 400) {
-                    setErrors([{ propertyPath: 'startDate', message: 'Nie poprawny format daty.' }]);
-                }
-                if (e.response.status === 422) {
-                    setErrors(e.response.data.violations);
+                    if(e.response.data.subExceptions == null){
+                        setErrors([{ field: 'startDate', message: 'Nie poprawny format daty.' }]);
+                    } else {
+                        setErrors(e.response.data.subExceptions);
+                    }
                 }
             });
     };
 
     const findErrors = (property) => {
-        return errors ? errors.find((el) => el.propertyPath === property) : null;
+        return errors ? errors.find((el) => el.field === property) : null;
     };
 
     return (

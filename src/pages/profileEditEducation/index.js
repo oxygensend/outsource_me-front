@@ -20,7 +20,7 @@ export const ProfileEditEducation = () => {
     const [personalData, setPersonalData] = useState(location.state);
     const [showModals, setShowModals] = useState({ jobPositions: false });
     const [selectedEducation, setSelectedEducation] = useState(null);
-    const { id } = tokenService.getUser();
+    const  id  = tokenService.getUserId();
 
     useEffect(() => {
         return () => {
@@ -49,8 +49,7 @@ export const ProfileEditEducation = () => {
             .getEducations(id)
             .then((response) => {
                 if (response.status === 200) {
-                    console.log(response.data);
-                    setEducation(response.data['hydra:member']);
+                    setEducation(response.data);
                 }
             })
             .catch((err) => {

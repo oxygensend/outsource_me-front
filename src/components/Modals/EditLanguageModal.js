@@ -3,10 +3,11 @@ import React from 'react';
 import { LanguageForm } from '../Forms/LanguageForm';
 import authAxios from '../../services/authAxios';
 import { API_URL } from '../../config';
+import tokenService from '../../services/tokenService';
 
 export const EditLanguageModal = ({ setShowModals, language, languages }) => {
     const request = async (data) => {
-        return authAxios.patch(API_URL + '/languages/' + language.id, data, {
+        return authAxios.patch(API_URL + '/users/'+ tokenService.getUserId() + '/languages/' + language.id, data, {
             headers: {
                 'Content-Type': 'application/merge-patch+json',
             },

@@ -1,4 +1,4 @@
-import { SERVER_URL } from '../../config';
+import { API_URL, SERVER_URL } from '../../config';
 import accountType from '../../translations/accountType';
 import github from '../../assets/icons/github.png';
 import linkedin from '../../assets/icons/linkedin.png';
@@ -68,7 +68,7 @@ export const PersonalInfo = ({ personalData, setShowModals }) => {
                 ) : null}
 
                 <img
-                    src={SERVER_URL + '/' + personalData.imagePath}
+                    src={API_URL + '/users/thumbnails/' + personalData.imagePath}
                     style={{ width: '120px', height: '120px' }}
                     className={
                         'rounded-2xl border-2  ' + (tokenService.checkIfMe(personalData.id) ? 'cursor-pointer' : null)
