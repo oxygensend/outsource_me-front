@@ -8,10 +8,11 @@ import loader from '../../assets/images/loader.gif';
 export const NotificationPage = ({ setShowModals, setSelectedNotification, notifications, setNotifications }) => {
     const [totalNumberOfItems, setTotalNumberOfItems] = useState();
     const [hasMore, setHasMore] = useState(false);
-    const  id  = TokenService.getUserId;
+    const  id  = TokenService.getUserId();
     const [currentPaginationUrl, setCurrentPaginationUrl] = useState(
-        '/api/users/' + id + '/notifications?order[createdAt]=desc',
+        '/notifications/internal'
     );
+    const [currentPage, setCurrentPage] = useState();
 
     useEffect(() => {
         return () => {
@@ -20,18 +21,23 @@ export const NotificationPage = ({ setShowModals, setSelectedNotification, notif
     }, []);
 
     const getNotifications = (clear = false) => {
-        getData(currentPaginationUrl)
+        getData(currentPaginationUrl, {
+            recipient_id: id,
+            page: currentPage,
+            size: 14
+        })
             .then((response) => {
                 if (response !== undefined) {
-                    const incomingData = response['hydra:member'];
+                    const incomingData = response.data;
 
-                    setCurrentPaginationUrl(response['hydra:view']['hydra:next']);
-                    setTotalNumberOfItems(response['hydra:totalItems']);
+                    setTotalNumberOfItems(response.numberOfElements);
 
-                    if (!response['hydra:view']['hydra:next']) {
-                        setHasMore(false);
-                    } else {
+                    const hasMorePages = (response['totalPages'] - response['currentPage']) > 0
+                    if (hasMorePages) {
+                        setCurrentPage((prevState) => prevState + 1)
                         setHasMore(true);
+                    } else {
+                        setHasMore(false);
                     }
 
                     if (clear === true) {
@@ -48,10 +54,11 @@ export const NotificationPage = ({ setShowModals, setSelectedNotification, notif
             });
     };
 
+    console.log(notifications)
     return (
         <div className={'notification-container full-height '}>
             <InfiniteScroll
-                pageStart={1}
+                pageStart={0}
                 loadMore={getNotifications}
                 hasMore={hasMore}
                 loader={<img src={loader} alt={'loader'} className={'loader'} key={-1} width={40} height={40} />}

@@ -15,7 +15,7 @@ export const PersonalInfo = ({ personalData }) => {
             />
             <div className={'md:col-start-2 md:col-span-4 col-start-2 col-span-6 mt-10'}>
                 <img
-                    src={SERVER_URL + '/' + personalData.imagePath}
+                    src={SERVER_URL + '/users/thumbnails/' + personalData.imagePath}
                     style={{ width: '120px', height: '120px' }}
                     className={'rounded-2xl border-2  '}
                     alt={'avatar'}

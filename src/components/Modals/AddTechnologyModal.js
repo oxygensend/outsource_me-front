@@ -8,30 +8,25 @@ import { TechnologySearch } from '../Search/TechnologySearch';
 export const AddTechnologyModal = memo(({ setShowModals }) => {
     const [selectedTechnologies, setSelectedTechnologies] = useState([]);
     const [errors, setErrors] = useState(false);
-    const { id } = tokenService.getUser();
+    const  id  = tokenService.getUserId();
 
     const onSubmitHandler = async () => {
-        let countSuccessfullResponses = 0;
         setErrors(null);
 
-        for (const technology of selectedTechnologies) {
-            await authAxios
-                .post('api/users/' + id + '/technologies', { iri: technology })
+        await authAxios
+                .post('/users/' + id + '/technologies/addAll', { technologies: selectedTechnologies })
                 .then((response) => {
-                    countSuccessfullResponses++;
+                    if(response.status === 204){
+                        window.location.href = '/profil/me';
+                        window.flash('Technologie zostały dodane', 'success');
+                    }
                 })
                 .catch((e) => {
                     if (e.response.status === 400) {
                         setErrors(true);
                     }
                 });
-        }
-
-        if (countSuccessfullResponses === selectedTechnologies.length) {
-            window.location.href = '/profil/me';
-            window.flash('Technologie zostały dodane', 'success');
-        }
-    };
+    }
 
     return (
         <ModalWrapper

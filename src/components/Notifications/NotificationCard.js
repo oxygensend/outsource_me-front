@@ -20,10 +20,10 @@ export const NotificationCard = ({ setShowModals, setSelectedNotification, notif
     };
 
     const onMouseEnterMarkSeen = () => {
-        if (notification.displayedAt) return;
+        if (notification.seenAt) return;
 
-        authAxios.post('api/users/' + id + '/notifications/' + notification.id + '/mark_seen', {}).then((response) => {
-            notification.displayedAt = response.data.displayedAt;
+        authAxios.post('/notifications/' + notification.id + '/mark_seen', {}).then((response) => {
+            notification.seenAt = response.data.seenAt;
             setTimeout(() => setReload(true), 500);
         });
     };
@@ -32,7 +32,7 @@ export const NotificationCard = ({ setShowModals, setSelectedNotification, notif
         <div
             className={
                 'notification-card  cursor-default  delay-75 ' +
-                (!notification.displayedAt ? 'notification-unseen' : 'notification-seen')
+                (!notification.seenAt ? 'notification-unseen' : 'notification-seen')
             }
             onMouseEnter={() => onMouseEnterMarkSeen()}
         >

@@ -21,6 +21,7 @@ import { OpinionsModal } from '../../components/Modals/OpinionsModal';
 export const Profile = () => {
     const [personalData, setPersonalData] = useState();
     const [opinions, setOpinions] = useState();
+    const [opinionsDetails, setOpinionsDetails] = useState();
     const id = getId(useParams().id);
     const openAdvertisementModalContent =
         'Przed dodaniem zgłoszenia upewnij się, ze w zakładkach na twoim profilu zawarte są wszystkie potrzebne\n' +
@@ -44,6 +45,7 @@ export const Profile = () => {
         return () => {
             getPersonalData();
             getOpinions();
+            getOpinionsDetails();
         };
     }, []);
 
@@ -78,12 +80,22 @@ export const Profile = () => {
     const getOpinions = () => {
         getData('/opinions?receiver=' + id)
             .then((response) => {
-                setOpinions(response);
+                setOpinions(response.data);
             })
             .catch((err) => {
                 console.log(err);
             });
     };
+
+    const getOpinionsDetails = () => {
+        getData('/users-opinion-details/' + id )
+        .then((response) => {
+            setOpinionsDetails(response)
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    }
 
     const onClickChangeUserStatus = (status, modalName) => {
         authAxios
@@ -113,7 +125,7 @@ export const Profile = () => {
 
     return (
         <>
-            <ProfilePage setShowModals={setShowModals} personalData={personalData} />
+            <ProfilePage setShowModals={setShowModals} personalData={personalData} opinionsDetails={opinionsDetails} />
 
             {showModals.technologies ? <AddTechnologyModal setShowModals={setShowModals} /> : null}
 

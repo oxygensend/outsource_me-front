@@ -20,18 +20,21 @@ export const YourApplications = () => {
         deleteApplication: false,
         previewApplication: false,
     });
-    const { id } = tokenService.getUser();
+    const  id  = tokenService.getUserId();
     const openDeleteApplicationModalContent = (application) => {
         return parse(`Czy na pewno chcesz usunąć aplikacje na stanowisko <b>` + application.jobOffer.name + `</b>?`);
     };
 
     useEffect(() => {
         return () => {
-            getData('/api/users/' + id + '/applications?order[createdAt]=desc&order[status]=desc').then((data) => {
+            getData('/applications', {
+                userId: id,
+                size: 10000
+            }).then((data) => {
                 let active = [];
                 let deactive = [];
-                data['hydra:member'].forEach((application, i) => {
-                    if (application.status === 1)
+                data['data'].forEach((application, i) => {
+                    if (application.status !== 'REJECTED')
                         active.push(
                             <ApplicationCard
                                 key={i}
@@ -67,7 +70,7 @@ export const YourApplications = () => {
 
     const onClickDeleteElement = (application) => {
         authAxios
-            .delete(application['@id'])
+            .delete('/applications/' + application.id)
             .then((data) => {
                 let newApplications = [...activeApplications];
                 let deleted = newApplications.filter((el) => el.props.application !== application);
@@ -85,6 +88,7 @@ export const YourApplications = () => {
     };
 
     const onClickPreview = (application) => {
+        console.log(application)
         setSelectedApplication(application);
         setShowModals((prevState) => ({
             ...prevState,
@@ -92,6 +96,7 @@ export const YourApplications = () => {
         }));
     };
 
+    console.log(showModals)
     if (activeApplications) {
         return (
             <>

@@ -20,7 +20,7 @@ export const JobPositions = ({ id, setShowModals, personalData }) => {
             .getJobPositions(id)
             .then((response) => {
                 if (response.status === 200) {
-                    setJobPositions(response.data['hydra:member']);
+                    setJobPositions(response.data);
                 }
             })
             .catch((err) => {
@@ -44,10 +44,10 @@ export const JobPositions = ({ id, setShowModals, personalData }) => {
                     name={element.company.name}
                     timePeriod={formatTimePeriod(element.startDate, element.endDate)}
                     metaData={element.description}
-                    key={element['@id']}
+                    key={element.id}
                 >
                     <p style={{ fontSize: '14px' }}>
-                        {element.name + (element.formOfEmployment.name ? ', ' + element.formOfEmployment.name : null)}
+                        {element.name + (element.formOfEmployment ? ', ' + element.formOfEmployment : null)}
                     </p>
                 </ListElement>,
             );

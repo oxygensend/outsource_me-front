@@ -23,6 +23,7 @@ export const JobOfferPage = ({ defaultFiltersSettings, searchParams, updatingUrl
     const [addressesList, setAddressesList] = useState([]);
     const [technologiesList, setTechnologiesList] = useState();
     const [workTypesList, setWorkTypesList] = useState();
+    const [currentPage, setCurrentPage] = useState(0);
 
     /* Data readers */
 
@@ -69,6 +70,8 @@ export const JobOfferPage = ({ defaultFiltersSettings, searchParams, updatingUrl
 
                     const hasMorePages = (response['totalPages'] - response['currentPage']) > 0
                     if (hasMorePages) {
+                        console.log(currentPage)
+                        setCurrentPage((prevState) => prevState + 1);
                         setHasMore(true);
                     } else {
                         setHasMore(false);
@@ -111,7 +114,7 @@ export const JobOfferPage = ({ defaultFiltersSettings, searchParams, updatingUrl
 
     const updateEndpointUrl = () => {
         const { developers } = filtersSettings;
-        return developers ? '/users?accountType=DEVELOPER&lookingForJob=true' : '/job-offers?archived=false';
+        return developers ? '/users?accountType=DEVELOPER&lookingForJob=true&page=' + currentPage : '/job-offers?archived=false&page=' + currentPage;
     };
 
     const updateQueryParams = () => {

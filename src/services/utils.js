@@ -15,7 +15,6 @@ export const defaultFiltersSettings = {
     technologies: [],
     address: null,
     workTypes: [],
-    page: 0,
     size: 10
 };
 
@@ -31,7 +30,6 @@ export const generateQueryParameters = (filtersSettings) => {
         url += `&workTypes=${filtersSettings.workTypes.join(',')}`;
 
 
-    url += `&page=${filtersSettings.page}`
     url += `&size=${filtersSettings.size}`
 
     return url;
@@ -44,14 +42,21 @@ export const searchArray = (search, array, filterProperty) => {
     }, search);
 };
 
+export const searchRawArray = (search, array) => {
+    return array.filter((element) => {
+        let regex = new RegExp('^' + search, 'i');
+        return !!element.match(regex);
+    }, search);
+};
+
 export const isInArray = (element, array) => {
     return array.indexOf(element) > -1;
 };
 
-export const getData = (endpoint) => {
+export const getData = (endpoint, params) => {
     const instance = tokenService.getLocalAccessToken() ? authAxios : axios;
     return instance
-        .get(SERVER_URL + endpoint)
+        .get(SERVER_URL + endpoint, {params: params})
         .then(({ data }) => data)
         .catch(function (error) {
             if (error.response) {

@@ -22,8 +22,8 @@ export const JobPositionForm = ({ options, jobPosition, request, afterSubmit, bu
     useEffect(() => {
         return () => {
             Promise.all([
-                getData('/api/companies').then((companies) => {
-                    setCompaniesList(companies['hydra:member']);
+                getData('/users/companies').then((companies) => {
+                    setCompaniesList(companies);
                 }),
             ]);
         };
@@ -34,9 +34,9 @@ export const JobPositionForm = ({ options, jobPosition, request, afterSubmit, bu
             if (jobPosition) {
                 reset({
                     name: jobPosition.name,
-                    formOfEmployment: jobPosition.formOfEmployment['@id'],
-                    startDate: jobPosition.startDate.split('T')[0],
-                    endDate: jobPosition.endDate ? jobPosition.endDate.split('T')[0] : '',
+                    formOfEmployment: jobPosition.formOfEmployment,
+                    startDate: jobPosition.startDate,
+                    endDate: jobPosition.endDate ? jobPosition.endDate : '',
                     description: jobPosition.description,
                 });
             }
@@ -72,12 +72,12 @@ export const JobPositionForm = ({ options, jobPosition, request, afterSubmit, bu
             data.endDate = undefined;
         }
         if (data.formOfEmployment === '') {
-            data.formOfEmployment = options[0]['@id'];
+            data.formOfEmployment = options[0].name;
         }
 
-        data.company = { name: selectedCompany ? selectedCompany.name : search };
-        if (data.company.name.trim() === '') {
-            setErrors([{ propertyPath: 'search', message: 'Musisz podać nazwe firmy' }]);
+        data.companyName =  selectedCompany ? selectedCompany.name : search ;
+        if (data.companyName.trim() === '') {
+            setErrors([{ field: 'search', message: 'Musisz podać nazwe firmy' }]);
             return;
         }
 
@@ -86,18 +86,16 @@ export const JobPositionForm = ({ options, jobPosition, request, afterSubmit, bu
                 afterSubmit(data);
             })
             .catch((e) => {
-                console.log(e);
-                if (e.response.status === 400) {
-                    setErrors([{ propertyPath: 'startDate', message: 'Nie poprawny format daty.' }]);
-                }
-                if (e.response.status === 422) {
-                    setErrors(e.response.data.violations);
+                if(e.response.data.subExceptions == null){
+                        setErrors([{ field: 'startDate', message: 'Nie poprawny format daty.' }]);
+                } else {
+                    setErrors(e.response.data.subExceptions);
                 }
             });
     };
 
     const findErrors = (property) => {
-        return errors ? errors.find((el) => el.propertyPath === property) : null;
+        return errors ? errors.find((el) => el.field === property) : null;
     };
 
     return (
@@ -131,7 +129,8 @@ export const JobPositionForm = ({ options, jobPosition, request, afterSubmit, bu
                 className={'jobPosition-select'}
                 register={register}
                 options={options}
-                property={'name'}
+                property={'displayName'}
+                idProperty={'name'}
             />
 
             <InputProfile

@@ -12,7 +12,7 @@ import { Button } from '../Button/Button';
 import { onClickShowModal, opinionsStringPluralForm } from '../../services/utils';
 import { check } from 'prettier';
 
-export const PersonalInfo = ({ personalData, setShowModals }) => {
+export const PersonalInfo = ({ personalData, setShowModals, opinionsDetails }) => {
     const checkIfMe = tokenService.checkIfMe(personalData.id);
 
     const stars = new Array(5).fill('none').map((el, i) => (i < personalData.opinionsRate ? 'yellow' : 'none'));
@@ -54,6 +54,7 @@ export const PersonalInfo = ({ personalData, setShowModals }) => {
     };
 
 
+    console.log(opinionsDetails)
     return (
         <div className={'col-span-full grid grid-cols-10'}>
             {checkIfMe ? (
@@ -142,7 +143,7 @@ export const PersonalInfo = ({ personalData, setShowModals }) => {
                             })}
                         </div>
                         <p className={'red-font mt-3'}>
-                            {personalData.opinionCount + opinionsStringPluralForm(personalData.opinionCount)}
+                            {opinionsDetails.opinionsCount + opinionsStringPluralForm(opinionsDetails.opinionsCount)}
                         </p>
                     </div>
                     <div>

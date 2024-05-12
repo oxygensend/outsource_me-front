@@ -11,7 +11,7 @@ export const ApplicationCard = ({ application, onClickDelete, onClickPreview }) 
         <div
             className={
                 'application flex justify-between ' +
-                (application.status ? 'application-active' : 'application-deactivated')
+                (application.status  !== 'REJECTED' ? 'application-active' : 'application-deactivated')
             }
         >
             <div>
@@ -33,7 +33,7 @@ export const ApplicationCard = ({ application, onClickDelete, onClickPreview }) 
                         width={20}
                         onClick={() => onClickPreview()}
                     />
-                    {application.status ? (
+                    {application.status !== 'REJECTED' ? (
                         <img
                             src={close_icon}
                             className={' cursor-pointer bottom-1 mobile-hide2'}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import AuthService from '../../services/authService';
 import tokenService from '../../services/tokenService';
+import { ROLE_DEVELOPER } from '../../helpers/Roles';
 
 export const NavLink = ({ route, children }) => {
     return (
@@ -74,7 +75,7 @@ export const DashboardMenu = (props) => {
             {props.login ? <MenuItem route={'/powiadomienia'}>Powiadomienia</MenuItem> : null}
 
             {props.login ? (
-                tokenService.getUser().accountType === 'Developer' ? (
+                tokenService.getUser().roles.includes(ROLE_DEVELOPER) === true ? (
                     <MenuItem route={'/profil/me/twoje-aplikacje'}>Twoje aplikacje</MenuItem>
                 ) : (
                     <MenuItem route={'/profil/me/twoje-oferty'}>Twoje oferty</MenuItem>
@@ -96,7 +97,7 @@ export const NavbarMenu = (props) => {
     return (
         <div className={'nav-wrapper'}>
             {props.login ? (
-                tokenService.getUser().accountType === 'Developer' ? (
+                tokenService.getUser().roles.includes(ROLE_DEVELOPER) === true ? (
                     <NavLink route={'/profil/me/twoje-aplikacje'}>Twoje aplikacje</NavLink>
                 ) : (
                     <NavLink route={'/profil/me/twoje-oferty'}>Twoje oferty</NavLink>

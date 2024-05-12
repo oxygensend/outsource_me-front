@@ -6,6 +6,7 @@ import { Dropbox } from '../Input/Dropbox';
 import authAxios from '../../services/authAxios';
 import { API_URL } from '../../config';
 import { useNavigate } from 'react-router-dom';
+import tokenService from '../../services/tokenService';
 
 export const ApplicationForm = ({ jobOffer }) => {
     const { register, handleSubmit } = useForm();
@@ -16,12 +17,26 @@ export const ApplicationForm = ({ jobOffer }) => {
     const navigate = useNavigate();
 
     const onSubmit = async (data) => {
-        data.jobOffer = jobOffer['@id'];
+        data.userId = tokenService.getUserId();
+        data.jobOfferId = jobOffer.id;
         data.attachments = attachments;
 
-        console.log(data);
+        console.log(attachments);
+        const formData = new FormData()
+        formData.append("request",  new Blob([JSON.stringify({
+                    userId: data.userId,
+                    jobOfferId: jobOffer.id,
+                    description: data.description
+                })], {
+                    type: 'application/json'
+                }));
+        attachments.forEach(a => {
+        formData.append("attachments", a);
+        })
+
         authAxios
-            .post(API_URL + '/applications', data, {
+            .post(API_URL + '/applications', formData
+            , {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -38,8 +53,8 @@ export const ApplicationForm = ({ jobOffer }) => {
             .catch((e) => {
                 window.flash('Aplikowałeś już na to stanowisko', 'error');
 
-                if (e.response.status === 422) {
-                    setErrors(e.response.data.violations);
+                if (e.response.status === 400) {
+                    setErrors(e.response.data.subExceptions);
                 }
             });
     };
@@ -75,7 +90,7 @@ export const ApplicationForm = ({ jobOffer }) => {
     };
 
     const findErrors = (property) => {
-        return errors ? errors.find((el) => el.propertyPath === property) : null;
+        return errors ? errors.find((el) => el.field === property) : null;
     };
 
     return (

@@ -90,7 +90,7 @@ export const ProfileEditEducation = () => {
                                               style={{
                                                   borderBottom: '1px solid rgb(15,82,139, 0.4)',
                                               }}
-                                              key={element['@id']}
+                                              key={element.id}
                                           >
                                               <ListElement
                                                   name={element.university.name}
@@ -99,7 +99,7 @@ export const ProfileEditEducation = () => {
                                                       formatTimePeriod(element.startDate, element.endDate) +
                                                       (element.title ? ' - ' + element.title : '')
                                                   }
-                                                  key={element['@id']}
+                                                  key={element.id}
                                               >
                                                   <p style={{ fontSize: '14px' }}>
                                                       {' '}

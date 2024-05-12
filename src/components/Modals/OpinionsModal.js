@@ -9,6 +9,7 @@ import authAxios from '../../services/authAxios';
 import { deleteElementFromArray } from '../../services/utils';
 
 export const OpinionsModal = ({ setShowModals, opinions, userIri, personalData, setOpinions }) => {
+    console.log(opinions)
     const myIri = tokenService.getUser()?.id ? '/api/users/' + tokenService.getUser()?.id : null;
     const checkIfIPostedOpinion = opinions?.filter((el) => el.fromWho['@id'] === myIri);
     const [opinionCount, setOpinionCount] = useState(personalData.opinionCount);

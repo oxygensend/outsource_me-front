@@ -12,12 +12,12 @@ export const ApplicationPreviewModal = ({ application, setShowModals }) => {
     const [selectedApplication, setSelectedApplication] = useState(null);
     useEffect(() => {
         return () => {
-            getData(application['@id']).then((data) => setSelectedApplication(data));
+            getData('/applications/' + application.id + "/info").then((data) => setSelectedApplication(data));
         };
     }, []);
 
     const onClickDownloadAttachment = (attachment) => {
-        authAxios(attachment['@id'], {
+        authAxios("/attachments/" + attachment.id, {
             responseType: 'arraybuffer',
         }).then((data) => {
             fileDownload(data.data, attachment.originalName);

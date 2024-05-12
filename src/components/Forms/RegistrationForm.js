@@ -28,8 +28,9 @@ export class RegistrationForm extends React.Component {
     }
 
     getFormData() {
-        const { developerChecked, principalChecked, errors, ...data } = this.state;
+        const { developerChecked, principalChecked, errors, successfulResponse,  ...data } = this.state;
         data.accountType = developerChecked ? 'DEVELOPER' : 'PRINCIPLE';
+        console.log(data)
         return data;
     }
 

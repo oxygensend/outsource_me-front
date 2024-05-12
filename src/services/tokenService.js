@@ -39,6 +39,10 @@ class TokenService {
     checkIfMe(id) {
         return (this.getLocalAccessToken() && this.getUserId() == id) || id === 'me';
     }
+
+    isPrinciple(){
+        return this.getLocalAccessToken() ? jwtDecode(this.getLocalAccessToken()).businessId : null;
+    }
 }
 
 export default new TokenService();

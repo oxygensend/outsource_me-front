@@ -10,7 +10,7 @@ import { PersonalInfo } from './PersonalInfo';
 import tokenService from '../../services/tokenService';
 import { JobOffers } from './JobOffers';
 
-export const ProfilePage = memo(({ style, setShowModals, personalData, languages }) => {
+export const ProfilePage = memo(({ style, setShowModals, personalData, languages , opinionsDetails}) => {
     const { id } = useParams();
     const DEVELOPER_ROLE = 'DEVELOPER';
 
@@ -29,10 +29,10 @@ export const ProfilePage = memo(({ style, setShowModals, personalData, languages
     /**
      * Personal data have to be rendered first
      */
-    if (personalData)
+    if (personalData && opinionsDetails)
         return (
             <div className={'profile-container  '} style={style}>
-                <PersonalInfo personalData={personalData} setShowModals={setShowModals} />
+                <PersonalInfo personalData={personalData} setShowModals={setShowModals} opinionsDetails={opinionsDetails} />
 
                 <Description personalData={personalData} setShowModals={setShowModals} />
                 <Languages id={personalData.id} personalData={personalData} setShowModals={setShowModals} />

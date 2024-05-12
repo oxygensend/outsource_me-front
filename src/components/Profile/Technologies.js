@@ -46,7 +46,7 @@ export const Technologies = memo(({ personalData, setShowModals }) => {
             <div className={'flex flex-row gap-5  mt-5 flex-wrap mb-12'}>
                 {personalData.technologies
                     ? personalData.technologies.map((technology) => {
-                          return <Technology name={technology.name} key={technology['@id']} />;
+                          return <Technology name={technology} key={technology} />;
                       })
                     : null}
             </div>

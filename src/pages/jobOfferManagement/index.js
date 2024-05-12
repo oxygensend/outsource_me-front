@@ -16,7 +16,7 @@ export const JobOfferManagement = () => {
     });
     useEffect(() => {
         return () => {
-            getData('/api/job_offers/' + slug + '/metadata')
+            getData('/job-offers/' + slug)
                 .then((data) => setJobOffer(data))
                 .catch((e) => {
                     window.location.href = '/logowanie';
@@ -26,13 +26,13 @@ export const JobOfferManagement = () => {
 
     const onClickArchiveJobOffer = () => {
         authAxios
-            .delete(jobOffer['@id'])
+            .delete('/job-offers/' + slug)
             .then((response) => {
                 setShowModals((prevState) => ({
                     ...prevState,
                     ['closeOfferModal']: false,
                 }));
-                jobOffer.archived = 1;
+                jobOffer.archived = true;
                 window.flash('Oferta została zarchiwizowana', 'error');
             })
             .catch((e) => {

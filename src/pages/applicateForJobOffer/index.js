@@ -17,7 +17,9 @@ export const ApplicateForJobOffer = () => {
     };
 
     useEffect(() => {
+            console.log(jobOffer);
         return () => {
+            console.log(jobOffer);
             if (!jobOffer) {
                 getJobOffer();
             }
@@ -46,7 +48,7 @@ export const ApplicateForJobOffer = () => {
                             to={'/profil/' + jobOffer.user.id}
                             children={
                                 <img
-                                    src={SERVER_URL + '/' + jobOffer.user.thumbnailPath}
+                                    src={SERVER_URL + '/users/thumbnails/' + jobOffer.user.thumbnailPath}
                                     width={54}
                                     height={54}
                                     style={{ minHeight: '54px', minWidth: '54px' }}
@@ -71,7 +73,7 @@ export const ApplicateForJobOffer = () => {
                     <p className={'joboffer-title-font'}>{jobOffer.name}</p>
                     <p className={'joboffer-company-font mt-2'}>{jobOffer?.comapnyName ?? 'Oferta prywatna'}</p>
 
-                    <p className={'joboffer-workType-font mt-4'}>{workTypeInfoMappings[jobOffer.workType[0].name]}</p>
+                    <p className={'joboffer-workType-font mt-4'}>{workTypeInfoMappings[jobOffer.workTypes[0].name]}</p>
                 </div>
 
                 <hr className={'col-span-full mt-5'} style={{ backgroundColor: '#0F528B', opacity: '0.8' }} />

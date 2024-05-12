@@ -20,9 +20,8 @@ export const ProfileEditJobPositions = () => {
     const [personalData, setPersonalData] = useState(location.state);
     const [showModals, setShowModals] = useState({ jobPositions: false });
     const [selectedJobPosition, setSelectedJobPosition] = useState(null);
-    const { id } = tokenService.getUser();
+    const  id  = tokenService.getUserId();
 
-    console.log(id);
 
     useEffect(() => {
         return () => {
@@ -52,7 +51,7 @@ export const ProfileEditJobPositions = () => {
             .then((response) => {
                 if (response.status === 200) {
                     console.log(response.data);
-                    setJobPositions(response.data['hydra:member']);
+                    setJobPositions(response.data);
                 }
             })
             .catch((err) => {
@@ -62,7 +61,7 @@ export const ProfileEditJobPositions = () => {
 
     const onClickDelete = (jobPosition) => {
         authAxios
-            .delete(API_URL + '/users/' + id + '/job_positions/' + jobPosition.id)
+            .delete(API_URL + '/users/' + id + '/job-positions/' + jobPosition.id)
             .then((data) => {
                 setJobPositions(deleteElementFromArray(jobPositions, jobPosition));
                 window.flash('Miejsce pracy zostało usunięte', 'error');
@@ -92,7 +91,7 @@ export const ProfileEditJobPositions = () => {
                                               style={{
                                                   borderBottom: '1px solid rgb(15,82,139, 0.4)',
                                               }}
-                                              key={jobPosition['@id']}
+                                              key={jobPosition.id}
                                           >
                                               <ListElement
                                                   name={jobPosition.company.name}
@@ -100,13 +99,13 @@ export const ProfileEditJobPositions = () => {
                                                       jobPosition.startDate,
                                                       jobPosition.endDate,
                                                   )}
-                                                  key={jobPosition['@id']}
+                                                  key={jobPosition.id}
                                                   disableVector={true}
                                               >
                                                   <p style={{ fontSize: '14px' }}>
                                                       {jobPosition.name +
-                                                          (jobPosition.formOfEmployment.name
-                                                              ? ', ' + jobPosition.formOfEmployment.name
+                                                          (jobPosition.formOfEmployment
+                                                              ? ', ' + jobPosition.formOfEmployment
                                                               : null)}
                                                   </p>
                                               </ListElement>

@@ -89,7 +89,7 @@ export const ProfileEditLanguages = () => {
                                               style={{
                                                   borderBottom: '1px solid rgb(15,82,139, 0.4)',
                                               }}
-                                              key={language['@id']}
+                                              key={language.id}
                                           >
                                               <p className={'text-xl'}>{language.name}</p>
                                               <div className={'flex flex-row gap-1'}>

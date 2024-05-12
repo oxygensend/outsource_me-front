@@ -5,20 +5,21 @@ import React, { useEffect, useState } from 'react';
 import { JobPositionForm } from '../Forms/JobPositionForm';
 import authAxios from '../../services/authAxios';
 import { API_URL } from '../../config';
+import tokenService from '../../services/tokenService';
 
 export const EditJobPositionModal = ({ setShowModals, jobPosition, jobPositions }) => {
     const [formOfEmployments, setFormOfEmployments] = useState([]);
 
     useEffect(() => {
         return () => {
-            getData('/api/form_of_employments').then((companies) => {
-                setFormOfEmployments(companies['hydra:member']);
+            getData('/static-data/form-of-employments').then((foE) => {
+                setFormOfEmployments(foE);
             });
         };
     }, []);
 
     const request = async (data) => {
-        return authAxios.patch(API_URL + '/job_positions/' + jobPosition.id, data, {
+        return authAxios.patch(API_URL + '/users/'+ tokenService.getUserId() + '/job-positions/' + jobPosition.id, data, {
             headers: {
                 'Content-Type': 'application/merge-patch+json',
             },

@@ -12,14 +12,13 @@ import tokenService from '../../services/tokenService';
 export const ProfileEditTechnologies = () => {
     const location = useLocation();
     const [personalData, setPersonalData] = useState(location.state);
-    const { id } = tokenService.getUser();
+    const  id  = tokenService.getUserId();
     const [technologies, setTechnologies] = useState(location.state?.technologies);
 
     useEffect(() => {
         return () => {
             console.log(personalData);
             if (!personalData) {
-                console.log('x');
                 getPersonalData();
             }
         };
@@ -41,7 +40,7 @@ export const ProfileEditTechnologies = () => {
 
     const onClickDelete = (technology) => {
         authAxios
-            .delete(API_URL + '/users/' + id + '/technologies/' + technology.id)
+            .delete(API_URL + '/users/' + id + '/technologies', {params: {name: technology}})
             .then((data) => {
                 let newTechnologies = [...technologies];
                 let index = newTechnologies.indexOf(technology);
@@ -67,9 +66,9 @@ export const ProfileEditTechnologies = () => {
                                       <div
                                           className={' pt-2 flex flex-row justify-between'}
                                           style={{ borderBottom: '1px solid rgb(15,82,139, 0.4)' }}
-                                          key={technology['@id']}
+                                          key={technology.name}
                                       >
-                                          <p className={'text-xl'}>{technology.name}</p>
+                                          <p className={'text-xl'}>{technology}</p>
                                           <img
                                               src={close_icon}
                                               className={'mb-1 mt-1 cursor-pointer'}

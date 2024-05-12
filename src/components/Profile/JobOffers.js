@@ -13,9 +13,13 @@ export const JobOffers = ({ personalData }) => {
     };
     useEffect(() => {
         return () => {
-            getData('/api/users/' + personalData.id + '/job_offers?order=newest&archived=0').then((data) => {
+            getData('/job-offers'  , {
+                userId: personalData.id,
+                size: 1000,
+                archived: false
+            }).then((data) => {
                 let temp = [];
-                data['hydra:member'].forEach((jobOffer, i) => {
+                data['data'].forEach((jobOffer, i) => {
                     temp.push(<JobOfferSmallCard jobOffer={jobOffer} key={i} id={i} />);
                 });
 

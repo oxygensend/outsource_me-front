@@ -12,6 +12,7 @@ import { DropdownElement } from './DropdownElement';
 import authService from '../../services/authService';
 import { SERVER_URL } from '../../config';
 import { Searchbar } from '../Search/Searchbar';
+import { ROLE_PRINCIPLE } from '../../helpers/Roles';
 
 export const Navbar = (props) => {
     const [showMenu, setShowMenu] = useState(false);
@@ -52,7 +53,7 @@ export const Navbar = (props) => {
             <Searchbar />
 
             <div className={'nav-menu'}>
-                {isAuthenticated && tokenService.getUser().accountType === 'Principle' ? (
+                {isAuthenticated && tokenService.getUser().roles.includes(ROLE_PRINCIPLE) ? (
                     <div className={'nav-new-offer'}>
                         <ButtonLink
                             class={'outsourceme_button outsource_takeOff nav-new-offer'}
@@ -68,7 +69,7 @@ export const Navbar = (props) => {
                     <div className={'div-avatar cursor-pointer'} ref={avatarRef}>
                         <img
                             alt={'avatar'}
-                            src={SERVER_URL + tokenService.getUser().thumbnail}
+                            src={SERVER_URL + '/users/' + tokenService.getUserId() + "/thumbnail"}
                             className={'avatar rounded-2xl'}
                             height={'50px'}
                             width={'50px'}

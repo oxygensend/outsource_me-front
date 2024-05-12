@@ -14,7 +14,7 @@ export const EditUserPersonalInfoForm = ({ personalData }) => {
             surname: personalData.surname,
             phoneNumber: personalData.phoneNumber,
             email: personalData.email,
-            dateOfBirth: personalData.dateOfBirth?.split('T')[0],
+            dateOfBirth: personalData.dateOfBirth,
             githubUrl: personalData.githubUrl,
             linkedinUrl: personalData.linkedinUrl,
             experience: personalData.experience,
@@ -26,7 +26,7 @@ export const EditUserPersonalInfoForm = ({ personalData }) => {
     const [foundAddress, setFoundAddress] = useState(personalData.address ? [personalData.address] : []);
     const [errors, setErrors] = useState(null);
     const [postalCodeError, setPostalCodeError] = useState();
-    const experienceOptions = ['', 'Senior', 'Junior', 'Mid', 'Expert', 'Stażysta'];
+    const experienceOptions = {Senior: 'SENIOR' , Junior: 'JUNIOR', Mid: 'MID', Expert: 'EXPERT', Stażysta:'TRAINEE'};
 
     const onSubmit = async (data) => {
         console.log(data.address);
@@ -39,11 +39,15 @@ export const EditUserPersonalInfoForm = ({ personalData }) => {
 
         if (!data.experience) {
             data.experience = null;
+        } else {
+            data.experience = experienceOptions[data.experience];
         }
 
         if (!data.dateOfBirth) {
             data.dateOfBirth = null;
         }
+
+        delete data.email;
 
         // if(data.address){
         //     data.address = data.address['@id'];
@@ -60,14 +64,14 @@ export const EditUserPersonalInfoForm = ({ personalData }) => {
                 window.flash('Informacje zostały zaktualizowane', 'success');
             })
             .catch((e) => {
-                if (e.response.status === 422) {
-                    setErrors(e.response.data.violations);
+                if (e.response.status === 400) {
+                    setErrors(e.response.data.subExceptions);
                 }
             });
     };
 
     const findErrors = (property) => {
-        return errors ? errors.find((el) => el.propertyPath === property) : null;
+        return errors ? errors.find((el) => el.field === property) : null;
     };
 
     const onChangeHandler = async (event) => {
@@ -80,10 +84,10 @@ export const EditUserPersonalInfoForm = ({ personalData }) => {
         }
 
         authAxios
-            .get(API_URL + '/addresses?search=' + search)
+            .get(API_URL + '/static-data/addresses?search=' + search)
             .then((response) => {
                 setPostalCodeError(null);
-                setFoundAddress(response.data['hydra:member']);
+                setFoundAddress(response.data);
             })
             .catch((e) => {
                 setFoundAddress([]);
@@ -121,6 +125,7 @@ export const EditUserPersonalInfoForm = ({ personalData }) => {
                     register={register}
                     required={true}
                     error={findErrors('email')}
+                    disabled={true}
                 />
                 <InputProfile
                     name={'phoneNumber'}
@@ -140,7 +145,12 @@ export const EditUserPersonalInfoForm = ({ personalData }) => {
                     required={false}
                     error={findErrors('dateOfBirth')}
                 />
-                <Select name={'experience'} label={'Doświadczenie'} register={register} options={experienceOptions} />
+                <Select 
+                    name={'experience'} 
+                    label={'Doświadczenie'}
+                    register={register}
+                    options={Object.keys(experienceOptions)}
+                   />
             </div>
 
             <div className={'mt-5'}>
@@ -164,7 +174,7 @@ export const EditUserPersonalInfoForm = ({ personalData }) => {
 
             <div className={'mt-5'}>
                 <p className={'text-xl'}>Portale Społecznościowe</p>
-                {personalData.accountType === 'Developer' ? (
+                {personalData.accountType === 'DEVELOPER' ? (
                     <InputProfile
                         name={'githubUrl'}
                         type={'text'}
