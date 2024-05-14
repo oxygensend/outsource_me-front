@@ -9,14 +9,14 @@ export const YourJobOffers = () => {
     const [showActiveJobOffers, setShowActiveJobOffers] = useState(false);
     const [activeJobOffers, setActiveJobOffers] = useState([]);
     const [archivedJobOffers, setArchivedJobOffers] = useState([]);
-    const { id } = tokenService.getUser();
+    const  id  = tokenService.getUserId();
 
     useEffect(() => {
         return () => {
-            getData('/api/users/' + id + '/job_offers?order=newest').then((data) => {
+            getData('/job-offers', {userId: id}).then((data) => {
                 let active = [];
                 let archived = [];
-                data['hydra:member'].forEach((jobOffer, i) => {
+                data['data'].forEach((jobOffer, i) => {
                     if (!jobOffer.archived) {
                         active.push(<JobOfferManagementCard key={i} jobOffer={jobOffer} />);
                     } else {

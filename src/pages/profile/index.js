@@ -90,10 +90,17 @@ export const Profile = () => {
     const getOpinionsDetails = () => {
         getData('/users-opinion-details/' + id )
         .then((response) => {
-            setOpinionsDetails(response)
+            if(!response){
+                setOpinionsDetails({opinionsCount: 0, opinionsRate: 0})
+            } else {
+                setOpinionsDetails(response)
+            }
         })
         .catch((err) => {
             console.log(err);
+            if(err.status === 404){
+                setOpinionsDetails({opinionsCount: 0, opinionsRate: 0})
+            }
         });
     }
 

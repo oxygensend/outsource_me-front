@@ -46,7 +46,7 @@ export const Languages = memo(({ id, setShowModals, personalData }) => {
             >
                 
                 {languages ? languages.map((element) => {
-                    return <ListElement name={element.name} metaData={element.description} key={element['@id']} />;
+                    return <ListElement name={element.name} metaData={element.description} key={element.id} />;
                 }): null}
             </ProfileModule>
         );

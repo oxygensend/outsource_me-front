@@ -15,6 +15,8 @@ import ContentState from 'draft-js/lib/ContentState';
 import { Search } from '../Search/Search';
 import authAxios from '../../services/authAxios';
 import { API_URL } from '../../config';
+import tokenService from '../../services/tokenService';
+import { getKeyByValue } from '../../services/utils';
 
 export const JobOfferForm = ({ jobOffer, employmentOptions, workTypeOptions, afterSubmit, buttonName, request }) => {
     const setEditorState = () => {
@@ -41,27 +43,28 @@ export const JobOfferForm = ({ jobOffer, employmentOptions, workTypeOptions, aft
     const [selectedTechnologies, setSelectedTechnologies] = useState([]);
     const [address, setAddress] = useState();
 
-    const postalCodeFormApi = jobOffer?.address?.postCodes.split(',')[0];
+    const postalCodeFormApi = jobOffer?.address?.postCode;
     const [postalCode, setPostalCode] = useState(postalCodeFormApi);
     const [foundAddress, setFoundAddress] = useState(jobOffer?.address ? [jobOffer?.address] : []);
     const [postalCodeError, setPostalCodeError] = useState();
+    const postalCodeRegex = /^\d{2}-\d{3}$/; // Format XX-XXX
 
     useEffect(() => {
         return () => {
             if (jobOffer) {
                 reset({
                     name: jobOffer.name,
-                    formOfEmployment: jobOffer.formOfEmployment['@id'],
-                    workType: jobOffer.workType['@id'],
-                    validTo: jobOffer.validTo ? jobOffer.validTo.split('T')[0] : '',
-                    experience: jobOffer.experience,
+                    formOfEmployment: jobOffer.formOfEmployment.name,
+                    workTypes: jobOffer.workTypes[0].name,
+                    validTo: jobOffer.validTo ?? '',
+                    experience: getKeyByValue(experienceOptions, jobOffer.experience),
                     salaryRange: jobOffer.salaryRange,
-                    address: jobOffer.address,
+                    address: jobOffer.address?.city ?? '',
                 });
 
                 setAddSalaryRange(jobOffer.salaryRange);
                 setAddAddress(jobOffer.address);
-                setSelectedTechnologies(jobOffer.technologies.map((el) => el['@id']));
+                setSelectedTechnologies(jobOffer.technologies.map((el) => el));
                 setAddress(jobOffer.address);
             }
         };
@@ -75,16 +78,21 @@ export const JobOfferForm = ({ jobOffer, employmentOptions, workTypeOptions, aft
         }
 
         if (data.formOfEmployment === '') {
-            data.formOfEmployment = employmentOptions[0]['@id'];
+            data.formOfEmployment = employmentOptions[0].name;
         }
 
-        if (data.workType === '') {
-            data.workType = workTypeOptions[0]['@id'];
+        console.log(data.workTypes)
+        if (data.workTypes === '') {
+            data.workTypes = workTypeOptions[0].name;
         }
-        data.workType = [data.workType];
+        data.workTypes = [data.workTypes];
         data.technologies = selectedTechnologies;
         data.experience = experienceOptions[data.experience]
+        if(!jobOffer){ //principleId is not allowed in patch request
+            data.principalId = tokenService.getUserId()
+        }
         console.log(data.experience)
+
 
 
         if (addSalaryRange) {
@@ -102,17 +110,20 @@ export const JobOfferForm = ({ jobOffer, employmentOptions, workTypeOptions, aft
             data.salaryRange = null;
         }
 
-        if (!addAddress) {
+        if (addAddress) {
+            if (!postalCodeRegex.test(postalCode)) {
+                setPostalCodeError('Podany kod pocztowy jest niepoprawny');
+                return
+            }
+            data.address = foundAddress.filter(el => el.city === data.address)[0]
+            data.address.postCode = postalCode
+        } else {
             data.address = null;
         }
 
-        console.log(foundAddress);
-        if (!foundAddress) {
-            data.address = foundAddress[0]['@id'];
-        }
 
-        console.log(foundAddress);
 
+        console.log(data)
         data.description = stateToHTML(data.description.getCurrentContent());
         request(data)
             .then((response) => {
@@ -121,20 +132,28 @@ export const JobOfferForm = ({ jobOffer, employmentOptions, workTypeOptions, aft
             .catch((e) => {
                 console.log(e);
                 if (e.response.status === 400) {
-                    setErrors([{ propertyPath: 'startDate', message: 'Nie poprawny format daty.' }]);
-                }
-                if (e.response.status === 422) {
-                    setErrors(e.response.data.violations);
+                    setErrors(e.response.data.subExceptions);
+                } else {
+                    setErrors([{ field: 'startDate', message: 'Nie poprawny format daty.' }]);
                 }
             });
     };
 
     const findErrors = (property) => {
-        return errors ? errors.find((el) => el.propertyPath === property) : null;
+        return errors ? errors.find((el) => el.field === property) : null;
     };
     const onChangeHandler = async (event) => {
         const search = event.target.value;
+        console.log("x", search, event.target.value)
+        setPostalCode(search);
 
+        if (!postalCodeRegex.test(search)) {
+            console.log(search)
+            setFoundAddress([]);
+            // setPostalCodeError('Podany kod pocztowy jest niepoprawny');
+            return;
+        }
+        
         setPostalCode(search);
 
         if (search === '') {
@@ -179,7 +198,7 @@ export const JobOfferForm = ({ jobOffer, employmentOptions, workTypeOptions, aft
             />
 
             <Select
-                name={'workType'}
+                name={'workTypes'}
                 label={'Typ pracy *'}
                 className={'jobPosition-select'}
                 register={register}

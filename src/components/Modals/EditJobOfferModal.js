@@ -5,6 +5,7 @@ import authAxios from '../../services/authAxios';
 import { API_URL } from '../../config';
 import { JobOfferForm } from '../Forms/JobOfferForm';
 import { useParams } from 'react-router-dom';
+import tokenService from '../../services/tokenService';
 
 export const EditJobOfferModal = ({ setShowModals, jobOffer }) => {
     const [formOfEmployments, setFormOfEmployments] = useState([]);
@@ -13,17 +14,17 @@ export const EditJobOfferModal = ({ setShowModals, jobOffer }) => {
 
     useEffect(() => {
         return () => {
-            Promise.all([getData('/api/form_of_employments'), getData('/api/work_types')]).then(
+            Promise.all([getData('/static-data/form-of-employments'), getData('/static-data/work-types')]).then(
                 ([formOfEmployments, workTypes]) => {
-                    setFormOfEmployments(formOfEmployments['hydra:member']);
-                    setWorkTypes(workTypes['hydra:member']);
+                    setFormOfEmployments(formOfEmployments);
+                    setWorkTypes(workTypes);
                 },
             );
         };
     }, []);
 
     const request = async (data) => {
-        return authAxios.patch(API_URL + '/job_offers/' + slug, data, {
+        return authAxios.patch(API_URL + '/job-offers/' + slug, data, {
             headers: {
                 'Content-Type': 'application/merge-patch+json',
             },
@@ -31,7 +32,7 @@ export const EditJobOfferModal = ({ setShowModals, jobOffer }) => {
     };
 
     const afterSubmit = (data) => {
-        window.location.href = '/profil/' + jobOffer.user.id + '/twoje-oferty/' + jobOffer.slug;
+        window.location.href = '/profil/' + tokenService.getUserId() + '/twoje-oferty/' + data.data.slug;
         window.flash('Pomyślnie edytowano oferte pracy', 'success');
     };
 

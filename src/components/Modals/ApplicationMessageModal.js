@@ -7,7 +7,7 @@ import { Button } from '../Button/Button';
 export const ApplicationMessageModal = ({ application, setShowModals }) => {
     return (
         <ModalWrapper
-            title={parse(`Wiadomość od  <b>` + application.applying_person.fullName + `</b>`)}
+            title={parse(`Wiadomość od  <b>` + application.user.fullName + `</b>`)}
             titleCenter={true}
             setShowModals={setShowModals}
             prop={'applicationMessageModal'}

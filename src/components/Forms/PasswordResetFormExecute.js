@@ -36,7 +36,7 @@ export const PasswordResetFormExecute = (props) => {
                 }
             })
             .catch((err) => {
-                if (err.response.status === 422 || err.response.status === 400) {
+                if (err.response.status === 400 || err.response.status === 400) {
                     setErrors(err.response.data.detail);
                 }
             });

@@ -15,7 +15,7 @@ import { check } from 'prettier';
 export const PersonalInfo = ({ personalData, setShowModals, opinionsDetails }) => {
     const checkIfMe = tokenService.checkIfMe(personalData.id);
 
-    const stars = new Array(5).fill('none').map((el, i) => (i < personalData.opinionsRate ? 'yellow' : 'none'));
+    const stars = new Array(5).fill('none').map((el, i) => (i < opinionsDetails.opinionsRate ? 'yellow' : 'none'));
 
     const onClickEdit = () => {
         setShowModals((prevState) => ({ ...prevState, ['personalInfo']: true }));

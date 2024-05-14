@@ -6,9 +6,11 @@ import { ProfilePage } from '../../components/Profile/ProfilePage';
 import { InfoModal } from '../../components/Modals/InfoModal';
 import { ApplicationMessageModal } from '../../components/Modals/ApplicationMessageModal';
 import { ContactModal } from '../../components/Modals/ContactModal';
+import { data } from 'autoprefixer';
 
 export const Application = () => {
     const [personalData, setPersonalData] = useState();
+    const [opinionDetails, setOpinionDetails] = useState();
     const [application, setApplication] = useState();
     const [showModals, setShowModals] = useState({
         contactModal: false,
@@ -19,20 +21,27 @@ export const Application = () => {
 
     useEffect(() => {
         return () => {
-            getData('/api/applications/' + applicationId).then((data) => setApplication(data));
+            getData('/applications/' + applicationId).then((data) => setApplication(data));
         };
     }, []);
 
     useEffect(() => {
         if (application) {
-            getData(application.applying_person['@id']).then((data) => setPersonalData(data));
+            Promise.all([
+                getData('/users/' + application.user.id),
+                getData('/users-opinion-details/' + application.user.id)])
+            .then(([personalData, opinionsDetails]) => {
+                setPersonalData(personalData);
+                setOpinionDetails(opinionsDetails);
+            });
         }
     }, [application]);
+
 
     if (personalData) {
         return (
             <>
-                <ProfilePage personalData={personalData} setShowModals={setShowModals} />
+                <ProfilePage personalData={personalData} setShowModals={setShowModals} opinionsDetails={opinionDetails} />
 
                 <ApplicationInfoBox application={application} setShowModals={setShowModals} />
 
@@ -50,7 +59,7 @@ export const Application = () => {
                 ) : null}
 
                 {showModals.messageModal === true ? (
-                    <ContactModal userIri={application.applying_person['@id']} setShowModals={setShowModals} />
+                    <ContactModal userIri={'/users/' + application.user.id} setShowModals={setShowModals} />
                 ) : null}
             </>
         );

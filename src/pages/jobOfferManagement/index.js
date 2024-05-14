@@ -16,7 +16,7 @@ export const JobOfferManagement = () => {
     });
     useEffect(() => {
         return () => {
-            getData('/job-offers/' + slug)
+            getData('/job-offers/' + slug + '/management')
                 .then((data) => setJobOffer(data))
                 .catch((e) => {
                     window.location.href = '/logowanie';

@@ -15,8 +15,8 @@ export const JobOfferManagementPage = ({ jobOffer, setShowModals }) => {
     const [showReApplications, setShowRejectedApplications] = useState(false);
 
     const statusMessage = {
-        1: 'zaakceptowana',
-        '-1': 'odrzucona',
+        'ACCEPTED': 'zaakceptowana',
+        'REJECTED': 'odrzucona',
     };
 
     useEffect(() => {
@@ -27,14 +27,15 @@ export const JobOfferManagementPage = ({ jobOffer, setShowModals }) => {
 
     const splitApplications = (applications) => {
         setApplications(applications);
-        setAcceptedApplications(applications.filter((el) => el.status === 1));
-        setRejectedApplications(applications.filter((el) => el.status === -1));
+        setAcceptedApplications(applications.filter((el) => el.status === 'ACCEPTED'));
+        setRejectedApplications(applications.filter((el) => el.status === 'REJECTED'));
     };
 
     const onClickChangeStatus = (application, status) => {
+
         authAxios
-            .post(API_URL + '/applications/' + application.id + '/change_status', {
-                status,
+            .post(API_URL + '/applications/' + application.id + '/change-status', {
+                status: status,
             })
             .then((response) => {
                 const newStatus = response.data.status;
@@ -44,7 +45,7 @@ export const JobOfferManagementPage = ({ jobOffer, setShowModals }) => {
                 splitApplications(applications);
                 window.flash(
                     'Status aplikacji został zmieniony na ' + statusMessage[status],
-                    status === 1 ? 'success' : 'error',
+                    status === 'ACCEPTED' ? 'success' : 'error',
                 );
             })
             .catch((e) => {
@@ -69,10 +70,11 @@ export const JobOfferManagementPage = ({ jobOffer, setShowModals }) => {
                             return (
                                 <PrincipleApplicationCard
                                     application={application}
-                                    onClickReject={() => onClickChangeStatus(application, -1)}
-                                    onClickAccept={() => onClickChangeStatus(application, 1)}
+                                    onClickReject={() => onClickChangeStatus(application, 'REJECTED')}
+                                    onClickAccept={() => onClickChangeStatus(application, 'ACCEPTED')}
                                     jobOfferStatus={jobOffer.archived}
                                     id={id}
+                                    key={id}
                                 />
                             );
                         })}
@@ -87,9 +89,10 @@ export const JobOfferManagementPage = ({ jobOffer, setShowModals }) => {
                                 <PrincipleApplicationCard
                                     application={application}
                                     id={id}
-                                    onClickReject={() => onClickChangeStatus(application, -1)}
-                                    onClickAccept={() => onClickChangeStatus(application, 1)}
+                                    onClickReject={() => onClickChangeStatus(application, 'REJECTED')}
+                                    onClickAccept={() => onClickChangeStatus(application, 'ACCEPTED')}
                                     jobOfferStatus={jobOffer.archived}
+                                    key={id}
                                 />
                             );
                         })}
@@ -102,9 +105,10 @@ export const JobOfferManagementPage = ({ jobOffer, setShowModals }) => {
                                 <PrincipleApplicationCard
                                     application={application}
                                     id={id}
-                                    onClickReject={() => onClickChangeStatus(application, -1)}
-                                    onClickAccept={() => onClickChangeStatus(application, 1)}
+                                    onClickReject={() => onClickChangeStatus(application, 'REJECTED')}
+                                    onClickAccept={() => onClickChangeStatus(application, 'ACCEPTED')}
                                     jobOfferStatus={jobOffer.archived}
+                                    key={id}
                                 />
                             );
                         })}

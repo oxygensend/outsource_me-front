@@ -8,7 +8,7 @@ import { Button } from '../Button/Button';
 
 export const ApplicationInfoBox = ({ application, setShowModals }) => {
     const onClickDownloadAttachment = (attachment) => {
-        authAxios(attachment['@id'], {
+        authAxios('/attachments/' + attachment.id, {
             responseType: 'arraybuffer',
         }).then((data) => {
             fileDownload(data.data, attachment.originalName);

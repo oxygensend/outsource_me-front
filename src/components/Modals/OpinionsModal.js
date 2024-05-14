@@ -10,8 +10,8 @@ import { deleteElementFromArray } from '../../services/utils';
 
 export const OpinionsModal = ({ setShowModals, opinions, userIri, personalData, setOpinions }) => {
     console.log(opinions)
-    const myIri = tokenService.getUser()?.id ? '/api/users/' + tokenService.getUser()?.id : null;
-    const checkIfIPostedOpinion = opinions?.filter((el) => el.fromWho['@id'] === myIri);
+    const myId = tokenService.getUserId();
+    const checkIfIPostedOpinion = opinions?.filter((el) => el.author.id === myId);
     const [opinionCount, setOpinionCount] = useState(personalData.opinionCount);
 
     const afterSubmit = (data) => {
@@ -24,9 +24,9 @@ export const OpinionsModal = ({ setShowModals, opinions, userIri, personalData, 
 
     const onClickDelete = (opinion) => {
         console.log(opinion);
-        const id = opinion['@id'].split('/')[3];
+        const id = opinion.id.split('/')[3];
         authAxios
-            .delete(SERVER_URL + myIri + '/opinions/' + id)
+            .delete(SERVER_URL + '/opinions/' + id)
             .then((data) => {
                 window.flash('Opinia została usunieta', 'error');
                 const newOpinions = deleteElementFromArray(opinions, opinion);
@@ -51,14 +51,14 @@ export const OpinionsModal = ({ setShowModals, opinions, userIri, personalData, 
                         <div className={'flex  flex-row justify-between ml-8 mr-8'}>
                             <div className={'flex flex-row  gap-3 col-start-2 md:col-start-1 col-span-7 mt-2  '}>
                                 <img
-                                    src={SERVER_URL + '/' + opinion.fromWho.thumbnailPath}
+                                    src={SERVER_URL + '/users/thumbnails/' + opinion.author.thumbnailPath}
                                     style={{ height: '50px', width: '50px' }}
                                     className={'rounded-2xl border-2  '}
                                     alt={'avatar'}
                                 />
 
                                 <div>
-                                    <p className={'fullname-font '}>{opinion.fromWho.fullName}</p>
+                                    <p className={'fullname-font '}>{opinion.author.fullName}</p>
                                 </div>
 
                                 <div className={'flex flex-row gap-1 w-2/5 md:w-4/5'}>
@@ -71,7 +71,7 @@ export const OpinionsModal = ({ setShowModals, opinions, userIri, personalData, 
                                 </div>
                             </div>
 
-                            {opinion.fromWho['@id'] === myIri ? (
+                            {opinion.author.id === myId ? (
                                 <img
                                     src={close_icon}
                                     className={' cursor-pointer bottom-1  mt-10 md:mt-2'}
@@ -85,17 +85,17 @@ export const OpinionsModal = ({ setShowModals, opinions, userIri, personalData, 
 
                         <div className={'ml-8 mt-4 flex flex-row gap-2 pb-2'}>
                             <p>Komentarz: </p>
-                            <p className={'font-info '}>{opinion.description ?? 'Brak'}</p>
+                            <p className={'font-info '}>{opinion.text ?? 'Brak'}</p>
                         </div>
                     </div>
                 );
             })}
 
-            {checkIfIPostedOpinion.length === 0 && myIri ? (
+            {checkIfIPostedOpinion.length === 0 && myId ? (
                 <div className={'relative top-34'}>
                     {tokenService?.checkIfMe(personalData.id) ? null : (
                         <OpinionForm
-                            userIri={personalData['@id']}
+                            userId={personalData.id}
                             setOpinions={setOpinions}
                             opinions={opinions}
                             afterSubmit={afterSubmit}

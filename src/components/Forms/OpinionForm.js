@@ -4,8 +4,9 @@ import { SubmitButton } from '../Button/SubmitButton';
 import { InputProfile } from '../Input/InputProfile';
 import authAxios from '../../services/authAxios';
 import { API_URL } from '../../config';
+import tokenService from '../../services/tokenService';
 
-export const OpinionForm = ({ userIri, afterSubmit }) => {
+export const OpinionForm = ({ userId, afterSubmit }) => {
     const { register, handleSubmit } = useForm();
     const [errors, setErrors] = useState(null);
 
@@ -14,21 +15,22 @@ export const OpinionForm = ({ userIri, afterSubmit }) => {
             .post(API_URL + '/opinions', {
                 scale: parseInt(data.scale),
                 description: data?.description,
-                toWho: userIri,
+                receiverId: userId,
+                authorId: tokenService.getUserId()
             })
             .then((data) => {
                 afterSubmit(data);
             })
             .catch((e) => {
                 console.log(e);
-                if (e.response.status === 422) {
-                    setErrors(e.response.data.violations);
+                if (e.response.status === 400) {
+                    setErrors(e.response.data.subExceptions);
                 }
             });
     };
 
     const findErrors = (property) => {
-        return errors ? errors.find((el) => el.propertyPath === property) : null;
+        return errors ? errors.find((el) => el.field === property) : null;
     };
 
     return (
