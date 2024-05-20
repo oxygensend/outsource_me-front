@@ -33,6 +33,7 @@ import Bus from './services/Bus';
 import { AboutUs } from './pages/aboutUs';
 import { SessionTimeout } from './components/SessionTimeout/SessionTimeout';
 import { Statute } from './pages/statute';
+import { EmailVerification } from './pages/emailVerification';
 
 function App() {
     window.flash = (message, type = 'success') => Bus.emit('flash', { message, type });
@@ -57,6 +58,7 @@ function App() {
                     <Route path={'/logowanie'} element={<Login />} />
                     <Route path={'/odzyskiwanie-hasla'} element={<PasswordReset />} />
                     <Route path={'/odzyskiwanie-hasla-email'} element={<PasswordSendLink />} />
+                    <Route path={'/aktywacja-konta'} element={<EmailVerification/>}/>
                 </Route>
                 <Route path={'/profil/:id'} element={<Profile />} />
                 <Route element={<ProtectedRoute isAuthorizated={user} checkRoles={[ROLE_ME]} />}>

@@ -8,7 +8,7 @@ export const UserSmallCard = ({ user, className }) => {
             <div className={'flex  flex-row justify-between ml-8 mr-8'}>
                 <div className={'flex flex-row  gap-3 col-start-2 md:col-start-1 col-span-7 mt-2  '}>
                     <img
-                        src={SERVER_URL + '/' + user.imagePath}
+                        src={user.imagePath}
                         style={{ height: '50px', width: '50px' }}
                         className={'rounded-2xl border-2  '}
                         alt={'avatar'}

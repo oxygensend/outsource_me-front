@@ -14,11 +14,11 @@ export const Search = () => {
     useEffect(() => {
         return () => {
             Promise.all([
-                getData('/api/search/users?search=' + searchText),
-                getData('/api/search/job_offers?search=' + searchText),
+                getData('/users/search?query=' + searchText),
+                getData('/job-offers/search?query=' + searchText),
             ]).then(([responseUsers, responseJobOffers]) => {
-                setResultJobOffers(responseJobOffers['hydra:member']);
-                setResultUsers(responseUsers['hydra:member']);
+                setResultJobOffers(responseJobOffers.data);
+                setResultUsers(responseUsers.data);
             });
         };
     }, []);

@@ -13,7 +13,7 @@ export const DeveloperCard = ({ developer }) => {
             <div className={'grid grid-cols-12 md:flex md:flex-row md:justify-between md:ml-8 md:mr-8'}>
                 <div className={'flex flex-row  gap-3 col-start-2 md:col-start-1 col-span-7 mt-2  '}>
                     <img
-                        src={SERVER_URL + '/' + developer.thumbnailPath}
+                        src={developer.thumbnailPath}
                         style={{ width: '54px', height: '54px' }}
                         className={'rounded-2xl border-2  '}
                         alt={'avatar'}
@@ -21,7 +21,7 @@ export const DeveloperCard = ({ developer }) => {
 
                     <div>
                         <p className={'fullname-font '}>{developer.fullName}</p>
-                        <p className={'company-font'}>Apple</p>
+                        <p className={'company-font'}>{developer.thumbnailPath}</p>
                     </div>
                 </div>
 

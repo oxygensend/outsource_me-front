@@ -104,6 +104,8 @@ export const JobOfferPage = ({ defaultFiltersSettings, searchParams, updatingUrl
         setReload(true);
         setIsInitialLoad(true);
         setHasMore(false);
+        setCurrentPage(0);
+        setJobOffers([]);
         scrollToTop();
 
         return setFiltersSettings((prevState) => ({
@@ -114,7 +116,7 @@ export const JobOfferPage = ({ defaultFiltersSettings, searchParams, updatingUrl
 
     const updateEndpointUrl = () => {
         const { developers } = filtersSettings;
-        return developers ? '/users?accountType=DEVELOPER&lookingForJob=true&page=' + currentPage : '/job-offers?archived=false&page=' + currentPage;
+        return developers ? '/users/developers-offers?&page=' + currentPage : '/job-offers?archived=false&page=' + currentPage;
     };
 
     const updateQueryParams = () => {

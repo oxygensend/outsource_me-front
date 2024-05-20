@@ -69,7 +69,7 @@ export const PersonalInfo = ({ personalData, setShowModals, opinionsDetails }) =
                 ) : null}
 
                 <img
-                    src={API_URL + '/users/thumbnails/' + personalData.imagePath}
+                    src={personalData.imagePath}
                     style={{ width: '120px', height: '120px' }}
                     className={
                         'rounded-2xl border-2  ' + (tokenService.checkIfMe(personalData.id) ? 'cursor-pointer' : null)

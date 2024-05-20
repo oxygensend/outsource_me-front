@@ -7,6 +7,7 @@ import { ROLE_DEVELOPER, ROLE_PRINCIPLE } from '../../helpers/Roles';
 
 export const JobOffersList = ({ filtersModal, jobOffers, getJobOffers, hasMore, developers, principles, order }) => {
     if (jobOffers) {
+        console.log(jobOffers)
         return (
             <div
                 className={

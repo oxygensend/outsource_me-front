@@ -12,8 +12,8 @@ export const SearchUsers = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const searchText = searchParams.get('value');
     const [hasMore, setHasMore] = useState(false);
-    const fetchUrl = '/api/search/users?search=' + searchText + '&page=';
-    const [page, setPage] = useState(2);
+    const fetchUrl = '/users/search?query=' + searchText + '&page=';
+    const [page, setPage] = useState(1);
     const [currentPaginationUrl, setCurrentPaginationUrl] = useState(fetchUrl + 1);
 
     useEffect(() => {
@@ -21,9 +21,9 @@ export const SearchUsers = () => {
             if (!location.state) {
                 getUsers();
             } else {
-                setPage(2);
+                setPage(1);
                 setHasMore(true);
-                setCurrentPaginationUrl(fetchUrl + 2);
+                setCurrentPaginationUrl(fetchUrl + 1);
             }
         };
     }, []);
@@ -32,16 +32,17 @@ export const SearchUsers = () => {
         getData(currentPaginationUrl)
             .then((response) => {
                 if (response !== undefined) {
-                    const incomingData = response['hydra:member'];
+                    const incomingData = response.data;
 
-                    const nextPage = page + 1;
-                    setPage(nextPage);
-                    setCurrentPaginationUrl(fetchUrl + nextPage);
-
-                    if (incomingData.length === 0) {
-                        setHasMore(false);
-                    } else {
+                   
+                    const hasMorePages = (response['totalPages'] - response['currentPage']) > 0
+                    if (hasMorePages) {
+                        const nextPage = page + 1;
+                        setPage((prev) => prev + 1)
+                        setCurrentPaginationUrl(fetchUrl + nextPage);
                         setHasMore(true);
+                    } else {
+                        setHasMore(false);
                     }
 
                     if (clear === true) {

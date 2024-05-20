@@ -9,6 +9,7 @@ import parse from 'html-react-parser';
 
 export const JobOfferCard = ({ jobOffer }) => {
     const [showWholeDescription, setShowWholeDescription] = useState(false);
+    console.log(jobOffer)
     return (
         <div className={'card md:mb-5'}>
             <div className={'grid grid-cols-12 md:flex md:flex-row md:justify-between md:ml-8 md:mr-8'}>
@@ -17,7 +18,7 @@ export const JobOfferCard = ({ jobOffer }) => {
                         to={'/profil/' + jobOffer.user.id}
                         children={
                             <img
-                                src={SERVER_URL + '/' + jobOffer.user.thumbnailPath}
+                                src={jobOffer.user.thumbnailPath}
                                 style={{ height: '54px', width: '54px', minWidth: '54px' }}
                                 className={'rounded-2xl border-2  '}
                                 alt={'avatar'}

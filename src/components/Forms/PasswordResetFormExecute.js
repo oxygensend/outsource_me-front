@@ -21,8 +21,8 @@ export const PasswordResetFormExecute = (props) => {
         event.preventDefault();
 
         const data = {
-            password: password,
-            confirmation_token: searchParams.get('token'),
+            newPassword: password,
+            token: searchParams.get('token'),
         };
 
         setErrors(null);

@@ -54,6 +54,14 @@ class AuthService {
             },
         });
     }
+    async verifyEmail(data) {
+        return axios.post(API_URL + '/auth/verify_email', data, {
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        });
+    }
     logout() {
         TokenService.removeTokens();
         window.location.href = '/';

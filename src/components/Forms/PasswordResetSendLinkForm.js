@@ -8,7 +8,7 @@ export const PasswordResetSendLinkForm = (props) => {
     const [email, setEmail] = useState(null);
     const [errors, setErrors] = useState(null);
     const [success, setSuccess] = useState(false);
-    const message = "Email został przesłany blabla"
+    const message = "Email został przesłany na podany adres."
 
     const handleInputChange = (event) => {
         const target = event.target;
