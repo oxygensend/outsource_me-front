@@ -15,7 +15,7 @@ export const Notifications = () => {
 
     const onCLickDeleteNotification = () => {
         authAxios
-            .delete(selectedNotification['@id'])
+            .delete('/notifications/' + selectedNotification.id + '/delete')
             .then((data) => {
                 let newNotifications = [...notifications];
                 let index = newNotifications.indexOf(selectedNotification);

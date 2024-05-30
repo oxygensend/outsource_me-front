@@ -12,10 +12,10 @@ import { Button } from '../Button/Button';
 import { onClickShowModal, opinionsStringPluralForm } from '../../services/utils';
 import { check } from 'prettier';
 
-export const PersonalInfo = ({ personalData, setShowModals, opinionsDetails }) => {
+export const PersonalInfo = ({ personalData, setShowModals }) => {
     const checkIfMe = tokenService.checkIfMe(personalData.id);
 
-    const stars = new Array(5).fill('none').map((el, i) => (i < opinionsDetails.opinionsRate ? 'yellow' : 'none'));
+    const stars = new Array(5).fill('none').map((el, i) => (i < personalData.opinionsRate ? 'yellow' : 'none'));
 
     const onClickEdit = () => {
         setShowModals((prevState) => ({ ...prevState, ['personalInfo']: true }));
@@ -49,12 +49,10 @@ export const PersonalInfo = ({ personalData, setShowModals, opinionsDetails }) =
         return personalData.accountType === 'DEVELOPER';
     };
     const checkIfUserHaveAnyJobOffer = () => {
-        const activeJobOffers = personalData.jobOffers ? personalData.jobOffers.filter((el) => !el.archived) : [];
-        return personalData.accountType === 'PRINCIPLE' && activeJobOffers.length > 0;
+        return personalData.accountType === 'PRINCIPLE' && personalData.jobOffers.length > 0;
     };
 
 
-    console.log(opinionsDetails)
     return (
         <div className={'col-span-full grid grid-cols-10'}>
             {checkIfMe ? (
@@ -143,7 +141,7 @@ export const PersonalInfo = ({ personalData, setShowModals, opinionsDetails }) =
                             })}
                         </div>
                         <p className={'red-font mt-3'}>
-                            {opinionsDetails.opinionsCount + opinionsStringPluralForm(opinionsDetails.opinionsCount)}
+                            {personalData.opinionsCount + opinionsStringPluralForm(personalData.opinionsCount)}
                         </p>
                     </div>
                     <div>

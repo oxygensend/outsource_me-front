@@ -8,19 +8,22 @@ import { InputProfile } from '../Input/InputProfile';
 import authAxios from '../../services/authAxios';
 import { API_URL } from '../../config';
 import { closeModal } from '../../services/utils';
+import tokenService from '../../services/tokenService';
 
-export const MessageForm = ({ userIri, setShowModals }) => {
+export const MessageForm = ({ userId, setShowModals }) => {
     const { register, handleSubmit, control } = useForm({
         defaultValues: { DraftJS: EditorState.createEmpty() },
     });
     const [errors, setErrors] = useState(null);
 
     const onSubmit = async (data) => {
+        console.log(userId)
         authAxios
-            .post(API_URL + '/messages', {
+            .post(API_URL + '/mail-messages', {
                 subject: data.subject,
-                content: stateToHTML(data.DraftJS.getCurrentContent()),
-                receiverIri: userIri,
+                body: stateToHTML(data.DraftJS.getCurrentContent()),
+                recipientId: userId,
+                senderId: tokenService.getUserId()
             })
             .then((data) => {
                 closeModal('messageModal', setShowModals);
@@ -28,14 +31,14 @@ export const MessageForm = ({ userIri, setShowModals }) => {
             })
             .catch((e) => {
                 console.log(e);
-                if (e.response.status === 422) {
-                    setErrors(e.response.data.violations);
+                if (e.response.status === 400) {
+                    setErrors(e.response.data.subExceptions);
                 }
             });
     };
 
     const findErrors = (property) => {
-        return errors ? errors.find((el) => el.propertyPath === property) : null;
+        return errors ? errors.find((el) => el.field === property) : null;
     };
 
     return (

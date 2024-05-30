@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { getData } from '../../services/utils';
 import parse from 'html-react-parser';
 import './index.css';
-import { SERVER_URL } from '../../config';
 
 export const AboutUs = () => {
     const [aboutUs, setAboutUs] = useState();
 
     useEffect(() => {
         return () => {
-            getData('/api/about_us?x').then((response) => {
-                setAboutUs(response['hydra:member'][0]);
+            getData('/static-data/about-us').then((response) => {
+                setAboutUs(response[0]);
             });
         };
     }, []);
@@ -18,7 +17,7 @@ export const AboutUs = () => {
     if (aboutUs) {
         return (
             <div className={'profile-container full-height'}>
-                <img className={'mainImage'} alt={'image-o-nas'} src={SERVER_URL + aboutUs.mainImagePath} />
+                <img className={'mainImage'} alt={'image-o-nas'} src={aboutUs.imageUrl} />
                 <div className={'w-full relative'}>
                     <div className={'title'}>
                         <p>{aboutUs.title}</p>

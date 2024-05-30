@@ -16,6 +16,7 @@ export const FiltersModal = ({
     addressesList,
     technologiesList,
     workTypesList,
+    enabled
 }) => {
     const sortOptions = [
         {
@@ -32,7 +33,10 @@ export const FiltersModal = ({
         },
     ];
 
+    console.log(enabled)
+    if(enabled){
     const { address, developers, order, technologies, principles, workTypes } = filtersSettings;
+
 
     return (
         <div
@@ -85,4 +89,7 @@ export const FiltersModal = ({
             </div>
         </div>
     );
+            } else {
+                return null;
+            }
 };

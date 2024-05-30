@@ -60,7 +60,7 @@ export const getData = (endpoint, params) => {
         .then(({ data }) => data)
         .catch(function (error) {
             if (error.response) {
-                if (error.response.status === 404) {
+                if (error.response.status !== 200) {
                     return undefined;
                 }
             } else {
@@ -68,6 +68,8 @@ export const getData = (endpoint, params) => {
             }
         });
 };
+
+
 export const getDataAuthentication = (endpoint) =>
     authAxios
         .get(SERVER_URL + endpoint)

@@ -59,7 +59,7 @@ export const Application = () => {
                 ) : null}
 
                 {showModals.messageModal === true ? (
-                    <ContactModal userIri={'/users/' + application.user.id} setShowModals={setShowModals} />
+                    <ContactModal userId={application.user.id} setShowModals={setShowModals} />
                 ) : null}
             </>
         );

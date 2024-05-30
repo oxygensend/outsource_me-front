@@ -21,7 +21,6 @@ import { OpinionsModal } from '../../components/Modals/OpinionsModal';
 export const Profile = () => {
     const [personalData, setPersonalData] = useState();
     const [opinions, setOpinions] = useState();
-    const [opinionsDetails, setOpinionsDetails] = useState();
     const id = getId(useParams().id);
     const openAdvertisementModalContent =
         'Przed dodaniem zgłoszenia upewnij się, ze w zakładkach na twoim profilu zawarte są wszystkie potrzebne\n' +
@@ -45,7 +44,6 @@ export const Profile = () => {
         return () => {
             getPersonalData();
             getOpinions();
-            getOpinionsDetails();
         };
     }, []);
 
@@ -87,23 +85,7 @@ export const Profile = () => {
             });
     };
 
-    const getOpinionsDetails = () => {
-        getData('/users-opinion-details/' + id )
-        .then((response) => {
-            if(!response){
-                setOpinionsDetails({opinionsCount: 0, opinionsRate: 0})
-            } else {
-                setOpinionsDetails(response)
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-            if(err.status === 404){
-                setOpinionsDetails({opinionsCount: 0, opinionsRate: 0})
-            }
-        });
-    }
-
+    
     const onClickChangeUserStatus = (status, modalName) => {
         authAxios
             .patch(
@@ -132,7 +114,7 @@ export const Profile = () => {
 
     return (
         <>
-            <ProfilePage setShowModals={setShowModals} personalData={personalData} opinionsDetails={opinionsDetails} />
+            <ProfilePage setShowModals={setShowModals} personalData={personalData} />
 
             {showModals.technologies ? <AddTechnologyModal setShowModals={setShowModals} /> : null}
 
@@ -185,7 +167,7 @@ export const Profile = () => {
             ) : null}
 
             {showModals.messageModal === true ? (
-                <ContactModal userIri={personalData['@id']} setShowModals={setShowModals} />
+                <ContactModal userId={personalData.id} setShowModals={setShowModals} />
             ) : null}
 
             {showModals.uploadPhotoModal === true ? (

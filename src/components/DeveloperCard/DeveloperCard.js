@@ -32,9 +32,9 @@ export const DeveloperCard = ({ developer }) => {
 
             <div className={'grid grid-cols-12 mt-5'}>
                 <div className={'col-start-2 col-end-12'}>
-                    {!showWholeDescription ? <p>{developer.shortDescription} </p> : <p>{developer.description}</p>}
+                    {!showWholeDescription && developer.shortDescription !== developer.description ? <p>{developer.shortDescription} </p> : <p>{developer.description}</p>}
 
-                    {developer.shortDescription ? (
+                    {developer.shortDescription && developer.shortDescription != developer.description ? (
                         <p
                             className={
                                 'underline cursor-pointer text-blue-700 hover:text-blue-500 no-underline ' +

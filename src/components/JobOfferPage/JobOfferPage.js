@@ -10,6 +10,7 @@ import {
     jobOffersStringPluralForm,
     scrollToTop,
 } from '../../services/utils';
+import { add } from 'draft-js/lib/DraftEntity';
 
 export const JobOfferPage = ({ defaultFiltersSettings, searchParams, updatingUrlCompleted, setSearchParams }) => {
     const [filtersModal, setFiltersModal] = useState(true);
@@ -24,6 +25,7 @@ export const JobOfferPage = ({ defaultFiltersSettings, searchParams, updatingUrl
     const [technologiesList, setTechnologiesList] = useState();
     const [workTypesList, setWorkTypesList] = useState();
     const [currentPage, setCurrentPage] = useState(0);
+    const [filtersLoaded, setFiltersLoaded] = useState(false);
 
     /* Data readers */
 
@@ -34,9 +36,14 @@ export const JobOfferPage = ({ defaultFiltersSettings, searchParams, updatingUrl
                 getData('/static-data/technologies'),
                 getData('/static-data/work-types'),
             ]).then(([addresses, technologies, work_types]) => {
-                setAddressesList(addresses);
-                setTechnologiesList(technologies);
-                setWorkTypesList(work_types);
+                if(addresses && technologies && work_types){
+                    setAddressesList(addresses);
+                    setTechnologiesList(technologies);
+                    setWorkTypesList(work_types);
+                    setFiltersLoaded(true);
+                } else {
+                    setFiltersLoaded(false);
+                }
             });
         };
     }, []);
@@ -158,10 +165,10 @@ export const JobOfferPage = ({ defaultFiltersSettings, searchParams, updatingUrl
                         : null}
                 </p>
             </div>
-            <div className={'mobile-filters-panel ' + (!filtersModal ? 'mobile-hide' : null)}>
-                <div className={'flex flex-row gap-2 cursor-pointer'} onClick={() => setFiltersModal(false)}>
-                    <img src={filter_icon} alt={'filter_icon'} />
-                    <p className={'font-medium text-xl'}>Filtry</p>
+             <div className={'mobile-filters-panel ' + (!filtersModal ? 'mobile-hide' : null)}>
+            <div className={'flex flex-row gap-2 cursor-pointer'} onClick={() => setFiltersModal(false)}>
+                {filtersLoaded ? (<><img src={filter_icon} alt={'filter_icon'} />
+                    <p className={'font-medium text-xl'}>Filtry</p></>) : null }
                 </div>
                 <div className={'gap-10'}>
                     <p style={{ color: '#7C8DB0' }}>{totalNumberOfItems ? totalNumberOfItems + ' zleceń' : null}</p>
@@ -177,6 +184,7 @@ export const JobOfferPage = ({ defaultFiltersSettings, searchParams, updatingUrl
                 addressesList={addressesList}
                 technologiesList={technologiesList}
                 workTypesList={workTypesList}
+                enabled={filtersLoaded}
             />
 
             <FiltersModal
@@ -188,6 +196,7 @@ export const JobOfferPage = ({ defaultFiltersSettings, searchParams, updatingUrl
                 addressesList={addressesList}
                 technologiesList={technologiesList}
                 workTypesList={workTypesList}
+                enabled={filtersLoaded}
             />
 
             <JobOffersList

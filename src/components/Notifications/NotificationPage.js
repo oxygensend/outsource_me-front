@@ -12,7 +12,7 @@ export const NotificationPage = ({ setShowModals, setSelectedNotification, notif
     const [currentPaginationUrl, setCurrentPaginationUrl] = useState(
         '/notifications/internal'
     );
-    const [currentPage, setCurrentPage] = useState();
+    const [currentPage, setCurrentPage] = useState(0);
 
     useEffect(() => {
         return () => {

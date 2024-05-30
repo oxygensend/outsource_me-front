@@ -9,7 +9,6 @@ import parse from 'html-react-parser';
 
 export const JobOfferCard = ({ jobOffer }) => {
     const [showWholeDescription, setShowWholeDescription] = useState(false);
-    console.log(jobOffer)
     return (
         <div className={'card md:mb-5'}>
             <div className={'grid grid-cols-12 md:flex md:flex-row md:justify-between md:ml-8 md:mr-8'}>
@@ -39,7 +38,7 @@ export const JobOfferCard = ({ jobOffer }) => {
 
             <div className={'grid grid-cols-12 mt-5'}>
                 <div className={'col-start-2 col-end-12'}>
-                    <h1 className={'text-xl text-red-700 font-bold mb-1'}>{jobOffer.name}</h1>
+                    <h1 className={'text-xl text-red-700 font-bold mb-1 '}>{jobOffer.name}</h1>
                     {!showWholeDescription ? parse(jobOffer.shortDescription) : parse(jobOffer.description)}
 
                     {jobOffer.shortDescription !== jobOffer.description ?
