@@ -1,4 +1,4 @@
-import { SERVER_URL } from '../../config';
+import { API_URL, SERVER_URL } from '../../config';
 import accountType from '../../translations/accountType';
 import github from '../../assets/icons/github.png';
 import linkedin from '../../assets/icons/linkedin.png';
@@ -10,6 +10,7 @@ import recruiting from '../../assets/images/recruiting.svg';
 import tokenService from '../../services/tokenService';
 import { Button } from '../Button/Button';
 import { onClickShowModal, opinionsStringPluralForm } from '../../services/utils';
+import { check } from 'prettier';
 
 export const PersonalInfo = ({ personalData, setShowModals }) => {
     const checkIfMe = tokenService.checkIfMe(personalData.id);
@@ -49,8 +50,9 @@ export const PersonalInfo = ({ personalData, setShowModals }) => {
     };
     const checkIfUserHaveAnyJobOffer = () => {
         const activeJobOffers = personalData.jobOffers ? personalData.jobOffers.filter((el) => !el.archived) : [];
-        return personalData.accountType === 'Principle' && activeJobOffers.length > 0;
+        return personalData.accountType === 'Principal' && activeJobOffers.length > 0;
     };
+
 
     return (
         <div className={'col-span-full grid grid-cols-10'}>

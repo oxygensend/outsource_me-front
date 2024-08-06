@@ -1,7 +1,7 @@
 export default (key) => {
     const translations = {
         Developer: 'Programista',
-        Principle: 'Zleceniodawca',
+        Principal: 'Zleceniodawca',
     };
     return translations[key];
 };
