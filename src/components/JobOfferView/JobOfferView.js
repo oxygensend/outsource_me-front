@@ -39,7 +39,7 @@ export const JobOfferView = ({ jobOffer }) => {
                         to={'/profil/' + jobOffer.user.id}
                         children={
                             <img
-                                src={jobOffer.user.thumbnailPath}
+                                src={SERVER_URL + "/users/thumbnails/user_placeholder.webp"}
                                 width={54}
                                 height={54}
                                 className={'rounded-2xl border-2  '}

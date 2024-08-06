@@ -21,7 +21,7 @@ export const DeveloperCard = ({ developer }) => {
 
                     <div>
                         <p className={'fullname-font '}>{developer.fullName}</p>
-                        <p className={'company-font'}>{developer.thumbnailPath}</p>
+                        <p className={'company-font'}>{developer.activeJobPosition}</p>
                     </div>
                 </div>
 

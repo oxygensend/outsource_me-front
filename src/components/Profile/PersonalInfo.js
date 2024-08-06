@@ -49,7 +49,7 @@ export const PersonalInfo = ({ personalData, setShowModals }) => {
         return personalData.accountType === 'DEVELOPER';
     };
     const checkIfUserHaveAnyJobOffer = () => {
-        return personalData.accountType === 'PRINCIPLE' && personalData.jobOffers.length > 0;
+        return personalData.accountType === 'PRINCIPLE' ;
     };
 
 

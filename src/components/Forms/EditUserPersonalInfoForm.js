@@ -6,8 +6,17 @@ import { SubmitButton } from '../Button/SubmitButton';
 import { InputProfile } from '../Input/InputProfile';
 import { Search } from '../Search/Search';
 import { Select } from '../Input/Select';
+import { getKeyByValue } from '../../services/utils';
 
 export const EditUserPersonalInfoForm = ({ personalData }) => {
+
+    const postalCodeFormApi = personalData.address?.postCode;
+    const [postalCode, setPostalCode] = useState(postalCodeFormApi);
+    const [foundAddress, setFoundAddress] = useState(personalData.address ? [personalData.address] : []);
+    const [errors, setErrors] = useState(null);
+    const [postalCodeError, setPostalCodeError] = useState();
+    const experienceOptions = {Senior: 'SENIOR' , Junior: 'JUNIOR', Mid: 'MID', Expert: 'EXPERT', Stażysta:'TRAINEE'};
+    const postalCodeRegex = /^\d{2}-\d{3}$/; // Format XX-XXX
     const { register, handleSubmit } = useForm({
         defaultValues: {
             name: personalData.name,
@@ -17,16 +26,12 @@ export const EditUserPersonalInfoForm = ({ personalData }) => {
             dateOfBirth: personalData.dateOfBirth,
             githubUrl: personalData.githubUrl,
             linkedinUrl: personalData.linkedinUrl,
-            experience: personalData.experience,
+            experience: getKeyByValue(experienceOptions, personalData.experience),
+
         },
     });
 
-    const postalCodeFormApi = personalData.address?.postCodes.split(',')[0];
-    const [postalCode, setPostalCode] = useState(postalCodeFormApi);
-    const [foundAddress, setFoundAddress] = useState(personalData.address ? [personalData.address] : []);
-    const [errors, setErrors] = useState(null);
-    const [postalCodeError, setPostalCodeError] = useState();
-    const experienceOptions = {Senior: 'SENIOR' , Junior: 'JUNIOR', Mid: 'MID', Expert: 'EXPERT', Stażysta:'TRAINEE'};
+
 
     const onSubmit = async (data) => {
         console.log(data.address);
@@ -47,11 +52,21 @@ export const EditUserPersonalInfoForm = ({ personalData }) => {
             data.dateOfBirth = null;
         }
 
-        delete data.email;
+        console.log(data.address)
+        if(data.address) {
+            if (!postalCodeRegex.test(postalCode)) {
+                setPostalCodeError('Podany kod pocztowy jest niepoprawny');
+                return
+            }
+            console.log(foundAddress)
+            data.address = foundAddress.filter(el => el.city === data.address)[0]
+            data.address.postCode = postalCode
+        } else {
+            data.address = null;
+        }
 
-        // if(data.address){
-        //     data.address = data.address['@id'];
-        // }
+
+        delete data.email;
 
         authAxios
             .patch(API_URL + '/users/' + personalData.id, data, {

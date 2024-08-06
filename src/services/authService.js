@@ -6,9 +6,9 @@ class AuthService {
     async refreshToken() {
         console.log(TokenService.getLocalRefreshToken());
         return await axios.post(
-            API_URL + '/refresh_token',
+            API_URL + '/auth/refresh_token',
             {
-                refresh_token: TokenService.getLocalRefreshToken(),
+                token: TokenService.getLocalRefreshToken(),
             },
             {
                 headers: {

@@ -17,7 +17,7 @@ export const JobOfferCard = ({ jobOffer }) => {
                         to={'/profil/' + jobOffer.user.id}
                         children={
                             <img
-                                src={jobOffer.user.thumbnailPath}
+                                src={SERVER_URL +"/users/thumbnails/user_placeholder.webp"}
                                 style={{ height: '54px', width: '54px', minWidth: '54px' }}
                                 className={'rounded-2xl border-2  '}
                                 alt={'avatar'}
